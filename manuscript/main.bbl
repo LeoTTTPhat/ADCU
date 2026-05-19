@@ -21,41 +21,6 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{cao2015machineunlearning}
-Y.~Cao and J.~Yang, ``Towards making systems forget with machine unlearning,''
-  \emph{IEEE Symposium on Security and Privacy}, 2015.
-
-\bibitem{bourtoule2021machineunlearning}
-L.~Bourtoule, V.~Chandrasekaran, C.~A. Choquette-Choo, H.~Jia, A.~Travers,
-  B.~Zhang, D.~Lie, and N.~Papernot, ``Machine unlearning,'' in \emph{IEEE
-  Symposium on Security and Privacy}, 2021.
-
-\bibitem{ginart2019making}
-A.~Ginart, M.~Guan, G.~Valiant, and J.~Y. Zou, ``Making ai forget you: Data
-  deletion in machine learning,'' in \emph{Advances in Neural Information
-  Processing Systems}, 2019.
-
-\bibitem{yao2024largeunlearning}
-Y.~Yao, X.~Xu, and Y.~Liu, ``Large language model unlearning,'' in
-  \emph{Advances in Neural Information Processing Systems}, 2024.
-
-\bibitem{maini2024tofu}
-P.~Maini, Z.~Feng, A.~Schwarzschild, Z.~C. Lipton, and J.~Z. Kolter, ``Tofu: A
-  task of fictitious unlearning for llms,'' in \emph{arXiv preprint
-  arXiv:2401.06121}, 2024.
-
-\bibitem{liu2024rethinking}
-Z.~Liu \emph{et~al.}, ``Rethinking machine unlearning for large language
-  models,'' \emph{arXiv preprint arXiv:2402.08787}, 2024.
-
-\bibitem{wang2024llmunlearning}
-L.~Wang \emph{et~al.}, ``Machine unlearning in large language models,''
-  \emph{arXiv preprint arXiv:2404.16841}, 2024.
-
-\bibitem{jin2024surveyunlearning}
-Z.~Jin \emph{et~al.}, ``Digital forgetting in large language models: A survey
-  of unlearning methods,'' \emph{Artificial Intelligence Review}, 2025.
-
 \bibitem{lewis2020rag}
 P.~Lewis, E.~Perez, A.~Piktus, F.~Petroni, V.~Karpukhin, N.~Goyal, H.~Kuttler,
   M.~Lewis, W.-t. Yih, T.~Rocktaschel, S.~Riedel, and D.~Kiela,
@@ -77,6 +42,97 @@ Y.~Gao, Y.~Xiong, X.~Gao, K.~Jia, J.~Pan, Y.~Bi, Y.~Dai, J.~Sun, M.~Wang, and
   H.~Wang, ``Retrieval-augmented generation for large language models: A
   survey,'' \emph{arXiv preprint arXiv:2312.10997}, 2024.
 
+\bibitem{voigt2017gdpr}
+P.~Voigt and A.~von~dem Bussche, \emph{The EU General Data Protection
+  Regulation (GDPR): A Practical Guide}.\hskip 1em plus 0.5em minus 0.4em\relax
+  Springer, 2017.
+
+\bibitem{cohen2022deletioncontrol}
+A.~Cohen, A.~Smith, M.~Swanberg, and P.~N. Vasudevan, ``Control,
+  confidentiality, and the right to be forgotten,'' \emph{arXiv preprint
+  arXiv:2210.07876}, 2022.
+
+\bibitem{fan2025fedfmchallenges}
+T.~Fan, H.~Gu, X.~Cao, C.~S. Chan, Q.~Chen, Y.~Chen, Y.~Feng, Y.~Gu, J.~Geng,
+  B.~Luo, S.~Liu, W.~K. Ong, C.~Ren, J.~Shao, C.~Sun, X.~Tang, H.-X. Tae,
+  Y.~Tong, S.~Wei, F.~Wu, W.~Xi, M.~Xu, H.~Yang, X.~Yang, J.~Yan, H.~Yu,
+  T.~Zhang, Y.~Zhang, X.~Zhang, Z.~Zheng, L.~Fan, and Q.~Yang, ``Ten
+  challenging problems in federated foundation models,'' \emph{IEEE
+  Transactions on Knowledge and Data Engineering}, vol.~37, no.~7, pp.
+  4314--4337, 2025.
+
+\bibitem{cao2015machineunlearning}
+Y.~Cao and J.~Yang, ``Towards making systems forget with machine unlearning,''
+  \emph{IEEE Symposium on Security and Privacy}, 2015.
+
+\bibitem{ginart2019making}
+A.~Ginart, M.~Guan, G.~Valiant, and J.~Y. Zou, ``Making ai forget you: Data
+  deletion in machine learning,'' in \emph{Advances in Neural Information
+  Processing Systems}, 2019.
+
+\bibitem{bourtoule2021machineunlearning}
+L.~Bourtoule, V.~Chandrasekaran, C.~A. Choquette-Choo, H.~Jia, A.~Travers,
+  B.~Zhang, D.~Lie, and N.~Papernot, ``Machine unlearning,'' in \emph{IEEE
+  Symposium on Security and Privacy}, 2021.
+
+\bibitem{guo2020certified}
+C.~Guo, T.~Goldstein, A.~Hannun, and L.~van~der Maaten, ``Certified data
+  removal from machine learning models,'' in \emph{International Conference on
+  Machine Learning}, 2020.
+
+\bibitem{maini2024tofu}
+P.~Maini, Z.~Feng, A.~Schwarzschild, Z.~C. Lipton, and J.~Z. Kolter, ``Tofu: A
+  task of fictitious unlearning for llms,'' in \emph{arXiv preprint
+  arXiv:2401.06121}, 2024.
+
+\bibitem{yao2024largeunlearning}
+Y.~Yao, X.~Xu, and Y.~Liu, ``Large language model unlearning,'' in
+  \emph{Advances in Neural Information Processing Systems}, 2024.
+
+\bibitem{liu2024rethinking}
+Z.~Liu \emph{et~al.}, ``Rethinking machine unlearning for large language
+  models,'' \emph{arXiv preprint arXiv:2402.08787}, 2024.
+
+\bibitem{wang2024llmunlearning}
+L.~Wang \emph{et~al.}, ``Machine unlearning in large language models,''
+  \emph{arXiv preprint arXiv:2404.16841}, 2024.
+
+\bibitem{jin2024surveyunlearning}
+Z.~Jin \emph{et~al.}, ``Digital forgetting in large language models: A survey
+  of unlearning methods,'' \emph{Artificial Intelligence Review}, 2025.
+
+\bibitem{carlini2019secretsharer}
+N.~Carlini, C.~Liu, U.~Erlingsson, J.~Kos, and D.~Song, ``The secret sharer:
+  Evaluating and testing unintended memorization in neural networks,'' in
+  \emph{USENIX Security Symposium}, 2019.
+
+\bibitem{carlini2021extracting}
+N.~Carlini, F.~Tramer, E.~Wallace, M.~Jagielski, A.~Herbert-Voss, K.~Lee,
+  A.~Roberts, T.~Brown, D.~Song, U.~Erlingsson, A.~Oprea, and C.~Raffel,
+  ``Extracting training data from large language models,'' in \emph{USENIX
+  Security Symposium}, 2021.
+
+\bibitem{carlini2023quantifying}
+N.~Carlini, D.~Ippolito, M.~Jagielski, K.~Lee, F.~Tramer, and C.~Zhang,
+  ``Quantifying memorization across neural language models,'' in
+  \emph{International Conference on Learning Representations}, 2023.
+
+\bibitem{shokri2017membership}
+R.~Shokri, M.~Stronati, C.~Song, and V.~Shmatikov, ``Membership inference
+  attacks against machine learning models,'' in \emph{IEEE Symposium on
+  Security and Privacy}, 2017.
+
+\bibitem{yeom2018privacy}
+S.~Yeom, I.~Giacomelli, M.~Fredrikson, and S.~Jha, ``Privacy risk in machine
+  learning: Analyzing the connection to overfitting,'' in \emph{IEEE Computer
+  Security Foundations Symposium}, 2018.
+
+\bibitem{mattern2023membership}
+J.~Mattern, F.~Mireshghallah, Z.~Jin, H.~Schutze, M.~Sachan, and
+  T.~Berg-Kirkpatrick, ``Membership inference attacks against language models
+  via neighbourhood comparison,'' \emph{Findings of the Association for
+  Computational Linguistics}, 2023.
+
 \bibitem{gao2023retrievalaugmented}
 Y.~Gao \emph{et~al.}, ``Retrieval-augmented generation for ai-generated
   content: A survey,'' \emph{arXiv preprint arXiv:2402.19473}, 2024.
@@ -95,6 +151,31 @@ H.~Yu, A.~Gan, K.~Zhang, S.~Tong, Q.~Liu, and Z.~Liu, ``Evaluation of
 R.~Akkiraju, A.~Xu, D.~Bora, T.~Yu, L.~An \emph{et~al.}, ``Facts about building
   retrieval augmented generation-based chatbots,'' \emph{arXiv preprint
   arXiv:2407.07858}, 2024.
+
+\bibitem{dwork2006dp}
+C.~Dwork, F.~McSherry, K.~Nissim, and A.~Smith, ``Calibrating noise to
+  sensitivity in private data analysis,'' in \emph{Theory of Cryptography
+  Conference}, 2006.
+
+\bibitem{wang2025ikea}
+Y.~Wang, W.~Qu, S.~Zhai, Y.~Jiang, Z.~Liu, Y.~Liu, Y.~Dong, and J.~Zhang,
+  ``Silent leaks: Implicit knowledge extraction attack on rag systems through
+  benign queries,'' \emph{arXiv preprint arXiv:2505.15420}, 2025.
+
+\bibitem{xie2026canaryrag}
+Y.~Xie, Y.~Zhang, Y.~Li, S.~Song, X.~Chen, Z.~Liu, L.~Su, and T.~Liu,
+  ``Detecting rag extraction attack via dual-path runtime integrity game,''
+  \emph{arXiv preprint arXiv:2604.10717}, 2026.
+
+\bibitem{song2026grasp}
+M.~Song, J.~Kim, M.~Kang, H.~Kim, S.~Shin, and S.~Son, ``Subgraph
+  reconstruction attacks on graph rag deployments with practical defenses,''
+  \emph{arXiv preprint arXiv:2602.06495}, 2026.
+
+\bibitem{thornton2026retrievalpivot}
+S.~Thornton, ``Retrieval pivot attacks in hybrid rag: Measuring and mitigating
+  amplified leakage from vector seeds to graph expansion,'' \emph{arXiv
+  preprint arXiv:2602.08668}, 2026.
 
 \bibitem{ghorbani2019datashapley}
 A.~Ghorbani and J.~Zou, ``Data shapley: Equitable valuation of data for machine
@@ -135,38 +216,6 @@ A.~Ilyas, S.~M. Park, L.~Engstrom, G.~Leclerc, and A.~Madry, ``Datamodels:
   Predicting predictions from training data,'' in \emph{International
   Conference on Machine Learning}, 2022.
 
-\bibitem{carlini2021extracting}
-N.~Carlini, F.~Tramer, E.~Wallace, M.~Jagielski, A.~Herbert-Voss, K.~Lee,
-  A.~Roberts, T.~Brown, D.~Song, U.~Erlingsson, A.~Oprea, and C.~Raffel,
-  ``Extracting training data from large language models,'' in \emph{USENIX
-  Security Symposium}, 2021.
-
-\bibitem{carlini2019secretsharer}
-N.~Carlini, C.~Liu, U.~Erlingsson, J.~Kos, and D.~Song, ``The secret sharer:
-  Evaluating and testing unintended memorization in neural networks,'' in
-  \emph{USENIX Security Symposium}, 2019.
-
-\bibitem{carlini2023quantifying}
-N.~Carlini, D.~Ippolito, M.~Jagielski, K.~Lee, F.~Tramer, and C.~Zhang,
-  ``Quantifying memorization across neural language models,'' in
-  \emph{International Conference on Learning Representations}, 2023.
-
-\bibitem{shokri2017membership}
-R.~Shokri, M.~Stronati, C.~Song, and V.~Shmatikov, ``Membership inference
-  attacks against machine learning models,'' in \emph{IEEE Symposium on
-  Security and Privacy}, 2017.
-
-\bibitem{yeom2018privacy}
-S.~Yeom, I.~Giacomelli, M.~Fredrikson, and S.~Jha, ``Privacy risk in machine
-  learning: Analyzing the connection to overfitting,'' in \emph{IEEE Computer
-  Security Foundations Symposium}, 2018.
-
-\bibitem{mattern2023membership}
-J.~Mattern, F.~Mireshghallah, Z.~Jin, H.~Schutze, M.~Sachan, and
-  T.~Berg-Kirkpatrick, ``Membership inference attacks against language models
-  via neighbourhood comparison,'' \emph{Findings of the Association for
-  Computational Linguistics}, 2023.
-
 \bibitem{kirchenbauer2023watermark}
 J.~Kirchenbauer, J.~Geiping, Y.~Wen, J.~Katz, I.~Miers, and T.~Goldstein, ``A
   watermark for large language models,'' in \emph{International Conference on
@@ -175,55 +224,6 @@ J.~Kirchenbauer, J.~Geiping, Y.~Wen, J.~Katz, I.~Miers, and T.~Goldstein, ``A
 \bibitem{zhao2023watermarksurvey}
 X.~Zhao \emph{et~al.}, ``A survey of text watermarking in the era of large
   language models,'' \emph{arXiv preprint arXiv:2312.07913}, 2023.
-
-\bibitem{dwork2006dp}
-C.~Dwork, F.~McSherry, K.~Nissim, and A.~Smith, ``Calibrating noise to
-  sensitivity in private data analysis,'' in \emph{Theory of Cryptography
-  Conference}, 2006.
-
-\bibitem{voigt2017gdpr}
-P.~Voigt and A.~von~dem Bussche, \emph{The EU General Data Protection
-  Regulation (GDPR): A Practical Guide}.\hskip 1em plus 0.5em minus 0.4em\relax
-  Springer, 2017.
-
-\bibitem{guo2020certified}
-C.~Guo, T.~Goldstein, A.~Hannun, and L.~van~der Maaten, ``Certified data
-  removal from machine learning models,'' in \emph{International Conference on
-  Machine Learning}, 2020.
-
-\bibitem{cohen2022deletioncontrol}
-A.~Cohen, A.~Smith, M.~Swanberg, and P.~N. Vasudevan, ``Control,
-  confidentiality, and the right to be forgotten,'' \emph{arXiv preprint
-  arXiv:2210.07876}, 2022.
-
-\bibitem{fan2025fedfmchallenges}
-T.~Fan, H.~Gu, X.~Cao, C.~S. Chan, Q.~Chen, Y.~Chen, Y.~Feng, Y.~Gu, J.~Geng,
-  B.~Luo, S.~Liu, W.~K. Ong, C.~Ren, J.~Shao, C.~Sun, X.~Tang, H.-X. Tae,
-  Y.~Tong, S.~Wei, F.~Wu, W.~Xi, M.~Xu, H.~Yang, X.~Yang, J.~Yan, H.~Yu,
-  T.~Zhang, Y.~Zhang, X.~Zhang, Z.~Zheng, L.~Fan, and Q.~Yang, ``Ten
-  challenging problems in federated foundation models,'' \emph{IEEE
-  Transactions on Knowledge and Data Engineering}, vol.~37, no.~7, pp.
-  4314--4337, 2025.
-
-\bibitem{wang2025ikea}
-Y.~Wang, W.~Qu, S.~Zhai, Y.~Jiang, Z.~Liu, Y.~Liu, Y.~Dong, and J.~Zhang,
-  ``Silent leaks: Implicit knowledge extraction attack on rag systems through
-  benign queries,'' \emph{arXiv preprint arXiv:2505.15420}, 2025.
-
-\bibitem{xie2026canaryrag}
-Y.~Xie, Y.~Zhang, Y.~Li, S.~Song, X.~Chen, Z.~Liu, L.~Su, and T.~Liu,
-  ``Detecting rag extraction attack via dual-path runtime integrity game,''
-  \emph{arXiv preprint arXiv:2604.10717}, 2026.
-
-\bibitem{song2026grasp}
-M.~Song, J.~Kim, M.~Kang, H.~Kim, S.~Shin, and S.~Son, ``Subgraph
-  reconstruction attacks on graph rag deployments with practical defenses,''
-  \emph{arXiv preprint arXiv:2602.06495}, 2026.
-
-\bibitem{thornton2026retrievalpivot}
-S.~Thornton, ``Retrieval pivot attacks in hybrid rag: Measuring and mitigating
-  amplified leakage from vector seeds to graph expansion,'' \emph{arXiv
-  preprint arXiv:2602.08668}, 2026.
 
 \bibitem{wang2024ragate}
 X.~Wang, P.~Sen, R.~Li, and E.~Yilmaz, ``Adaptive retrieval-augmented

@@ -73,29 +73,110 @@ def _budget(plt) -> None:
 
 
 def _provenance(plt) -> None:
-    fig, ax = plt.subplots(figsize=(6.8, 2.3))
+    from matplotlib.lines import Line2D
+
+    fig, ax = plt.subplots(figsize=(4.2, 4.7))
     ax.axis("off")
-    nodes = {
-        "Raw private\nrecord": (0.08, 0.55),
-        "Chunk /\nembedding": (0.32, 0.75),
-        "Summary /\ncache": (0.32, 0.35),
-        "Synthetic\nQA": (0.58, 0.55),
-        "Adapter /\nanswer": (0.82, 0.55),
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
+
+    colors = {
+        "target": ("#e8f1ff", "#2f6fbb"),
+        "removed": ("#f4f4f4", "#9a9a9a"),
+        "residual": ("#fff1dc", "#d97904"),
+        "answer": ("#ffe4e6", "#c4314b"),
+        "audit": ("#eaf7ed", "#23824a"),
     }
-    for label, (x, y) in nodes.items():
-        ax.add_patch(FancyBboxPatch((x - 0.07, y - 0.11), 0.14, 0.16, boxstyle="round,pad=0.02", facecolor="#fff8ed", edgecolor="#d98c2b"))
-        ax.text(x, y - 0.03, label, ha="center", va="center", fontsize=8)
+
+    def box(label: str, x: float, y: float, w: float, h: float, kind: str, fontsize: int = 7) -> None:
+        face, edge = colors[kind]
+        patch = FancyBboxPatch(
+            (x - w / 2, y - h / 2),
+            w,
+            h,
+            boxstyle="round,pad=0.012,rounding_size=0.015",
+            facecolor=face,
+            edgecolor=edge,
+            linewidth=1.1,
+        )
+        ax.add_patch(patch)
+        ax.text(x, y, label, ha="center", va="center", fontsize=fontsize, color="#1f2933")
+
+    def arrow(src: tuple[float, float], dst: tuple[float, float], color: str = "#59636e", dashed: bool = False) -> None:
+        ax.annotate(
+            "",
+            xy=dst,
+            xytext=src,
+            arrowprops={
+                "arrowstyle": "-|>",
+                "color": color,
+                "lw": 1.0,
+                "linestyle": "--" if dashed else "-",
+                "shrinkA": 7,
+                "shrinkB": 7,
+                "mutation_scale": 9,
+            },
+        )
+
+    ax.text(0.50, 0.965, "Case-study provenance graph", ha="center", va="top", fontsize=10, weight="bold")
+    ax.text(0.20, 0.885, "Deletion target", ha="center", fontsize=7, color="#4b5563")
+    ax.text(0.50, 0.885, "Derived artifacts", ha="center", fontsize=7, color="#4b5563")
+    ax.text(0.82, 0.885, "Residual behavior", ha="center", fontsize=7, color="#4b5563")
+
+    nodes = {
+        "target": (0.19, 0.72),
+        "chunk": (0.48, 0.81),
+        "embedding": (0.48, 0.69),
+        "summary": (0.48, 0.57),
+        "cache": (0.48, 0.45),
+        "synthetic": (0.48, 0.33),
+        "adapter": (0.48, 0.21),
+        "retriever": (0.82, 0.69),
+        "answer": (0.82, 0.48),
+        "memory": (0.82, 0.27),
+        "audit": (0.50, 0.08),
+    }
+
+    box("Deleted\nrecord $z$", *nodes["target"], 0.22, 0.12, "target", fontsize=8)
+    box("Raw chunk\nremoved", *nodes["chunk"], 0.22, 0.085, "removed")
+    box("Embedding\nrow stale", *nodes["embedding"], 0.22, 0.085, "residual")
+    box("Summary\nderivative", *nodes["summary"], 0.22, 0.085, "residual")
+    box("Citation\ncache", *nodes["cache"], 0.22, 0.085, "residual")
+    box("Synthetic\nQA pair", *nodes["synthetic"], 0.22, 0.085, "residual")
+    box("LoRA\nupdate", *nodes["adapter"], 0.22, 0.085, "residual")
+    box("Retriever\nhit", *nodes["retriever"], 0.22, 0.10, "answer")
+    box("Paraphrased\nanswer", *nodes["answer"], 0.22, 0.10, "answer")
+    box("Adapter\nmemory", *nodes["memory"], 0.22, 0.10, "answer")
+    box("ADCU probes: direct, paraphrase,\nretrieval, counterfactual, extraction", *nodes["audit"], 0.70, 0.075, "audit", fontsize=6.5)
+
     edges = [
-        ("Raw private\nrecord", "Chunk /\nembedding"),
-        ("Raw private\nrecord", "Summary /\ncache"),
-        ("Chunk /\nembedding", "Synthetic\nQA"),
-        ("Summary /\ncache", "Synthetic\nQA"),
-        ("Synthetic\nQA", "Adapter /\nanswer"),
+        ("target", "chunk", "#9a9a9a", True),
+        ("target", "embedding", "#d97904", False),
+        ("target", "summary", "#d97904", False),
+        ("target", "cache", "#d97904", False),
+        ("target", "synthetic", "#d97904", False),
+        ("synthetic", "adapter", "#d97904", False),
+        ("embedding", "retriever", "#c4314b", False),
+        ("cache", "retriever", "#c4314b", False),
+        ("summary", "answer", "#c4314b", False),
+        ("synthetic", "answer", "#c4314b", False),
+        ("adapter", "memory", "#c4314b", False),
+        ("retriever", "audit", "#23824a", True),
+        ("answer", "audit", "#23824a", True),
+        ("memory", "audit", "#23824a", True),
     ]
-    for a, b in edges:
-        ax.annotate("", xy=nodes[b], xytext=nodes[a], arrowprops={"arrowstyle": "->", "color": "#555"})
-    ax.set_title("Example deletion-target provenance graph", fontsize=10, weight="bold")
-    fig.tight_layout()
+    for a, b, color, dashed in edges:
+        arrow(nodes[a], nodes[b], color=color, dashed=dashed)
+
+    legend = [
+        Line2D([0], [0], color="#9a9a9a", lw=1.2, linestyle="--", label="deleted path"),
+        Line2D([0], [0], color="#d97904", lw=1.2, label="residual artifact"),
+        Line2D([0], [0], color="#c4314b", lw=1.2, label="behavioral leak"),
+        Line2D([0], [0], color="#23824a", lw=1.2, linestyle="--", label="audit evidence"),
+    ]
+    ax.legend(handles=legend, loc="lower center", bbox_to_anchor=(0.5, -0.035), ncol=2, frameon=False, fontsize=6)
+
+    fig.tight_layout(pad=0.4)
     fig.savefig(FIG_DIR / "provenance_case.pdf")
     plt.close(fig)
 

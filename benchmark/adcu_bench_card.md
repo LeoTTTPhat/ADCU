@@ -57,6 +57,8 @@ Optional semantic scorer validation on deployment samples can use
 
 ## Reproducibility Commands
 
+Code repository: https://github.com/LeoTTTPhat/ADCU
+
 ```bash
 python3.11 scripts/run_adcu_submission_experiments.py
 python3.11 scripts/run_adcu_advanced_experiments.py
