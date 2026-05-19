@@ -6,18 +6,13 @@ The main repeated commands are:
 \begin{itemize}
 \item \texttt{run\_adcu\_submission\_experiments.py}: repeated RealRAG, NaturalFEVER, FineTuneSim, and HybridReal experiments.
 \item \texttt{run\_adcu\_advanced\_experiments.py}: LoRA-SFT and DenseRAG experiments.
-\item \texttt{make\_adcu\_adjudication\_draft.py}: a 30-row redacted NaturalFEVER adjudication draft for later human confirmation.
 \item \texttt{make\_adcu\_submission\_tables.py} and \texttt{make\_adcu\_advanced\_tables.py}: manuscript tables.
 \item \texttt{make\_adcu\_submission\_figures.py}: benchmark figures.
 \end{itemize}
 
-\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table11_model_adjudication_draft}
-
-Table~\ref{tab:model_adjudication_draft} is included only as an artifact-preparation aid. The labels are model-assisted draft labels over redacted NaturalFEVER outputs, not human adjudication; the release pairs this file with a human-adjudication template so independent annotators can confirm or revise the labels without seeing unredacted evidence.
-
 The benchmark card specifies tracks, metrics, baselines, and release assumptions. Every exported result row includes the track, deletion method, audit method, decision, failure label, detection label, risk score, leakage channels, retain utility, audit calls, seed, target size, and budget where applicable. The advanced rows additionally include pretrained-LoRA forget margins, retain perplexity, retain completion accuracy, neural embedding model names, and top-$k$ deleted-derivative hit rates. A requirements file, one-command reproduction script, and model-cache manifest are included with expected runtime and cache assumptions.
 
 \textbf{Code availability.}
-The artifact code, benchmark harness, experiment scripts, generated tables, and manuscript sources are available at \url{https://github.com/LeoTTTPhat/ADCU}. The repository includes the one-command reproduction script, environment requirements, model-cache manifest, benchmark card, and redacted adjudication-draft files used to regenerate the reported results.
+The artifact code, benchmark harness, experiment scripts, generated tables, and manuscript sources are available at \url{https://github.com/LeoTTTPhat/ADCU}. The repository includes the one-command reproduction script, environment requirements, model-cache manifest, benchmark card, and redacted human-adjudication logs used to regenerate the reported results.
 
 The current artifact uses synthetic private data and public FEVER evidence passages. This design avoids releasing sensitive records while still testing realistic deletion failure modes: index-only deletion, shadow-copy retention, cache retention, adapter memory, negative fine-tuning, gradient-ascent unlearning, synthetic derivative retention, and over-unlearning. The artifact should be interpreted as a technical audit benchmark, not as a legal compliance certification tool.

@@ -83,10 +83,7 @@ ADCU_TOFU_EVAL_LIMIT=full scripts/reproduce_adcu_artifact.sh
 See `benchmark/model_cache_manifest.md` for exact HuggingFace checkpoint names,
 cache expectations, and approximate runtime. See
 `benchmark/human_adjudication_template.md` for optional deployment-side
-validation of semantic scorer precision and recall. The artifact also includes
-`benchmark/model_assisted_adjudication_draft.csv`, a 30-row redacted
-NaturalFEVER labeling draft for humans to confirm; it is explicitly not reported
-as human adjudication.
+validation of semantic scorer precision and recall.
 
 ## Release Notes
 

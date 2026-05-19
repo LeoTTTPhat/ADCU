@@ -75,7 +75,7 @@ def _budget(plt) -> None:
 def _provenance(plt) -> None:
     from matplotlib.lines import Line2D
 
-    fig, ax = plt.subplots(figsize=(4.2, 4.7))
+    fig, ax = plt.subplots(figsize=(3.55, 2.95))
     ax.axis("off")
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
@@ -118,36 +118,36 @@ def _provenance(plt) -> None:
             },
         )
 
-    ax.text(0.50, 0.965, "Case-study provenance graph", ha="center", va="top", fontsize=10, weight="bold")
-    ax.text(0.20, 0.885, "Deletion target", ha="center", fontsize=7, color="#4b5563")
-    ax.text(0.50, 0.885, "Derived artifacts", ha="center", fontsize=7, color="#4b5563")
-    ax.text(0.82, 0.885, "Residual behavior", ha="center", fontsize=7, color="#4b5563")
+    ax.text(0.50, 0.98, "Case-study provenance graph", ha="center", va="top", fontsize=8.5, weight="bold")
+    ax.text(0.16, 0.89, "target", ha="center", fontsize=6, color="#4b5563")
+    ax.text(0.49, 0.89, "derived artifacts", ha="center", fontsize=6, color="#4b5563")
+    ax.text(0.82, 0.89, "behavior", ha="center", fontsize=6, color="#4b5563")
 
     nodes = {
-        "target": (0.19, 0.72),
-        "chunk": (0.48, 0.81),
-        "embedding": (0.48, 0.69),
-        "summary": (0.48, 0.57),
-        "cache": (0.48, 0.45),
-        "synthetic": (0.48, 0.33),
-        "adapter": (0.48, 0.21),
-        "retriever": (0.82, 0.69),
-        "answer": (0.82, 0.48),
-        "memory": (0.82, 0.27),
-        "audit": (0.50, 0.08),
+        "target": (0.15, 0.62),
+        "chunk": (0.39, 0.77),
+        "embedding": (0.39, 0.62),
+        "summary": (0.39, 0.47),
+        "cache": (0.61, 0.77),
+        "synthetic": (0.61, 0.62),
+        "adapter": (0.61, 0.47),
+        "retriever": (0.85, 0.74),
+        "answer": (0.85, 0.60),
+        "memory": (0.85, 0.46),
+        "audit": (0.50, 0.21),
     }
 
-    box("Deleted\nrecord $z$", *nodes["target"], 0.22, 0.12, "target", fontsize=8)
-    box("Raw chunk\nremoved", *nodes["chunk"], 0.22, 0.085, "removed")
-    box("Embedding\nrow stale", *nodes["embedding"], 0.22, 0.085, "residual")
-    box("Summary\nderivative", *nodes["summary"], 0.22, 0.085, "residual")
-    box("Citation\ncache", *nodes["cache"], 0.22, 0.085, "residual")
-    box("Synthetic\nQA pair", *nodes["synthetic"], 0.22, 0.085, "residual")
-    box("LoRA\nupdate", *nodes["adapter"], 0.22, 0.085, "residual")
-    box("Retriever\nhit", *nodes["retriever"], 0.22, 0.10, "answer")
-    box("Paraphrased\nanswer", *nodes["answer"], 0.22, 0.10, "answer")
-    box("Adapter\nmemory", *nodes["memory"], 0.22, 0.10, "answer")
-    box("ADCU probes: direct, paraphrase,\nretrieval, counterfactual, extraction", *nodes["audit"], 0.70, 0.075, "audit", fontsize=6.5)
+    box("Deleted\nrecord $z$", *nodes["target"], 0.20, 0.11, "target", fontsize=6.8)
+    box("Raw chunk\nremoved", *nodes["chunk"], 0.18, 0.075, "removed", fontsize=5.8)
+    box("Embedding\nstale", *nodes["embedding"], 0.18, 0.075, "residual", fontsize=5.8)
+    box("Summary\nderivative", *nodes["summary"], 0.18, 0.075, "residual", fontsize=5.8)
+    box("Citation\ncache", *nodes["cache"], 0.18, 0.075, "residual", fontsize=5.8)
+    box("Synthetic\nQA", *nodes["synthetic"], 0.18, 0.075, "residual", fontsize=5.8)
+    box("LoRA\nupdate", *nodes["adapter"], 0.18, 0.075, "residual", fontsize=5.8)
+    box("Retriever\nhit", *nodes["retriever"], 0.18, 0.075, "answer", fontsize=5.8)
+    box("Paraphrased\nanswer", *nodes["answer"], 0.18, 0.075, "answer", fontsize=5.8)
+    box("Adapter\nmemory", *nodes["memory"], 0.18, 0.075, "answer", fontsize=5.8)
+    box("ADCU evidence: direct | paraphrase | retrieval |\ncounterfactual | extraction", *nodes["audit"], 0.73, 0.075, "audit", fontsize=5.4)
 
     edges = [
         ("target", "chunk", "#9a9a9a", True),
@@ -174,7 +174,7 @@ def _provenance(plt) -> None:
         Line2D([0], [0], color="#c4314b", lw=1.2, label="behavioral leak"),
         Line2D([0], [0], color="#23824a", lw=1.2, linestyle="--", label="audit evidence"),
     ]
-    ax.legend(handles=legend, loc="lower center", bbox_to_anchor=(0.5, -0.035), ncol=2, frameon=False, fontsize=6)
+    ax.legend(handles=legend, loc="lower center", bbox_to_anchor=(0.5, -0.01), ncol=2, frameon=False, fontsize=5.2)
 
     fig.tight_layout(pad=0.4)
     fig.savefig(FIG_DIR / "provenance_case.pdf")

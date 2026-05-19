@@ -9,7 +9,6 @@ export ADCU_ENABLE_QWEN_TOFU="${ADCU_ENABLE_QWEN_TOFU:-1}"
 python3.11 scripts/run_adcu_submission_experiments.py
 python3.11 scripts/run_adcu_attack_suite.py
 python3.11 scripts/run_adcu_advanced_experiments.py
-python3.11 scripts/make_adcu_adjudication_draft.py
 python3.11 scripts/make_adcu_submission_tables.py
 python3.11 scripts/make_adcu_advanced_tables.py
 python3.11 scripts/make_adcu_submission_figures.py

@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1779179590.72678 "main.aux" "main.bbl" "main" 1779179592.56321 0
+["bibtex main"] 1779181670.26629 "main.aux" "main.bbl" "main" 1779181671.5354 0
   "./references.bib" 1779168948.30977 13569 8e170edeca7deb63f4f51d90b443ac62 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1772380719 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1779179592.02341 14519 dae56d139cbb17c10229620c053cfbcc "pdflatex"
+  "main.aux" 1779181671.31377 14246 8b28f724aa346cfc92d4a973cdf9ac35 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1779179590.81635 "main.tex" "main.pdf" "main" 1779179592.56342 0
+["pdflatex"] 1779181670.33943 "main.tex" "main.pdf" "main" 1779181671.53555 0
   "../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table1_ci_by_track.tex" 1779168234.1582 1945 7df178489f1560499fc668adb100ec75 ""
   "../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table3_pretrained_margins.tex" 1779168234.15831 1260 38db056aa54a1cb1ce89348c3e26147c ""
   "../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table4_retriever_hits.tex" 1779168234.15842 685 0b36b7d661b63df02a117276eb87c3d4 ""
@@ -15,7 +15,6 @@
   "../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table7_case_studies.tex" 1779168234.15868 1344 15789069c7a995c44cd81490619646d3 ""
   "../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table8_tofu_eval.tex" 1779168234.15884 1775 949c93c6162174b9f31480c2adbc4cca ""
   "../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table10_natural_fever_case.tex" 1779169406.8426 1240 05569c9aaf84fe90c234a33b0fae2641 ""
-  "../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table11_model_adjudication_draft.tex" 1779171529.22301 691 1ac819b2e04f6e125b98e08bfc480c75 ""
   "../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table1_audit_summary.tex" 1779169406.84137 1746 9e0cae9ec34ee8c697fc2e0a72234da2 ""
   "../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table2_method_summary.tex" 1779169406.84154 2040 604e53166b83798129f85d0ca42a325f ""
   "../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table3_budget_summary.tex" 1779169406.84164 369 dce789e05ec29cb6d0154c7bc1bb3284 ""
@@ -26,10 +25,10 @@
   "../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table8_counterfactual_ablation.tex" 1779169406.84239 1861 d1dd58b7f47bdfcc8bd1d2f7b918ccad ""
   "../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table9_robustness.tex" 1779169406.8425 538 77fb921c8aca8afaad4c8b34f0c8eb94 ""
   "../Third-Best-Data-Centric-Unlearning/tables/table3_attack_suite.tex" 1779167333.75241 1370 4787061fd1c9f79ce9cf42b1c38426d2 ""
-  "../figures/adcu_pdf/adcu_pipeline.pdf" 1779132837.47533 18229 5da74242e442c447b4d74095a0b316b6 ""
-  "../figures/adcu_pdf/budget_detection_risk.pdf" 1779132837.63282 20825 8529452beaa4c073e442b0985e425402 ""
-  "../figures/adcu_pdf/hybrid_real_detection.pdf" 1779132837.54241 21828 572b85de3d69d1d5d11815d2cacb7ed6 ""
-  "../figures/adcu_pdf/provenance_case.pdf" 1779132837.69729 19079 c5bbce7110d935f1a466358f349a974a ""
+  "../figures/adcu_pdf/adcu_pipeline.pdf" 1779179978.59602 18229 da9b3a33455ea65a2454292e9cd27e93 ""
+  "../figures/adcu_pdf/budget_detection_risk.pdf" 1779179978.72448 20850 a0abab6a9c9785acbe9b39524a65ad15 ""
+  "../figures/adcu_pdf/hybrid_real_detection.pdf" 1779179978.65222 22519 ab20d034a9680deb4a429d7257d256bd ""
+  "../figures/adcu_pdf/provenance_case.pdf" 1779179978.86889 25262 84d13c8b4f9161e3af8f8d9414f4b103 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1772380719 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/map/fontname/texfonts.map" 1772380719 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1772380719 5541360 f183aac233c4cd1e5ef882fcbe8e7096 ""
@@ -151,9 +150,9 @@
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/xcolor/xcolor.sty" 1772380719 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/web2c/texmf.cnf" 1772380719 43633 14bbc273cebd985e64ab1a698333eaf9 ""
   "/opt/homebrew/Cellar/texlive/20260301/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1772380719 3636956 5168b884cb430e6a6336cfea08fa659a ""
-  "main.aux" 1779179592.02341 14519 dae56d139cbb17c10229620c053cfbcc "pdflatex"
-  "main.bbl" 1779179590.81311 11092 d0d09f69e5d04957f65c12c6b5181cf1 "bibtex main"
-  "main.out" 1779179592.02467 4132 af617b4889acbb0d1b8cfbc7f5a1d3e7 "pdflatex"
+  "main.aux" 1779181671.31377 14246 8b28f724aa346cfc92d4a973cdf9ac35 "pdflatex"
+  "main.bbl" 1779181670.33701 11092 d0d09f69e5d04957f65c12c6b5181cf1 "bibtex main"
+  "main.out" 1779181671.31492 4132 af617b4889acbb0d1b8cfbc7f5a1d3e7 "pdflatex"
   "main.tex" 1779131766.92642 2833 e93f7ed075e1ee310140f467e780777e ""
   "sections/01_introduction.tex" 1779179582.58518 9278 f03d8b4e1b1768b2a3ba2f8816c77f5d ""
   "sections/02_related_work.tex" 1779168915.26933 6184 4a24d24812e708c4cf037a24bc11d303 ""
@@ -161,9 +160,9 @@
   "sections/04_metric.tex" 1779168922.08296 5853 bed834e590edfb945e40ea8f2f40d0db ""
   "sections/05_algorithm.tex" 1779131766.92749 2124 c317e71fd5facc18db51c4cf108ae4ad ""
   "sections/06_benchmark.tex" 1779131058.64912 1845 1d238908eca34fc0627ef8f4e548a029 ""
-  "sections/07_experiments.tex" 1779169414.69073 11484 360deadf4020123f9765d7d776f56d3d ""
-  "sections/08_discussion.tex" 1779168939.62759 3616 cfdd8db9bd26433b318085376fbf79a5 ""
-  "sections/09_artifact.tex" 1779179390.54585 3014 9fdd2fbcddb0a4b4a53ec390eacb2418 ""
+  "sections/07_experiments.tex" 1779181193.79955 11530 106a3fcf68f38336c56b43f50160deab ""
+  "sections/08_discussion.tex" 1779181195.81214 3608 5e467f5d9cfa54a8036b8c8c40a9efe2 ""
+  "sections/09_artifact.tex" 1779181648.8854 2421 97f9c44b3eda3d640f28f47b13929171 ""
   "sections/10_conclusion.tex" 1779131058.64971 650 5b40ab9bc93fb415e99d63ddad9df2f7 ""
   "sections/11_appendix.tex" 1779167274.59629 17242 5c91705caf96c80c5f0c4f884e534c34 ""
   (generated)
