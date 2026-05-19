@@ -1,0 +1,14 @@
+| weight_profile | tolerance | failure_detection_rate | false_alarm_rate | n |
+| --- | --- | --- | --- | --- |
+| default | 0.3 | 1.0 | 1.0 | 855 |
+| default | 0.45 | 0.9926 | 0.5556 | 855 |
+| default | 0.6 | 0.8578 | 0.3333 | 855 |
+| semantic_heavy | 0.3 | 1.0 | 1.0 | 855 |
+| semantic_heavy | 0.45 | 1.0 | 0.5556 | 855 |
+| semantic_heavy | 0.6 | 0.8815 | 0.3333 | 855 |
+| retrieval_heavy | 0.3 | 1.0 | 1.0 | 855 |
+| retrieval_heavy | 0.45 | 0.9926 | 0.5556 | 855 |
+| retrieval_heavy | 0.6 | 0.7926 | 0.3333 | 855 |
+| extraction_heavy | 0.3 | 1.0 | 1.0 | 855 |
+| extraction_heavy | 0.45 | 0.9837 | 0.5556 | 855 |
+| extraction_heavy | 0.6 | 0.6963 | 0.3333 | 855 |

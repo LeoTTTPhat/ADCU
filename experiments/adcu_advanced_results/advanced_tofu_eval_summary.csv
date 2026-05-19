@@ -1,0 +1,13 @@
+answer_preferred_rate,eval_mode,eval_n,mean_answer_loss,mean_answer_margin,method,split_size,tofu_split
+1.0,full,40,2.0098,2.6162,Qwen2.5-0.5B TOFU-like NPO unlearning,40,forget01
+1.0,deterministic_subset_5_of_40,5,0.8516,3.5929,Qwen2.5-0.5B TOFU-like NPO unlearning,40,forget01_perturbed
+1.0,deterministic_subset_5_of_100,5,0.5613,0.0,Qwen2.5-0.5B TOFU-like NPO unlearning,100,real_authors
+1.0,deterministic_subset_5_of_3960,5,2.2326,1.8546,Qwen2.5-0.5B TOFU-like NPO unlearning,3960,retain99
+1.0,deterministic_subset_5_of_400,5,2.2326,1.8546,Qwen2.5-0.5B TOFU-like NPO unlearning,400,retain_perturbed
+0.4,deterministic_subset_5_of_117,5,4.854,-2.0521,Qwen2.5-0.5B TOFU-like NPO unlearning,117,world_facts
+1.0,full,40,2.0209,3.4098,Qwen2.5-0.5B TOFU-like full SFT,40,forget01
+1.0,deterministic_subset_5_of_40,5,0.8811,4.4914,Qwen2.5-0.5B TOFU-like full SFT,40,forget01_perturbed
+1.0,deterministic_subset_5_of_100,5,0.4016,0.0,Qwen2.5-0.5B TOFU-like full SFT,100,real_authors
+1.0,deterministic_subset_5_of_3960,5,2.2736,2.4063,Qwen2.5-0.5B TOFU-like full SFT,3960,retain99
+1.0,deterministic_subset_5_of_400,5,2.2736,2.4063,Qwen2.5-0.5B TOFU-like full SFT,400,retain_perturbed
+0.4,deterministic_subset_5_of_117,5,4.3498,-1.8328,Qwen2.5-0.5B TOFU-like full SFT,117,world_facts

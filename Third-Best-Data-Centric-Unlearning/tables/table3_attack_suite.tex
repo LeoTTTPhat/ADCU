@@ -1,0 +1,25 @@
+\begin{table*}[t]
+\centering
+\caption{Attack suite outcomes.}
+\label{tab:adcu_attacks}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllll}
+\toprule
+Attack Id & Decision & Risk Ucb & Violations & Fooled Weak Audits \\
+\midrule
+paraphrase\_survival & fail & 0.7018 & 8 & exact\_match, canary\_only \\
+chunk\_boundary\_leakage & fail & 0.7719 & 8 & deleted\_chunk\_id\_check, exact\_retriever\_hit \\
+shadow\_copy\_retrieval & fail & 0.5851 & 8 & source\_level\_delete\_check, vector\_id\_delete\_check \\
+synthetic\_derivative\_retention & fail & 0.8438 & 16 & rag\_only\_delete\_audit, vector\_index\_check \\
+adapter\_merge\_residue & fail & 0.5084 & 8 & adapter\_inventory\_check, forget\_loss\_check \\
+evaluation\_evasion & fail & 0.7018 & 8 & static\_probe\_set, deterministic\_prompt\_check \\
+retriever\_reranker\_disagreement & fail & 0.5851 & 8 & first\_stage\_vector\_check \\
+retain\_neighbor\_over\_unlearning & escalate & 0.4327 & 0 & forget\_only\_metric \\
+multi\_hop\_reconstruction & fail & 0.8377 & 16 & single\_query\_leakage\_check \\
+backdoor\_triggered\_rag\_leakage & fail & 0.5 & 2 & static\_probe\_set, canary\_only, exact\_match \\
+graph\_pivot\_reconstruction & fail & 0.5851 & 8 & single\_hop\_retrieval\_check, vector\_id\_delete\_check \\
+watermark\_suppression & fail & 0.7406 & 8 & canary\_only \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

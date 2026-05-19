@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\caption{Redacted case studies from advanced experiments.}
+\label{tab:case_studies}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllll}
+\toprule
+Case Id & Risk Ucb & Direct Leakage & Paraphrase Leakage & Retrieval Dependence & Interpretation \\
+\midrule
+PEFT-LoRA::tiny HF PEFT LoRA validation::ADCU & 0.8847 & 0.6508 & 0.7535 & 0.0 & Residual dependence remains after the nominal deletion/unlearning operation. \\
+LoRA-SFT::full adapter no unlearning::ADCU & 0.8818 & 0.5794 & 0.7104 & 0.0 & Residual dependence remains after the nominal deletion/unlearning operation. \\
+DenseRAG::dense retrieval with retained derivatives::RetrieverHit & 0.7858 & 0.2639 & 0.321 & 0.4444 & Residual dependence remains after the nominal deletion/unlearning operation. \\
+DenseRAG::e5 retrieval with retained derivatives::ADCU & 0.7858 & 0.369 & 0.3997 & 0.4722 & Residual dependence remains after the nominal deletion/unlearning operation. \\
+DenseRAG::lexical retrieval with retained derivatives::ADCU & 0.7858 & 0.3413 & 0.3789 & 0.4444 & Residual dependence remains after the nominal deletion/unlearning operation. \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

@@ -1,0 +1,62 @@
+[
+  {
+    "case_id": "PEFT-LoRA::tiny HF PEFT LoRA validation::ADCU",
+    "risk_ucb": 0.7661,
+    "direct_leakage": 0.5437,
+    "paraphrase_leakage": 0.6396,
+    "retrieval_dependence": 0.0,
+    "redacted_probe": "[REDACTED USER] deletion audit probe",
+    "redacted_output": "[REDACTED SECRET] residual behavior detected",
+    "interpretation": "Residual dependence remains after the nominal deletion/unlearning operation."
+  },
+  {
+    "case_id": "Pretrained-LoRA::pretrained LoRA NPO unlearning::ADCU",
+    "risk_ucb": 0.4161,
+    "direct_leakage": 0.1548,
+    "paraphrase_leakage": 0.1181,
+    "retrieval_dependence": 0.0,
+    "redacted_probe": "[REDACTED USER] deletion audit probe",
+    "redacted_output": "[REDACTED SECRET] residual behavior detected",
+    "interpretation": "Residual dependence remains after the nominal deletion/unlearning operation."
+  },
+  {
+    "case_id": "LoRA-SFT::full adapter no unlearning::ADCU",
+    "risk_ucb": 0.9262,
+    "direct_leakage": 0.6012,
+    "paraphrase_leakage": 0.6737,
+    "retrieval_dependence": 0.0,
+    "redacted_probe": "[REDACTED USER] deletion audit probe",
+    "redacted_output": "[REDACTED SECRET] residual behavior detected",
+    "interpretation": "Residual dependence remains after the nominal deletion/unlearning operation."
+  },
+  {
+    "case_id": "DenseRAG::dense retrieval with retained derivatives::RetrieverHit",
+    "risk_ucb": 0.7858,
+    "direct_leakage": 0.2396,
+    "paraphrase_leakage": 0.2726,
+    "retrieval_dependence": 0.375,
+    "redacted_probe": "[REDACTED USER] deletion audit probe",
+    "redacted_output": "[REDACTED SECRET] residual behavior detected",
+    "interpretation": "Residual dependence remains after the nominal deletion/unlearning operation."
+  },
+  {
+    "case_id": "DenseRAG::e5 retrieval with retained derivatives::ADCU",
+    "risk_ucb": 0.7858,
+    "direct_leakage": 0.381,
+    "paraphrase_leakage": 0.3796,
+    "retrieval_dependence": 0.4583,
+    "redacted_probe": "[REDACTED USER] deletion audit probe",
+    "redacted_output": "[REDACTED SECRET] residual behavior detected",
+    "interpretation": "Residual dependence remains after the nominal deletion/unlearning operation."
+  },
+  {
+    "case_id": "DenseRAG::lexical retrieval with retained derivatives::ADCU",
+    "risk_ucb": 0.7858,
+    "direct_leakage": 0.2976,
+    "paraphrase_leakage": 0.316,
+    "retrieval_dependence": 0.375,
+    "redacted_probe": "[REDACTED USER] deletion audit probe",
+    "redacted_output": "[REDACTED SECRET] residual behavior detected",
+    "interpretation": "Residual dependence remains after the nominal deletion/unlearning operation."
+  }
+]

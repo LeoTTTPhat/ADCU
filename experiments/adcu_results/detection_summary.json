@@ -1,0 +1,146 @@
+[
+  {
+    "track": "FineTune",
+    "audit_method": "ADCU",
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.4839,
+    "detections_per_1000_calls": 32.61
+  },
+  {
+    "track": "FineTune",
+    "audit_method": "ADCU-NoValuation",
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.4839,
+    "detections_per_1000_calls": 32.61
+  },
+  {
+    "track": "FineTune",
+    "audit_method": "CanaryOnly",
+    "failure_detection_rate": 0.3333,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.4299,
+    "detections_per_1000_calls": 10.87
+  },
+  {
+    "track": "FineTune",
+    "audit_method": "ExactMatch",
+    "failure_detection_rate": 0.3333,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.4839,
+    "detections_per_1000_calls": 10.87
+  },
+  {
+    "track": "FineTune",
+    "audit_method": "RetrieverHit",
+    "failure_detection_rate": 0.3333,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.4299,
+    "detections_per_1000_calls": 10.87
+  },
+  {
+    "track": "FineTune",
+    "audit_method": "UniformProbes",
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.4839,
+    "detections_per_1000_calls": 32.61
+  },
+  {
+    "track": "Hybrid",
+    "audit_method": "ADCU",
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.785,
+    "detections_per_1000_calls": 32.61
+  },
+  {
+    "track": "Hybrid",
+    "audit_method": "ADCU-NoValuation",
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.785,
+    "detections_per_1000_calls": 32.61
+  },
+  {
+    "track": "Hybrid",
+    "audit_method": "CanaryOnly",
+    "failure_detection_rate": 0.3333,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.5184,
+    "detections_per_1000_calls": 10.87
+  },
+  {
+    "track": "Hybrid",
+    "audit_method": "ExactMatch",
+    "failure_detection_rate": 0.3333,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.7463,
+    "detections_per_1000_calls": 10.87
+  },
+  {
+    "track": "Hybrid",
+    "audit_method": "RetrieverHit",
+    "failure_detection_rate": 0.6667,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.643,
+    "detections_per_1000_calls": 21.74
+  },
+  {
+    "track": "Hybrid",
+    "audit_method": "UniformProbes",
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.785,
+    "detections_per_1000_calls": 32.61
+  },
+  {
+    "track": "RAG",
+    "audit_method": "ADCU",
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.643,
+    "detections_per_1000_calls": 32.61
+  },
+  {
+    "track": "RAG",
+    "audit_method": "ADCU-NoValuation",
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.643,
+    "detections_per_1000_calls": 32.61
+  },
+  {
+    "track": "RAG",
+    "audit_method": "CanaryOnly",
+    "failure_detection_rate": 0.6667,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.6069,
+    "detections_per_1000_calls": 21.74
+  },
+  {
+    "track": "RAG",
+    "audit_method": "ExactMatch",
+    "failure_detection_rate": 0.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.643,
+    "detections_per_1000_calls": 0.0
+  },
+  {
+    "track": "RAG",
+    "audit_method": "RetrieverHit",
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.643,
+    "detections_per_1000_calls": 32.61
+  },
+  {
+    "track": "RAG",
+    "audit_method": "UniformProbes",
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "mean_risk_ucb": 0.643,
+    "detections_per_1000_calls": 32.61
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "track": "Pretrained-LoRA",
+    "method": "pretrained LoRA NPO unlearning",
+    "active_forget_targets": 0.0,
+    "mean_forget_margin": -2.0091,
+    "retain_perplexity": 72.2828,
+    "retain_completion_accuracy": 0.0,
+    "adcu_decision": "escalate",
+    "failure_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "method": "pretrained LoRA SimNPO unlearning",
+    "active_forget_targets": 0.0,
+    "mean_forget_margin": -1.9647,
+    "retain_perplexity": 71.5352,
+    "retain_completion_accuracy": 0.0,
+    "adcu_decision": "escalate",
+    "failure_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "method": "pretrained LoRA filtered retraining",
+    "active_forget_targets": 0.0,
+    "mean_forget_margin": -0.9395,
+    "retain_perplexity": 55.9968,
+    "retain_completion_accuracy": 0.0,
+    "adcu_decision": "escalate",
+    "failure_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "method": "pretrained LoRA full SFT",
+    "active_forget_targets": 0.3333,
+    "mean_forget_margin": -0.8107,
+    "retain_perplexity": 63.1552,
+    "retain_completion_accuracy": 0.0,
+    "adcu_decision": "escalate/fail",
+    "failure_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "method": "pretrained LoRA gradient-ascent unlearning",
+    "active_forget_targets": 0.0,
+    "mean_forget_margin": -1.6783,
+    "retain_perplexity": 127.0763,
+    "retain_completion_accuracy": 0.0,
+    "adcu_decision": "escalate",
+    "failure_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "method": "pretrained LoRA negative SFT unlearning",
+    "active_forget_targets": 0.0,
+    "mean_forget_margin": -2.3428,
+    "retain_perplexity": 64.688,
+    "retain_completion_accuracy": 0.0,
+    "adcu_decision": "escalate",
+    "failure_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "track": "Qwen-TOFU-LoRA",
+    "method": "Qwen2.5-0.5B TOFU-like NPO unlearning",
+    "active_forget_targets": 1.0,
+    "mean_forget_margin": -0.4114,
+    "retain_perplexity": 8.5194,
+    "retain_completion_accuracy": 1.0,
+    "adcu_decision": "fail",
+    "failure_detection_rate": 1.0,
+    "n": 1
+  },
+  {
+    "track": "Qwen-TOFU-LoRA",
+    "method": "Qwen2.5-0.5B TOFU-like full SFT",
+    "active_forget_targets": 1.0,
+    "mean_forget_margin": -0.1918,
+    "retain_perplexity": 8.9517,
+    "retain_completion_accuracy": 1.0,
+    "adcu_decision": "fail",
+    "failure_detection_rate": 1.0,
+    "n": 1
+  }
+]

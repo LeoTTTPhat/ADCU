@@ -1,0 +1,20 @@
+[
+  {
+    "budget": 12,
+    "failure_detection_rate": 0.9778,
+    "mean_risk_ucb": 0.8011,
+    "mean_calls": 12.0
+  },
+  {
+    "budget": 24,
+    "failure_detection_rate": 1.0,
+    "mean_risk_ucb": 0.682,
+    "mean_calls": 24.0
+  },
+  {
+    "budget": 48,
+    "failure_detection_rate": 1.0,
+    "mean_risk_ucb": 0.5957,
+    "mean_calls": 40.28
+  }
+]

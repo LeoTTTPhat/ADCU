@@ -1,0 +1,8 @@
+| channel | scorer | threshold | precision | recall | n_labeled_cases |
+| --- | --- | --- | --- | --- | --- |
+| direct | token overlap with protected text | 0.4 | 1.0 | 1.0 | 12 |
+| paraphrase | alias/fact/expected-term overlap | 0.35 | 0.92 | 1.0 | 12 |
+| retrieval | derived artifact id or citation hit | 0.2 | 1.0 | 1.0 | 12 |
+| counterfactual | semantic or retrieval evidence gate | 1.0 | 0.92 | 1.0 | 12 |
+| extraction | extraction probe plus semantic/direct hit | 0.08 | 1.0 | 0.83 | 12 |
+| watermark | exact canary/provenance-token hit | 0.2 | 1.0 | 0.75 | 12 |

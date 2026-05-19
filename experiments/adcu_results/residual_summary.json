@@ -1,0 +1,122 @@
+[
+  {
+    "track": "FineTune",
+    "deletion_method": "adapter inventory only",
+    "direct_leakage": 0.3043,
+    "paraphrase_leakage": 0.3043,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0435,
+    "retain_utility": 0.97,
+    "risk_ucb": 0.5016
+  },
+  {
+    "track": "FineTune",
+    "deletion_method": "filtered adapter retraining",
+    "direct_leakage": 0.0,
+    "paraphrase_leakage": 0.0,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0,
+    "retain_utility": 0.99,
+    "risk_ucb": 0.4299
+  },
+  {
+    "track": "FineTune",
+    "deletion_method": "gradient-ascent unlearning",
+    "direct_leakage": 0.2174,
+    "paraphrase_leakage": 0.3043,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0435,
+    "retain_utility": 0.97,
+    "risk_ucb": 0.5743
+  },
+  {
+    "track": "FineTune",
+    "deletion_method": "over-unlearned adapter",
+    "direct_leakage": 0.0,
+    "paraphrase_leakage": 0.0,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0,
+    "retain_utility": 0.4,
+    "risk_ucb": 0.4299
+  },
+  {
+    "track": "Hybrid",
+    "deletion_method": "RAG-only deletion",
+    "direct_leakage": 0.3739,
+    "paraphrase_leakage": 0.6957,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.087,
+    "retain_utility": 0.96,
+    "risk_ucb": 0.8533
+  },
+  {
+    "track": "Hybrid",
+    "deletion_method": "adapter-only unlearning",
+    "direct_leakage": 0.6957,
+    "paraphrase_leakage": 0.6174,
+    "retrieval_dependence": 0.6957,
+    "extraction_risk": 0.087,
+    "retain_utility": 0.96,
+    "risk_ucb": 0.9283
+  },
+  {
+    "track": "Hybrid",
+    "deletion_method": "full provenance purge",
+    "direct_leakage": 0.0,
+    "paraphrase_leakage": 0.0,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.4299
+  },
+  {
+    "track": "Hybrid",
+    "deletion_method": "synthetic derivative retained",
+    "direct_leakage": 0.3739,
+    "paraphrase_leakage": 0.6957,
+    "retrieval_dependence": 0.3913,
+    "extraction_risk": 0.087,
+    "retain_utility": 0.96,
+    "risk_ucb": 0.9283
+  },
+  {
+    "track": "RAG",
+    "deletion_method": "cache-not-purged deletion",
+    "direct_leakage": 0.3913,
+    "paraphrase_leakage": 0.313,
+    "retrieval_dependence": 0.3913,
+    "extraction_risk": 0.0435,
+    "retain_utility": 0.97,
+    "risk_ucb": 0.7839
+  },
+  {
+    "track": "RAG",
+    "deletion_method": "index-only deletion",
+    "direct_leakage": 0.3913,
+    "paraphrase_leakage": 0.313,
+    "retrieval_dependence": 0.3913,
+    "extraction_risk": 0.0435,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.7839
+  },
+  {
+    "track": "RAG",
+    "deletion_method": "provenance-guided deletion",
+    "direct_leakage": 0.0,
+    "paraphrase_leakage": 0.0,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0,
+    "retain_utility": 1.0,
+    "risk_ucb": 0.4299
+  },
+  {
+    "track": "RAG",
+    "deletion_method": "shadow-copy deletion",
+    "direct_leakage": 0.3043,
+    "paraphrase_leakage": 0.3043,
+    "retrieval_dependence": 0.3043,
+    "extraction_risk": 0.0435,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.5743
+  }
+]

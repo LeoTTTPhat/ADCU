@@ -1,0 +1,192 @@
+[
+  {
+    "track": "FineTuneSim",
+    "deletion_method": "adapter replacement failure",
+    "direct_leakage": 0.6111,
+    "paraphrase_leakage": 0.4668,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0509,
+    "retain_utility": 0.965,
+    "risk_ucb": 0.829
+  },
+  {
+    "track": "FineTuneSim",
+    "deletion_method": "filtered retraining",
+    "direct_leakage": 0.0,
+    "paraphrase_leakage": 0.0,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0,
+    "retain_utility": 0.985,
+    "risk_ucb": 0.508
+  },
+  {
+    "track": "FineTuneSim",
+    "deletion_method": "gradient-ascent unlearning",
+    "direct_leakage": 0.1019,
+    "paraphrase_leakage": 0.3056,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0255,
+    "retain_utility": 0.965,
+    "risk_ucb": 0.6716
+  },
+  {
+    "track": "FineTuneSim",
+    "deletion_method": "negative fine-tuning",
+    "direct_leakage": 0.1309,
+    "paraphrase_leakage": 0.3056,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0255,
+    "retain_utility": 0.955,
+    "risk_ucb": 0.606
+  },
+  {
+    "track": "FineTuneSim",
+    "deletion_method": "over-unlearned adapter",
+    "direct_leakage": 0.0,
+    "paraphrase_leakage": 0.0,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0,
+    "retain_utility": 0.42,
+    "risk_ucb": 0.508
+  },
+  {
+    "track": "HybridReal",
+    "deletion_method": "RAG-only deletion",
+    "direct_leakage": 0.2328,
+    "paraphrase_leakage": 0.6111,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0509,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.8045
+  },
+  {
+    "track": "HybridReal",
+    "deletion_method": "adapter-only unlearning",
+    "direct_leakage": 0.6111,
+    "paraphrase_leakage": 0.4668,
+    "retrieval_dependence": 0.6111,
+    "extraction_risk": 0.0509,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.8772
+  },
+  {
+    "track": "HybridReal",
+    "deletion_method": "full provenance purge",
+    "direct_leakage": 0.0,
+    "paraphrase_leakage": 0.0,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.508
+  },
+  {
+    "track": "HybridReal",
+    "deletion_method": "graph-pivot expansion retained",
+    "direct_leakage": 0.2328,
+    "paraphrase_leakage": 0.6111,
+    "retrieval_dependence": 0.6111,
+    "extraction_risk": 0.0509,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.877
+  },
+  {
+    "track": "HybridReal",
+    "deletion_method": "synthetic derivative retained",
+    "direct_leakage": 0.3995,
+    "paraphrase_leakage": 1.0,
+    "retrieval_dependence": 0.6111,
+    "extraction_risk": 0.0833,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.9846
+  },
+  {
+    "track": "NaturalFEVER",
+    "deletion_method": "answer-only paraphrase leak",
+    "direct_leakage": 0.574,
+    "paraphrase_leakage": 0.616,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0436,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.8427
+  },
+  {
+    "track": "NaturalFEVER",
+    "deletion_method": "citation cache retained",
+    "direct_leakage": 0.3068,
+    "paraphrase_leakage": 0.3011,
+    "retrieval_dependence": 0.3056,
+    "extraction_risk": 0.0218,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.6985
+  },
+  {
+    "track": "NaturalFEVER",
+    "deletion_method": "full provenance purge",
+    "direct_leakage": 0.0012,
+    "paraphrase_leakage": 0.0049,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.5078
+  },
+  {
+    "track": "NaturalFEVER",
+    "deletion_method": "natural summary retained",
+    "direct_leakage": 0.2915,
+    "paraphrase_leakage": 0.3105,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0218,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.6632
+  },
+  {
+    "track": "RealRAG",
+    "deletion_method": "backdoor-triggered RAG leakage",
+    "direct_leakage": 0.1019,
+    "paraphrase_leakage": 0.3056,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0255,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.6716
+  },
+  {
+    "track": "RealRAG",
+    "deletion_method": "cache-not-purged deletion",
+    "direct_leakage": 0.3056,
+    "paraphrase_leakage": 0.2292,
+    "retrieval_dependence": 0.3056,
+    "extraction_risk": 0.0255,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.7155
+  },
+  {
+    "track": "RealRAG",
+    "deletion_method": "index-only deletion",
+    "direct_leakage": 0.3056,
+    "paraphrase_leakage": 0.2292,
+    "retrieval_dependence": 0.3056,
+    "extraction_risk": 0.0255,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.7155
+  },
+  {
+    "track": "RealRAG",
+    "deletion_method": "provenance-guided deletion",
+    "direct_leakage": 0.0,
+    "paraphrase_leakage": 0.0,
+    "retrieval_dependence": 0.0,
+    "extraction_risk": 0.0,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.508
+  },
+  {
+    "track": "RealRAG",
+    "deletion_method": "shadow-copy deletion",
+    "direct_leakage": 0.3056,
+    "paraphrase_leakage": 0.2376,
+    "retrieval_dependence": 0.3056,
+    "extraction_risk": 0.0255,
+    "retain_utility": 0.98,
+    "risk_ucb": 0.6696
+  }
+]

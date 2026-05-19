@@ -1,0 +1,13 @@
+| track | seed | failure_detection_rate | mean_adcu_risk_ucb | n |
+| --- | --- | --- | --- | --- |
+| DenseRAG | 21 | 0.8 | 0.7857 | 30 |
+| DenseRAG | 22 | 0.8 | 0.7857 | 30 |
+| DenseRAG | 23 | 0.8 | 0.7857 | 30 |
+| LoRA-SFT | 11 | 0.8333 | 0.7732 | 24 |
+| LoRA-SFT | 12 | 0.8333 | 0.7446 | 24 |
+| LoRA-SFT | 13 | 0.8333 | 0.7493 | 24 |
+| PEFT-LoRA | 31 | 0.7143 | 0.7661 | 7 |
+| Pretrained-LoRA | 41 | 1.0 | 0.4161 | 24 |
+| Pretrained-LoRA | 42 | 1.0 | 0.4161 | 24 |
+| Pretrained-LoRA | 43 | 1.0 | 0.4634 | 24 |
+| Qwen-TOFU-LoRA | 51 | 0.75 | 0.6434 | 8 |

@@ -1,0 +1,173 @@
+[
+  {
+    "track": "FineTuneSim",
+    "deletion_method": "adapter replacement failure",
+    "full_risk_ucb": 0.829,
+    "retrieval_off_risk_ucb": 0.829,
+    "risk_delta": 0.0,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 1.0
+  },
+  {
+    "track": "FineTuneSim",
+    "deletion_method": "filtered retraining",
+    "full_risk_ucb": 0.508,
+    "retrieval_off_risk_ucb": 0.508,
+    "risk_delta": 0.0,
+    "full_detection_rate": 0.0,
+    "retrieval_off_detection_rate": 0.0
+  },
+  {
+    "track": "FineTuneSim",
+    "deletion_method": "gradient-ascent unlearning",
+    "full_risk_ucb": 0.6716,
+    "retrieval_off_risk_ucb": 0.6716,
+    "risk_delta": 0.0,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 1.0
+  },
+  {
+    "track": "FineTuneSim",
+    "deletion_method": "negative fine-tuning",
+    "full_risk_ucb": 0.606,
+    "retrieval_off_risk_ucb": 0.606,
+    "risk_delta": 0.0,
+    "full_detection_rate": 0.8889,
+    "retrieval_off_detection_rate": 0.8889
+  },
+  {
+    "track": "FineTuneSim",
+    "deletion_method": "over-unlearned adapter",
+    "full_risk_ucb": 0.508,
+    "retrieval_off_risk_ucb": 0.508,
+    "risk_delta": 0.0,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 1.0
+  },
+  {
+    "track": "HybridReal",
+    "deletion_method": "RAG-only deletion",
+    "full_risk_ucb": 0.8045,
+    "retrieval_off_risk_ucb": 0.8045,
+    "risk_delta": 0.0,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 1.0
+  },
+  {
+    "track": "HybridReal",
+    "deletion_method": "adapter-only unlearning",
+    "full_risk_ucb": 0.8772,
+    "retrieval_off_risk_ucb": 0.5302,
+    "risk_delta": 0.347,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 0.0
+  },
+  {
+    "track": "HybridReal",
+    "deletion_method": "full provenance purge",
+    "full_risk_ucb": 0.508,
+    "retrieval_off_risk_ucb": 0.508,
+    "risk_delta": 0.0,
+    "full_detection_rate": 0.0,
+    "retrieval_off_detection_rate": 0.0
+  },
+  {
+    "track": "HybridReal",
+    "deletion_method": "graph-pivot expansion retained",
+    "full_risk_ucb": 0.877,
+    "retrieval_off_risk_ucb": 0.5302,
+    "risk_delta": 0.3469,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 0.0
+  },
+  {
+    "track": "HybridReal",
+    "deletion_method": "synthetic derivative retained",
+    "full_risk_ucb": 0.9846,
+    "retrieval_off_risk_ucb": 0.6377,
+    "risk_delta": 0.3469,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 0.6667
+  },
+  {
+    "track": "NaturalFEVER",
+    "deletion_method": "answer-only paraphrase leak",
+    "full_risk_ucb": 0.8427,
+    "retrieval_off_risk_ucb": 0.8427,
+    "risk_delta": 0.0,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 1.0
+  },
+  {
+    "track": "NaturalFEVER",
+    "deletion_method": "citation cache retained",
+    "full_risk_ucb": 0.6985,
+    "retrieval_off_risk_ucb": 0.5104,
+    "risk_delta": 0.1881,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 0.0
+  },
+  {
+    "track": "NaturalFEVER",
+    "deletion_method": "full provenance purge",
+    "full_risk_ucb": 0.5078,
+    "retrieval_off_risk_ucb": 0.5078,
+    "risk_delta": 0.0,
+    "full_detection_rate": 0.0,
+    "retrieval_off_detection_rate": 0.0
+  },
+  {
+    "track": "NaturalFEVER",
+    "deletion_method": "natural summary retained",
+    "full_risk_ucb": 0.6632,
+    "retrieval_off_risk_ucb": 0.6632,
+    "risk_delta": 0.0,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 1.0
+  },
+  {
+    "track": "RealRAG",
+    "deletion_method": "backdoor-triggered RAG leakage",
+    "full_risk_ucb": 0.6716,
+    "retrieval_off_risk_ucb": 0.6716,
+    "risk_delta": 0.0,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 1.0
+  },
+  {
+    "track": "RealRAG",
+    "deletion_method": "cache-not-purged deletion",
+    "full_risk_ucb": 0.7155,
+    "retrieval_off_risk_ucb": 0.5213,
+    "risk_delta": 0.1943,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 0.0
+  },
+  {
+    "track": "RealRAG",
+    "deletion_method": "index-only deletion",
+    "full_risk_ucb": 0.7155,
+    "retrieval_off_risk_ucb": 0.5213,
+    "risk_delta": 0.1943,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 0.0
+  },
+  {
+    "track": "RealRAG",
+    "deletion_method": "provenance-guided deletion",
+    "full_risk_ucb": 0.508,
+    "retrieval_off_risk_ucb": 0.508,
+    "risk_delta": 0.0,
+    "full_detection_rate": 0.0,
+    "retrieval_off_detection_rate": 0.0
+  },
+  {
+    "track": "RealRAG",
+    "deletion_method": "shadow-copy deletion",
+    "full_risk_ucb": 0.6696,
+    "retrieval_off_risk_ucb": 0.5168,
+    "risk_delta": 0.1528,
+    "full_detection_rate": 1.0,
+    "retrieval_off_detection_rate": 0.0
+  }
+]

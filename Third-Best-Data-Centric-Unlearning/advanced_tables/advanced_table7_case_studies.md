@@ -1,0 +1,8 @@
+| case_id | risk_ucb | direct_leakage | paraphrase_leakage | retrieval_dependence | interpretation |
+| --- | --- | --- | --- | --- | --- |
+| PEFT-LoRA::tiny HF PEFT LoRA validation::ADCU | 0.7661 | 0.5437 | 0.6396 | 0.0 | Residual dependence remains after the nominal deletion/unlearning operation. |
+| Pretrained-LoRA::pretrained LoRA NPO unlearning::ADCU | 0.4161 | 0.1548 | 0.1181 | 0.0 | Residual dependence remains after the nominal deletion/unlearning operation. |
+| LoRA-SFT::full adapter no unlearning::ADCU | 0.9262 | 0.6012 | 0.6737 | 0.0 | Residual dependence remains after the nominal deletion/unlearning operation. |
+| DenseRAG::dense retrieval with retained derivatives::RetrieverHit | 0.7858 | 0.2396 | 0.2726 | 0.375 | Residual dependence remains after the nominal deletion/unlearning operation. |
+| DenseRAG::e5 retrieval with retained derivatives::ADCU | 0.7858 | 0.381 | 0.3796 | 0.4583 | Residual dependence remains after the nominal deletion/unlearning operation. |
+| DenseRAG::lexical retrieval with retained derivatives::ADCU | 0.7858 | 0.2976 | 0.316 | 0.375 | Residual dependence remains after the nominal deletion/unlearning operation. |

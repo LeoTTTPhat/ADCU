@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{Retriever deleted-derivative hit rates by mode.}
+\label{tab:retriever_hits}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllll}
+\toprule
+Retrieval Mode & Embedding Model & Top3 Deleted Derivative Hit Rate & Top5 Deleted Derivative Hit Rate & Adcu Detection Rate & N \\
+\midrule
+bge & BAAI/bge-small-en-v1.5 & 0.9583 & 1.0 & 1.0 & 3 \\
+cross & not\_used & 0.0 & 0.0 & 1.0 & 3 \\
+dense & not\_used & 0.75 & 0.75 & 1.0 & 3 \\
+e5 & intfloat/e5-base-v2 & 0.9306 & 0.9583 & 1.0 & 3 \\
+lexical & not\_used & 0.75 & 0.75 & 1.0 & 3 \\
+neural & sentence-transformers/all-MiniLM-L6-v2 & 0.9722 & 0.9722 & 1.0 & 3 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

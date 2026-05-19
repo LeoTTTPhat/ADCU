@@ -1,0 +1,42 @@
+[
+  {
+    "case_id": "NF-1",
+    "deletion_method": "full provenance purge",
+    "ground_truth": "clean",
+    "decision": "pass",
+    "risk_ucb": 0.4327,
+    "retrieval_dependence": 0.0,
+    "redacted_claim": "[X] [X] was born in the late [X]",
+    "redacted_answer": "[X] do not have enough retained [X] to answer that request."
+  },
+  {
+    "case_id": "NF-2",
+    "deletion_method": "citation cache retained",
+    "ground_truth": "failure",
+    "decision": "fail",
+    "risk_ucb": 0.6508,
+    "retrieval_dependence": 0.3333,
+    "redacted_claim": "[X] [X] was born in the late [X]",
+    "redacted_answer": "[X] retained derivative says: [X] [X] -LRB- born [X] [X] , [X] -RRB- is an [X] graphic designer , director , and [X] best ..."
+  },
+  {
+    "case_id": "NF-3",
+    "deletion_method": "natural summary retained",
+    "ground_truth": "failure",
+    "decision": "fail",
+    "risk_ucb": 0.6204,
+    "retrieval_dependence": 0.0,
+    "redacted_claim": "[X] [X] spent her whole life single.",
+    "redacted_answer": "[X] [X] spent her whole life single. [X] [X] [X] , [X] married [X] tennis player [X] [X] , with whom she had three ..."
+  },
+  {
+    "case_id": "NF-4",
+    "deletion_method": "answer-only paraphrase leak",
+    "ground_truth": "failure",
+    "decision": "fail",
+    "risk_ucb": 0.5934,
+    "retrieval_dependence": 0.0,
+    "redacted_claim": "[X] [X] received [X] for three [X] [X] [X]",
+    "redacted_answer": "[X] [X] received [X] for three [X] [X] [X] [X] [X] has been nominated for a number of awards , including an [X] [X] ..."
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "track": "FineTuneSim",
+    "audit_method": "ADCU",
+    "failure_detection_rate": 0.9722,
+    "mean_direct": 0.1688,
+    "mean_paraphrase": 0.2156,
+    "mean_retrieval": 0.0,
+    "mean_risk_ucb": 0.6245,
+    "n": 225
+  },
+  {
+    "track": "FineTuneSim",
+    "audit_method": "ADCU-BlackBox",
+    "failure_detection_rate": 0.9722,
+    "mean_direct": 0.1688,
+    "mean_paraphrase": 0.2156,
+    "mean_retrieval": 0.0,
+    "mean_risk_ucb": 0.6245,
+    "n": 225
+  },
+  {
+    "track": "HybridReal",
+    "audit_method": "ADCU",
+    "failure_detection_rate": 1.0,
+    "mean_direct": 0.2953,
+    "mean_paraphrase": 0.5378,
+    "mean_retrieval": 0.3667,
+    "mean_risk_ucb": 0.8103,
+    "n": 225
+  },
+  {
+    "track": "HybridReal",
+    "audit_method": "ADCU-BlackBox",
+    "failure_detection_rate": 1.0,
+    "mean_direct": 0.2953,
+    "mean_paraphrase": 0.5378,
+    "mean_retrieval": 0.0,
+    "mean_risk_ucb": 0.7794,
+    "n": 225
+  },
+  {
+    "track": "NaturalFEVER",
+    "audit_method": "ADCU",
+    "failure_detection_rate": 1.0,
+    "mean_direct": 0.2934,
+    "mean_paraphrase": 0.3081,
+    "mean_retrieval": 0.0764,
+    "mean_risk_ucb": 0.6781,
+    "n": 180
+  },
+  {
+    "track": "NaturalFEVER",
+    "audit_method": "ADCU-BlackBox",
+    "failure_detection_rate": 1.0,
+    "mean_direct": 0.2934,
+    "mean_paraphrase": 0.3081,
+    "mean_retrieval": 0.0,
+    "mean_risk_ucb": 0.6758,
+    "n": 180
+  },
+  {
+    "track": "RealRAG",
+    "audit_method": "ADCU",
+    "failure_detection_rate": 1.0,
+    "mean_direct": 0.2037,
+    "mean_paraphrase": 0.2003,
+    "mean_retrieval": 0.1833,
+    "mean_risk_ucb": 0.656,
+    "n": 225
+  },
+  {
+    "track": "RealRAG",
+    "audit_method": "ADCU-BlackBox",
+    "failure_detection_rate": 1.0,
+    "mean_direct": 0.2037,
+    "mean_paraphrase": 0.2003,
+    "mean_retrieval": 0.0,
+    "mean_risk_ucb": 0.6531,
+    "n": 225
+  }
+]

@@ -1,0 +1,73 @@
+track,deletion_method,audit_method,decision,ground_truth_failure,detected_failure,aggregate_risk_ucb,direct_leakage,paraphrase_leakage,retrieval_dependence,counterfactual_dependence,extraction_risk,watermark_hit,retain_utility,audit_calls,detection_per_1000_calls
+RAG,provenance-guided deletion,ExactMatch,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,1.0,23,0.0
+RAG,provenance-guided deletion,CanaryOnly,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,1.0,23,0.0
+RAG,provenance-guided deletion,RetrieverHit,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,1.0,23,0.0
+RAG,provenance-guided deletion,UniformProbes,escalate,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,1.0,23,0.0
+RAG,provenance-guided deletion,ADCU-NoValuation,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,1.0,23,0.0
+RAG,provenance-guided deletion,ADCU,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,1.0,23,0.0
+RAG,index-only deletion,ExactMatch,fail,True,False,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.98,23,0.0
+RAG,index-only deletion,CanaryOnly,fail,True,True,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.98,23,43.48
+RAG,index-only deletion,RetrieverHit,fail,True,True,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.98,23,43.48
+RAG,index-only deletion,UniformProbes,fail,True,True,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.98,23,43.48
+RAG,index-only deletion,ADCU-NoValuation,fail,True,True,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.98,23,43.48
+RAG,index-only deletion,ADCU,fail,True,True,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.98,23,43.48
+RAG,shadow-copy deletion,ExactMatch,fail,True,False,0.5743,0.3043,0.3043,0.3043,0.3043,0.0435,0.0,0.98,23,0.0
+RAG,shadow-copy deletion,CanaryOnly,pass,True,False,0.4299,0.3043,0.3043,0.3043,0.3043,0.0435,0.0,0.98,23,0.0
+RAG,shadow-copy deletion,RetrieverHit,fail,True,True,0.5743,0.3043,0.3043,0.3043,0.3043,0.0435,0.0,0.98,23,43.48
+RAG,shadow-copy deletion,UniformProbes,fail,True,True,0.5743,0.3043,0.3043,0.3043,0.3043,0.0435,0.0,0.98,23,43.48
+RAG,shadow-copy deletion,ADCU-NoValuation,fail,True,True,0.5743,0.3043,0.3043,0.3043,0.3043,0.0435,0.0,0.98,23,43.48
+RAG,shadow-copy deletion,ADCU,fail,True,True,0.5743,0.3043,0.3043,0.3043,0.3043,0.0435,0.0,0.98,23,43.48
+RAG,cache-not-purged deletion,ExactMatch,fail,True,False,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.97,23,0.0
+RAG,cache-not-purged deletion,CanaryOnly,fail,True,True,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.97,23,43.48
+RAG,cache-not-purged deletion,RetrieverHit,fail,True,True,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.97,23,43.48
+RAG,cache-not-purged deletion,UniformProbes,fail,True,True,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.97,23,43.48
+RAG,cache-not-purged deletion,ADCU-NoValuation,fail,True,True,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.97,23,43.48
+RAG,cache-not-purged deletion,ADCU,fail,True,True,0.7839,0.3913,0.313,0.3913,0.3913,0.0435,0.3913,0.97,23,43.48
+FineTune,filtered adapter retraining,ExactMatch,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.99,23,0.0
+FineTune,filtered adapter retraining,CanaryOnly,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.99,23,0.0
+FineTune,filtered adapter retraining,RetrieverHit,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.99,23,0.0
+FineTune,filtered adapter retraining,UniformProbes,escalate,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.99,23,0.0
+FineTune,filtered adapter retraining,ADCU-NoValuation,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.99,23,0.0
+FineTune,filtered adapter retraining,ADCU,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.99,23,0.0
+FineTune,gradient-ascent unlearning,ExactMatch,fail,True,False,0.5743,0.2174,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,0.0
+FineTune,gradient-ascent unlearning,CanaryOnly,pass,True,False,0.4299,0.2174,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,0.0
+FineTune,gradient-ascent unlearning,RetrieverHit,pass,True,False,0.4299,0.2174,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,0.0
+FineTune,gradient-ascent unlearning,UniformProbes,fail,True,True,0.5743,0.2174,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,43.48
+FineTune,gradient-ascent unlearning,ADCU-NoValuation,fail,True,True,0.5743,0.2174,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,43.48
+FineTune,gradient-ascent unlearning,ADCU,fail,True,True,0.5743,0.2174,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,43.48
+FineTune,adapter inventory only,ExactMatch,fail,True,False,0.5016,0.3043,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,0.0
+FineTune,adapter inventory only,CanaryOnly,pass,True,False,0.4299,0.3043,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,0.0
+FineTune,adapter inventory only,RetrieverHit,pass,True,False,0.4299,0.3043,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,0.0
+FineTune,adapter inventory only,UniformProbes,fail,True,True,0.5016,0.3043,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,43.48
+FineTune,adapter inventory only,ADCU-NoValuation,fail,True,True,0.5016,0.3043,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,43.48
+FineTune,adapter inventory only,ADCU,fail,True,True,0.5016,0.3043,0.3043,0.0,0.3043,0.0435,0.0,0.97,23,43.48
+FineTune,over-unlearned adapter,ExactMatch,escalate,True,True,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.4,23,43.48
+FineTune,over-unlearned adapter,CanaryOnly,escalate,True,True,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.4,23,43.48
+FineTune,over-unlearned adapter,RetrieverHit,escalate,True,True,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.4,23,43.48
+FineTune,over-unlearned adapter,UniformProbes,escalate,True,True,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.4,23,43.48
+FineTune,over-unlearned adapter,ADCU-NoValuation,escalate,True,True,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.4,23,43.48
+FineTune,over-unlearned adapter,ADCU,escalate,True,True,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.4,23,43.48
+Hybrid,full provenance purge,ExactMatch,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.98,23,0.0
+Hybrid,full provenance purge,CanaryOnly,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.98,23,0.0
+Hybrid,full provenance purge,RetrieverHit,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.98,23,0.0
+Hybrid,full provenance purge,UniformProbes,escalate,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.98,23,0.0
+Hybrid,full provenance purge,ADCU-NoValuation,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.98,23,0.0
+Hybrid,full provenance purge,ADCU,pass,False,False,0.4299,0.0,0.0,0.0,0.0,0.0,0.0,0.98,23,0.0
+Hybrid,RAG-only deletion,ExactMatch,fail,True,False,0.8135,0.3739,0.6957,0.0,0.6957,0.087,0.0,0.96,23,0.0
+Hybrid,RAG-only deletion,CanaryOnly,pass,True,False,0.4299,0.3739,0.6957,0.0,0.6957,0.087,0.0,0.96,23,0.0
+Hybrid,RAG-only deletion,RetrieverHit,pass,True,False,0.4299,0.3739,0.6957,0.0,0.6957,0.087,0.0,0.96,23,0.0
+Hybrid,RAG-only deletion,UniformProbes,fail,True,True,0.8533,0.3739,0.6957,0.0,0.6957,0.087,0.0,0.96,23,43.48
+Hybrid,RAG-only deletion,ADCU-NoValuation,fail,True,True,0.8533,0.3739,0.6957,0.0,0.6957,0.087,0.0,0.96,23,43.48
+Hybrid,RAG-only deletion,ADCU,fail,True,True,0.8533,0.3739,0.6957,0.0,0.6957,0.087,0.0,0.96,23,43.48
+Hybrid,adapter-only unlearning,ExactMatch,fail,True,True,0.9283,0.6957,0.6174,0.6957,0.6957,0.087,0.3913,0.96,23,43.48
+Hybrid,adapter-only unlearning,CanaryOnly,fail,True,True,0.7839,0.6957,0.6174,0.6957,0.6957,0.087,0.3913,0.96,23,43.48
+Hybrid,adapter-only unlearning,RetrieverHit,fail,True,True,0.9283,0.6957,0.6174,0.6957,0.6957,0.087,0.3913,0.96,23,43.48
+Hybrid,adapter-only unlearning,UniformProbes,fail,True,True,0.9283,0.6957,0.6174,0.6957,0.6957,0.087,0.3913,0.96,23,43.48
+Hybrid,adapter-only unlearning,ADCU-NoValuation,fail,True,True,0.9283,0.6957,0.6174,0.6957,0.6957,0.087,0.3913,0.96,23,43.48
+Hybrid,adapter-only unlearning,ADCU,fail,True,True,0.9283,0.6957,0.6174,0.6957,0.6957,0.087,0.3913,0.96,23,43.48
+Hybrid,synthetic derivative retained,ExactMatch,fail,True,False,0.8135,0.3739,0.6957,0.3913,0.6957,0.087,0.0,0.96,23,0.0
+Hybrid,synthetic derivative retained,CanaryOnly,pass,True,False,0.4299,0.3739,0.6957,0.3913,0.6957,0.087,0.0,0.96,23,0.0
+Hybrid,synthetic derivative retained,RetrieverHit,fail,True,True,0.7839,0.3739,0.6957,0.3913,0.6957,0.087,0.0,0.96,23,43.48
+Hybrid,synthetic derivative retained,UniformProbes,fail,True,True,0.9283,0.3739,0.6957,0.3913,0.6957,0.087,0.0,0.96,23,43.48
+Hybrid,synthetic derivative retained,ADCU-NoValuation,fail,True,True,0.9283,0.3739,0.6957,0.3913,0.6957,0.087,0.0,0.96,23,43.48
+Hybrid,synthetic derivative retained,ADCU,fail,True,True,0.9283,0.3739,0.6957,0.3913,0.6957,0.087,0.0,0.96,23,43.48

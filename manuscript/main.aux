@@ -1,0 +1,171 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{cao2015machineunlearning}
+\citation{bourtoule2021machineunlearning}
+\citation{ginart2019making}
+\citation{yao2024largeunlearning}
+\citation{maini2024tofu}
+\citation{liu2024rethinking}
+\citation{wang2024llmunlearning}
+\citation{jin2024surveyunlearning}
+\citation{lewis2020rag}
+\citation{karpukhin2020dpr}
+\citation{izacard2021fid}
+\citation{gao2024ragsurvey}
+\citation{gao2023retrievalaugmented}
+\citation{asai2024selfrag}
+\citation{yu2024ragevalsurvey}
+\citation{akkiraju2024facts}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{1}{section.2}\protected@file@percent }
+\citation{ghorbani2019datashapley}
+\citation{jia2019data}
+\citation{kwon2021betashapley}
+\citation{wang2023databanzhaf}
+\citation{koh2017influence}
+\citation{pruthi2020tracin}
+\citation{feldman2020memorization}
+\citation{ilyas2022datamodels}
+\citation{carlini2021extracting}
+\citation{carlini2019secretsharer}
+\citation{carlini2023quantifying}
+\citation{shokri2017membership}
+\citation{yeom2018privacy}
+\citation{mattern2023membership}
+\citation{kirchenbauer2023watermark}
+\citation{zhao2023watermarksurvey}
+\citation{dwork2006dp}
+\citation{voigt2017gdpr}
+\citation{guo2020certified}
+\citation{cohen2022deletioncontrol}
+\citation{fan2025fedfmchallenges}
+\citation{wang2025ikea}
+\citation{xie2026canaryrag}
+\citation{song2026grasp}
+\citation{thornton2026retrievalpivot}
+\citation{wang2024ragate}
+\citation{pham2026memorai}
+\citation{lee2025finetunerag}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Problem Formulation}{2}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Deletion-Risk Metric}{3}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}ADCU{} Audit Algorithm}{3}{section.5}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces ADCU{} black-box deletion audit}}{4}{algorithm.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}ADCU-Bench{}}{4}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Experiments}{4}{section.7}\protected@file@percent }
+\citation{maini2024tofu}
+\citation{zhang2024npo}
+\citation{wang2022textembeddings}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces ADCU audit pipeline. Deletion requests are expanded through provenance, prioritized by influence and artifact degree, audited through black-box probes, and summarized as risk confidence bounds plus retain-utility checks.}}{5}{figure.1}\protected@file@percent }
+\newlabel{fig:adcu_pipeline}{{1}{5}{ADCU audit pipeline. Deletion requests are expanded through provenance, prioritized by influence and artifact degree, audited through black-box probes, and summarized as risk confidence bounds plus retain-utility checks}{figure.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Repeated audit detection summary across seeds, deletion-target sizes, and budgets.}}{5}{table.1}\protected@file@percent }
+\newlabel{tab:submission_audit}{{1}{5}{Repeated audit detection summary across seeds, deletion-target sizes, and budgets}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Repeated residual-dependence summary for ADCU.}}{6}{table.2}\protected@file@percent }
+\newlabel{tab:submission_methods}{{2}{6}{Repeated residual-dependence summary for ADCU}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces ADCU detection as audit budget varies.}}{6}{table.3}\protected@file@percent }
+\newlabel{tab:submission_budget}{{3}{6}{ADCU detection as audit budget varies}{table.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Synthetic labeled validation of evidence-channel scorers.}}{6}{table.4}\protected@file@percent }
+\newlabel{tab:scorer_validation}{{4}{6}{Synthetic labeled validation of evidence-channel scorers}{table.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces HybridReal failure detection by audit method. Narrow audits miss residual-dependence channels that combine model-side and retrieval-side artifacts.}}{6}{figure.2}\protected@file@percent }
+\newlabel{fig:hybrid_detection}{{2}{6}{HybridReal failure detection by audit method. Narrow audits miss residual-dependence channels that combine model-side and retrieval-side artifacts}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Advanced LoRA-SFT and DenseRAG Experiments}{6}{subsection.7.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Audit budget tradeoff. Larger budgets improve detection and reduce the average risk confidence bound.}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:budget}{{3}{6}{Audit budget tradeoff. Larger budgets improve detection and reduce the average risk confidence bound}{figure.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Weight and tolerance sensitivity in the repeated harness.}}{7}{table.5}\protected@file@percent }
+\newlabel{tab:weight_sensitivity}{{5}{7}{Weight and tolerance sensitivity in the repeated harness}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Pure black-box answer-only auditing compared with metadata-aware ADCU.}}{7}{table.6}\protected@file@percent }
+\newlabel{tab:blackbox}{{6}{7}{Pure black-box answer-only auditing compared with metadata-aware ADCU}{table.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Retrieval-off counterfactual ablation for deletion-risk attribution.}}{8}{table.7}\protected@file@percent }
+\newlabel{tab:counterfactual_ablation}{{7}{8}{Retrieval-off counterfactual ablation for deletion-risk attribution}{table.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Robustness diagnostics for correlated probes and score jitter.}}{8}{table.8}\protected@file@percent }
+\newlabel{tab:robustness}{{8}{8}{Robustness diagnostics for correlated probes and score jitter}{table.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Natural-data FEVER deletion audit case study with redacted observed outputs.}}{8}{table.9}\protected@file@percent }
+\newlabel{tab:natural_fever_case}{{9}{8}{Natural-data FEVER deletion audit case study with redacted observed outputs}{table.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Case-study provenance graph. A deletion target can survive through chunks, embeddings, summaries, caches, synthetic QA records, and adapter behavior.}}{8}{figure.4}\protected@file@percent }
+\newlabel{fig:provenance_case}{{4}{8}{Case-study provenance graph. A deletion target can survive through chunks, embeddings, summaries, caches, synthetic QA records, and adapter behavior}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Ablations}{8}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Discussion}{8}{section.8}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Attack suite outcomes.}}{9}{table.10}\protected@file@percent }
+\newlabel{tab:adcu_attacks}{{10}{9}{Attack suite outcomes}{table.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Advanced LoRA-SFT and DenseRAG audit results with confidence intervals.}}{9}{table.11}\protected@file@percent }
+\newlabel{tab:advanced_ci}{{11}{9}{Advanced LoRA-SFT and DenseRAG audit results with confidence intervals}{table.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Pretrained LoRA forget margins and retain utility.}}{10}{table.12}\protected@file@percent }
+\newlabel{tab:pretrained_margins}{{12}{10}{Pretrained LoRA forget margins and retain utility}{table.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces TOFU split-level evaluation for Qwen2.5-0.5B LoRA runs.}}{10}{table.13}\protected@file@percent }
+\newlabel{tab:tofu_eval}{{13}{10}{TOFU split-level evaluation for Qwen2.5-0.5B LoRA runs}{table.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Retriever deleted-derivative hit rates by mode.}}{10}{table.14}\protected@file@percent }
+\newlabel{tab:retriever_hits}{{14}{10}{Retriever deleted-derivative hit rates by mode}{table.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Artifact and Reproducibility}{10}{section.9}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {15}{\ignorespaces Probe-family ablations with bootstrap confidence intervals.}}{11}{table.15}\protected@file@percent }
+\newlabel{tab:probe_ablation}{{15}{11}{Probe-family ablations with bootstrap confidence intervals}{table.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {16}{\ignorespaces Redacted case studies from advanced experiments.}}{11}{table.16}\protected@file@percent }
+\newlabel{tab:case_studies}{{16}{11}{Redacted case studies from advanced experiments}{table.16}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {17}{\ignorespaces Model-assisted draft adjudication for redacted NaturalFEVER outputs. These labels are not human adjudication.}}{11}{table.17}\protected@file@percent }
+\newlabel{tab:model_adjudication_draft}{{17}{11}{Model-assisted draft adjudication for redacted NaturalFEVER outputs. These labels are not human adjudication}{table.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusion}{11}{section.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  A: Benchmark Protocol Details}{11}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Deletion Target Construction}{12}{subsection.Appendix.A.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Probe Families}{12}{subsection.Appendix.A.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Deletion Methods}{12}{subsection.Appendix.A.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4}Audit Baselines}{12}{subsection.Appendix.A.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.5}Confidence Intervals}{12}{subsection.Appendix.A.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.6}Proofs for Risk Bounds}{12}{subsection.Appendix.A.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.7}DenseRAG Configuration}{13}{subsection.Appendix.A.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.8}LoRA-SFT Configuration}{13}{subsection.Appendix.A.8}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {18}{\ignorespaces Utility--risk summary for ADCU across repeated deletion cases.}}{14}{table.18}\protected@file@percent }
+\newlabel{tab:utility_risk}{{18}{14}{Utility--risk summary for ADCU across repeated deletion cases}{table.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.9}Case-Study Redaction}{14}{subsection.Appendix.A.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.10}Recommended Extensions}{14}{subsection.Appendix.A.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  B: Artifact Checklist}{14}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  C: Limitations and Failure Cases}{14}{section*.3}\protected@file@percent }
+\bibstyle{IEEEtran}
+\bibdata{references}
+\bibcite{cao2015machineunlearning}{1}
+\bibcite{bourtoule2021machineunlearning}{2}
+\bibcite{ginart2019making}{3}
+\bibcite{yao2024largeunlearning}{4}
+\bibcite{maini2024tofu}{5}
+\bibcite{liu2024rethinking}{6}
+\bibcite{wang2024llmunlearning}{7}
+\bibcite{jin2024surveyunlearning}{8}
+\bibcite{lewis2020rag}{9}
+\bibcite{karpukhin2020dpr}{10}
+\bibcite{izacard2021fid}{11}
+\bibcite{gao2024ragsurvey}{12}
+\bibcite{gao2023retrievalaugmented}{13}
+\bibcite{asai2024selfrag}{14}
+\bibcite{yu2024ragevalsurvey}{15}
+\bibcite{akkiraju2024facts}{16}
+\bibcite{ghorbani2019datashapley}{17}
+\bibcite{jia2019data}{18}
+\bibcite{kwon2021betashapley}{19}
+\bibcite{wang2023databanzhaf}{20}
+\bibcite{koh2017influence}{21}
+\bibcite{pruthi2020tracin}{22}
+\bibcite{feldman2020memorization}{23}
+\bibcite{ilyas2022datamodels}{24}
+\bibcite{carlini2021extracting}{25}
+\bibcite{carlini2019secretsharer}{26}
+\bibcite{carlini2023quantifying}{27}
+\bibcite{shokri2017membership}{28}
+\bibcite{yeom2018privacy}{29}
+\bibcite{mattern2023membership}{30}
+\bibcite{kirchenbauer2023watermark}{31}
+\bibcite{zhao2023watermarksurvey}{32}
+\bibcite{dwork2006dp}{33}
+\bibcite{voigt2017gdpr}{34}
+\bibcite{guo2020certified}{35}
+\bibcite{cohen2022deletioncontrol}{36}
+\bibcite{fan2025fedfmchallenges}{37}
+\bibcite{wang2025ikea}{38}
+\@writefile{toc}{\contentsline {section}{References}{15}{section*.4}\protected@file@percent }
+\bibcite{xie2026canaryrag}{39}
+\bibcite{song2026grasp}{40}
+\bibcite{thornton2026retrievalpivot}{41}
+\bibcite{wang2024ragate}{42}
+\bibcite{pham2026memorai}{43}
+\bibcite{lee2025finetunerag}{44}
+\bibcite{zhang2024npo}{45}
+\bibcite{wang2022textembeddings}{46}
+\gdef \@abspage@last{16}

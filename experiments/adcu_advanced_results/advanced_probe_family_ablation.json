@@ -1,0 +1,202 @@
+[
+  {
+    "track": "DenseRAG",
+    "probe_family": "direct_only",
+    "failure_detection_rate": 0.3333,
+    "bootstrap_ci95_low": 0.1111,
+    "bootstrap_ci95_high": 0.5556,
+    "n": 18
+  },
+  {
+    "track": "DenseRAG",
+    "probe_family": "paraphrase_only",
+    "failure_detection_rate": 0.6667,
+    "bootstrap_ci95_low": 0.4444,
+    "bootstrap_ci95_high": 0.8889,
+    "n": 18
+  },
+  {
+    "track": "DenseRAG",
+    "probe_family": "retrieval_only",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 18
+  },
+  {
+    "track": "DenseRAG",
+    "probe_family": "extraction_only",
+    "failure_detection_rate": 0.0,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.0,
+    "n": 18
+  },
+  {
+    "track": "DenseRAG",
+    "probe_family": "full_adcu",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 18
+  },
+  {
+    "track": "LoRA-SFT",
+    "probe_family": "direct_only",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 6
+  },
+  {
+    "track": "LoRA-SFT",
+    "probe_family": "paraphrase_only",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 6
+  },
+  {
+    "track": "LoRA-SFT",
+    "probe_family": "retrieval_only",
+    "failure_detection_rate": 0.0,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.0,
+    "n": 6
+  },
+  {
+    "track": "LoRA-SFT",
+    "probe_family": "extraction_only",
+    "failure_detection_rate": 0.0,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.0,
+    "n": 6
+  },
+  {
+    "track": "LoRA-SFT",
+    "probe_family": "full_adcu",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 6
+  },
+  {
+    "track": "PEFT-LoRA",
+    "probe_family": "direct_only",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 1
+  },
+  {
+    "track": "PEFT-LoRA",
+    "probe_family": "paraphrase_only",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 1
+  },
+  {
+    "track": "PEFT-LoRA",
+    "probe_family": "retrieval_only",
+    "failure_detection_rate": 0.0,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.0,
+    "n": 1
+  },
+  {
+    "track": "PEFT-LoRA",
+    "probe_family": "extraction_only",
+    "failure_detection_rate": 0.0,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.0,
+    "n": 1
+  },
+  {
+    "track": "PEFT-LoRA",
+    "probe_family": "full_adcu",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 1
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "probe_family": "direct_only",
+    "failure_detection_rate": 0.0556,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.1667,
+    "n": 18
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "probe_family": "paraphrase_only",
+    "failure_detection_rate": 0.0556,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.1667,
+    "n": 18
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "probe_family": "retrieval_only",
+    "failure_detection_rate": 0.0,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.0,
+    "n": 18
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "probe_family": "extraction_only",
+    "failure_detection_rate": 0.0,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.0,
+    "n": 18
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "probe_family": "full_adcu",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 18
+  },
+  {
+    "track": "Qwen-TOFU-LoRA",
+    "probe_family": "direct_only",
+    "failure_detection_rate": 0.0,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.0,
+    "n": 2
+  },
+  {
+    "track": "Qwen-TOFU-LoRA",
+    "probe_family": "paraphrase_only",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 2
+  },
+  {
+    "track": "Qwen-TOFU-LoRA",
+    "probe_family": "retrieval_only",
+    "failure_detection_rate": 0.0,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.0,
+    "n": 2
+  },
+  {
+    "track": "Qwen-TOFU-LoRA",
+    "probe_family": "extraction_only",
+    "failure_detection_rate": 0.0,
+    "bootstrap_ci95_low": 0.0,
+    "bootstrap_ci95_high": 0.0,
+    "n": 2
+  },
+  {
+    "track": "Qwen-TOFU-LoRA",
+    "probe_family": "full_adcu",
+    "failure_detection_rate": 1.0,
+    "bootstrap_ci95_low": 1.0,
+    "bootstrap_ci95_high": 1.0,
+    "n": 2
+  }
+]

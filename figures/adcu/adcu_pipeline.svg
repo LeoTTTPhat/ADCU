@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="210" viewBox="0 0 1020 210">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#555"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="510" y="33" text-anchor="middle" font-family="Arial" font-size="20" font-weight="700">ADCU Audit Pipeline</text>
+<rect x="40" y="76" width="165" height="78" fill="#f4f7fb" stroke="#2f6fbb" stroke-width="1.5" rx="6"/>
+<text x="122.5" y="107" text-anchor="middle" font-family="Arial" font-size="13">Deletion</text>
+<text x="122.5" y="125" text-anchor="middle" font-family="Arial" font-size="13">Request</text>
+<line x1="212" y1="115" x2="231" y2="115" stroke="#555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="239" y="76" width="165" height="78" fill="#f4f7fb" stroke="#2f6fbb" stroke-width="1.5" rx="6"/>
+<text x="321.5" y="107" text-anchor="middle" font-family="Arial" font-size="13">Provenance</text>
+<text x="321.5" y="125" text-anchor="middle" font-family="Arial" font-size="13">Graph</text>
+<line x1="411" y1="115" x2="430" y2="115" stroke="#555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="438" y="76" width="165" height="78" fill="#f4f7fb" stroke="#2f6fbb" stroke-width="1.5" rx="6"/>
+<text x="520.5" y="107" text-anchor="middle" font-family="Arial" font-size="13">Value-Guided</text>
+<text x="520.5" y="125" text-anchor="middle" font-family="Arial" font-size="13">Probe Allocation</text>
+<line x1="610" y1="115" x2="629" y2="115" stroke="#555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="637" y="76" width="165" height="78" fill="#f4f7fb" stroke="#2f6fbb" stroke-width="1.5" rx="6"/>
+<text x="719.5" y="107" text-anchor="middle" font-family="Arial" font-size="13">Black-Box</text>
+<text x="719.5" y="125" text-anchor="middle" font-family="Arial" font-size="13">Behavior Tests</text>
+<line x1="809" y1="115" x2="828" y2="115" stroke="#555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="836" y="76" width="165" height="78" fill="#f4f7fb" stroke="#2f6fbb" stroke-width="1.5" rx="6"/>
+<text x="918.5" y="107" text-anchor="middle" font-family="Arial" font-size="13">Risk UCB +</text>
+<text x="918.5" y="125" text-anchor="middle" font-family="Arial" font-size="13">Retain Utility</text>
+</svg>

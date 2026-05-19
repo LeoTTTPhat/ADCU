@@ -1,0 +1,31 @@
+\begin{table*}[t]
+\centering
+\caption{Audit detection summary.}
+\label{tab:adcu_detection}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllll}
+\toprule
+Track & Audit Method & Failure Detection Rate & False Alarm Rate & Mean Risk Ucb & Detections Per 1000 Calls \\
+\midrule
+FineTune & ADCU & 1.0 & 0.0 & 0.4839 & 32.61 \\
+FineTune & ADCU-NoValuation & 1.0 & 0.0 & 0.4839 & 32.61 \\
+FineTune & CanaryOnly & 0.3333 & 0.0 & 0.4299 & 10.87 \\
+FineTune & ExactMatch & 0.3333 & 0.0 & 0.4839 & 10.87 \\
+FineTune & RetrieverHit & 0.3333 & 0.0 & 0.4299 & 10.87 \\
+FineTune & UniformProbes & 1.0 & 0.0 & 0.4839 & 32.61 \\
+Hybrid & ADCU & 1.0 & 0.0 & 0.785 & 32.61 \\
+Hybrid & ADCU-NoValuation & 1.0 & 0.0 & 0.785 & 32.61 \\
+Hybrid & CanaryOnly & 0.3333 & 0.0 & 0.5184 & 10.87 \\
+Hybrid & ExactMatch & 0.3333 & 0.0 & 0.7463 & 10.87 \\
+Hybrid & RetrieverHit & 0.6667 & 0.0 & 0.643 & 21.74 \\
+Hybrid & UniformProbes & 1.0 & 0.0 & 0.785 & 32.61 \\
+RAG & ADCU & 1.0 & 0.0 & 0.643 & 32.61 \\
+RAG & ADCU-NoValuation & 1.0 & 0.0 & 0.643 & 32.61 \\
+RAG & CanaryOnly & 0.6667 & 0.0 & 0.6069 & 21.74 \\
+RAG & ExactMatch & 0.0 & 0.0 & 0.643 & 0.0 \\
+RAG & RetrieverHit & 1.0 & 0.0 & 0.643 & 32.61 \\
+RAG & UniformProbes & 1.0 & 0.0 & 0.643 & 32.61 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

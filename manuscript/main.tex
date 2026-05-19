@@ -1,0 +1,55 @@
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsthm}
+
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\method}{ADCU}
+\newcommand{\bench}{ADCU-Bench}
+
+\begin{document}
+
+\title{Auditable Data-Centric Unlearning in Retrieval-Augmented and Fine-Tuned Foundation Models}
+
+\author{Author~Names~Omitted~for~Review}
+
+\markboth{IEEE Transactions on Knowledge and Data Engineering}{}
+
+\maketitle
+
+\begin{abstract}
+Deletion requests in foundation-model applications are difficult to audit because user data can influence behavior through multiple data-bearing artifacts: raw documents, chunks, embeddings, vector indexes, synthetic summaries, fine-tuning records, adapters, caches, and generated traces. Existing machine-unlearning evaluations often focus on model weights or exact memorization probes, leaving retrieval-time dependence, paraphrased leakage, and derivative artifacts under-tested. This paper proposes \method{}, an auditable data-centric unlearning framework for retrieval-augmented and fine-tuned foundation-model systems. \method{} models deletion as a pipeline-level data operation over a provenance graph, defines a deletion-risk metric that combines direct leakage, paraphrased leakage, retrieval dependence, counterfactual answer dependence, extraction risk, and watermark hits, and implements a valuation-guided black-box audit algorithm with confidence-bounded pass/fail/escalate decisions. We introduce \bench{}, a benchmark protocol covering RAG deletion, fine-tuning record unlearning, and hybrid RAG-to-fine-tuning derivative retention. A synthetic pilot and attack suite show that exact-match, canary-only, and retriever-only audits miss important residual-dependence channels, while \method{} detects all configured deletion failures with zero false alarms in the pilot setting. The results position deletion verification as a data engineering problem for foundation-model systems, complementing model-centric unlearning algorithms with measurable audit evidence.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Machine unlearning, retrieval-augmented generation, foundation models, data provenance, data valuation, deletion auditing.
+\end{IEEEkeywords}
+
+\input{sections/01_introduction}
+\input{sections/02_related_work}
+\input{sections/03_problem}
+\input{sections/04_metric}
+\input{sections/05_algorithm}
+\input{sections/06_benchmark}
+\input{sections/07_experiments}
+\input{sections/08_discussion}
+\input{sections/09_artifact}
+\input{sections/10_conclusion}
+
+\appendices
+\input{sections/11_appendix}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

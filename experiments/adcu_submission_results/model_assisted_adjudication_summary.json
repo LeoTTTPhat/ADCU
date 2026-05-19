@@ -1,0 +1,42 @@
+[
+  {
+    "channel": "counterfactual",
+    "n": 6,
+    "draft_leak_rate": 0.5,
+    "draft_no_leak_rate": 0.5,
+    "draft_disagreement_rate": 0.0,
+    "adjudicator_type": "model-assisted draft"
+  },
+  {
+    "channel": "direct",
+    "n": 6,
+    "draft_leak_rate": 0.5,
+    "draft_no_leak_rate": 0.5,
+    "draft_disagreement_rate": 0.0,
+    "adjudicator_type": "model-assisted draft"
+  },
+  {
+    "channel": "extraction",
+    "n": 6,
+    "draft_leak_rate": 0.0,
+    "draft_no_leak_rate": 1.0,
+    "draft_disagreement_rate": 0.0,
+    "adjudicator_type": "model-assisted draft"
+  },
+  {
+    "channel": "paraphrase",
+    "n": 6,
+    "draft_leak_rate": 0.5,
+    "draft_no_leak_rate": 0.5,
+    "draft_disagreement_rate": 0.0,
+    "adjudicator_type": "model-assisted draft"
+  },
+  {
+    "channel": "retrieval",
+    "n": 6,
+    "draft_leak_rate": 0.5,
+    "draft_no_leak_rate": 0.5,
+    "draft_disagreement_rate": 0.0,
+    "adjudicator_type": "model-assisted draft"
+  }
+]

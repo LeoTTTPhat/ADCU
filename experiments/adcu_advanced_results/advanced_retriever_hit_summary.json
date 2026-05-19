@@ -1,0 +1,50 @@
+[
+  {
+    "retrieval_mode": "bge",
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "top3_deleted_derivative_hit_rate": 0.9583,
+    "top5_deleted_derivative_hit_rate": 1.0,
+    "adcu_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "retrieval_mode": "cross",
+    "embedding_model": "not_used",
+    "top3_deleted_derivative_hit_rate": 0.0,
+    "top5_deleted_derivative_hit_rate": 0.0,
+    "adcu_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "retrieval_mode": "dense",
+    "embedding_model": "not_used",
+    "top3_deleted_derivative_hit_rate": 0.75,
+    "top5_deleted_derivative_hit_rate": 0.75,
+    "adcu_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "retrieval_mode": "e5",
+    "embedding_model": "intfloat/e5-base-v2",
+    "top3_deleted_derivative_hit_rate": 0.9306,
+    "top5_deleted_derivative_hit_rate": 0.9583,
+    "adcu_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "retrieval_mode": "lexical",
+    "embedding_model": "not_used",
+    "top3_deleted_derivative_hit_rate": 0.75,
+    "top5_deleted_derivative_hit_rate": 0.75,
+    "adcu_detection_rate": 1.0,
+    "n": 3
+  },
+  {
+    "retrieval_mode": "neural",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "top3_deleted_derivative_hit_rate": 0.9722,
+    "top5_deleted_derivative_hit_rate": 0.9722,
+    "adcu_detection_rate": 1.0,
+    "n": 3
+  }
+]

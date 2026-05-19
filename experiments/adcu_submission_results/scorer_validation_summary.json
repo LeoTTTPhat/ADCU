@@ -1,0 +1,50 @@
+[
+  {
+    "channel": "direct",
+    "scorer": "token overlap with protected text",
+    "threshold": 0.4,
+    "precision": 1.0,
+    "recall": 1.0,
+    "n_labeled_cases": 12
+  },
+  {
+    "channel": "paraphrase",
+    "scorer": "alias/fact/expected-term overlap",
+    "threshold": 0.35,
+    "precision": 0.92,
+    "recall": 1.0,
+    "n_labeled_cases": 12
+  },
+  {
+    "channel": "retrieval",
+    "scorer": "derived artifact id or citation hit",
+    "threshold": 0.2,
+    "precision": 1.0,
+    "recall": 1.0,
+    "n_labeled_cases": 12
+  },
+  {
+    "channel": "counterfactual",
+    "scorer": "semantic or retrieval evidence gate",
+    "threshold": 1.0,
+    "precision": 0.92,
+    "recall": 1.0,
+    "n_labeled_cases": 12
+  },
+  {
+    "channel": "extraction",
+    "scorer": "extraction probe plus semantic/direct hit",
+    "threshold": 0.08,
+    "precision": 1.0,
+    "recall": 0.83,
+    "n_labeled_cases": 12
+  },
+  {
+    "channel": "watermark",
+    "scorer": "exact canary/provenance-token hit",
+    "threshold": 0.2,
+    "precision": 1.0,
+    "recall": 0.75,
+    "n_labeled_cases": 12
+  }
+]

@@ -1,0 +1,9 @@
+active_forget_targets,adcu_decision,failure_detection_rate,mean_forget_margin,method,n,retain_completion_accuracy,retain_perplexity,track
+0.0,escalate,1.0,-2.0091,pretrained LoRA NPO unlearning,3,0.0,72.2828,Pretrained-LoRA
+0.0,escalate,1.0,-1.9647,pretrained LoRA SimNPO unlearning,3,0.0,71.5352,Pretrained-LoRA
+0.0,escalate,1.0,-0.9395,pretrained LoRA filtered retraining,3,0.0,55.9968,Pretrained-LoRA
+0.3333,escalate/fail,1.0,-0.8107,pretrained LoRA full SFT,3,0.0,63.1552,Pretrained-LoRA
+0.0,escalate,1.0,-1.6783,pretrained LoRA gradient-ascent unlearning,3,0.0,127.0763,Pretrained-LoRA
+0.0,escalate,1.0,-2.3428,pretrained LoRA negative SFT unlearning,3,0.0,64.688,Pretrained-LoRA
+1.0,fail,1.0,-0.4114,Qwen2.5-0.5B TOFU-like NPO unlearning,1,1.0,8.5194,Qwen-TOFU-LoRA
+1.0,fail,1.0,-0.1918,Qwen2.5-0.5B TOFU-like full SFT,1,1.0,8.9517,Qwen-TOFU-LoRA

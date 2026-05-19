@@ -1,0 +1,31 @@
+\section{Related Work}
+
+\textbf{Machine unlearning.}
+Machine unlearning studies how systems can remove the effect of selected training data after model deployment~\cite{cao2015machineunlearning,bourtoule2021machineunlearning,ginart2019making}. Foundation-model unlearning extends this challenge to large pretrained and adapted models, where exact retraining is often infeasible~\cite{yao2024largeunlearning,maini2024tofu,liu2024rethinking,wang2024llmunlearning}. Recent surveys emphasize that LLM unlearning must evaluate both forgetting and retained utility~\cite{jin2024surveyunlearning}. Our work differs by focusing on auditability across the data pipeline rather than proposing a new weight-update rule.
+
+\textbf{Retrieval-augmented generation.}
+RAG systems condition generation on retrieved external documents~\cite{lewis2020rag,karpukhin2020dpr,izacard2021fid,gao2024ragsurvey}. This improves factual grounding but introduces deletion risk: removing a source document from one index does not necessarily remove derived chunks, summaries, cached contexts, or fine-tuning examples generated from that source. Recent work studies attribution, context usage, source tracing, RAG evaluation fragmentation, and enterprise control points~\cite{gao2023retrievalaugmented,asai2024selfrag,yu2024ragevalsurvey,akkiraju2024facts}. \method{} treats these artifacts as first-class audit objects and adds deletion risk as an orthogonal audit axis.
+
+\textbf{Data valuation and influence.}
+Data valuation methods estimate how much individual records contribute to model utility~\cite{ghorbani2019datashapley,jia2019data,kwon2021betashapley,wang2023databanzhaf}. Influence functions and related attribution methods estimate the effect of training examples on predictions~\cite{koh2017influence,pruthi2020tracin,feldman2020memorization,ilyas2022datamodels}. \method{} uses this line of work differently: valuation is used to prioritize audit effort after deletion requests.
+
+\textbf{Extraction, membership, canaries, and watermarking.}
+Prior work has shown that language models can expose training data through extraction attacks~\cite{carlini2021extracting,carlini2019secretsharer,carlini2023quantifying}. Membership inference also provides evidence of training-data dependence~\cite{shokri2017membership,yeom2018privacy,mattern2023membership}. Canaries and watermarks provide useful signals~\cite{kirchenbauer2023watermark,zhao2023watermarksurvey}, but canary-only audits can be defeated when the protected semantic fact remains after the obvious marker is suppressed. \method{} therefore combines watermark hits with semantic and retrieval-dependence evidence.
+
+\textbf{Privacy and deletion compliance.}
+Deletion auditing is motivated by privacy rights and governance obligations such as data erasure, but technical audits should not overclaim legal compliance. Prior privacy work on differential privacy, memorization, certified removal, and deletion-as-control provides useful context~\cite{dwork2006dp,voigt2017gdpr,guo2020certified,cohen2022deletioncontrol}. \method{} contributes measurable technical evidence that can coexist with formal mechanisms: when certified removal or DP continual release is available, ADCU can monitor pipeline drift and derivative artifacts outside the formal core.
+
+\textbf{Foundation-model data governance.}
+Recent challenge work on federated foundation models identifies private data utilization, continual learning, unlearning, model watermarking, and efficiency as major open problems~\cite{fan2025fedfmchallenges}. \method{} operationalizes these concerns for RAG and fine-tuned systems by defining measurable deletion-risk audits over provenance-aware data pipelines.
+
+\textbf{Membership and extraction baselines.}
+Membership-style audits ask whether the system behaves differently on records that were present in training or adaptation data. Extraction-style audits ask whether prompting can recover sensitive spans. Both are useful but incomplete: membership tests may miss retrieval-only leakage, and extraction prompts may miss ordinary paraphrased answer dependence. Our benchmark therefore includes membership-inference, extraction, retriever-only, and influence-proxy baselines beside full \method{}.
+
+\textbf{RAG provenance and reranking.}
+RAG pipelines often contain multiple ranking stages. A first-stage vector index can be clean while a reranker, cache, query expansion layer, or synthetic derivative reintroduces deleted facts. This motivates our DenseRAG extension, which evaluates lexical retrieval, dense SVD retrieval, and a local cross-encoder-style reranker under the same deletion audit interface.
+
+\textbf{RAG extraction, triggered leakage, and graph pivots.}
+Recent RAG security work shows that leakage can occur through benign-looking extraction queries, runtime canary suppression, and graph-expansion pivots rather than only through obvious jailbreak prompts~\cite{wang2025ikea,xie2026canaryrag,song2026grasp,thornton2026retrievalpivot}. These threats are complementary to deletion auditing: extraction benchmarks ask whether a system can be induced to reveal its knowledge base, while \method{} asks whether deleted records and their derivatives still influence post-deletion behavior. We incorporate this connection through triggered-leakage probes, graph-pivot probes, retrieval-dependence scoring, and watermark evidence.
+
+\textbf{Adaptive RAG and memory governance.}
+RAGate-style gating asks when retrieval should be activated in a conversational system, while recent memory systems add provenance-enriched graphs for long-term conversational state~\cite{wang2024ragate,pham2026memorai}. These ideas motivate two reviewer-response diagnostics in ADCU-Bench: an answer-only black-box audit for deployments that hide retrieval metadata, and a retrieval-off counterfactual audit that tests whether deleting or disabling retrieval changes the residual dependence score. Grounding-aware fine-tuning methods such as Finetune-RAG show that training can change reliance on imperfect retrieved contexts; ADCU can audit whether such training preserves deleted facts as paraphrases or synthetic derivatives~\cite{lee2025finetunerag}.

@@ -1,0 +1,94 @@
+audit_method,bootstrap_ci95_high,bootstrap_ci95_low,ci95_high,ci95_low,deletion_method,failure_detection_rate,mean_risk_ucb,n,track
+ADCU,1.0,1.0,1.0,1.0,bge retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ExtractionAudit,0.0,0.0,0.0,0.0,bge retrieval with retained derivatives,0.0,0.581,3,DenseRAG
+InfluenceProxy,1.0,1.0,1.0,1.0,bge retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+MembershipInference,1.0,1.0,1.0,1.0,bge retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+RetrieverHit,1.0,1.0,1.0,1.0,bge retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ADCU,1.0,1.0,1.0,1.0,cross retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ExtractionAudit,0.0,0.0,0.0,0.0,cross retrieval with retained derivatives,0.0,0.5416,3,DenseRAG
+InfluenceProxy,1.0,1.0,1.0,1.0,cross retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+MembershipInference,1.0,1.0,1.0,1.0,cross retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+RetrieverHit,1.0,1.0,1.0,1.0,cross retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ADCU,1.0,1.0,1.0,1.0,dense retrieval with retained derivatives,1.0,0.7849,3,DenseRAG
+ExtractionAudit,0.0,0.0,0.0,0.0,dense retrieval with retained derivatives,0.0,0.5371,3,DenseRAG
+InfluenceProxy,1.0,1.0,1.0,1.0,dense retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+MembershipInference,1.0,1.0,1.0,1.0,dense retrieval with retained derivatives,1.0,0.7849,3,DenseRAG
+RetrieverHit,1.0,1.0,1.0,1.0,dense retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ADCU,1.0,1.0,1.0,1.0,e5 retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ExtractionAudit,0.0,0.0,0.0,0.0,e5 retrieval with retained derivatives,0.0,0.581,3,DenseRAG
+InfluenceProxy,1.0,1.0,1.0,1.0,e5 retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+MembershipInference,1.0,1.0,1.0,1.0,e5 retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+RetrieverHit,1.0,1.0,1.0,1.0,e5 retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ADCU,1.0,1.0,1.0,1.0,lexical retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ExtractionAudit,0.0,0.0,0.0,0.0,lexical retrieval with retained derivatives,0.0,0.5595,3,DenseRAG
+InfluenceProxy,1.0,1.0,1.0,1.0,lexical retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+MembershipInference,1.0,1.0,1.0,1.0,lexical retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+RetrieverHit,1.0,1.0,1.0,1.0,lexical retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ADCU,1.0,1.0,1.0,1.0,neural retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ExtractionAudit,0.0,0.0,0.0,0.0,neural retrieval with retained derivatives,0.0,0.581,3,DenseRAG
+InfluenceProxy,1.0,1.0,1.0,1.0,neural retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+MembershipInference,1.0,1.0,1.0,1.0,neural retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+RetrieverHit,1.0,1.0,1.0,1.0,neural retrieval with retained derivatives,1.0,0.7858,3,DenseRAG
+ADCU,0.0,0.0,0.0,0.0,filtered LoRA retraining,0.0,0.6274,3,LoRA-SFT
+ADCU-NoValuation,0.0,0.0,0.0,0.0,filtered LoRA retraining,0.0,0.6274,3,LoRA-SFT
+CanaryOnly,0.0,0.0,0.0,0.0,filtered LoRA retraining,0.0,0.6126,3,LoRA-SFT
+ExactMatch,0.0,0.0,0.0,0.0,filtered LoRA retraining,0.0,0.6447,3,LoRA-SFT
+RetrieverHit,0.0,0.0,0.0,0.0,filtered LoRA retraining,0.0,0.4327,3,LoRA-SFT
+UniformProbes,0.0,0.0,0.0,0.0,filtered LoRA retraining,0.0,0.6274,3,LoRA-SFT
+ADCU,1.0,1.0,1.0,1.0,full adapter no unlearning,1.0,0.8898,3,LoRA-SFT
+ADCU-NoValuation,1.0,1.0,1.0,1.0,full adapter no unlearning,1.0,0.8898,3,LoRA-SFT
+CanaryOnly,1.0,1.0,1.0,1.0,full adapter no unlearning,1.0,0.8923,3,LoRA-SFT
+ExactMatch,1.0,1.0,1.0,1.0,full adapter no unlearning,1.0,0.9675,3,LoRA-SFT
+RetrieverHit,0.0,0.0,0.0,0.0,full adapter no unlearning,0.0,0.4327,3,LoRA-SFT
+UniformProbes,1.0,1.0,1.0,1.0,full adapter no unlearning,1.0,0.8898,3,LoRA-SFT
+ADCU,1.0,1.0,1.0,1.0,gradient-ascent LoRA unlearning,1.0,0.8782,3,LoRA-SFT
+ADCU-NoValuation,1.0,1.0,1.0,1.0,gradient-ascent LoRA unlearning,1.0,0.8782,3,LoRA-SFT
+CanaryOnly,1.0,1.0,1.0,1.0,gradient-ascent LoRA unlearning,1.0,0.8721,3,LoRA-SFT
+ExactMatch,1.0,1.0,1.0,1.0,gradient-ascent LoRA unlearning,1.0,0.9625,3,LoRA-SFT
+RetrieverHit,0.0,0.0,0.0,0.0,gradient-ascent LoRA unlearning,0.0,0.4327,3,LoRA-SFT
+UniformProbes,1.0,1.0,1.0,1.0,gradient-ascent LoRA unlearning,1.0,0.8782,3,LoRA-SFT
+ADCU,0.0,0.0,0.0,0.0,negative SFT unlearning,0.0,0.6274,3,LoRA-SFT
+ADCU-NoValuation,0.0,0.0,0.0,0.0,negative SFT unlearning,0.0,0.6274,3,LoRA-SFT
+CanaryOnly,0.0,0.0,0.0,0.0,negative SFT unlearning,0.0,0.6126,3,LoRA-SFT
+ExactMatch,0.0,0.0,0.0,0.0,negative SFT unlearning,0.0,0.6447,3,LoRA-SFT
+RetrieverHit,0.0,0.0,0.0,0.0,negative SFT unlearning,0.0,0.4327,3,LoRA-SFT
+UniformProbes,0.0,0.0,0.0,0.0,negative SFT unlearning,0.0,0.6274,3,LoRA-SFT
+ADCU,1.0,1.0,1.0,1.0,tiny HF PEFT LoRA validation,1.0,0.7661,1,PEFT-LoRA
+CanaryOnly,1.0,1.0,1.0,1.0,tiny HF PEFT LoRA validation,1.0,0.8016,1,PEFT-LoRA
+ExactMatch,1.0,1.0,1.0,1.0,tiny HF PEFT LoRA validation,1.0,0.9066,1,PEFT-LoRA
+ExtractionAudit,0.0,0.0,0.0,0.0,tiny HF PEFT LoRA validation,0.0,0.5464,1,PEFT-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,tiny HF PEFT LoRA validation,1.0,0.8482,1,PEFT-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,tiny HF PEFT LoRA validation,1.0,0.9195,1,PEFT-LoRA
+RetrieverHit,0.0,0.0,0.0,0.0,tiny HF PEFT LoRA validation,0.0,0.3736,1,PEFT-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.4161,3,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.3964,3,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.4221,3,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.4474,3,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.4161,3,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.3964,3,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.4221,3,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.4474,3,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.4161,3,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.3964,3,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.4221,3,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.4474,3,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.5106,3,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.4452,3,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.5296,3,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.5498,3,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.4161,3,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.3964,3,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.4221,3,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.4474,3,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.4161,3,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.3964,3,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.4221,3,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.4474,3,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,Qwen2.5-0.5B TOFU-like NPO unlearning,1.0,0.6434,1,Qwen-TOFU-LoRA
+ExtractionAudit,0.0,0.0,0.0,0.0,Qwen2.5-0.5B TOFU-like NPO unlearning,0.0,0.5249,1,Qwen-TOFU-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,Qwen2.5-0.5B TOFU-like NPO unlearning,1.0,0.6845,1,Qwen-TOFU-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,Qwen2.5-0.5B TOFU-like NPO unlearning,1.0,0.6845,1,Qwen-TOFU-LoRA
+ADCU,1.0,1.0,1.0,1.0,Qwen2.5-0.5B TOFU-like full SFT,1.0,0.6434,1,Qwen-TOFU-LoRA
+ExtractionAudit,0.0,0.0,0.0,0.0,Qwen2.5-0.5B TOFU-like full SFT,0.0,0.5249,1,Qwen-TOFU-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,Qwen2.5-0.5B TOFU-like full SFT,1.0,0.6845,1,Qwen-TOFU-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,Qwen2.5-0.5B TOFU-like full SFT,1.0,0.6845,1,Qwen-TOFU-LoRA

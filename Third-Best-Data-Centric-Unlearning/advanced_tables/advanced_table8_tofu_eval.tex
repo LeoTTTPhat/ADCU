@@ -1,0 +1,25 @@
+\begin{table*}[t]
+\centering
+\caption{TOFU split-level evaluation for Qwen2.5-0.5B LoRA runs.}
+\label{tab:tofu_eval}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllllll}
+\toprule
+Method & Tofu Split & Split Size & Eval N & Eval Mode & Answer Preferred Rate & Mean Answer Margin & Mean Answer Loss \\
+\midrule
+Qwen2.5-0.5B TOFU-like NPO unlearning & forget01 & 40 & 40 & full & 1.0 & 2.6162 & 2.0098 \\
+Qwen2.5-0.5B TOFU-like NPO unlearning & forget01\_perturbed & 40 & 5 & deterministic\_subset\_5\_of\_40 & 1.0 & 3.5929 & 0.8516 \\
+Qwen2.5-0.5B TOFU-like NPO unlearning & real\_authors & 100 & 5 & deterministic\_subset\_5\_of\_100 & 1.0 & 0.0 & 0.5613 \\
+Qwen2.5-0.5B TOFU-like NPO unlearning & retain99 & 3960 & 5 & deterministic\_subset\_5\_of\_3960 & 1.0 & 1.8546 & 2.2326 \\
+Qwen2.5-0.5B TOFU-like NPO unlearning & retain\_perturbed & 400 & 5 & deterministic\_subset\_5\_of\_400 & 1.0 & 1.8546 & 2.2326 \\
+Qwen2.5-0.5B TOFU-like NPO unlearning & world\_facts & 117 & 5 & deterministic\_subset\_5\_of\_117 & 0.4 & -2.0521 & 4.854 \\
+Qwen2.5-0.5B TOFU-like full SFT & forget01 & 40 & 40 & full & 1.0 & 3.4098 & 2.0209 \\
+Qwen2.5-0.5B TOFU-like full SFT & forget01\_perturbed & 40 & 5 & deterministic\_subset\_5\_of\_40 & 1.0 & 4.4914 & 0.8811 \\
+Qwen2.5-0.5B TOFU-like full SFT & real\_authors & 100 & 5 & deterministic\_subset\_5\_of\_100 & 1.0 & 0.0 & 0.4016 \\
+Qwen2.5-0.5B TOFU-like full SFT & retain99 & 3960 & 5 & deterministic\_subset\_5\_of\_3960 & 1.0 & 2.4063 & 2.2736 \\
+Qwen2.5-0.5B TOFU-like full SFT & retain\_perturbed & 400 & 5 & deterministic\_subset\_5\_of\_400 & 1.0 & 2.4063 & 2.2736 \\
+Qwen2.5-0.5B TOFU-like full SFT & world\_facts & 117 & 5 & deterministic\_subset\_5\_of\_117 & 0.4 & -1.8328 & 4.3498 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

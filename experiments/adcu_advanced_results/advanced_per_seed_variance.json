@@ -1,0 +1,79 @@
+[
+  {
+    "track": "DenseRAG",
+    "seed": 21,
+    "failure_detection_rate": 0.8,
+    "mean_adcu_risk_ucb": 0.7857,
+    "n": 30
+  },
+  {
+    "track": "DenseRAG",
+    "seed": 22,
+    "failure_detection_rate": 0.8,
+    "mean_adcu_risk_ucb": 0.7857,
+    "n": 30
+  },
+  {
+    "track": "DenseRAG",
+    "seed": 23,
+    "failure_detection_rate": 0.8,
+    "mean_adcu_risk_ucb": 0.7857,
+    "n": 30
+  },
+  {
+    "track": "LoRA-SFT",
+    "seed": 11,
+    "failure_detection_rate": 0.8333,
+    "mean_adcu_risk_ucb": 0.7732,
+    "n": 24
+  },
+  {
+    "track": "LoRA-SFT",
+    "seed": 12,
+    "failure_detection_rate": 0.8333,
+    "mean_adcu_risk_ucb": 0.7446,
+    "n": 24
+  },
+  {
+    "track": "LoRA-SFT",
+    "seed": 13,
+    "failure_detection_rate": 0.8333,
+    "mean_adcu_risk_ucb": 0.7493,
+    "n": 24
+  },
+  {
+    "track": "PEFT-LoRA",
+    "seed": 31,
+    "failure_detection_rate": 0.7143,
+    "mean_adcu_risk_ucb": 0.7661,
+    "n": 7
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "seed": 41,
+    "failure_detection_rate": 1.0,
+    "mean_adcu_risk_ucb": 0.4161,
+    "n": 24
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "seed": 42,
+    "failure_detection_rate": 1.0,
+    "mean_adcu_risk_ucb": 0.4161,
+    "n": 24
+  },
+  {
+    "track": "Pretrained-LoRA",
+    "seed": 43,
+    "failure_detection_rate": 1.0,
+    "mean_adcu_risk_ucb": 0.4634,
+    "n": 24
+  },
+  {
+    "track": "Qwen-TOFU-LoRA",
+    "seed": 51,
+    "failure_detection_rate": 0.75,
+    "mean_adcu_risk_ucb": 0.6434,
+    "n": 8
+  }
+]

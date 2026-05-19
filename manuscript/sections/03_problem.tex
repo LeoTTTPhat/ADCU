@@ -1,0 +1,12 @@
+\section{Problem Formulation}
+
+Let $S_0$ be the pre-deletion system and $S_-$ be the post-deletion system. A system may include a base model, retriever, vector index, reranker, prompt template, adapter, cache, and operational logs. A deletion request targets a set of data units $D_{\mathrm{del}}=\{z_1,\ldots,z_k\}$. Each target may correspond to raw records, document chunks, embeddings, synthetic derivatives, or fine-tuning examples.
+
+We model data dependence with a provenance graph $G=(V,E)$. Nodes include deletion targets and downstream artifacts. An edge $(u,v)$ means artifact $v$ was produced from or influenced by $u$. Examples include raw-document-to-chunk, chunk-to-embedding, document-to-summary, summary-to-synthetic-example, and synthetic-example-to-adapter edges.
+
+The audit problem is to decide whether $S_-$ still exhibits residual dependence on $D_{\mathrm{del}}$ while preserving utility on a retain distribution $Q_{\mathrm{ret}}$. We do not require the auditor to inspect model weights. Instead, the auditor can submit black-box probes and observe generated answers, retrieved contexts, citations, and available metadata.
+
+An audit returns one of three decisions. \emph{Pass} means the upper confidence bound on residual deletion risk is below tolerance and retain utility is acceptable. \emph{Fail} means at least one behavioral violation is observed. \emph{Escalate} means the evidence is inconclusive or retain utility has collapsed.
+
+\textbf{Threat model.}
+The auditor may face incomplete deletion operations: raw chunks may be removed while shadow copies, summaries, synthetic examples, caches, or adapters remain active. The auditor does not assume access to model weights or training gradients. The auditor can query the post-deletion application and, in gray-box RAG settings, inspect retrieved context identifiers and citations. We do not claim that black-box auditing proves absolute absence of influence; instead, the objective is bounded evidence against declared residual-dependence channels.

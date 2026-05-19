@@ -1,0 +1,34 @@
+[
+  {
+    "track": "FineTuneSim",
+    "block_bootstrap_low": 0.9722,
+    "block_bootstrap_high": 0.9722,
+    "score_jitter_stability": 0.9722,
+    "mean_effective_probe_families": 2.6,
+    "n": 225
+  },
+  {
+    "track": "HybridReal",
+    "block_bootstrap_low": 1.0,
+    "block_bootstrap_high": 1.0,
+    "score_jitter_stability": 1.0,
+    "mean_effective_probe_families": 4.0,
+    "n": 225
+  },
+  {
+    "track": "NaturalFEVER",
+    "block_bootstrap_low": 1.0,
+    "block_bootstrap_high": 1.0,
+    "score_jitter_stability": 1.0,
+    "mean_effective_probe_families": 3.35,
+    "n": 180
+  },
+  {
+    "track": "RealRAG",
+    "block_bootstrap_low": 1.0,
+    "block_bootstrap_high": 1.0,
+    "score_jitter_stability": 1.0,
+    "mean_effective_probe_families": 4.4,
+    "n": 225
+  }
+]

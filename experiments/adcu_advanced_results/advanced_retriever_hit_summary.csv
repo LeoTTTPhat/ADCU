@@ -1,0 +1,7 @@
+adcu_detection_rate,embedding_model,n,retrieval_mode,top3_deleted_derivative_hit_rate,top5_deleted_derivative_hit_rate
+1.0,BAAI/bge-small-en-v1.5,3,bge,0.9583,1.0
+1.0,not_used,3,cross,0.0,0.0
+1.0,not_used,3,dense,0.75,0.75
+1.0,intfloat/e5-base-v2,3,e5,0.9306,0.9583
+1.0,not_used,3,lexical,0.75,0.75
+1.0,sentence-transformers/all-MiniLM-L6-v2,3,neural,0.9722,0.9722
