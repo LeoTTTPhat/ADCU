@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Homebrew) (preloaded format=pdflatex 2026.3.4)  19 MAY 2026 16:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Homebrew) (preloaded format=pdflatex 2026.3.4)  19 MAY 2026 16:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -717,12 +717,12 @@ dies.tex)
 Underfull \vbox (badness 2538) has occurred while \output is active []
 
  [8]
-<../figures/adcu_pdf/provenance_case.pdf, id=528, 256.5585pt x 213.19649pt>
+<../figures/adcu_pdf/provenance_case.pdf, id=528, 505.89pt x 187.902pt>
 File: ../figures/adcu_pdf/provenance_case.pdf Graphic file (type pdf)
 <use ../figures/adcu_pdf/provenance_case.pdf>
 Package pdftex.def Info: ../figures/adcu_pdf/provenance_case.pdf  used on input
  line 84.
-(pdftex.def)             Requested size: 252.94499pt x 210.19983pt.
+(pdftex.def)             Requested size: 252.94499pt x 93.95076pt.
 )
 (./sections/08_discussion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 91--1
@@ -755,10 +755,14 @@ Underfull \hbox (badness 2088) in paragraph at lines 7--8
 \OT1/ppl/m/n/9.53561 lot. The ad-vanced ex-per-i-ments fur-ther add low-rank
  []
 
-[9]) (./sections/09_artifact.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[9 <../figures/adcu_pdf/provenance_case.pdf>]
+Underfull \vbox (badness 1917) has occurred while \output is active []
 
- [10]
+
+Underfull \vbox (badness 1917) has occurred while \output is active []
+
+ [10])
+(./sections/09_artifact.tex
 Underfull \hbox (badness 10000) in paragraph at lines 7--8
 []\OT1/pcr/m/n/9.53561 run_adcu_submission_experiments.py\OT1/ppl/m/n/9.53561 :
 
@@ -797,8 +801,10 @@ Underfull \hbox (badness 5008) in paragraph at lines 15--17
 
  []
 
-[11 <../figures/adcu_pdf/provenance_case.pdf>]) (./sections/10_conclusion.tex)
-(./sections/11_appendix.tex [12]
+) (./sections/10_conclusion.tex [11]) (./sections/11_appendix.tex
+Underfull \vbox (badness 1442) has occurred while \output is active []
+
+ [12]
 Underfull \hbox (badness 10000) in paragraph at lines 50--52
 []\OT1/ppl/b/n/9.53561 Target-level false-pass con-trol. \OT1/ppl/m/n/9.53561 A
 s-sume
@@ -848,7 +854,11 @@ Underfull \hbox (badness 1571) in paragraph at lines 25--29
 
  []
 
-[16]) [17
+
+Underfull \vbox (badness 1221) has occurred while \output is active []
+
+ [16])
+[17
 
 ] (./main.aux)
  ***********
@@ -861,7 +871,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  11811 strings out of 467525
  200919 string characters out of 5408440
- 673391 words of memory out of 5000000
+ 673390 words of memory out of 5000000
  40331 multiletter control sequences out of 15000+600000
  671969 words of font info for 143 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -888,10 +898,10 @@ r8a.pfb></opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/type1/urw
 nts/type1/urw/palatino/uplr8a.pfb></opt/homebrew/Cellar/texlive/20260301/share/
 texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></opt/homebrew/Cellar/texlive/2
 0260301/share/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on main.pdf (17 pages, 361092 bytes).
+Output written on main.pdf (17 pages, 360068 bytes).
 PDF statistics:
- 756 PDF objects out of 1000 (max. 8388607)
- 481 compressed objects within 5 object streams
+ 750 PDF objects out of 1000 (max. 8388607)
+ 477 compressed objects within 5 object streams
  136 named destinations out of 1000 (max. 500000)
  229 words of extra memory for PDF output out of 10000 (max. 10000000)
 
