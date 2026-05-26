@@ -1,21 +1,21 @@
 % =====================================================================
-%  Drop-in section: A Composition Theorem for Pipeline Deletion
-%  ---------------------------------------------------------------------
-%  INTEGRATION NOTES
-%  1. Add these declarations to the PREAMBLE of main.tex (you already
-%     have \newtheorem{proposition}{Proposition}; do NOT redeclare it):
+% Drop-in section: A Composition Theorem for Pipeline Deletion
+% ---------------------------------------------------------------------
+% INTEGRATION NOTES
+% 1. Add these declarations to the PREAMBLE of main.tex (you already
+% have \newtheorem{proposition}{Proposition}; do NOT redeclare it):
 %
-%        \newtheorem{theorem}{Theorem}
-%        \newtheorem{lemma}{Lemma}
-%        \newtheorem{corollary}{Corollary}
-%        \theoremstyle{definition}
-%        \newtheorem{definition}{Definition}
-%        \newtheorem{assumption}{Assumption}
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}{Lemma}
+% \newtheorem{corollary}{Corollary}
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definition}
+% \newtheorem{assumption}{Assumption}
 %
-%  2. \input this file where the formal contribution should appear,
-%     e.g. just after Section 4 (Deletion-Risk Metric) or in the
-%     supplement. It uses your \method{} and \bench{} macros.
-%  3. Requires amsmath, amssymb/amsfonts, amsthm (already loaded).
+% 2. \input this file where the formal contribution should appear,
+% e.g. just after Section 4 (Deletion-Risk Metric) or in the
+% supplement. It uses your \method{} and \bench{} macros.
+% 3. Requires amsmath, amssymb/amsfonts, amsthm (already loaded).
 % =====================================================================
 
 \section{A Composition Theorem for Pipeline Deletion}
@@ -24,7 +24,7 @@
 The experiments show repeatedly that deleting a record from each
 component in isolation does not delete it from the deployed system: an
 index can be purged while a summary survives, or an adapter can be
-unlearned while a synthetic derivative is still retrieved. This section
+unlearned while a derivative is still retrieved. This section
 makes that observation precise. We define behavioral deletion against a
 counterfactual reference system, prove that per-component deletion
 guarantees \emph{compose} up to an explicit derivative-coupling term,
@@ -41,7 +41,7 @@ query $q$, a distribution over answers. We write the pipeline's answer
 law as $P_{S}(\cdot\mid q)$ for a system $S$. A system is characterized
 by a parameter state $\theta$ (base weights and adapters) and an
 external knowledge state $K$ (vector index, lexical index, reranker
-state, caches, summaries, and any synthetic-derivative store). We
+state, caches, summaries, and any -derivative store). We
 consider queries drawn from a declared probe class $\mathcal{B}$ and
 measure deviation between answer laws by total variation,
 $\mathrm{TV}(\mu,\nu)=\sup_{A}\lvert\mu(A)-\nu(A)\rvert$.
@@ -63,10 +63,10 @@ model to the whole pipeline.
 The behavioral residual influence of $z$ in the post-deletion system,
 relative to the probe class $\mathcal{B}$, is
 \[
-  \rho_{\mathcal{B}}(S^{-})
-  \;=\;
-  \sup_{q\in\mathcal{B}}
-  \mathrm{TV}\!\big(P_{S^{-}}(\cdot\mid q),\,P_{S^{\star}}(\cdot\mid q)\big).
+ \rho_{\mathcal{B}}(S^{-})
+ \;=\;
+ \sup_{q\in\mathcal{B}}
+ \mathrm{TV}\!\big(P_{S^{-}}(\cdot\mid q),\,P_{S^{\star}}(\cdot\mid q)\big).
 \]
 We say $S^{-}$ achieves \emph{$\varepsilon$-behavioral deletion} on
 $\mathcal{B}$ if $\rho_{\mathcal{B}}(S^{-})\le\varepsilon$.
@@ -98,10 +98,10 @@ the answer with law $\mathcal{G}(\cdot\mid q,X,\theta)$. The pipeline
 answer law is the mixture
 \begin{equation}
 \label{eq:pipeline}
-  P_{S}(\cdot\mid q)
-  \;=\;
-  \mathbb{E}_{X\sim\mathcal{R}(\cdot\mid q,K)}
-  \big[\,\mathcal{G}(\cdot\mid q,X,\theta)\,\big].
+ P_{S}(\cdot\mid q)
+ \;=\;
+ \mathbb{E}_{X\sim\mathcal{R}(\cdot\mid q,K)}
+ \big[\,\mathcal{G}(\cdot\mid q,X,\theta)\,\big].
 \end{equation}
 Deeper pipelines (reranking, caching, summarization) are obtained by
 further composing stages; the serial generalization is
@@ -110,7 +110,7 @@ Theorem~\ref{thm:general}.
 We assume the deletion operation is, or can be analyzed relative to, a
 \emph{provenance-closed} idealization. Let $\mathcal{D}(z)$ denote the
 transitive closure of $z$ in the provenance graph: every chunk,
-embedding, summary, cache entry, synthetic instruction/QA example, and
+embedding, summary, cache entry, instruction/QA example, and
 fine-tuning record causally derived from $z$ or from a member of
 $\mathcal{D}(z)$. Let $S^{\diamond}=(\theta^{\diamond},K^{\diamond})$ be
 the system obtained from $S^{-}$ by \emph{additionally} removing all of
@@ -124,9 +124,9 @@ that produced the parameters. $S^{\diamond}$ is the system $S^{-}$
 \label{a:theta}
 Uniformly over the probe class and over contexts,
 \[
-  \sup_{q\in\mathcal{B},\,x}
-  \mathrm{TV}\!\big(\mathcal{G}(\cdot\mid q,x,\theta^{\diamond}),\,
-  \mathcal{G}(\cdot\mid q,x,\theta^{\star})\big)\le\varepsilon_{\theta}.
+ \sup_{q\in\mathcal{B},\,x}
+ \mathrm{TV}\!\big(\mathcal{G}(\cdot\mid q,x,\theta^{\diamond}),\,
+ \mathcal{G}(\cdot\mid q,x,\theta^{\star})\big)\le\varepsilon_{\theta}.
 \]
 \end{assumption}
 
@@ -134,9 +134,9 @@ Uniformly over the probe class and over contexts,
 \label{a:k}
 For a retrieval discrepancy $d_{\mathcal{R}}$,
 \[
-  \sup_{q\in\mathcal{B}}
-  d_{\mathcal{R}}\!\big(\mathcal{R}(\cdot\mid q,K^{\diamond}),\,
-  \mathcal{R}(\cdot\mid q,K^{\star})\big)\le\varepsilon_{K}.
+ \sup_{q\in\mathcal{B}}
+ d_{\mathcal{R}}\!\big(\mathcal{R}(\cdot\mid q,K^{\diamond}),\,
+ \mathcal{R}(\cdot\mid q,K^{\star})\big)\le\varepsilon_{K}.
 \]
 \end{assumption}
 
@@ -146,9 +146,9 @@ The generation stage is $L$-Lipschitz from the retrieval discrepancy to
 answer total variation: for any context laws $\alpha,\beta$ and any
 fixed $(q,\theta)$,
 \[
-  \mathrm{TV}\!\Big(\mathbb{E}_{X\sim\alpha}\mathcal{G}(\cdot\mid q,X,\theta),\,
-  \mathbb{E}_{X\sim\beta}\mathcal{G}(\cdot\mid q,X,\theta)\Big)
-  \le L\, d_{\mathcal{R}}(\alpha,\beta).
+ \mathrm{TV}\!\Big(\mathbb{E}_{X\sim\alpha}\mathcal{G}(\cdot\mid q,X,\theta),\,
+ \mathbb{E}_{X\sim\beta}\mathcal{G}(\cdot\mid q,X,\theta)\Big)
+ \le L\, d_{\mathcal{R}}(\alpha,\beta).
 \]
 \end{assumption}
 
@@ -169,8 +169,8 @@ answer divergence it induces.
 \label{lem:hybrid}
 For any $q$,
 \[
-  \mathrm{TV}\!\big(P_{S^{\diamond}}(\cdot\mid q),P_{S^{\star}}(\cdot\mid q)\big)
-  \le \varepsilon_{\theta} + L\,\varepsilon_{K}.
+ \mathrm{TV}\!\big(P_{S^{\diamond}}(\cdot\mid q),P_{S^{\star}}(\cdot\mid q)\big)
+ \le \varepsilon_{\theta} + L\,\varepsilon_{K}.
 \]
 \end{lemma}
 
@@ -222,10 +222,10 @@ from the provenance-closed $S^{\diamond}$.
 \begin{definition}[Derivative-coupling term]
 \label{def:gamma}
 \[
-  \gamma_{z}
-  \;=\;
-  \sup_{q\in\mathcal{B}}
-  \mathrm{TV}\!\big(P_{S^{-}}(\cdot\mid q),\,P_{S^{\diamond}}(\cdot\mid q)\big).
+ \gamma_{z}
+ \;=\;
+ \sup_{q\in\mathcal{B}}
+ \mathrm{TV}\!\big(P_{S^{-}}(\cdot\mid q),\,P_{S^{\diamond}}(\cdot\mid q)\big).
 \]
 We say the deletion operation achieves \emph{provenance closure} if
 $S^{-}=S^{\diamond}$, equivalently if every artifact in
@@ -236,9 +236,9 @@ $\mathcal{D}(z)$ was removed.
 \label{thm:main}
 Under Assumptions~\ref{a:theta}--\ref{a:lip},
 \[
-  \boxed{\;\rho_{\mathcal{B}}(S^{-})
-  \;\le\;
-  \varepsilon_{\theta}\;+\;L\,\varepsilon_{K}\;+\;\gamma_{z}.\;}
+ \boxed{\;\rho_{\mathcal{B}}(S^{-})
+ \;\le\;
+ \varepsilon_{\theta}\;+\;L\,\varepsilon_{K}\;+\;\gamma_{z}.\;}
 \]
 Moreover $\gamma_{z}=0$ if and only if the deletion operation achieves
 provenance closure, in which case
@@ -303,7 +303,7 @@ carried by $\gamma_{z}$, the orphan derivative $s(z)$.
 \end{proof}
 
 Proposition~\ref{prop:necessity} is the formal counterpart of the
-\emph{synthetic derivative retained} and \emph{shadow-copy} failures in
+\emph{ derivative retained} and \emph{shadow-copy} failures in
 our experiments, where each component looks clean by its own check yet
 the pipeline still answers the deleted fact. It explains why those rows
 carry near-maximal risk even though no artifact labeled with the target
@@ -319,10 +319,10 @@ reference (on the provenance-closed problem) and every downstream stage
 $C_{k}$, $k>i$, is $L_{k}$-Lipschitz in the sense of
 Assumption~\ref{a:lip}. Then
 \[
-  \rho_{\mathcal{B}}(S^{-})
-  \;\le\;
-  \sum_{i=1}^{m}\Big(\textstyle\prod_{k=i+1}^{m}L_{k}\Big)\varepsilon_{i}
-  \;+\;\gamma_{z}.
+ \rho_{\mathcal{B}}(S^{-})
+ \;\le\;
+ \sum_{i=1}^{m}\Big(\textstyle\prod_{k=i+1}^{m}L_{k}\Big)\varepsilon_{i}
+ \;+\;\gamma_{z}.
 \]
 \end{theorem}
 

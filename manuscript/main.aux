@@ -1,0 +1,230 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{lewis2020rag}
+\citation{karpukhin2020dpr}
+\citation{izacard2021fid}
+\citation{voigt2017gdpr}
+\citation{fan2025fedfmchallenges}
+\citation{cao2015machineunlearning}
+\citation{ginart2019making}
+\citation{bourtoule2021machineunlearning}
+\citation{guo2020certified}
+\citation{yao2024largeunlearning}
+\citation{liu2024rethinking}
+\citation{jin2024surveyunlearning}
+\citation{carlini2019secretsharer}
+\citation{carlini2021extracting}
+\citation{carlini2023quantifying}
+\citation{shokri2017membership}
+\citation{yeom2018privacy}
+\citation{mattern2023membership}
+\citation{asai2024selfrag}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{dwork2006dp}
+\citation{guo2020certified}
+\citation{kirchenbauer2023watermark}
+\citation{thorne2018fever}
+\citation{thorne2018fever}
+\citation{hu2021lora}
+\citation{thorne2018fever}
+\citation{thorne2018fever}
+\citation{hu2021lora}
+\citation{fan2025fedfmchallenges}
+\citation{cao2015machineunlearning}
+\citation{bourtoule2021machineunlearning}
+\citation{ginart2019making}
+\citation{yao2024largeunlearning}
+\citation{liu2024rethinking}
+\citation{jin2024surveyunlearning}
+\citation{lewis2020rag}
+\citation{karpukhin2020dpr}
+\citation{izacard2021fid}
+\citation{asai2024selfrag}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\citation{ghorbani2019datashapley}
+\citation{jia2019data}
+\citation{kwon2021betashapley}
+\citation{wang2023databanzhaf}
+\citation{koh2017influence}
+\citation{pruthi2020tracin}
+\citation{feldman2020memorization}
+\citation{ilyas2022datamodels}
+\citation{carlini2021extracting}
+\citation{carlini2019secretsharer}
+\citation{carlini2023quantifying}
+\citation{shokri2017membership}
+\citation{yeom2018privacy}
+\citation{mattern2023membership}
+\citation{kirchenbauer2023watermark}
+\citation{dwork2006dp}
+\citation{voigt2017gdpr}
+\citation{guo2020certified}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Problem Formulation}{3}{section.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The six diagnostic evidence channels. Each fires under a different failure mode---direct/paraphrase under model-side leakage, retrieval under stale or shadow-copy artifacts, counterfactual under any $S_-$-vs-$S_{\mathrm  {clean}}$ divergence, extraction under adversarial probes, watermark under canary or provenance-token hits---and together they localize residual dependence without themselves defining deletion failure.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:channels}{{1}{4}{The six diagnostic evidence channels. Each fires under a different failure mode---direct/paraphrase under model-side leakage, retrieval under stale or shadow-copy artifacts, counterfactual under any $S_-$-vs-$S_{\mathrm {clean}}$ divergence, extraction under adversarial probes, watermark under canary or provenance-token hits---and together they localize residual dependence without themselves defining deletion failure}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Behavioral Deletion Risk}{4}{section.4}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces ADCU{} graph-adaptive counterfactual audit}}{5}{algorithm.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}ADCU{} Audit Algorithm}{5}{section.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Pipeline-deletion composition (Appendix~A). Per-component deletion errors compose additively---$\varepsilon _\theta $ on parameters, $\varepsilon _K$ on knowledge amplified by the generation Lipschitz factor $L$---plus a non-additive derivative-coupling term $\gamma _z$ that is zero \emph  {iff} every derivative of the deleted record has also been removed; otherwise orphan derivatives dominate.}}{6}{figure.2}\protected@file@percent }
+\newlabel{fig:composition}{{2}{6}{Pipeline-deletion composition (Appendix~A). Per-component deletion errors compose additively---$\varepsilon _\theta $ on parameters, $\varepsilon _K$ on knowledge amplified by the generation Lipschitz factor $L$---plus a non-additive derivative-coupling term $\gamma _z$ that is zero \emph {iff} every derivative of the deleted record has also been removed; otherwise orphan derivatives dominate}{figure.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}ADCU-Bench{}}{6}{section.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces ADCU{} audit pipeline. A deletion request is expanded through the provenance graph; the post-deletion system $S_-$ is compared against the clean reference $S_{\mathrm  {clean}}$ via a two-sample distance over a graph-adaptive probe budget, six diagnostic channels localize where any residual dependence is mediated, component interventions attribute it causally, and the audit returns a confidence-bounded decision with a retain-utility check.}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:adcu_pipeline}{{3}{6}{\method {} audit pipeline. A deletion request is expanded through the provenance graph; the post-deletion system $S_-$ is compared against the clean reference $S_{\mathrm {clean}}$ via a two-sample distance over a graph-adaptive probe budget, six diagnostic channels localize where any residual dependence is mediated, component interventions attribute it causally, and the audit returns a confidence-bounded decision with a retain-utility check}{figure.3}{}}
+\citation{thorne2018fever}
+\citation{thorne2018fever}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Experiments}{7}{section.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Detection vs.\ false alarm across weight profiles as the operating tolerance is swept (Table~\ref {tab:weight_sensitivity}). Lowering the tolerance raises sensitivity, but near the Hoeffding confidence floor it also rejects clean systems; the headline rows instead use the floor-normalized excess-risk tolerance.}}{7}{figure.4}\protected@file@percent }
+\newlabel{fig:tolerance_roc}{{4}{7}{Detection vs.\ false alarm across weight profiles as the operating tolerance is swept (Table~\ref {tab:weight_sensitivity}). Lowering the tolerance raises sensitivity, but near the Hoeffding confidence floor it also rejects clean systems; the headline rows instead use the floor-normalized excess-risk tolerance}{figure.4}{}}
+\citation{hu2021lora}
+\citation{zhang2024npo}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Repeated audit detection summary across seeds, deletion-target sizes, and budgets.}}{8}{table.1}\protected@file@percent }
+\newlabel{tab:submission_audit}{{1}{8}{Repeated audit detection summary across seeds, deletion-target sizes, and budgets}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Headline counterfactual deletion results using the two-sample $\hat  R_{\mathrm  {cf}}$ statistic.}}{8}{table.2}\protected@file@percent }
+\newlabel{tab:cf_headline}{{2}{8}{Headline counterfactual deletion results using the two-sample $\hat R_{\mathrm {cf}}$ statistic}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Mid-size RealRAG scaling check on a 5,000-record FEVER retain corpus.}}{8}{table.3}\protected@file@percent }
+\newlabel{tab:mid_size_scaling}{{3}{8}{Mid-size RealRAG scaling check on a 5,000-record FEVER retain corpus}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Advanced LoRA-SFT and DenseRAG Experiments}{8}{subsection.7.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Case-study provenance graph. The raw chunk of $z$ is syntactically removed (dashed gray), but residual derivatives (orange) keep producing post-deletion behavioral leakage (red) that ADCU{} catches through its evidence channels (green)---the orphan-derivative term $\gamma _z$ in the composition theorem.}}{9}{figure.5}\protected@file@percent }
+\newlabel{fig:provenance_case}{{5}{9}{Case-study provenance graph. The raw chunk of $z$ is syntactically removed (dashed gray), but residual derivatives (orange) keep producing post-deletion behavioral leakage (red) that \method {} catches through its evidence channels (green)---the orphan-derivative term $\gamma _z$ in the composition theorem}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Ablations}{9}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Discussion}{9}{section.8}\protected@file@percent }
+\bibstyle{IEEEtran}
+\bibdata{references}
+\bibcite{lewis2020rag}{1}
+\bibcite{karpukhin2020dpr}{2}
+\bibcite{izacard2021fid}{3}
+\bibcite{gao2024ragsurvey}{4}
+\bibcite{voigt2017gdpr}{5}
+\bibcite{cohen2022deletioncontrol}{6}
+\bibcite{fan2025fedfmchallenges}{7}
+\bibcite{cao2015machineunlearning}{8}
+\bibcite{ginart2019making}{9}
+\bibcite{bourtoule2021machineunlearning}{10}
+\bibcite{guo2020certified}{11}
+\bibcite{maini2024tofu}{12}
+\bibcite{yao2024largeunlearning}{13}
+\bibcite{liu2024rethinking}{14}
+\bibcite{wang2024llmunlearning}{15}
+\bibcite{jin2024surveyunlearning}{16}
+\bibcite{carlini2019secretsharer}{17}
+\bibcite{carlini2021extracting}{18}
+\bibcite{carlini2023quantifying}{19}
+\bibcite{shokri2017membership}{20}
+\bibcite{yeom2018privacy}{21}
+\bibcite{mattern2023membership}{22}
+\bibcite{gao2023retrievalaugmented}{23}
+\bibcite{asai2024selfrag}{24}
+\bibcite{yu2024ragevalsurvey}{25}
+\bibcite{akkiraju2024facts}{26}
+\bibcite{dwork2006dp}{27}
+\bibcite{wang2025ikea}{28}
+\bibcite{xie2026canaryrag}{29}
+\bibcite{song2026grasp}{30}
+\bibcite{thornton2026retrievalpivot}{31}
+\bibcite{ghorbani2019datashapley}{32}
+\bibcite{jia2019data}{33}
+\bibcite{kwon2021betashapley}{34}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{10}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{10}{section*.1}\protected@file@percent }
+\bibcite{wang2023databanzhaf}{35}
+\bibcite{koh2017influence}{36}
+\bibcite{pruthi2020tracin}{37}
+\bibcite{feldman2020memorization}{38}
+\bibcite{ilyas2022datamodels}{39}
+\bibcite{kirchenbauer2023watermark}{40}
+\bibcite{zhao2023watermarksurvey}{41}
+\bibcite{wang2024ragate}{42}
+\bibcite{pham2026memorai}{43}
+\bibcite{lee2025finetunerag}{44}
+\bibcite{zhang2024npo}{45}
+\bibcite{wang2022textembeddings}{46}
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  A: A Composition Theorem for Pipeline Deletion}{12}{section*.2}\protected@file@percent }
+\newlabel{sec:composition}{{A}{12}{\appendixname \nobreakspace \thesectiondis \\* A Composition Theorem for Pipeline Deletion}{section*.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Setup and Counterfactual Reference}{12}{subsection.Appendix.A.1}\protected@file@percent }
+\newlabel{def:residual}{{1}{12}{Behavioral residual influence}{definition.1}{}}
+\newlabel{def:syntactic}{{2}{12}{Syntactic vs.\ behavioral deletion}{definition.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Pipeline Decomposition}{12}{subsection.Appendix.A.2}\protected@file@percent }
+\newlabel{eq:pipeline}{{1}{12}{Pipeline Decomposition}{equation.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Assumptions}{12}{subsection.Appendix.A.3}\protected@file@percent }
+\newlabel{a:theta}{{1}{12}{Parametric behavioral deletion}{assumption.1}{}}
+\newlabel{a:k}{{2}{12}{Knowledge-state deletion}{assumption.2}{}}
+\newlabel{a:lip}{{3}{12}{Bounded context sensitivity}{assumption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4}Composition}{12}{subsection.Appendix.A.4}\protected@file@percent }
+\newlabel{lem:hybrid}{{1}{12}{Hybrid bound}{lemma.1}{}}
+\newlabel{def:gamma}{{3}{13}{Derivative-coupling term}{definition.3}{}}
+\newlabel{thm:main}{{1}{13}{Pipeline deletion composition}{theorem.1}{}}
+\newlabel{prop:necessity}{{4}{13}{Necessity of provenance closure}{proposition.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.5}Serial Pipelines}{13}{subsection.Appendix.A.5}\protected@file@percent }
+\newlabel{thm:general}{{2}{13}{Multi-stage composition}{theorem.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.6}Consequences for Auditing}{13}{subsection.Appendix.A.6}\protected@file@percent }
+\newlabel{cor:audit}{{1}{13}{Audit sufficiency}{corollary.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {A.6.0.1}Relation to differential-privacy composition.}{13}{paragraph.Appendix.A.6.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {A.6.0.2}Assumptions and scope.}{14}{paragraph.Appendix.A.6.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  B: Benchmark Protocol Details}{14}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Deletion Target Construction}{14}{subsection.Appendix.B.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Probe Families}{14}{subsection.Appendix.B.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}Deletion Methods}{14}{subsection.Appendix.B.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.4}Audit Baselines}{14}{subsection.Appendix.B.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.5}Confidence Intervals}{14}{subsection.Appendix.B.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.6}Proofs for Risk Bounds}{15}{subsection.Appendix.B.6}\protected@file@percent }
+\citation{hu2021lora}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.7}DenseRAG Configuration}{16}{subsection.Appendix.B.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.8}LoRA-SFT Configuration}{16}{subsection.Appendix.B.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  C: Supplementary Empirical Tables}{16}{section*.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Utility--risk summary for ADCU across repeated deletion cases.}}{17}{table.4}\protected@file@percent }
+\newlabel{tab:utility_risk}{{4}{17}{Utility--risk summary for ADCU across repeated deletion cases}{table.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces HybridReal failure detection by audit method (Table~\ref {tab:submission_audit}). Narrow single-axis audits miss residual-dependence channels that combine model-side and retrieval-side artifacts, while the full multi-channel audit detects all configured failures.}}{17}{figure.6}\protected@file@percent }
+\newlabel{fig:hybrid_detection}{{6}{17}{HybridReal failure detection by audit method (Table~\ref {tab:submission_audit}). Narrow single-axis audits miss residual-dependence channels that combine model-side and retrieval-side artifacts, while the full multi-channel audit detects all configured failures}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Audit-budget tradeoff (Table~\ref {tab:submission_budget}). A larger probe budget raises detection (blue, left axis) and lowers the mean risk UCB (orange dashed, right axis) as the Hoeffding confidence floor shrinks.}}{17}{figure.7}\protected@file@percent }
+\newlabel{fig:budget}{{7}{17}{Audit-budget tradeoff (Table~\ref {tab:submission_budget}). A larger probe budget raises detection (blue, left axis) and lowers the mean risk UCB (orange dashed, right axis) as the Hoeffding confidence floor shrinks}{figure.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}Case-Study Redaction}{17}{subsection.Appendix.C.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2}Recommended Extensions}{17}{subsection.Appendix.C.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  D: Artifact Checklist}{17}{section*.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Residual dependence by deletion method.}}{18}{table.5}\protected@file@percent }
+\newlabel{tab:adcu_residual}{{5}{18}{Residual dependence by deletion method}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Per-seed failure detection and mean ADCU{} risk UCB for the advanced tracks. Tiny-$N$ seeds (PEFT-LoRA, Qwen-TOFU-LoRA) are reported as descriptive single-seed observations rather than as confidence intervals.}}{18}{table.6}\protected@file@percent }
+\newlabel{tab:per_seed}{{6}{18}{Per-seed failure detection and mean \method {} risk UCB for the advanced tracks. Tiny-$N$ seeds (PEFT-LoRA, Qwen-TOFU-LoRA) are reported as descriptive single-seed observations rather than as confidence intervals}{table.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces ADCU-Bench reproducibility summary.}}{18}{table.7}\protected@file@percent }
+\newlabel{tab:reproducibility_summary}{{7}{18}{ADCU-Bench reproducibility summary}{table.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Counterfactual and graph-allocation evidence in the repeated harness. $\hat  R_{\mathrm  {cf}}$ is the empirical clean-vs-post behavioral distance; clean rows have zero empirical distance before the UCB floor.}}{18}{table.8}\protected@file@percent }
+\newlabel{tab:cf_graph_summary}{{8}{18}{Counterfactual and graph-allocation evidence in the repeated harness. $\hat R_{\mathrm {cf}}$ is the empirical clean-vs-post behavioral distance; clean rows have zero empirical distance before the UCB floor}{table.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Repeated residual-dependence summary for ADCU.}}{19}{table.9}\protected@file@percent }
+\newlabel{tab:submission_methods}{{9}{19}{Repeated residual-dependence summary for ADCU}{table.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces ADCU detection as audit budget varies.}}{19}{table.10}\protected@file@percent }
+\newlabel{tab:submission_budget}{{10}{19}{ADCU detection as audit budget varies}{table.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Held-out released labeled-set validation of evidence-channel scorers.}}{19}{table.11}\protected@file@percent }
+\newlabel{tab:scorer_validation}{{11}{19}{Held-out released labeled-set validation of evidence-channel scorers}{table.11}{}}
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  E: Limitations and Failure Cases}{19}{section*.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Floor-normalized counterfactual-risk ROC with declared $\delta $.}}{20}{table.12}\protected@file@percent }
+\newlabel{tab:floor_roc}{{12}{20}{Floor-normalized counterfactual-risk ROC with declared $\delta $}{table.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces Evaluation against deletion-operation labels independent of ADCU channel scores.}}{20}{table.13}\protected@file@percent }
+\newlabel{tab:independent_labels}{{13}{20}{Evaluation against deletion-operation labels independent of ADCU channel scores}{table.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Weight and tolerance sensitivity in the repeated harness.}}{20}{table.14}\protected@file@percent }
+\newlabel{tab:weight_sensitivity}{{14}{20}{Weight and tolerance sensitivity in the repeated harness}{table.14}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {15}{\ignorespaces Pure black-box answer-only auditing compared with metadata-aware ADCU.}}{21}{table.15}\protected@file@percent }
+\newlabel{tab:blackbox}{{15}{21}{Pure black-box answer-only auditing compared with metadata-aware ADCU}{table.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {16}{\ignorespaces Retrieval-off counterfactual ablation for deletion-risk attribution.}}{21}{table.16}\protected@file@percent }
+\newlabel{tab:counterfactual_ablation}{{16}{21}{Retrieval-off counterfactual ablation for deletion-risk attribution}{table.16}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {17}{\ignorespaces Robustness diagnostics for correlated probes and score jitter.}}{21}{table.17}\protected@file@percent }
+\newlabel{tab:robustness}{{17}{21}{Robustness diagnostics for correlated probes and score jitter}{table.17}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {18}{\ignorespaces Natural-data FEVER deletion audit case study with redacted observed outputs.}}{21}{table.18}\protected@file@percent }
+\newlabel{tab:natural_fever_case}{{18}{21}{Natural-data FEVER deletion audit case study with redacted observed outputs}{table.18}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {19}{\ignorespaces Attack suite outcomes.}}{22}{table.19}\protected@file@percent }
+\newlabel{tab:adcu_attacks}{{19}{22}{Attack suite outcomes}{table.19}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {20}{\ignorespaces Advanced LoRA-SFT and DenseRAG audit results with confidence intervals.}}{22}{table.20}\protected@file@percent }
+\newlabel{tab:advanced_ci}{{20}{22}{Advanced LoRA-SFT and DenseRAG audit results with confidence intervals}{table.20}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {21}{\ignorespaces Larger-model PEFT/LoRA validation. Forget risk before is the full-SFT risk for the same checkpoint; forget risk after is the audited post-unlearning risk.}}{22}{table.21}\protected@file@percent }
+\newlabel{tab:larger_model_validation}{{21}{22}{Larger-model PEFT/LoRA validation. Forget risk before is the full-SFT risk for the same checkpoint; forget risk after is the audited post-unlearning risk}{table.21}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {22}{\ignorespaces TOFU-style forget, retain, utility, extraction, and clean-counterfactual evaluation.}}{23}{table.22}\protected@file@percent }
+\newlabel{tab:tofu_complete}{{22}{23}{TOFU-style forget, retain, utility, extraction, and clean-counterfactual evaluation}{table.22}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {23}{\ignorespaces Dense retrieval comparison across lexical, SVD, neural, E5, BGE, and cross-reranked settings.}}{23}{table.23}\protected@file@percent }
+\newlabel{tab:retriever_comparison}{{23}{23}{Dense retrieval comparison across lexical, SVD, neural, E5, BGE, and cross-reranked settings}{table.23}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {24}{\ignorespaces Probe-family ablation with detection, false alarms, marginal gain, missed failures, and bootstrap intervals.}}{23}{table.24}\protected@file@percent }
+\newlabel{tab:probe_family_complete}{{24}{23}{Probe-family ablation with detection, false alarms, marginal gain, missed failures, and bootstrap intervals}{table.24}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {25}{\ignorespaces Redacted failure-mode case study comparing clean and post-deletion behavior.}}{23}{table.25}\protected@file@percent }
+\newlabel{tab:failure_mode_case}{{25}{23}{Redacted failure-mode case study comparing clean and post-deletion behavior}{table.25}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {26}{\ignorespaces Named unlearning-method and audit-method baselines separated by role.}}{24}{table.26}\protected@file@percent }
+\newlabel{tab:named_baselines}{{26}{24}{Named unlearning-method and audit-method baselines separated by role}{table.26}{}}
+\gdef \@abspage@last{24}

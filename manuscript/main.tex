@@ -1,6 +1,7 @@
 \documentclass[10pt,journal,compsoc]{IEEEtran}
 
 \usepackage{amsmath,amsfonts}
+\usepackage[inline]{enumitem}
 \usepackage{amsthm}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -25,13 +26,13 @@
 \definecolor{adcuGray}{HTML}{8A8F98}
 \definecolor{adcuPurple}{HTML}{6B4FA0}
 \tikzset{
-  adcunode/.style={draw, rounded corners=2pt, align=center, font=\scriptsize,
-    inner sep=2.5pt, minimum height=6.5mm, line width=0.5pt},
-  adcustage/.style={adcunode, fill=adcuBlue!12, draw=adcuBlue},
-  adcuclean/.style={adcunode, fill=adcuGreen!12, draw=adcuGreen},
-  adcupost/.style={adcunode, fill=adcuOrange!15, draw=adcuOrange},
-  adcudec/.style={adcunode, fill=adcuPurple!12, draw=adcuPurple},
-  adcuflow/.style={-{Stealth[length=4pt]}, line width=0.5pt, draw=adcuGray!90},
+ adcunode/.style={draw, rounded corners=2pt, align=center, font=\scriptsize,
+ inner sep=2.5pt, minimum height=6.5mm, line width=0.5pt},
+ adcustage/.style={adcunode, fill=adcuBlue!12, draw=adcuBlue},
+ adcuclean/.style={adcunode, fill=adcuGreen!12, draw=adcuGreen},
+ adcupost/.style={adcunode, fill=adcuOrange!15, draw=adcuOrange},
+ adcudec/.style={adcunode, fill=adcuPurple!12, draw=adcuPurple},
+ adcuflow/.style={-{Stealth[length=4pt]}, line width=0.5pt, draw=adcuGray!90},
 }
 
 \newtheorem{proposition}{Proposition}
@@ -55,11 +56,11 @@
 \maketitle
 
 \begin{abstract}
-Deletion requests are easy to honor on paper and hard to verify in practice. In a modern foundation-model application a deleted record rarely lives in the model weights alone: it can persist through retrievers, vector indexes, synthetic summaries, adapters, caches, and generated traces, so a system can pass a weight-level unlearning test while still behaving as if nothing was removed. We argue that deletion should instead be verified as \emph{counterfactual behavioral indistinguishability}---a post-deletion system should behave like a clean reference system, $S_{\mathrm{clean}}$, rebuilt as if the record had never entered the pipeline---and we make this property testable. \method{} lifts $(\varepsilon,\delta)$ deletion from model-centric removal to compositional RAG and fine-tuned systems: it scores residual risk as a two-sample distance to $S_{\mathrm{clean}}$, allocates a black-box probe budget over provenance-linked target--channel arms under a declared probe-coverage assumption, and uses six diagnostic channels to localize where residual dependence is mediated. The companion benchmark, \bench{}, spans RAG deletion, fine-tuning-record unlearning, hybrid RAG-to-fine-tuning retention, dense retrieval, TOFU-style forget/retain evaluation, clean-counterfactual testing, and causal component interventions. Across 6{,}840 repeated audit rows, \method{} flags every configured RealRAG, NaturalFEVER, and HybridReal failure with zero false alarms at the declared operating point, and a 5{,}000-record scaling check shows the effect is not an artifact of tiny corpora; in contrast, exact-match, canary-only, retriever-only, membership-style, and extraction-only audits each miss entire residual-dependence channels.
+Deletion requests are easy to honor on paper and hard to verify in practice. In a modern foundation-model application a deleted record rarely lives in the model weights alone: it can persist through retrievers, vector indexes, summaries, adapters, caches, and generated traces, so a system can pass a weight-level unlearning test while still behaving as if nothing was removed. We argue that deletion should instead be verified as \emph{counterfactual behavioral indistinguishability}---a post-deletion system should behave like a clean reference system, $S_{\mathrm{clean}}$, rebuilt as if the record had never entered the pipeline---and we make this property testable. \method{} lifts $(\varepsilon,\delta)$ deletion from model-centric removal to compositional RAG and fine-tuned systems: it scores residual risk as a two-sample distance to $S_{\mathrm{clean}}$, allocates a black-box probe budget over provenance-linked target--channel arms under a declared probe-coverage assumption, and uses six diagnostic channels to localize where residual dependence is mediated. The companion benchmark, \bench{}, spans RAG deletion, fine-tuning-record unlearning, hybrid RAG-to-fine-tuning retention, dense retrieval, TOFU-style forget/retain evaluation, clean-counterfactual testing, and causal component interventions. Across 6{,}840 repeated audit rows, \method{} flags every configured RealRAG, NaturalFEVER, and HybridReal failure with zero false alarms at the declared operating point, and a 5{,}000-record scaling check shows the effect is not an artifact of tiny corpora; in contrast, exact-match, canary-only, retriever-only, membership-style, and extraction-only audits each miss entire residual-dependence channels.
 \end{abstract}
 
 \noindent\textbf{Impact Statement---}
-Foundation-model systems are increasingly used in settings where users, organizations, and regulators may require deletion of contributed data. Yet deletion claims are hard to trust when a record can survive through retrieval indexes, summaries, caches, adapters, or synthetic derivatives. This work advances trustworthy AI by turning deletion verification into a measurable behavioral audit for RAG and fine-tuned foundation models. The proposed metric, algorithm, benchmark, and attack suite help practitioners identify residual dependence, compare unlearning procedures, preserve retain utility, and document uncertainty through confidence-bounded decisions. The broader impact is a practical assurance layer for AI governance: rather than relying on informal claims that a model or pipeline has forgotten, operators can produce repeatable, redacted, and technically interpretable evidence about what was tested and where residual deletion risk remains.
+Foundation-model systems are increasingly used in settings where users, organizations, and regulators may require deletion of contributed data. Yet deletion claims are hard to trust when a record can survive through retrieval indexes, summaries, caches, adapters, or derivatives. This work advances trustworthy AI by turning deletion verification into a measurable behavioral audit for RAG and fine-tuned foundation models. The proposed metric, algorithm, benchmark, and attack suite help practitioners identify residual dependence, compare unlearning procedures, preserve retain utility, and document uncertainty through confidence-bounded decisions. The broader impact is a practical assurance layer for AI governance: rather than relying on informal claims that a model or pipeline has forgotten, operators can produce repeatable, redacted, and technically interpretable evidence about what was tested and where residual deletion risk remains.
 
 \begin{IEEEkeywords}
 Trustworthy artificial intelligence, machine unlearning, retrieval-augmented generation, foundation models, data provenance, behavioral auditing.
@@ -70,22 +71,29 @@ Trustworthy artificial intelligence, machine unlearning, retrieval-augmented gen
 
 \section{Introduction}
 
-A modern foundation-model application is no longer a single model queried in isolation: a deployed assistant or enterprise analyst tool stitches retrieval-augmented generation (RAG), dense and lexical indexes, rerankers, supervised fine-tuning and LoRA adapters, synthetic-data generation, and caches into one pipeline. RAG connects language models to external knowledge sources~\cite{lewis2020rag,karpukhin2020dpr,izacard2021fid,gao2024ragsurvey}, while instruction tuning and adapter-based specialization fold private or domain-specific records directly into model behavior. This improves utility but creates a core trustworthy-AI problem: after a deletion request, an operator can remove the original record while the deployed system keeps behaving as if it remained---through retrieved chunks, embeddings, summaries, synthetic question--answer pairs, cache entries, adapters, or evaluation traces.
+A modern foundation-model application is no longer a single model queried in isolation: a deployed assistant or enterprise analyst tool stitches retrieval-augmented generation (RAG), dense and lexical indexes, rerankers, supervised fine-tuning and LoRA adapters, -data generation, and caches into one pipeline. RAG connects language models to external knowledge sources~\cite{lewis2020rag,karpukhin2020dpr,izacard2021fid}, while instruction tuning and adapter-based specialization fold private or domain-specific records directly into model behavior. This improves utility but creates a core trustworthy-AI problem: after a deletion request, an operator can remove the original record while the deployed system keeps behaving as if it remained---through retrieved chunks, embeddings, summaries, question--answer pairs, cache entries, adapters, or evaluation traces.
 
-Privacy and governance regimes motivate data erasure and deletion accountability~\cite{voigt2017gdpr,cohen2022deletioncontrol,fan2025fedfmchallenges}, and machine unlearning provides the algorithmic foundation for making systems forget selected data~\cite{cao2015machineunlearning,ginart2019making,bourtoule2021machineunlearning,guo2020certified,maini2024tofu,yao2024largeunlearning,liu2024rethinking,wang2024llmunlearning,jin2024surveyunlearning}. But in modern LLM and RAG deployments the deletion problem is not confined to the parameter vector: a system can pass a model-centric unlearning test while still retrieving a stale chunk, citing a shadow copy, answering from a synthetic derivative, or paraphrasing a fact learned through an adapter. Extraction and membership-inference work shows that such dependence can be exposed through black-box interaction~\cite{carlini2019secretsharer,carlini2021extracting,carlini2023quantifying,shokri2017membership,yeom2018privacy,mattern2023membership}, and RAG evaluation studies retrieval quality and attribution~\cite{gao2023retrievalaugmented,asai2024selfrag,yu2024ragevalsurvey,akkiraju2024facts}; yet none directly answers the operator's audit question: after a deletion request, what measurable evidence shows that the deleted data and its downstream derivatives no longer influence retrieval, generation, or fine-tuned behavior?
+Privacy and governance regimes motivate data erasure and deletion accountability~\cite{voigt2017gdpr,fan2025fedfmchallenges}, and machine unlearning provides the algorithmic foundation for making systems forget selected data~\cite{cao2015machineunlearning,ginart2019making,bourtoule2021machineunlearning,guo2020certified,yao2024largeunlearning,liu2024rethinking,jin2024surveyunlearning}. But in modern LLM and RAG deployments the deletion problem is not confined to the parameter vector: a system can pass a model-centric unlearning test while still retrieving a stale chunk, citing a shadow copy, answering from a derivative, or paraphrasing a fact learned through an adapter. Extraction and membership-inference work shows that such dependence can be exposed through black-box interaction~\cite{carlini2019secretsharer,carlini2021extracting,carlini2023quantifying,shokri2017membership,yeom2018privacy,mattern2023membership}, and RAG evaluation studies retrieval quality and attribution~\cite{asai2024selfrag}; yet none directly answers the operator's audit question: after a deletion request, what measurable evidence shows that the deleted data and its downstream derivatives no longer influence retrieval, generation, or fine-tuned behavior?
 
-We argue that deletion verification should be treated as \emph{counterfactual behavioral indistinguishability}. The relevant question is not whether a chosen leakage string appears, but whether the post-deletion system behaves like a clean reference system $S_{\mathrm{clean}}$ rebuilt as if the deleted record had never entered any retriever, cache, synthetic-data generator, adapter, or evaluation trace. This avoids circularity: diagnostic channels can localize failures, but the gold standard is statistical distance from the clean counterfactual. A practical audit then needs three ingredients: provenance (which artifacts are downstream of the target), efficient adaptive testing over high-risk target--channel arms, and behavioral tests that compare $S_-$ with $S_{\mathrm{clean}}$ and explain whether the residual distance is retrieval-, parametric-, cache-, or derivative-mediated.
+We argue that deletion verification should be treated as \emph{counterfactual behavioral indistinguishability}. The relevant question is not whether a chosen leakage string appears, but whether the post-deletion system behaves like a clean reference system $S_{\mathrm{clean}}$ rebuilt as if the deleted record had never entered any retriever, cache, -data generator, adapter, or evaluation trace. This avoids circularity: diagnostic channels can localize failures, but the gold standard is statistical distance from the clean counterfactual. A practical audit then needs three ingredients: provenance (which artifacts are downstream of the target), efficient adaptive testing over high-risk target--channel arms, and behavioral tests that compare $S_-$ with $S_{\mathrm{clean}}$ and explain whether the residual distance is retrieval-, parametric-, cache-, or derivative-mediated.
 
 This article proposes \method{} (\emph{Auditable Data-Centric Unlearning}), a framework for deletion-risk auditing in RAG and fine-tuned foundation-model systems. \method{} represents deletion targets and their downstream artifacts in a provenance graph; defines an $(\varepsilon,\delta)$ behavioral-deletion guarantee as bounded distance between $S_-$ and $S_{\mathrm{clean}}$ over an adversary-aware probe class; allocates probes through a graph-structured sequential test; and uses direct, paraphrase, retrieval, counterfactual, extraction, trigger, and graph-pivot probes as diagnostic localizers rather than as the failure definition. Instead of a binary claim of perfect forgetting, it returns a confidence-bounded pass, fail, or escalate decision under an operator-chosen tolerance. The goal is not to replace unlearning algorithms, certified removal, differential privacy, or legal review~\cite{dwork2006dp,guo2020certified,kirchenbauer2023watermark}, but to provide measurable technical evidence about residual behavioral dependence in the pipeline surrounding those mechanisms.
 
-We instantiate the framework in \bench{}, spanning four settings: \emph{RealRAG} (public FEVER retain corpus with injected synthetic private targets), \emph{NaturalFEVER} (public FEVER passages as deletion units with redacted outputs), \emph{FineTuneSim} (a controlled adapter-memory simulator), and \emph{HybridReal} (RAG records plus derivatives that survive through summaries, caches, synthetic examples, or model-side behavior). We further add LoRA-SFT and cached PEFT/LoRA validations, pretrained LoRA margin analysis, TOFU-style forget/retain evaluation, neural dense retrieval (MiniLM/E5/BGE), clean-counterfactual two-sample tests, and component interventions for causal mediation. Across the repeated harness, \method{} detects configured deletion failures in RealRAG, NaturalFEVER, and HybridReal with zero configured false alarms; in FineTuneSim it detects 72.2\% of all configured failures, or 96.3\% of residual adapter-memory failures once utility-only over-unlearning cases are separated as escalations. The results do not prove legal compliance or absolute absence of influence; they show that deletion audits become substantially more informative when they are clean-counterfactual, provenance-aware, graph-adaptive, and multi-channel.
+We instantiate the framework in \bench{}, spanning four core evaluation tracks:
+\begin{itemize}
+\item \emph{RealRAG}~\cite{thorne2018fever}: Tests RAG deletion by loading the FEVER dataset as a public retain corpus, injecting private targets, and evaluating whether provenance-guided purges succeed while index-only or cache-forgetful deletions fail.
+\item \emph{NaturalFEVER}~\cite{thorne2018fever}: Audits natural data deletion by treating public FEVER passages themselves as deletion units and testing whether raw evidence, citation caches, or answer-only paraphrases still influence responses after removal.
+\item \emph{FineTuneSim}: A controlled adapter-memory track that models residual parameter-side memory, testing unlearning methods like gradient-ascent and negative fine-tuning against over-unlearning and replacement failures.
+\item \emph{HybridReal}: A hybrid track that stresses both retrieval and fine-tuning pipelines by combining RAG retention with derivatives that survive through summaries, cache artifacts, graph-pivot expansion, or model-side instruction examples.
+\end{itemize}
+We further add LoRA-SFT~\cite{hu2021lora} and cached PEFT/LoRA validations, pretrained LoRA margin analysis, TOFU-style forget/retain evaluation~, neural dense retrieval (MiniLM/E5/BGE), clean-counterfactual two-sample tests, and component interventions for causal mediation. Across the repeated harness, \method{} detects configured deletion failures in RealRAG, NaturalFEVER, and HybridReal with zero configured false alarms; in FineTuneSim it detects 72.2\% of all configured failures, or 96.3\% of residual adapter-memory failures once utility-only over-unlearning cases are separated as escalations. The results do not prove legal compliance or absolute absence of influence; they show that deletion audits become substantially more informative when they are clean-counterfactual, provenance-aware, graph-adaptive, and multi-channel.
 
 This article makes the following contributions:
 \begin{itemize}
 \item We formulate deletion verification for RAG and fine-tuned foundation-model systems as $(\varepsilon,\delta)$ counterfactual behavioral indistinguishability from a clean reference pipeline.
 \item We define deletion risk as clean-counterfactual behavioral distance and use direct, paraphrase, retrieval, extraction, and watermark evidence as diagnostic localizers rather than circular ground truth.
 \item We present a graph-structured adaptive audit algorithm with confidence bounds over provenance-linked target--channel arms, plus causal intervention diagnostics that decompose residual risk into retrieval-, cache-, derivative-, and parametric-mediated components.
-\item We introduce \bench{}, a reusable benchmark spanning synthetic private deletion, natural public-evidence deletion, RAG retention, fine-tuning residues, hybrid derivative retention, dense retrieval, pretrained LoRA, and TOFU-style forget/retain evaluation, with an attack and baseline suite showing where exact-match, canary-only, retriever-only, membership-inference, extraction-only, and influence-proxy audits fail.
+\item We introduce \bench{}, a reusable benchmark with four core evaluation tracks (\emph{RealRAG}~\cite{thorne2018fever}, \emph{NaturalFEVER}~\cite{thorne2018fever}, \emph{FineTuneSim}, \emph{HybridReal}) spanning private deletion, natural public-evidence deletion, RAG retention, fine-tuning residues, hybrid derivative retention, dense retrieval, LoRA-SFT~\cite{hu2021lora} and PEFT/LoRA validations, pretrained LoRA margin analysis, and TOFU-style forget/retain evaluation~, with an attack and baseline suite showing where exact-match, canary-only, retriever-only, membership-inference, extraction-only, and influence-proxy audits fail.
 \end{itemize}
 
 \noindent Section~2 reviews related work; Section~3 defines the audit problem and threat model; Sections~4--5 present the deletion-risk metric and audit algorithm; Section~6 describes \bench{}; Section~7 reports experiments; Sections~8--9 discuss limitations and reproducibility; Section~10 concludes.
@@ -98,29 +106,29 @@ This article makes the following contributions:
 Trustworthy AI evaluation increasingly requires evidence about deployed behavior rather than only benchmark accuracy, and foundation-model deletion is a hard audit target because residual dependence can appear through retrieval, adaptation, memory, or generated derivatives. Recent challenge work on federated foundation models lists private-data utilization, continual learning, unlearning, and watermarking among the major open problems~\cite{fan2025fedfmchallenges}. \method{} contributes to this agenda by making deletion claims testable through declared probes, confidence bounds, and artifact-level provenance; unlike explainability or attribution work, it asks whether a specific deleted source still contributes to post-deletion behavior, not merely which context was salient for one answer.
 
 \textbf{Machine unlearning.}
-Machine unlearning removes the effect of selected training data after deployment~\cite{cao2015machineunlearning,bourtoule2021machineunlearning,ginart2019making}, and foundation-model unlearning extends this to large pretrained and adapted models where exact retraining is infeasible~\cite{yao2024largeunlearning,maini2024tofu,liu2024rethinking,wang2024llmunlearning}. Benchmarks such as TOFU, MUSE, RWKU, and WMDP evaluate fictitious-biography unlearning, six-way unlearning properties, real-world knowledge removal, and hazardous-knowledge reduction~\cite{maini2024tofu,shi2024muse,jin2024rwku,li2024wmdp}, and surveys emphasize evaluating both forgetting and retained utility~\cite{jin2024surveyunlearning}. We differ by focusing on auditability across the data pipeline rather than proposing a new weight-update rule: \method{} can wrap a TOFU-, MUSE-, RWKU-, or WMDP-style run and ask whether downstream artifacts, caches, derivatives, or adapters remain behaviorally distinguishable from a clean reference pipeline.
+Machine unlearning removes the effect of selected training data after deployment~\cite{cao2015machineunlearning,bourtoule2021machineunlearning,ginart2019making}, and foundation-model unlearning extends this to large pretrained and adapted models where exact retraining is infeasible~\cite{yao2024largeunlearning,liu2024rethinking}. Benchmarks such as TOFU, MUSE, RWKU, and WMDP evaluate fictitious-biography unlearning, six-way unlearning properties, real-world knowledge removal, and hazardous-knowledge reduction~, and surveys emphasize evaluating both forgetting and retained utility~\cite{jin2024surveyunlearning}. We differ by focusing on auditability across the data pipeline rather than proposing a new weight-update rule: \method{} can wrap a TOFU-, MUSE-, RWKU-, or WMDP-style run and ask whether downstream artifacts, caches, derivatives, or adapters remain behaviorally distinguishable from a clean reference pipeline.
 
 \textbf{Retrieval-augmented generation and provenance.}
-RAG conditions generation on retrieved documents~\cite{lewis2020rag,karpukhin2020dpr,izacard2021fid,gao2024ragsurvey}, which improves grounding but introduces deletion risk: removing a source from one index need not remove derived chunks, summaries, cached contexts, or fine-tuning examples, and multi-stage pipelines can have a clean first-stage index while a reranker, cache, or synthetic derivative reintroduces a deleted fact. Work on attribution, context usage, source tracing, and RAG evaluation~\cite{gao2023retrievalaugmented,asai2024selfrag,yu2024ragevalsurvey,akkiraju2024facts} treats retrieval quality as the object of study; \method{} instead treats these artifacts as first-class audit objects and adds deletion risk as an orthogonal axis, motivating the DenseRAG extension over lexical, dense SVD, neural, and cross-encoder reranking under one audit interface.
+RAG conditions generation on retrieved documents~\cite{lewis2020rag,karpukhin2020dpr,izacard2021fid}, which improves grounding but introduces deletion risk: removing a source from one index need not remove derived chunks, summaries, cached contexts, or fine-tuning examples, and multi-stage pipelines can have a clean first-stage index while a reranker, cache, or derivative reintroduces a deleted fact. Work on attribution, context usage, source tracing, and RAG evaluation~\cite{asai2024selfrag} treats retrieval quality as the object of study; \method{} instead treats these artifacts as first-class audit objects and adds deletion risk as an orthogonal axis, motivating the DenseRAG extension over lexical, dense SVD, neural, and cross-encoder reranking under one audit interface.
 
 \textbf{Data valuation and influence.}
 Data-valuation methods estimate how much individual records contribute to utility~\cite{ghorbani2019datashapley,jia2019data,kwon2021betashapley,wang2023databanzhaf}, and influence functions estimate the effect of training examples on predictions~\cite{koh2017influence,pruthi2020tracin,feldman2020memorization,ilyas2022datamodels}. \method{} uses this line differently: valuation prioritizes audit effort after a deletion request rather than scoring training contributions.
 
 \textbf{Extraction, membership, canaries, and watermarking.}
-Language models can expose training data through extraction~\cite{carlini2021extracting,carlini2019secretsharer,carlini2023quantifying}, membership inference~\cite{shokri2017membership,yeom2018privacy,mattern2023membership}, and canary or watermark signals~\cite{kirchenbauer2023watermark,zhao2023watermarksurvey}. These black-box channels reveal data dependence even when accuracy looks acceptable, but each is incomplete: canary-only checks fail once the marker is suppressed, membership tests miss retrieval-only leakage, and extraction prompts miss ordinary paraphrased dependence. Our benchmark therefore includes membership-inference, extraction, retriever-only, and influence-proxy baselines beside full \method{}, and incorporates triggered-leakage, graph-pivot, retrieval-dependence, and watermark evidence rather than relying on any single axis.
+Language models can expose training data through extraction~\cite{carlini2021extracting,carlini2019secretsharer,carlini2023quantifying}, membership inference~\cite{shokri2017membership,yeom2018privacy,mattern2023membership}, and canary or watermark signals~\cite{kirchenbauer2023watermark}. These black-box channels reveal data dependence even when accuracy looks acceptable, but each is incomplete: canary-only checks fail once the marker is suppressed, membership tests miss retrieval-only leakage, and extraction prompts miss ordinary paraphrased dependence. Our benchmark therefore includes membership-inference, extraction, retriever-only, and influence-proxy baselines beside full \method{}, and incorporates triggered-leakage, graph-pivot, retrieval-dependence, and watermark evidence rather than relying on any single axis.
 
 \textbf{Privacy, compliance, and memory governance.}
-Deletion auditing is motivated by data-erasure rights, but technical audits should not overclaim legal compliance; prior work on differential privacy, certified removal, and deletion-as-control provides context~\cite{dwork2006dp,voigt2017gdpr,guo2020certified,cohen2022deletioncontrol}. \method{} contributes measurable evidence that coexists with such mechanisms: when certified removal or DP continual release is available, it monitors pipeline drift and derivative artifacts outside the formal core. Finally, adaptive-retrieval gating~\cite{wang2024ragate} motivates two diagnostics in \bench{}: an answer-only black-box audit for deployments that hide retrieval metadata, and a retrieval-off counterfactual audit that tests whether disabling retrieval changes the residual-dependence score.
+Deletion auditing is motivated by data-erasure rights, but technical audits should not overclaim legal compliance; prior work on differential privacy, certified removal, and deletion-as-control provides context~\cite{dwork2006dp,voigt2017gdpr,guo2020certified}. \method{} contributes measurable evidence that coexists with such mechanisms: when certified removal or DP continual release is available, it monitors pipeline drift and derivative artifacts outside the formal core. Finally, adaptive-retrieval gating~ motivates two diagnostics in \bench{}: an answer-only black-box audit for deployments that hide retrieval metadata, and a retrieval-off counterfactual audit that tests whether disabling retrieval changes the residual-dependence score.
 
 % ===== 03_problem.tex =====
 
 \section{Problem Formulation}
 
-Let $S_0$ be the pre-deletion system and $S_-$ be the post-deletion system. A system may include a base model, retriever, vector index, reranker, prompt template, adapter, cache, and operational logs. A deletion request targets a set of data units $D_{\mathrm{del}}=\{z_1,\ldots,z_k\}$. Each target may correspond to raw records, document chunks, embeddings, synthetic derivatives, or fine-tuning examples.
+Let $S_0$ be the pre-deletion system and $S_-$ be the post-deletion system. A system may include a base model, retriever, vector index, reranker, prompt template, adapter, cache, and operational logs. A deletion request targets a set of data units $D_{\mathrm{del}}=\{z_1,\ldots,z_k\}$. Each target may correspond to raw records, document chunks, embeddings, derivatives, or fine-tuning examples.
 
-The counterfactual gold standard is a clean reference system $S_{\mathrm{clean}}(D_{\mathrm{del}})$ built as if the deletion targets had never entered any pipeline component: no raw record, chunk, embedding, cache item, synthetic derivative, adapter update, evaluation trace, or summary is produced from $D_{\mathrm{del}}$. Exact construction of $S_{\mathrm{clean}}$ may require retraining, rebuilding indexes, regenerating synthetic data, and purging caches. When that construction is infeasible, it remains the formal oracle that defines deletion success; practical audits estimate distance to this oracle.
+The counterfactual gold standard is a clean reference system $S_{\mathrm{clean}}(D_{\mathrm{del}})$ built as if the deletion targets had never entered any pipeline component: no raw record, chunk, embedding, cache item, derivative, adapter update, evaluation trace, or summary is produced from $D_{\mathrm{del}}$. Exact construction of $S_{\mathrm{clean}}$ may require retraining, rebuilding indexes, regenerating data, and purging caches. When that construction is infeasible, it remains the formal oracle that defines deletion success; practical audits estimate distance to this oracle.
 
-We model data dependence with a provenance graph $G=(V,E)$. Nodes include deletion targets and downstream artifacts. An edge $(u,v)$ means artifact $v$ was produced from or influenced by $u$. Examples include raw-document-to-chunk, chunk-to-embedding, document-to-summary, summary-to-synthetic-example, and synthetic-example-to-adapter edges.
+We model data dependence with a provenance graph $G=(V,E)$. Nodes include deletion targets and downstream artifacts. An edge $(u,v)$ means artifact $v$ was produced from or influenced by $u$. Examples include raw-document-to-chunk, chunk-to-embedding, document-to-summary, summary-to--example, and -example-to-adapter edges.
 
 \textbf{Behavioral-deletion guarantee.}
 Let $\mathcal{Q}(D_{\mathrm{del}},G)$ be a probe class and let $O_S(q)$ denote the observable behavior of system $S$ on probe $q$, including generated answer, retrieved context identifiers, citations, and available metadata. For a bounded discrepancy $d(\cdot,\cdot)\in[0,1]$, define
@@ -134,14 +142,14 @@ We say $S_-$ satisfies $(\varepsilon,\delta)$ behavioral deletion for $D_{\mathr
 \[
 \Delta_{\mathcal{Q}}(S_-,S_{\mathrm{clean}})\leq \varepsilon.
 \]
-This definition lifts counterfactual indistinguishability from model-centric unlearning to compositional AI pipelines: a post-deletion system must behave like the system that would have existed had the record never affected retrieval, caches, synthetic derivatives, or adapters.
+This definition lifts counterfactual indistinguishability from model-centric unlearning to compositional AI pipelines: a post-deletion system must behave like the system that would have existed had the record never affected retrieval, caches, derivatives, or adapters.
 
 The audit problem is to test whether $S_-$ is behaviorally indistinguishable from $S_{\mathrm{clean}}$ while preserving utility on a retain distribution $Q_{\mathrm{ret}}$. We do not require the auditor to inspect model weights. Instead, the auditor can submit black-box probes and observe generated answers, retrieved contexts, citations, and available metadata. The six evidence channels used later are estimators and diagnostics for this counterfactual distance; they are not the definition of deletion failure.
 
 An audit returns one of three decisions. \emph{Pass} means the floor-normalized excess counterfactual risk is below the declared operating tolerance and retain utility is acceptable. \emph{Fail} means the post-deletion system is distinguishable from the clean counterfactual or a diagnostic channel localizes a violation. \emph{Escalate} means the evidence is inconclusive, the clean reference is unavailable, or retain utility has collapsed.
 
 \textbf{Threat model.}
-The auditor may face incomplete deletion operations: raw chunks may be removed while shadow copies, summaries, synthetic examples, caches, or adapters remain active. The baseline attacker class is black-box or gray-box: the auditor queries the post-deletion application and, in gray-box RAG settings, inspects retrieved context identifiers and citations, but does not assume access to model weights or training gradients. A white-box self-influence adversary with access to gradients, adapter weights, or internal memorization scores is outside the guarantee boundary by assumption; such tools can be added as privileged evidence. We do not claim that black-box auditing proves absolute absence of influence under all prompts; the objective is bounded evidence of counterfactual behavioral indistinguishability over a declared, adversary-aware probe class.
+The auditor may face incomplete deletion operations: raw chunks may be removed while shadow copies, summaries, examples, caches, or adapters remain active. The baseline attacker class is black-box or gray-box: the auditor queries the post-deletion application and, in gray-box RAG settings, inspects retrieved context identifiers and citations, but does not assume access to model weights or training gradients. A white-box self-influence adversary with access to gradients, adapter weights, or internal memorization scores is outside the guarantee boundary by assumption; such tools can be added as privileged evidence. We do not claim that black-box auditing proves absolute absence of influence under all prompts; the objective is bounded evidence of counterfactual behavioral indistinguishability over a declared, adversary-aware probe class.
 
 % ===== 04_metric.tex =====
 
@@ -172,14 +180,14 @@ where $e_d$ measures direct leakage, $e_p$ paraphrased leakage, $e_r$ retrieval 
 \centering
 \resizebox{\columnwidth}{!}{%
 \begin{tikzpicture}[node distance=2mm and 3mm, every node/.style={font=\scriptsize, align=center}]
-  \node[adcunode, fill=adcuRed!18, draw=adcuRed]                       (d) {$e_d$\\direct};
-  \node[adcunode, fill=adcuRed!12, draw=adcuRed, right=of d]           (p) {$e_p$\\paraphrase};
-  \node[adcunode, fill=adcuOrange!18, draw=adcuOrange, right=of p]     (r) {$e_r$\\retrieval};
-  \node[adcunode, fill=adcuPurple!12, draw=adcuPurple, right=of r]     (c) {$e_c$\\counter-\\factual};
-  \node[adcunode, fill=adcuBlue!12, draw=adcuBlue, right=of c]         (x) {$e_x$\\extraction};
-  \node[adcunode, fill=adcuGray!18, draw=adcuGray, right=of x]         (w) {$e_w$\\watermark};
-  \node[adcuclean, below=5mm of c.south, text width=48mm]              (risk) {evidence vector $e(S_-,q,z) \to$ channel score $\hat R$ (localizers; the failure definition is the $S_-$-vs-$S_{\mathrm{clean}}$ distance)};
-  \foreach \n in {d,p,r,c,x,w} \draw[adcuflow, line width=0.4pt] (\n)--(risk);
+ \node[adcunode, fill=adcuRed!18, draw=adcuRed] (d) {$e_d$\\direct};
+ \node[adcunode, fill=adcuRed!12, draw=adcuRed, right=of d] (p) {$e_p$\\paraphrase};
+ \node[adcunode, fill=adcuOrange!18, draw=adcuOrange, right=of p] (r) {$e_r$\\retrieval};
+ \node[adcunode, fill=adcuPurple!12, draw=adcuPurple, right=of r] (c) {$e_c$\\counter-\\factual};
+ \node[adcunode, fill=adcuBlue!12, draw=adcuBlue, right=of c] (x) {$e_x$\\extraction};
+ \node[adcunode, fill=adcuGray!18, draw=adcuGray, right=of x] (w) {$e_w$\\watermark};
+ \node[adcuclean, below=5mm of c.south, text width=48mm] (risk) {evidence vector $e(S_-,q,z) \to$ channel score $\hat R$ (localizers; the failure definition is the $S_-$-vs-$S_{\mathrm{clean}}$ distance)};
+ \foreach \n in {d,p,r,c,x,w} \draw[adcuflow, line width=0.4pt] (\n)--(risk);
 \end{tikzpicture}}
 \caption{The six diagnostic evidence channels. Each fires under a different failure mode---direct/paraphrase under model-side leakage, retrieval under stale or shadow-copy artifacts, counterfactual under any $S_-$-vs-$S_{\mathrm{clean}}$ divergence, extraction under adversarial probes, watermark under canary or provenance-token hits---and together they localize residual dependence without themselves defining deletion failure.}
 \label{fig:channels}
@@ -258,19 +266,19 @@ The implementation records any high-scoring diagnostic probe as a localized viol
 \STATE Generate direct, paraphrase, retrieval, extraction, trigger, and graph-pivot probes
 \STATE Initialize each target with a minimum clean-vs-post-deletion probe budget
 \WHILE{audit budget remains and some arm has UCB above tolerance}
-  \STATE Select arm $a_t$ with largest graph-adjusted upper-confidence score
-  \STATE Query $S_-$ and $S_{\mathrm{clean}}$ on the selected probe
-  \STATE Update counterfactual distance and diagnostic evidence channels
-  \STATE Propagate conservative effective samples to provenance-neighbor arms
+ \STATE Select arm $a_t$ with largest graph-adjusted upper-confidence score
+ \STATE Query $S_-$ and $S_{\mathrm{clean}}$ on the selected probe
+ \STATE Update counterfactual distance and diagnostic evidence channels
+ \STATE Propagate conservative effective samples to provenance-neighbor arms
 \ENDWHILE
 \STATE Estimate retain utility on $Q_{\mathrm{ret}}$
 \STATE Run component interventions: retrieval off, cache purged, adapter swapped, derivative store purged
 \IF{counterfactual UCB $>\varepsilon$ or a localized violation is observed}
-  \STATE \textbf{return} fail with causal component attribution
+ \STATE \textbf{return} fail with causal component attribution
 \ELSIF{counterfactual UCB $\leq\varepsilon$ and retain utility is acceptable}
-  \STATE \textbf{return} pass
+ \STATE \textbf{return} pass
 \ELSE
-  \STATE \textbf{return} escalate
+ \STATE \textbf{return} escalate
 \ENDIF
 \end{algorithmic}
 \end{algorithm}
@@ -278,7 +286,7 @@ The implementation records any high-scoring diagnostic probe as a localized viol
 The audit is intentionally black-box or gray-box: it can be applied when the operator has access to system responses and retrieval metadata but not necessarily to training gradients or model weights. The key distinction from the earlier channel-only view is that \method{} compares $S_-$ against $S_{\mathrm{clean}}$. Channel scores explain \emph{why} the systems differ; counterfactual distance defines \emph{whether} deletion succeeds.
 
 \textbf{Graph-structured pure exploration.}
-Each audit arm is a target--channel pair, such as $(z,\mathrm{retrieval})$, $(z,\mathrm{paraphrase})$, or $(z,\mathrm{adapter})$. The provenance graph induces correlations among arms: a probe that retrieves a deleted summary may inform cache, synthetic-QA, and adapter arms derived from that summary. \method{} uses this graph in two modes. In the certified mode of Proposition~2, neighbor observations are shared only when the scorer contract supplies bounded pseudo-observations for the same arm mean. Otherwise, the graph is an allocation heuristic: arms with many high-risk derivatives receive more probes, but the formal pass certificate is computed from direct clean-counterfactual samples. This reframes valuation-guided auditing as graph-structured sequential testing rather than a softmax heuristic while avoiding an unjustified UCB claim.
+Each audit arm is a target--channel pair, such as $(z,\mathrm{retrieval})$, $(z,\mathrm{paraphrase})$, or $(z,\mathrm{adapter})$. The provenance graph induces correlations among arms: a probe that retrieves a deleted summary may inform cache, -QA, and adapter arms derived from that summary. \method{} uses this graph in two modes. In the certified mode of Proposition~2, neighbor observations are shared only when the scorer contract supplies bounded pseudo-observations for the same arm mean. Otherwise, the graph is an allocation heuristic: arms with many high-risk derivatives receive more probes, but the formal pass certificate is computed from direct clean-counterfactual samples. This reframes valuation-guided auditing as graph-structured sequential testing rather than a softmax heuristic while avoiding an unjustified UCB claim.
 
 \textbf{Informal composition theorem.}
 Let $S^-$ be the post-deletion pipeline, $S_{\mathrm{clean}}$ the clean reference, and $S^\diamond$ the provenance-closed version of $S^-$ obtained by additionally removing every derivative of the deleted record. If the parametric component is within $\varepsilon_\theta$ of its clean counterfactual, the retrieval/knowledge component is within $\varepsilon_K$, and generation is $L$-Lipschitz with respect to retrieval discrepancy, then the behavioral residual influence over probe class $\mathcal{B}$ obeys
@@ -289,23 +297,23 @@ Let $S^-$ be the post-deletion pipeline, $S_{\mathrm{clean}}$ the clean referenc
 \quad
 \gamma_z=\sup_{q\in\mathcal{B}}\mathrm{TV}(P_{S^-},P_{S^\diamond}).
 \]
-The derivative-coupling term $\gamma_z$ (Fig.~\ref{fig:composition}) is zero exactly when deletion is provenance-closed: every chunk, embedding, summary, cache entry, synthetic example, and adapter-training derivative of the record has been removed or rendered behaviorally inert. Thus component-level unlearning guarantees compose only after lineage closure; otherwise orphan derivatives can dominate residual behavior. Appendix~A gives the full theorem, multi-stage extension, and necessity proof.
+The derivative-coupling term $\gamma_z$ (Fig.~\ref{fig:composition}) is zero exactly when deletion is provenance-closed: every chunk, embedding, summary, cache entry, example, and adapter-training derivative of the record has been removed or rendered behaviorally inert. Thus component-level unlearning guarantees compose only after lineage closure; otherwise orphan derivatives can dominate residual behavior. Appendix~A gives the full theorem, multi-stage extension, and necessity proof.
 
 \begin{figure}[t]
 \centering
 \resizebox{\columnwidth}{!}{%
 \begin{tikzpicture}[node distance=4mm and 6mm, every node/.style={font=\scriptsize, align=center}]
-  \node[adcunode, fill=adcuBlue!10, draw=adcuBlue, text width=20mm]                              (theta) {Parametric\\error $\varepsilon_\theta$};
-  \node[adcunode, fill=adcuGreen!10, draw=adcuGreen, text width=20mm, right=of theta]            (K)     {Knowledge\\error $\varepsilon_K$};
-  \node[adcunode, fill=adcuOrange!12, draw=adcuOrange, text width=20mm, right=of K]              (gen)   {Generation\\Lipschitz $L$};
-  \node[adcudec, below=5mm of K, text width=58mm]                                                (bound) {Composed bound:\\ $\rho_{\mathcal{B}}(S^-) \le \varepsilon_\theta + L\,\varepsilon_K + \gamma_z$};
-  \node[adcunode, fill=adcuRed!15, draw=adcuRed, text width=22mm, right=7mm of bound]            (gz)    {derivative coupling $\gamma_z$\\(orphan derivatives, non-additive)};
-  \draw[adcuflow] (theta)--(K);
-  \draw[adcuflow] (K)--(gen);
-  \draw[adcuflow] (theta) to[bend right=12] (bound);
-  \draw[adcuflow] (K) to[bend right=6] (bound);
-  \draw[adcuflow] (gen) to[bend left=12] (bound);
-  \draw[adcuflow, dashed] (gz) -- (bound);
+ \node[adcunode, fill=adcuBlue!10, draw=adcuBlue, text width=20mm] (theta) {Parametric\\error $\varepsilon_\theta$};
+ \node[adcunode, fill=adcuGreen!10, draw=adcuGreen, text width=20mm, right=of theta] (K) {Knowledge\\error $\varepsilon_K$};
+ \node[adcunode, fill=adcuOrange!12, draw=adcuOrange, text width=20mm, right=of K] (gen) {Generation\\Lipschitz $L$};
+ \node[adcudec, below=5mm of K, text width=58mm] (bound) {Composed bound:\\ $\rho_{\mathcal{B}}(S^-) \le \varepsilon_\theta + L\,\varepsilon_K + \gamma_z$};
+ \node[adcunode, fill=adcuRed!15, draw=adcuRed, text width=22mm, right=7mm of bound] (gz) {derivative coupling $\gamma_z$\\(orphan derivatives, non-additive)};
+ \draw[adcuflow] (theta)--(K);
+ \draw[adcuflow] (K)--(gen);
+ \draw[adcuflow] (theta) to[bend right=12] (bound);
+ \draw[adcuflow] (K) to[bend right=6] (bound);
+ \draw[adcuflow] (gen) to[bend left=12] (bound);
+ \draw[adcuflow, dashed] (gz) -- (bound);
 \end{tikzpicture}}
 \caption{Pipeline-deletion composition (Appendix~A). Per-component deletion errors compose additively---$\varepsilon_\theta$ on parameters, $\varepsilon_K$ on knowledge amplified by the generation Lipschitz factor $L$---plus a non-additive derivative-coupling term $\gamma_z$ that is zero \emph{iff} every derivative of the deleted record has also been removed; otherwise orphan derivatives dominate.}
 \label{fig:composition}
@@ -319,7 +327,7 @@ R_{\mathrm{cf}}(S_-,S_{\mathrm{clean}})
 -
 R_{\mathrm{cf}}(S^{\mathrm{do}(M=0)},S_{\mathrm{clean}}).
 \]
-Under standard intervention assumptions--component toggles do not introduce new leakage, retain behavior outside the intervened path is stable, and probes are held fixed--$\mathrm{Med}(M)$ identifies how much distinguishability is mediated by that component. This turns retrieval-off ablations into a causal diagnostic: the audit can say whether deleted information survives primarily through retrieval artifacts, parametric adapter memory, caches, or synthetic derivatives.
+Under standard intervention assumptions--component toggles do not introduce new leakage, retain behavior outside the intervened path is stable, and probes are held fixed--$\mathrm{Med}(M)$ identifies how much distinguishability is mediated by that component. This turns retrieval-off ablations into a causal diagnostic: the audit can say whether deleted information survives primarily through retrieval artifacts, parametric adapter memory, caches, or derivatives.
 
 \textbf{Adaptive adversarial probes.}
 Templated probes are reproducible but incomplete. \method{} therefore treats learned red-team probes as an optional budgeted arm: a generator proposes paraphrases within a declared semantic radius or $k$-hop graph pivots that maximize current evidence. The audit records whether learned probes discover violations missed by direct, paraphrase, retrieval, and extraction templates. This makes probe coverage an empirical object tied to the adversary class in Proposition~3 rather than an informal assumption.
@@ -328,22 +336,22 @@ Templated probes are reproducible but incomplete. \method{} therefore treats lea
 \centering
 \resizebox{\columnwidth}{!}{%
 \begin{tikzpicture}[node distance=4mm and 5mm, every node/.style={font=\scriptsize}]
-  \node[adcustage] (req) {Deletion request $D_{\mathrm{del}}$};
-  \node[adcustage, below=of req] (prov) {Provenance graph $G$\\record $+$ derivatives};
-  \node[adcuclean, below left=8mm and -2mm of prov, text width=24mm] (clean) {Clean reference\\$S_{\mathrm{clean}}$ (rebuilt w/o $z$)};
-  \node[adcupost,  below right=8mm and -2mm of prov, text width=24mm] (post)  {Post-deletion\\system $S_-$};
-  \node[adcustage, below=20mm of prov, text width=44mm] (test) {Two-sample distance $\hat R_{\mathrm{cf}}(S_-,S_{\mathrm{clean}})$\\over graph-adaptive probe budget};
-  \node[adcunode, right=5mm of test, fill=adcuGray!12, draw=adcuGray, text width=17mm] (chan) {6 diagnostic channels (localize)};
-  \node[adcustage, below=of test, text width=50mm] (interv) {Component interventions: retrieval $\mid$ cache $\mid$ adapter $\mid$ derivative};
-  \node[adcudec,  below=of interv, text width=50mm] (dec) {Decision: \textcolor{adcuGreen}{\textbf{pass}} $\mid$ \textcolor{adcuRed}{\textbf{fail}} $\mid$ \textcolor{adcuOrange}{\textbf{escalate}} (with retain-utility check)};
-  \draw[adcuflow] (req)--(prov);
-  \draw[adcuflow] (prov)--(clean);
-  \draw[adcuflow] (prov)--(post);
-  \draw[adcuflow] (clean)--(test);
-  \draw[adcuflow] (post)--(test);
-  \draw[adcuflow] (test)--(interv);
-  \draw[adcuflow] (interv)--(dec);
-  \draw[{Stealth[length=3pt]}-{Stealth[length=3pt]}, draw=adcuGray, dashed, line width=0.4pt] (test)--(chan);
+ \node[adcustage] (req) {Deletion request $D_{\mathrm{del}}$};
+ \node[adcustage, below=of req] (prov) {Provenance graph $G$\\record $+$ derivatives};
+ \node[adcuclean, below left=8mm and -2mm of prov, text width=24mm] (clean) {Clean reference\\$S_{\mathrm{clean}}$ (rebuilt w/o $z$)};
+ \node[adcupost, below right=8mm and -2mm of prov, text width=24mm] (post) {Post-deletion\\system $S_-$};
+ \node[adcustage, below=20mm of prov, text width=44mm] (test) {Two-sample distance $\hat R_{\mathrm{cf}}(S_-,S_{\mathrm{clean}})$\\over graph-adaptive probe budget};
+ \node[adcunode, right=5mm of test, fill=adcuGray!12, draw=adcuGray, text width=17mm] (chan) {6 diagnostic channels (localize)};
+ \node[adcustage, below=of test, text width=50mm] (interv) {Component interventions: retrieval $\mid$ cache $\mid$ adapter $\mid$ derivative};
+ \node[adcudec, below=of interv, text width=50mm] (dec) {Decision: \textcolor{adcuGreen}{\textbf{pass}} $\mid$ \textcolor{adcuRed}{\textbf{fail}} $\mid$ \textcolor{adcuOrange}{\textbf{escalate}} (with retain-utility check)};
+ \draw[adcuflow] (req)--(prov);
+ \draw[adcuflow] (prov)--(clean);
+ \draw[adcuflow] (prov)--(post);
+ \draw[adcuflow] (clean)--(test);
+ \draw[adcuflow] (post)--(test);
+ \draw[adcuflow] (test)--(interv);
+ \draw[adcuflow] (interv)--(dec);
+ \draw[{Stealth[length=3pt]}-{Stealth[length=3pt]}, draw=adcuGray, dashed, line width=0.4pt] (test)--(chan);
 \end{tikzpicture}}
 \caption{\method{} audit pipeline. A deletion request is expanded through the provenance graph; the post-deletion system $S_-$ is compared against the clean reference $S_{\mathrm{clean}}$ via a two-sample distance over a graph-adaptive probe budget, six diagnostic channels localize where any residual dependence is mediated, component interventions attribute it causally, and the audit returns a confidence-bounded decision with a retain-utility check.}
 \label{fig:adcu_pipeline}
@@ -353,7 +361,7 @@ Templated probes are reproducible but incomplete. \method{} therefore treats lea
 
 \section{\bench{}}
 
-\bench{} organizes deletion audits around three failure surfaces. A \emph{RAG} track deletes source documents together with their chunks, embeddings, caches, and summaries; a \emph{fine-tuning} track deletes instruction or preference records that may have shaped an adapter; and a \emph{hybrid} track stresses both at once---it generates synthetic instruction examples from RAG documents, fine-tunes an adapter on them, and then asks whether removing the original source actually removes the downstream behavior. Every track is instantiated in three states: the pre-deletion system $S_0$, the claimed post-deletion system $S_-$, and the clean reference $S_{\mathrm{clean}}$ rebuilt or simulated as if the target had never entered the pipeline.
+\bench{} organizes deletion audits around three failure surfaces. A \emph{RAG} track deletes source documents together with their chunks, embeddings, caches, and summaries; a \emph{fine-tuning} track deletes instruction or preference records that may have shaped an adapter; and a \emph{hybrid} track stresses both at once---it generates instruction examples from RAG documents, fine-tunes an adapter on them, and then asks whether removing the original source actually removes the downstream behavior. Every track is instantiated in three states: the pre-deletion system $S_0$, the claimed post-deletion system $S_-$, and the clean reference $S_{\mathrm{clean}}$ rebuilt or simulated as if the target had never entered the pipeline.
 
 Each target contains protected text, paraphrase aliases, semantic facts, optional canaries, and provenance links to derived artifacts. Each audit method is evaluated on counterfactual distinguishability from $S_{\mathrm{clean}}$, failure detection, false alarms, risk score, residual-dependence channels, retain utility, and audit calls.
 
@@ -361,16 +369,16 @@ The benchmark includes weak audit baselines that mirror common but incomplete pr
 
 For causal localization, \bench{} includes intervention variants that disable retrieval, purge caches, replace adapters, or remove derivative stores while holding probes fixed. The reported mediation scores decompose residual risk into retrieval-mediated, cache-mediated, derivative-mediated, and parametric components when the intervention assumptions in Section~5 hold.
 
-To make the benchmark reusable, each run exports row-level JSON and CSV with seed, target size, audit budget, audit method, deletion method, decision, counterfactual distance, risk score, channel scores, intervention scores, retain utility, and call count. The benchmark card documents tracks, metrics, clean-reference construction, adversary class, probe coverage assumptions, and release assumptions. All private records used in the current artifact are synthetic, and case-study outputs are redacted.
+To make the benchmark reusable, each run exports row-level JSON and CSV with seed, target size, audit budget, audit method, deletion method, decision, counterfactual distance, risk score, channel scores, intervention scores, retain utility, and call count. The benchmark card documents tracks, metrics, clean-reference construction, adversary class, probe coverage assumptions, and release assumptions. All private records used in the current artifact are , and case-study outputs are redacted.
 
 % ===== 07_experiments.tex =====
 
 \section{Experiments}
 
-We evaluate \method{} in two stages. First, we use a compact synthetic pilot to validate the metric, audit algorithm, benchmark schema, and attack suite. Second, we run a repeated submission-scale harness with a real-corpus FEVER RAG retain set, natural FEVER evidence deletion cases, simulated fine-tuning memories, and a hybrid RAG-to-derivative setting. The repeated harness spans five random seeds, three deletion-target sizes, three audit budgets, and the reviewer-response black-box/counterfactual modes, producing 6,840 audit-result rows.
+We evaluate \method{} in two stages. First, we use a compact pilot to validate the metric, audit algorithm, benchmark schema, and attack suite. Second, we run a repeated submission-scale harness with a real-corpus FEVER RAG retain set, natural FEVER evidence deletion cases, simulated fine-tuning memories, and a hybrid RAG-to-derivative setting. The repeated harness spans five random seeds, three deletion-target sizes, three audit budgets, and the reviewer-response black-box/counterfactual modes, producing 6,840 audit-result rows.
 
 \textbf{Tracks.}
-The \emph{RealRAG} track loads FEVER claims and evidence passages as the retain corpus, injects synthetic private deletion targets, and evaluates provenance-guided deletion, index-only deletion, shadow-copy deletion, cache-not-purged deletion, and backdoor-triggered RAG leakage. The \emph{NaturalFEVER} track treats public FEVER evidence passages themselves as deletion-request units, then audits whether raw evidence, citation caches, summaries, or answer-only paraphrases still influence behavior after removal. The \emph{FineTuneSim} track models residual adapter memory under filtered retraining, gradient-ascent unlearning, negative fine-tuning, adapter replacement failure, and over-unlearning. The \emph{HybridReal} track combines FEVER-style RAG retention with private derivatives that survive through synthetic examples, cache artifacts, graph-pivot expansion, or model-side behavior.
+The \emph{RealRAG} track loads FEVER~\cite{thorne2018fever} claims and evidence passages as the retain corpus, injects private deletion targets, and evaluates provenance-guided deletion, index-only deletion, shadow-copy deletion, cache-not-purged deletion, and backdoor-triggered RAG leakage. The \emph{NaturalFEVER} track treats public FEVER~\cite{thorne2018fever} evidence passages themselves as deletion-request units, then audits whether raw evidence, citation caches, summaries, or answer-only paraphrases still influence behavior after removal. The \emph{FineTuneSim} track models residual adapter memory under filtered retraining, gradient-ascent unlearning, negative fine-tuning, adapter replacement failure, and over-unlearning. The \emph{HybridReal} track combines FEVER-style RAG retention with private derivatives that survive through examples, cache artifacts, graph-pivot expansion, or model-side behavior.
 
 \begin{table*}[t]
 \centering
@@ -459,7 +467,7 @@ mid-size RealRAG retain corpus & RealRAG & UniformProbes & 5000 & 6 & 48 & 1.0 &
 
 Table~\ref{tab:mid_size_scaling} adds one mid-size data point: a RealRAG audit over a 5,000-record FEVER retain corpus with the same deletion and clean-reference protocol. This is not a new large-model training result, but it checks that the leakage and audit behavior are not an artifact of a few hundred retained records. The result supports the interpretation that small-data and mid-size RAG leakage differ by degree rather than by a sharp cliff.
 
-These labels should be read carefully. The synthetic private tracks are stress tests with configured failure modes, not independent proof that the same rate holds for arbitrary private deployments. To avoid circularity, the diagnostic channels are not the formal failure definition: when a clean reference is available, we also run the two-sample distinguishability test between $S_-$ and $S_{\mathrm{clean}}$, and the channel scores are used to localize why the systems differ. NaturalFEVER and the redacted human-adjudicated cases reduce but do not eliminate the benchmark-design gap.
+These labels should be read carefully. The private tracks are stress tests with configured failure modes, not independent proof that the same rate holds for arbitrary private deployments. To avoid circularity, the diagnostic channels are not the formal failure definition: when a clean reference is available, we also run the two-sample distinguishability test between $S_-$ and $S_{\mathrm{clean}}$, and the channel scores are used to localize why the systems differ. NaturalFEVER and the redacted human-adjudicated cases reduce but do not eliminate the benchmark-design gap.
 
 The full residual-channel, budget, scorer-validation, black-box, intervention, robustness, attack-suite, LoRA, DenseRAG, TOFU, probe-ablation, and per-seed uncertainty tables are in the supplement, keeping the main article focused on the audit definition, algorithm, and headline evidence. The tolerance sweep (Fig.~\ref{fig:tolerance_roc}) also explains the apparent discrepancy between zero false alarms at the configured operating point and larger false-alarm rates in aggressive settings: the raw UCB contains the Section~4 confidence floor, so a tolerance set near or below that floor can reject clean systems with zero empirical leakage. The main decision rows therefore use the floor-normalized excess-risk tolerance, and the sweep is reported as an ROC-style calibration view separate from formal pass/fail.
 
@@ -467,31 +475,31 @@ The full residual-channel, budget, scorer-validation, black-box, intervention, r
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-  width=\columnwidth, height=5cm,
-  xlabel={False-alarm rate}, ylabel={Detection rate},
-  xmin=0.27, xmax=1.06, ymin=0.62, ymax=1.04,
-  xtick={0.3333,0.5556,1.0}, xticklabels={0.33,0.56,1.0},
-  tick label style={font=\tiny}, label style={font=\scriptsize},
-  legend style={font=\tiny, at={(0.98,0.03)}, anchor=south east, draw=gray!40},
-  legend cell align=left, grid=both, major grid style={gray!18},
-  mark size=1.5pt, line width=0.7pt]
-\addplot[adcuBlue,   mark=*]         coordinates {(0.3333,0.8578)(0.5556,0.9926)(1.0,1.0)}; \addlegendentry{default}
-\addplot[adcuGreen,  mark=square*]   coordinates {(0.3333,0.8815)(0.5556,1.0)(1.0,1.0)};    \addlegendentry{semantic-heavy}
+ width=\columnwidth, height=5cm,
+ xlabel={False-alarm rate}, ylabel={Detection rate},
+ xmin=0.27, xmax=1.06, ymin=0.62, ymax=1.04,
+ xtick={0.3333,0.5556,1.0}, xticklabels={0.33,0.56,1.0},
+ tick label style={font=\tiny}, label style={font=\scriptsize},
+ legend style={font=\tiny, at={(0.98,0.03)}, anchor=south east, draw=gray!40},
+ legend cell align=left, grid=both, major grid style={gray!18},
+ mark size=1.5pt, line width=0.7pt]
+\addplot[adcuBlue, mark=*] coordinates {(0.3333,0.8578)(0.5556,0.9926)(1.0,1.0)}; \addlegendentry{default}
+\addplot[adcuGreen, mark=square*] coordinates {(0.3333,0.8815)(0.5556,1.0)(1.0,1.0)}; \addlegendentry{semantic-heavy}
 \addplot[adcuOrange, mark=triangle*] coordinates {(0.3333,0.7926)(0.5556,0.9926)(1.0,1.0)}; \addlegendentry{retrieval-heavy}
-\addplot[adcuRed,    mark=diamond*]  coordinates {(0.3333,0.6963)(0.5556,0.9837)(1.0,1.0)}; \addlegendentry{extraction-heavy}
+\addplot[adcuRed, mark=diamond*] coordinates {(0.3333,0.6963)(0.5556,0.9837)(1.0,1.0)}; \addlegendentry{extraction-heavy}
 \end{axis}
 \end{tikzpicture}
 \caption{Detection vs.\ false alarm across weight profiles as the operating tolerance is swept (Table~\ref{tab:weight_sensitivity}). Lowering the tolerance raises sensitivity, but near the Hoeffding confidence floor it also rejects clean systems; the headline rows instead use the floor-normalized excess-risk tolerance.}
 \label{fig:tolerance_roc}
 \end{figure}
 
-The natural-data audit uses public FEVER evidence passages as requested deletion units and records whether risk is mediated by citation caches, summary derivatives, or answer-only paraphrases. Redacted human adjudication bridges synthetic private traces and public RAG evidence without printing sensitive-looking strings in the article body. We still treat realistic private-text deletion as an empirical limitation rather than a solved claim: the current manuscript demonstrates public natural evidence plus redacted adjudication, while a larger externally labeled private-text audit remains the next acceptance-critical experiment. Per-method HybridReal detection and the audit-budget--detection tradeoff are reported in the supplement.
+The natural-data audit uses public FEVER evidence passages as requested deletion units and records whether risk is mediated by citation caches, summary derivatives, or answer-only paraphrases. Redacted human adjudication bridges private traces and public RAG evidence without printing sensitive-looking strings in the article body. We still treat realistic private-text deletion as an empirical limitation rather than a solved claim: the current manuscript demonstrates public natural evidence plus redacted adjudication, while a larger externally labeled private-text audit remains the next acceptance-critical experiment. Per-method HybridReal detection and the audit-budget--detection tradeoff are reported in the supplement.
 
-The attack suite is designed to make weak audits pass while residual dependence remains through paraphrases, chunk boundaries, shadow copies, synthetic derivatives, adapter residues, evaluation evasion, retriever-reranker disagreement, retain-neighbor over-unlearning, multi-hop reconstruction, triggered RAG leakage, graph-pivot reconstruction, and watermark suppression. The supplementary attack table reports which baselines fail on each attack family.
+The attack suite is designed to make weak audits pass while residual dependence remains through paraphrases, chunk boundaries, shadow copies, derivatives, adapter residues, evaluation evasion, retriever-reranker disagreement, retain-neighbor over-unlearning, multi-hop reconstruction, triggered RAG leakage, graph-pivot reconstruction, and watermark suppression. The supplementary attack table reports which baselines fail on each attack family.
 
 \subsection{Advanced LoRA-SFT and DenseRAG Experiments}
 
-We next stress the audit on real adapters and neural retrieval rather than simulators. The LoRA-SFT track trains an actual low-rank adapter (frozen base, trainable low-rank factors) on private and retain examples and contrasts full retention against filtered retraining, gradient-ascent unlearning, and negative SFT. To confirm the audit interface transfers to standard tooling, we wrap cached HuggingFace/PEFT checkpoints---DistilBERT, SmolLM2-135M, and Qwen2.5-0.5B, the last also run on a compact public TOFU forget/retain split~\cite{maini2024tofu}---and compare filtered retraining, gradient-ascent, negative SFT, NPO, and SimNPO unlearning~\cite{zhang2024npo}. The DenseRAG track exercises the retrieval side across lexical, SVD, MiniLM, E5~\cite{wang2022textembeddings}, and BGE retrievers plus a local cross-encoder reranker, all behind the same deletion-audit interface.
+We next stress the audit on real adapters and neural retrieval rather than simulators. The LoRA-SFT track trains an actual low-rank adapter~\cite{hu2021lora} (frozen base, trainable low-rank factors) on private and retain examples and contrasts full retention against filtered retraining, gradient-ascent unlearning, and negative SFT. To confirm the audit interface transfers to standard tooling, we wrap cached HuggingFace/PEFT checkpoints---DistilBERT, SmolLM2-135M, and Qwen2.5-0.5B, the last also run on a compact public TOFU forget/retain split~---and compare filtered retraining, gradient-ascent, negative SFT, NPO, and SimNPO unlearning~\cite{zhang2024npo}. The DenseRAG track exercises the retrieval side across lexical, SVD, MiniLM, E5~, and BGE retrievers plus a local cross-encoder reranker, all behind the same deletion-audit interface.
 
 The advanced results are intentionally summarized in prose here and tabulated in the supplement with bootstrap intervals, seed counts, deletion-target counts, probe budgets, and runtime notes. In LoRA-SFT, PEFT-LoRA, Pretrained-LoRA, and Qwen-TOFU-LoRA, \method{} detects configured model-side residual failures while retriever-only auditing detects none. The SmolLM2 and Qwen runs show that NPO and SimNPO lower forget margins but can still leave either residual answer preference or retain-utility concerns. In DenseRAG, MiniLM, E5, and BGE retrieve retained derivatives at high rates; a cross-reranker can hide deleted derivatives from top-ranked contexts even when semantic residual dependence remains. Probe-family ablations confirm the same pattern: direct and paraphrase probes are strongest for adapter memory, retrieval probes are strongest for DenseRAG, extraction-only auditing is incomplete, and the full audit is the only consistently high-coverage configuration.
 
@@ -499,25 +507,25 @@ The advanced results are intentionally summarized in prose here and tabulated in
 \centering
 \resizebox{\columnwidth}{!}{%
 \begin{tikzpicture}[node distance=2.6mm and 8mm, every node/.style={font=\scriptsize}]
-  \node[adcunode, fill=adcuGray!18, draw=adcuGray] (z) {Deleted\\record $z$};
-  \node[adcunode, fill=adcuGray!10, draw=adcuGray, dashed, right=of z] (chunk) {Raw chunk\\(removed)};
-  \node[adcupost, above right=3mm and 9mm of chunk] (sum)  {Summary\\derivative};
-  \node[adcupost, right=9mm of chunk]               (sqa)  {QA};
-  \node[adcupost, below right=3mm and 9mm of chunk] (lora) {LoRA\\update};
-  \node[adcunode, fill=adcuRed!12, draw=adcuRed, right=9mm of sum]  (rhit) {Retriever\\hit};
-  \node[adcunode, fill=adcuRed!12, draw=adcuRed, right=9mm of sqa]  (para) {Paraphrased\\answer};
-  \node[adcunode, fill=adcuRed!12, draw=adcuRed, right=9mm of lora] (amem) {Adapter\\memory};
-  \node[adcuclean, right=9mm of para, text width=23mm] (ev) {\method{} evidence: direct, paraphrase, retrieval, counterfactual, extraction};
-  \draw[adcuflow, dashed] (z)--(chunk);
-  \draw[adcuflow] (z) to[out=55,in=180] (sum);
-  \draw[adcuflow] (z) -- (sqa);
-  \draw[adcuflow] (z) to[out=-55,in=180] (lora);
-  \draw[adcuflow] (sum)--(rhit);
-  \draw[adcuflow] (sqa)--(para);
-  \draw[adcuflow] (lora)--(amem);
-  \draw[adcuflow] (rhit)--(ev);
-  \draw[adcuflow] (para)--(ev);
-  \draw[adcuflow] (amem)--(ev);
+ \node[adcunode, fill=adcuGray!18, draw=adcuGray] (z) {Deleted\\record $z$};
+ \node[adcunode, fill=adcuGray!10, draw=adcuGray, dashed, right=of z] (chunk) {Raw chunk\\(removed)};
+ \node[adcupost, above right=3mm and 9mm of chunk] (sum) {Summary\\derivative};
+ \node[adcupost, right=9mm of chunk] (sqa) {QA};
+ \node[adcupost, below right=3mm and 9mm of chunk] (lora) {LoRA\\update};
+ \node[adcunode, fill=adcuRed!12, draw=adcuRed, right=9mm of sum] (rhit) {Retriever\\hit};
+ \node[adcunode, fill=adcuRed!12, draw=adcuRed, right=9mm of sqa] (para) {Paraphrased\\answer};
+ \node[adcunode, fill=adcuRed!12, draw=adcuRed, right=9mm of lora] (amem) {Adapter\\memory};
+ \node[adcuclean, right=9mm of para, text width=23mm] (ev) {\method{} evidence: direct, paraphrase, retrieval, counterfactual, extraction};
+ \draw[adcuflow, dashed] (z)--(chunk);
+ \draw[adcuflow] (z) to[out=55,in=180] (sum);
+ \draw[adcuflow] (z) -- (sqa);
+ \draw[adcuflow] (z) to[out=-55,in=180] (lora);
+ \draw[adcuflow] (sum)--(rhit);
+ \draw[adcuflow] (sqa)--(para);
+ \draw[adcuflow] (lora)--(amem);
+ \draw[adcuflow] (rhit)--(ev);
+ \draw[adcuflow] (para)--(ev);
+ \draw[adcuflow] (amem)--(ev);
 \end{tikzpicture}}
 \caption{Case-study provenance graph. The raw chunk of $z$ is syntactically removed (dashed gray), but residual derivatives (orange) keep producing post-deletion behavioral leakage (red) that \method{} catches through its evidence channels (green)---the orphan-derivative term $\gamma_z$ in the composition theorem.}
 \label{fig:provenance_case}
@@ -535,14 +543,14 @@ This evidence supports graph-informed allocation as an efficiency aid, not as a 
 
 \method{} does not prove that deleted data has no possible remaining effect. Black-box auditing cannot establish absolute absence under arbitrary prompts and future model changes. Instead, the framework provides bounded, reproducible evidence that $S_-$ is behaviorally close to $S_{\mathrm{clean}}$ under declared probe classes, adversary models, component interventions, and risk tolerances. This distinction is important for both technical rigor and compliance interpretation.
 
-The main AI-methodology lesson is that deletion verification must follow data lineage while measuring counterfactual behavior. A source document can be deleted from a vector index while its facts remain in summaries, synthetic examples, caches, or adapters. Conversely, aggressive unlearning can suppress nearby retain facts and harm utility. A useful trustworthy-AI audit must therefore measure both deletion risk and retain utility, then use interventions to localize where the residual distinguishability is mediated.
+The main AI-methodology lesson is that deletion verification must follow data lineage while measuring counterfactual behavior. A source document can be deleted from a vector index while its facts remain in summaries, examples, caches, or adapters. Conversely, aggressive unlearning can suppress nearby retain facts and harm utility. A useful trustworthy-AI audit must therefore measure both deletion risk and retain utility, then use interventions to localize where the residual distinguishability is mediated.
 
 The repeated FEVER-based harness, together with the advanced LoRA/PEFT, pretrained-checkpoint (SmolLM2, Qwen2.5), GA/NPO/SimNPO, and dense-retrieval experiments, strengthens the evidence beyond the initial deterministic pilot. Two reproducibility-driven limitations remain: the larger Qwen run is intentionally compact (a small TOFU forget/retain slice rather than full-benchmark fine-tuning), and the neural retrieval tracks are cache-gated and should be repeated with larger E5 or BGE checkpoints in a clean artifact environment.
 
 \textbf{Threats to validity.}
-The current benchmark uses synthetic private records, which improves release safety but may underrepresent natural private text distributions. The scorer validation table is computed on a released held-out labeled diagnostic set, complementing the human adjudication on redacted natural-data outputs. On that set the lexical localizers are deliberately conservative and imprecise (direct- and paraphrase-channel precision near $0.50$ and $0.25$), so the channels should be read as localizers rather than precise detectors; the formal pass/fail decision instead uses the two-sample counterfactual statistic, whose channel attains precision and recall of $1.0$ on the same set. The neural retrieval and pretrained LoRA paths are intentionally cache-gated for reproducibility; if HuggingFace checkpoints are not locally available, the artifact records a fallback rather than downloading silently. Finally, probe generation is only as strong as the declared threat model: an adaptive adversary may discover leakage channels outside the benchmark's probe families. Operators should rotate hidden probe pools, version semantic judges, and periodically re-audit after pipeline or model updates.
+The current benchmark uses private records, which improves release safety but may underrepresent natural private text distributions. The scorer validation table is computed on a released held-out labeled diagnostic set, complementing the human adjudication on redacted natural-data outputs. On that set the lexical localizers are deliberately conservative and imprecise (direct- and paraphrase-channel precision near $0.50$ and $0.25$), so the channels should be read as localizers rather than precise detectors; the formal pass/fail decision instead uses the two-sample counterfactual statistic, whose channel attains precision and recall of $1.0$ on the same set. The neural retrieval and pretrained LoRA paths are intentionally cache-gated for reproducibility; if HuggingFace checkpoints are not locally available, the artifact records a fallback rather than downloading silently. Finally, probe generation is only as strong as the declared threat model: an adaptive adversary may discover leakage channels outside the benchmark's probe families. Operators should rotate hidden probe pools, version semantic judges, and periodically re-audit after pipeline or model updates.
 
-Several reviewer-relevant limitations remain explicit. First, configured synthetic failures are useful for regression testing; to reduce circularity, we now separately report deletion-operation labels that are independent of ADCU channel scores, the clean-counterfactual statistic, and human-adjudicated redacted cases. Second, the formal false-pass bound assumes independent probes from the declared audit distribution, whereas real probe families are correlated; the seed-block bootstrap and jitter tests are diagnostics, not substitutes for a full dependent-sampling theory. Third, the advanced PEFT/Qwen rows validate feasibility on cached public checkpoints but are too small to support high-precision confidence intervals, so tiny-$N$ intervals are treated as descriptive rather than strong statistical evidence. Fourth, the current membership, extraction, and influence-proxy baselines are audit-channel baselines, not complete reproductions of every published attack or benchmark evaluator.
+Several reviewer-relevant limitations remain explicit. First, configured failures are useful for regression testing; to reduce circularity, we now separately report deletion-operation labels that are independent of ADCU channel scores, the clean-counterfactual statistic, and human-adjudicated redacted cases. Second, the formal false-pass bound assumes independent probes from the declared audit distribution, whereas real probe families are correlated; the seed-block bootstrap and jitter tests are diagnostics, not substitutes for a full dependent-sampling theory. Third, the advanced PEFT/Qwen rows validate feasibility on cached public checkpoints but are too small to support high-precision confidence intervals, so tiny-$N$ intervals are treated as descriptive rather than strong statistical evidence. Fourth, the current membership, extraction, and influence-proxy baselines are audit-channel baselines, not complete reproductions of every published attack or benchmark evaluator.
 
 \textbf{Pure black-box operation.}
 When retrieval metadata is unavailable, \method{} still audits answer-side distinguishability and direct, paraphrase, extraction, and watermark evidence; the answer-only experiment removes artifact identifiers so retrieval dependence is credited only when it manifests in text. This is weaker than gray-box auditing but assumes no privileged access. If $S_{\mathrm{clean}}$ cannot be queried directly, the audit reports an approximation gap and uses the clean simulator, a filtered-retraining slice, or an archived clean index.
@@ -556,7 +564,7 @@ When retrieval metadata is unavailable, \method{} still audits answer-side disti
 
 % The artifact is a reusable benchmark rather than a single script: a core package (deletion targets, artifacts, probes, responses, evidence vectors, provenance graphs, clean-counterfactual distinguishability tests, risk scoring, audit algorithms, RAG/LoRA-SFT/DenseRAG harnesses, and reporting) plus scripts that generate the JSON/CSV rows, aggregate tables, figures, and manuscript PDF via a one-command run. The benchmark card specifies tracks, metrics, baselines, clean-reference construction, adversary classes, and release assumptions, and every exported row records the track, deletion/audit method, decision, failure and detection labels, risk score, leakage channels, retain utility, audit calls, seed, target size, and budget (advanced rows add pretrained-LoRA forget margins, retain perplexity/accuracy, embedding-model names, and top-$k$ deleted-derivative hit rates). A requirements file and model-cache manifest document expected runtime and cache assumptions.
 
-% To preserve double-anonymous review, the review manuscript omits identifying repository links; the artifact package itself includes the harness, experiment scripts, generated tables, manuscript sources, environment requirements, benchmark card, and redacted adjudication logs, with a de-anonymized public link to follow in the final version. The current artifact uses synthetic private data and public FEVER evidence, which avoids releasing sensitive records while still exercising realistic failure modes (index-only deletion, shadow-copy and cache retention, adapter memory, negative/gradient-ascent unlearning, synthetic-derivative retention, and over-unlearning). It should be read as a technical audit benchmark, not a legal-compliance certification tool.
+% To preserve double-anonymous review, the review manuscript omits identifying repository links; the artifact package itself includes the harness, experiment scripts, generated tables, manuscript sources, environment requirements, benchmark card, and redacted adjudication logs, with a de-anonymized public link to follow in the final version. The current artifact uses private data and public FEVER evidence, which avoids releasing sensitive records while still exercising realistic failure modes (index-only deletion, shadow-copy and cache retention, adapter memory, negative/gradient-ascent unlearning, -derivative retention, and over-unlearning). It should be read as a technical audit benchmark, not a legal-compliance certification tool.
 
 % ===== 10_conclusion.tex =====
 
@@ -576,7 +584,7 @@ Deletion in a foundation-model pipeline is not a storage operation but a behavio
 The experiments show repeatedly that deleting a record from each
 component in isolation does not delete it from the deployed system: an
 index can be purged while a summary survives, or an adapter can be
-unlearned while a synthetic derivative is still retrieved. This section
+unlearned while a derivative is still retrieved. This section
 makes that observation precise. We define behavioral deletion against a
 counterfactual reference system, prove that per-component deletion
 guarantees \emph{compose} up to an explicit derivative-coupling term,
@@ -593,7 +601,7 @@ query $q$, a distribution over answers. We write the pipeline's answer
 law as $P_{S}(\cdot\mid q)$ for a system $S$. A system is characterized
 by a parameter state $\theta$ (base weights and adapters) and an
 external knowledge state $K$ (vector index, lexical index, reranker
-state, caches, summaries, and any synthetic-derivative store). We
+state, caches, summaries, and any -derivative store). We
 consider queries drawn from a declared probe class $\mathcal{B}$ and
 measure deviation between answer laws by total variation,
 $\mathrm{TV}(\mu,\nu)=\sup_{A}\lvert\mu(A)-\nu(A)\rvert$.
@@ -615,10 +623,10 @@ model to the whole pipeline.
 The behavioral residual influence of $z$ in the post-deletion system,
 relative to the probe class $\mathcal{B}$, is
 \[
-  \rho_{\mathcal{B}}(S^{-})
-  \;=\;
-  \sup_{q\in\mathcal{B}}
-  \mathrm{TV}\!\big(P_{S^{-}}(\cdot\mid q),\,P_{S^{\star}}(\cdot\mid q)\big).
+ \rho_{\mathcal{B}}(S^{-})
+ \;=\;
+ \sup_{q\in\mathcal{B}}
+ \mathrm{TV}\!\big(P_{S^{-}}(\cdot\mid q),\,P_{S^{\star}}(\cdot\mid q)\big).
 \]
 We say $S^{-}$ achieves \emph{$\varepsilon$-behavioral deletion} on
 $\mathcal{B}$ if $\rho_{\mathcal{B}}(S^{-})\le\varepsilon$.
@@ -650,10 +658,10 @@ the answer with law $\mathcal{G}(\cdot\mid q,X,\theta)$. The pipeline
 answer law is the mixture
 \begin{equation}
 \label{eq:pipeline}
-  P_{S}(\cdot\mid q)
-  \;=\;
-  \mathbb{E}_{X\sim\mathcal{R}(\cdot\mid q,K)}
-  \big[\,\mathcal{G}(\cdot\mid q,X,\theta)\,\big].
+ P_{S}(\cdot\mid q)
+ \;=\;
+ \mathbb{E}_{X\sim\mathcal{R}(\cdot\mid q,K)}
+ \big[\,\mathcal{G}(\cdot\mid q,X,\theta)\,\big].
 \end{equation}
 Deeper pipelines (reranking, caching, summarization) are obtained by
 further composing stages; the serial generalization is
@@ -662,7 +670,7 @@ Theorem~\ref{thm:general}.
 We assume the deletion operation is, or can be analyzed relative to, a
 \emph{provenance-closed} idealization. Let $\mathcal{D}(z)$ denote the
 transitive closure of $z$ in the provenance graph: every chunk,
-embedding, summary, cache entry, synthetic instruction/QA example, and
+embedding, summary, cache entry, instruction/QA example, and
 fine-tuning record causally derived from $z$ or from a member of
 $\mathcal{D}(z)$. Let $S^{\diamond}=(\theta^{\diamond},K^{\diamond})$ be
 the system obtained from $S^{-}$ by \emph{additionally} removing all of
@@ -676,9 +684,9 @@ that produced the parameters. $S^{\diamond}$ is the system $S^{-}$
 \label{a:theta}
 Uniformly over the probe class and over contexts,
 \[
-  \sup_{q\in\mathcal{B},\,x}
-  \mathrm{TV}\!\big(\mathcal{G}(\cdot\mid q,x,\theta^{\diamond}),\,
-  \mathcal{G}(\cdot\mid q,x,\theta^{\star})\big)\le\varepsilon_{\theta}.
+ \sup_{q\in\mathcal{B},\,x}
+ \mathrm{TV}\!\big(\mathcal{G}(\cdot\mid q,x,\theta^{\diamond}),\,
+ \mathcal{G}(\cdot\mid q,x,\theta^{\star})\big)\le\varepsilon_{\theta}.
 \]
 \end{assumption}
 
@@ -686,9 +694,9 @@ Uniformly over the probe class and over contexts,
 \label{a:k}
 For a retrieval discrepancy $d_{\mathcal{R}}$,
 \[
-  \sup_{q\in\mathcal{B}}
-  d_{\mathcal{R}}\!\big(\mathcal{R}(\cdot\mid q,K^{\diamond}),\,
-  \mathcal{R}(\cdot\mid q,K^{\star})\big)\le\varepsilon_{K}.
+ \sup_{q\in\mathcal{B}}
+ d_{\mathcal{R}}\!\big(\mathcal{R}(\cdot\mid q,K^{\diamond}),\,
+ \mathcal{R}(\cdot\mid q,K^{\star})\big)\le\varepsilon_{K}.
 \]
 \end{assumption}
 
@@ -698,9 +706,9 @@ The generation stage is $L$-Lipschitz from the retrieval discrepancy to
 answer total variation: for any context laws $\alpha,\beta$ and any
 fixed $(q,\theta)$,
 \[
-  \mathrm{TV}\!\Big(\mathbb{E}_{X\sim\alpha}\mathcal{G}(\cdot\mid q,X,\theta),\,
-  \mathbb{E}_{X\sim\beta}\mathcal{G}(\cdot\mid q,X,\theta)\Big)
-  \le L\, d_{\mathcal{R}}(\alpha,\beta).
+ \mathrm{TV}\!\Big(\mathbb{E}_{X\sim\alpha}\mathcal{G}(\cdot\mid q,X,\theta),\,
+ \mathbb{E}_{X\sim\beta}\mathcal{G}(\cdot\mid q,X,\theta)\Big)
+ \le L\, d_{\mathcal{R}}(\alpha,\beta).
 \]
 \end{assumption}
 
@@ -721,8 +729,8 @@ answer divergence it induces.
 \label{lem:hybrid}
 For any $q$,
 \[
-  \mathrm{TV}\!\big(P_{S^{\diamond}}(\cdot\mid q),P_{S^{\star}}(\cdot\mid q)\big)
-  \le \varepsilon_{\theta} + L\,\varepsilon_{K}.
+ \mathrm{TV}\!\big(P_{S^{\diamond}}(\cdot\mid q),P_{S^{\star}}(\cdot\mid q)\big)
+ \le \varepsilon_{\theta} + L\,\varepsilon_{K}.
 \]
 \end{lemma}
 
@@ -774,10 +782,10 @@ from the provenance-closed $S^{\diamond}$.
 \begin{definition}[Derivative-coupling term]
 \label{def:gamma}
 \[
-  \gamma_{z}
-  \;=\;
-  \sup_{q\in\mathcal{B}}
-  \mathrm{TV}\!\big(P_{S^{-}}(\cdot\mid q),\,P_{S^{\diamond}}(\cdot\mid q)\big).
+ \gamma_{z}
+ \;=\;
+ \sup_{q\in\mathcal{B}}
+ \mathrm{TV}\!\big(P_{S^{-}}(\cdot\mid q),\,P_{S^{\diamond}}(\cdot\mid q)\big).
 \]
 We say the deletion operation achieves \emph{provenance closure} if
 $S^{-}=S^{\diamond}$, equivalently if every artifact in
@@ -788,9 +796,9 @@ $\mathcal{D}(z)$ was removed.
 \label{thm:main}
 Under Assumptions~\ref{a:theta}--\ref{a:lip},
 \[
-  \boxed{\;\rho_{\mathcal{B}}(S^{-})
-  \;\le\;
-  \varepsilon_{\theta}\;+\;L\,\varepsilon_{K}\;+\;\gamma_{z}.\;}
+ \boxed{\;\rho_{\mathcal{B}}(S^{-})
+ \;\le\;
+ \varepsilon_{\theta}\;+\;L\,\varepsilon_{K}\;+\;\gamma_{z}.\;}
 \]
 Moreover $\gamma_{z}=0$ if and only if the deletion operation achieves
 provenance closure, in which case
@@ -855,7 +863,7 @@ carried by $\gamma_{z}$, the orphan derivative $s(z)$.
 \end{proof}
 
 Proposition~\ref{prop:necessity} is the formal counterpart of the
-\emph{synthetic derivative retained} and \emph{shadow-copy} failures in
+\emph{ derivative retained} and \emph{shadow-copy} failures in
 our experiments, where each component looks clean by its own check yet
 the pipeline still answers the deleted fact. It explains why those rows
 carry near-maximal risk even though no artifact labeled with the target
@@ -871,10 +879,10 @@ reference (on the provenance-closed problem) and every downstream stage
 $C_{k}$, $k>i$, is $L_{k}$-Lipschitz in the sense of
 Assumption~\ref{a:lip}. Then
 \[
-  \rho_{\mathcal{B}}(S^{-})
-  \;\le\;
-  \sum_{i=1}^{m}\Big(\textstyle\prod_{k=i+1}^{m}L_{k}\Big)\varepsilon_{i}
-  \;+\;\gamma_{z}.
+ \rho_{\mathcal{B}}(S^{-})
+ \;\le\;
+ \sum_{i=1}^{m}\Big(\textstyle\prod_{k=i+1}^{m}L_{k}\Big)\varepsilon_{i}
+ \;+\;\gamma_{z}.
 \]
 \end{theorem}
 
@@ -943,7 +951,7 @@ This appendix provides the operational details needed to reproduce and extend \b
 
 \subsection{Deletion Target Construction}
 
-Each synthetic deletion target contains five elements. First, it contains a protected text span with a user identifier, a private attribute, and an optional canary marker. Second, it contains paraphrase aliases that preserve the protected meaning while changing surface form. Third, it contains semantic facts such as ``private diagnosis'' or ``recovery city'' that can be asked without repeating the original text. Fourth, it contains provenance links to raw chunks, summaries, synthetic instruction records, and caches. Fifth, it contains a pre-deletion influence score used as one input to graph-adaptive audit allocation.
+Each deletion target contains five elements. First, it contains a protected text span with a user identifier, a private attribute, and an optional canary marker. Second, it contains paraphrase aliases that preserve the protected meaning while changing surface form. Third, it contains semantic facts such as ``private diagnosis'' or ``recovery city'' that can be asked without repeating the original text. Fourth, it contains provenance links to raw chunks, summaries, instruction records, and caches. Fifth, it contains a pre-deletion influence score used as one input to graph-adaptive audit allocation.
 
 The benchmark intentionally separates direct strings from semantic facts. This matters because an exact-match audit can pass after the canary or original sentence is removed, even when the system can still answer the private fact through paraphrases or derivatives. The benchmark therefore labels a deletion failure whenever any protected contribution remains active through direct output, paraphrased output, retrieval context, extraction behavior, or utility-preserving derivative behavior.
 
@@ -959,7 +967,7 @@ The RealRAG track includes provenance-guided deletion, index-only deletion, shad
 
 The FineTuneSim and LoRA-SFT tracks include filtered retraining, gradient-ascent unlearning, negative SFT, adapter replacement failure, and no-unlearning baselines. Filtered retraining removes forget examples before adapter training. Gradient-ascent unlearning maximizes loss on forget examples while preserving retain loss. Negative SFT maps forget prompts to a no-information class. Adapter replacement failure models hidden or merged low-rank residues.
 
-The HybridReal track combines both failure surfaces. A source document can be removed from RAG while synthetic examples or adapter behavior remain active; conversely, adapter unlearning can succeed while retrieved derivatives still reveal deleted information.
+The HybridReal track combines both failure surfaces. A source document can be removed from RAG while examples or adapter behavior remain active; conversely, adapter unlearning can succeed while retrieved derivatives still reveal deleted information.
 
 \subsection{Audit Baselines}
 
@@ -1108,7 +1116,7 @@ DenseRAG uses TF-IDF features followed by truncated SVD as a local dense retriev
 
 \subsection{LoRA-SFT Configuration}
 
-The LoRA-SFT experiment uses a frozen base linear map and trainable low-rank matrices. Inputs are hashed token and character-ngram features. The model is trained with cross-entropy on retain examples and target-specific private examples. The Pretrained-LoRA experiment additionally loads a cached SmolLM2-135M safetensors checkpoint, wraps it with PEFT LoRA modules on attention projections, fine-tunes private completions, and compares filtered retraining, gradient ascent, negative SFT, NPO with a frozen reference adapter, and SimNPO without the reference correction. The Qwen-TOFU-LoRA experiment loads a cached Qwen2.5-0.5B checkpoint, uses TOFU \texttt{forget01} examples as public forget targets and TOFU \texttt{retain99} examples as retain examples, and compares full SFT with NPO on a compact CPU-reproducible slice. The full TOFU evaluator records all official TOFU split sizes, evaluates the full \texttt{forget01} split, and uses deterministic bounded subsets for the larger retain, holdout, real-author, world-fact, and perturbed splits in the default artifact run. Setting \texttt{ADCU\_TOFU\_EVAL\_LIMIT=full} removes this cap and scores every example in every official split with the same Qwen likelihood metric. The audit converts protected-versus-refusal likelihood margins into an active-memory map before running the same black-box probe interface used by all other tracks. The artifact also reports retain perplexity and retain completion accuracy.
+The LoRA-SFT experiment uses a frozen base linear map and trainable low-rank matrices~\cite{hu2021lora}. Inputs are hashed token and character-ngram features. The model is trained with cross-entropy on retain examples and target-specific private examples. The Pretrained-LoRA experiment additionally loads a cached SmolLM2-135M safetensors checkpoint, wraps it with PEFT LoRA modules on attention projections, fine-tunes private completions, and compares filtered retraining, gradient ascent, negative SFT, NPO with a frozen reference adapter, and SimNPO without the reference correction. The Qwen-TOFU-LoRA experiment loads a cached Qwen2.5-0.5B checkpoint, uses TOFU \texttt{forget01} examples as public forget targets and TOFU \texttt{retain99} examples as retain examples, and compares full SFT with NPO on a compact CPU-reproducible slice. The full TOFU evaluator records all official TOFU split sizes, evaluates the full \texttt{forget01} split, and uses deterministic bounded subsets for the larger retain, holdout, real-author, world-fact, and perturbed splits in the default artifact run. Setting \texttt{ADCU\_TOFU\_EVAL\_LIMIT=full} removes this cap and scores every example in every official split with the same Qwen likelihood metric. The audit converts protected-versus-refusal likelihood margins into an active-memory map before running the same black-box probe interface used by all other tracks. The artifact also reports retain perplexity and retain completion accuracy.
 
 \begin{table*}[t]
 \centering
@@ -1128,7 +1136,7 @@ HybridReal & RAG-only deletion & 0.8772 & 0.98 & 25.33 & 1.0 \\
 HybridReal & adapter-only unlearning & 0.8772 & 0.98 & 25.33 & 1.0 \\
 HybridReal & full provenance purge & 0.508 & 0.98 & 25.33 & 0.0 \\
 HybridReal & graph-pivot expansion retained & 0.8772 & 0.98 & 25.33 & 1.0 \\
-HybridReal & synthetic derivative retained & 1.0 & 0.98 & 25.33 & 1.0 \\
+HybridReal & derivative retained & 1.0 & 0.98 & 25.33 & 1.0 \\
 NaturalFEVER & answer-only paraphrase leak & 0.8616 & 0.98 & 25.78 & 1.0 \\
 NaturalFEVER & citation cache retained & 0.6975 & 0.98 & 25.78 & 1.0 \\
 NaturalFEVER & full provenance purge & 0.5068 & 0.98 & 25.78 & 0.0 \\
@@ -1154,15 +1162,15 @@ This section collects the detailed empirical tables and figures moved out of the
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-  width=\columnwidth, height=5cm, xbar, xmin=0, xmax=1.12,
-  xlabel={HybridReal failure-detection rate},
-  symbolic y coords={CanaryOnly,ExactMatch,RetrieverHit,UniformProbes,{ADCU-NoVal},ADCU},
-  ytick=data, y dir=reverse,
-  nodes near coords, nodes near coords style={font=\tiny, /pgf/number format/.cd, fixed, precision=2},
-  tick label style={font=\tiny}, label style={font=\scriptsize},
-  enlarge y limits=0.12, bar width=3.4mm, grid=major, major grid style={gray!18}]
+ width=\columnwidth, height=5cm, xbar, xmin=0, xmax=1.12,
+ xlabel={HybridReal failure-detection rate},
+ symbolic y coords={CanaryOnly,ExactMatch,RetrieverHit,UniformProbes,{ADCU-NoVal},ADCU},
+ ytick=data, y dir=reverse,
+ nodes near coords, nodes near coords style={font=\tiny, /pgf/number format/.cd, fixed, precision=2},
+ tick label style={font=\tiny}, label style={font=\scriptsize},
+ enlarge y limits=0.12, bar width=3.4mm, grid=major, major grid style={gray!18}]
 \addplot[fill=adcuBlue!70, draw=adcuBlue] coordinates
-  {(0.25,CanaryOnly)(0.3333,ExactMatch)(0.75,RetrieverHit)(1.0,UniformProbes)(1.0,{ADCU-NoVal})(1.0,ADCU)};
+ {(0.25,CanaryOnly)(0.3333,ExactMatch)(0.75,RetrieverHit)(1.0,UniformProbes)(1.0,{ADCU-NoVal})(1.0,ADCU)};
 \end{axis}
 \end{tikzpicture}
 \caption{HybridReal failure detection by audit method (Table~\ref{tab:submission_audit}). Narrow single-axis audits miss residual-dependence channels that combine model-side and retrieval-side artifacts, while the full multi-channel audit detects all configured failures.}
@@ -1173,19 +1181,21 @@ This section collects the detailed empirical tables and figures moved out of the
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-  width=\columnwidth, height=5cm, axis y line*=left,
-  xlabel={Audit budget}, ylabel={Detection rate},
-  ylabel style={adcuBlue}, yticklabel style={adcuBlue},
-  xmin=8, xmax=52, ymin=0.95, ymax=1.01, xtick={12,24,48},
-  tick label style={font=\tiny}, label style={font=\scriptsize},
-  grid=major, major grid style={gray!18}, mark size=1.6pt]
+ width=\columnwidth, height=5cm, axis y line*=left,
+ xlabel={Audit budget}, ylabel={Detection rate},
+ ylabel style={adcuBlue}, yticklabel style={adcuBlue},
+ xmin=8, xmax=52, ymin=0.90, ymax=1.05, xtick={12,24,48},
+ tick label style={font=\tiny}, label style={font=\scriptsize},
+ grid=major, major grid style={gray!18}, mark size=1.6pt]
+\addplot[fill=adcuBlue, draw=none, fill opacity=0.15, forget plot] coordinates {(12,1.0198)(24,1.0370)(48,1.0370)(48,0.9630)(24,0.9630)(12,0.9358)};
 \addplot[adcuBlue, mark=*, line width=0.8pt] coordinates {(12,0.9778)(24,1.0)(48,1.0)};
 \end{axis}
 \begin{axis}[
-  width=\columnwidth, height=5cm, axis y line*=right, axis x line=none,
-  ylabel={Mean risk UCB}, ylabel style={adcuOrange}, yticklabel style={adcuOrange},
-  xmin=8, xmax=52, ymin=0.55, ymax=0.85,
-  tick label style={font=\tiny}, label style={font=\scriptsize}, mark size=1.6pt]
+ width=\columnwidth, height=5cm, axis y line*=right, axis x line=none,
+ ylabel={Mean risk UCB}, ylabel style={adcuOrange}, yticklabel style={adcuOrange},
+ xmin=8, xmax=52, ymin=0.55, ymax=0.85,
+ tick label style={font=\tiny}, label style={font=\scriptsize}, mark size=1.6pt]
+\addplot[fill=adcuOrange, draw=none, fill opacity=0.15, forget plot] coordinates {(12,0.8201)(24,0.7080)(48,0.6257)(48,0.5657)(24,0.6560)(12,0.7821)};
 \addplot[adcuOrange, mark=square*, dashed, line width=0.8pt] coordinates {(12,0.8011)(24,0.682)(48,0.5957)};
 \end{axis}
 \end{tikzpicture}
@@ -1209,7 +1219,7 @@ FineTune & over-unlearned adapter & 0.0 & 0.0 & 0.0 & 0.0 & 0.4 & 0.4299 \\
 Hybrid & RAG-only deletion & 0.3739 & 0.6957 & 0.0 & 0.087 & 0.96 & 0.8533 \\
 Hybrid & adapter-only unlearning & 0.6957 & 0.6174 & 0.6957 & 0.087 & 0.96 & 0.9283 \\
 Hybrid & full provenance purge & 0.0 & 0.0 & 0.0 & 0.0 & 0.98 & 0.4299 \\
-Hybrid & synthetic derivative retained & 0.3739 & 0.6957 & 0.3913 & 0.087 & 0.96 & 0.9283 \\
+Hybrid & derivative retained & 0.3739 & 0.6957 & 0.3913 & 0.087 & 0.96 & 0.9283 \\
 RAG & cache-not-purged deletion & 0.3913 & 0.313 & 0.3913 & 0.0435 & 0.97 & 0.7839 \\
 RAG & index-only deletion & 0.3913 & 0.313 & 0.3913 & 0.0435 & 0.98 & 0.7839 \\
 RAG & provenance-guided deletion & 0.0 & 0.0 & 0.0 & 0.0 & 1.0 & 0.4299 \\
@@ -1255,12 +1265,12 @@ Qwen-TOFU-LoRA & 51 & 0.75 & 0.6434 & 8 \\
 \toprule
 Track & Data & Model & Retriever & Deletion Targets & Probes & Seeds & Runtime \\
 \midrule
-RealRAG & FEVER retain + synthetic private targets & black-box QA simulator & lexical/SVD & 1/3/5 & 12/24/48 & 5 & ~8 min CPU \\
-NaturalFEVER & public FEVER evidence deletions & black-box QA simulator & lexical & 1/3/5 & 12/24/48 & 5 & ~5 min CPU \\
-LoRA-SFT & synthetic SFT records & controlled low-rank adapter & none & 2 & 32 & 2 & ~2 min CPU \\
-Pretrained-LoRA & synthetic private completions & SmolLM2-135M/Qwen2.5-0.5B PEFT & none & 1 & 24 & 3 per model & ~30-90 min CPU \\
-Qwen-TOFU-LoRA & TOFU forget01/retain99 & Qwen2.5-0.5B PEFT & none & 2 & 24 & 1 & ~25 min CPU \\
-DenseRAG & FEVER retain + derivatives & black-box QA simulator & BM25/SVD/MiniLM/E5/BGE/cross & 2 & 24 & 3 & ~10 min CPU \\
+RealRAG & FEVER retain + private targets & black-box QA simulator & lexical/SVD & 1/3/5 & 12/24/48 & 5 & 8 min CPU \\
+NaturalFEVER & public FEVER evidence deletions & black-box QA simulator & lexical & 1/3/5 & 12/24/48 & 5 & 5 min CPU \\
+LoRA-SFT & SFT records & controlled low-rank adapter & none & 2 & 32 & 2 & 2 min CPU \\
+Pretrained-LoRA & private completions & SmolLM2-135M/Qwen2.5-0.5B PEFT & none & 1 & 24 & 3 per model & 30-90 min CPU \\
+Qwen-TOFU-LoRA & TOFU forget01/retain99 & Qwen2.5-0.5B PEFT & none & 2 & 24 & 1 & 25 min CPU \\
+DenseRAG & FEVER retain + derivatives & black-box QA simulator & BM25/SVD/MiniLM/E5/BGE/cross & 2 & 24 & 3 & 10 min CPU \\
 \bottomrule
 \end{tabular}%
 }
@@ -1304,7 +1314,7 @@ HybridReal & RAG-only deletion & 0.2328 & 0.6111 & 0.0 & 0.0509 & 0.98 & 0.8772 
 HybridReal & adapter-only unlearning & 0.6111 & 0.4668 & 0.6111 & 0.0509 & 0.98 & 0.8772 & 0.6111 & 0.7226 \\
 HybridReal & full provenance purge & 0.0 & 0.0 & 0.0 & 0.0 & 0.98 & 0.508 & 0.0 & 0.0 \\
 HybridReal & graph-pivot expansion retained & 0.2328 & 0.6111 & 0.6111 & 0.0509 & 0.98 & 0.8772 & 0.6111 & 0.7226 \\
-HybridReal & synthetic derivative retained & 0.3995 & 1.0 & 0.6111 & 0.0833 & 0.98 & 1.0 & 1.0 & 1.0 \\
+HybridReal & derivative retained & 0.3995 & 1.0 & 0.6111 & 0.0833 & 0.98 & 1.0 & 1.0 & 1.0 \\
 NaturalFEVER & answer-only paraphrase leak & 0.574 & 0.616 & 0.0 & 0.0436 & 0.98 & 0.8616 & 0.6111 & 0.6857 \\
 NaturalFEVER & citation cache retained & 0.3068 & 0.3011 & 0.3056 & 0.0218 & 0.98 & 0.6975 & 0.3056 & 0.3685 \\
 NaturalFEVER & full provenance purge & 0.0012 & 0.0049 & 0.0 & 0.0 & 0.98 & 0.5068 & 0.0 & 0.0 \\
@@ -1477,7 +1487,7 @@ HybridReal & RAG-only deletion & 0.8772 & 0.8772 & 0.0 & 1.0 & 1.0 \\
 HybridReal & adapter-only unlearning & 0.8772 & 0.8772 & 0.0 & 1.0 & 1.0 \\
 HybridReal & full provenance purge & 0.508 & 0.508 & 0.0 & 0.0 & 0.0 \\
 HybridReal & graph-pivot expansion retained & 0.8772 & 0.8772 & 0.0 & 1.0 & 1.0 \\
-HybridReal & synthetic derivative retained & 1.0 & 1.0 & 0.0 & 1.0 & 1.0 \\
+HybridReal & derivative retained & 1.0 & 1.0 & 0.0 & 1.0 & 1.0 \\
 NaturalFEVER & answer-only paraphrase leak & 0.8616 & 0.8616 & 0.0 & 1.0 & 1.0 \\
 NaturalFEVER & citation cache retained & 0.6975 & 0.6975 & 0.0 & 1.0 & 1.0 \\
 NaturalFEVER & full provenance purge & 0.5068 & 0.5068 & 0.0 & 0.0 & 0.0 \\
@@ -1543,7 +1553,7 @@ Attack Id & Decision & Risk Ucb & Violations & Fooled Weak Audits \\
 paraphrase\_survival & fail & 0.7018 & 8 & exact\_match, canary\_only \\
 chunk\_boundary\_leakage & fail & 0.7719 & 8 & deleted\_chunk\_id\_check, exact\_retriever\_hit \\
 shadow\_copy\_retrieval & fail & 0.5851 & 8 & source\_level\_delete\_check, vector\_id\_delete\_check \\
-synthetic\_derivative\_retention & fail & 0.8438 & 16 & rag\_only\_delete\_audit, vector\_index\_check \\
+\_derivative\_retention & fail & 0.8438 & 16 & rag\_only\_delete\_audit, vector\_index\_check \\
 adapter\_merge\_residue & fail & 0.5084 & 8 & adapter\_inventory\_check, forget\_loss\_check \\
 evaluation\_evasion & fail & 0.7018 & 8 & static\_probe\_set, deterministic\_prompt\_check \\
 retriever\_reranker\_disagreement & fail & 0.5851 & 8 & first\_stage\_vector\_check \\
@@ -1608,18 +1618,18 @@ Qwen-TOFU-LoRA & MembershipInference & 1.0 & -- & -- & 0.6845 & 2 \\
 \toprule
 Model & Method & Forget Risk Before & Forget Risk After & Clean Counterfactual Distance & Retain Utility & Adcu Decision & Seeds \\
 \midrule
-SmolLM2-135M (synthetic) & NPO & 0.929 & 0.681 & 0.500 & 0.333 & escalate/fail & 3 \\
-SmolLM2-135M (synthetic) & SimNPO & 0.929 & 0.681 & 0.500 & 0.333 & escalate/fail & 3 \\
-SmolLM2-135M (synthetic) & filtered retraining & 0.929 & 0.929 & 1.000 & 0.333 & fail & 3 \\
-SmolLM2-135M (synthetic) & full SFT & 0.929 & 0.929 & 1.000 & 0.333 & fail & 3 \\
-SmolLM2-135M (synthetic) & gradient-ascent & 0.929 & 0.852 & 0.833 & 0.333 & fail & 3 \\
-SmolLM2-135M (synthetic) & negative SFT & 0.929 & 0.587 & 0.333 & 0.000 & escalate/fail & 3 \\
-Qwen2.5-0.5B (synthetic) & NPO & 0.511 & 0.416 & 0.000 & 0.000 & escalate & 3 \\
-Qwen2.5-0.5B (synthetic) & SimNPO & 0.511 & 0.416 & 0.000 & 0.000 & escalate & 3 \\
-Qwen2.5-0.5B (synthetic) & filtered retraining & 0.511 & 0.416 & 0.000 & 0.000 & escalate & 3 \\
-Qwen2.5-0.5B (synthetic) & full SFT & 0.511 & 0.511 & 0.167 & 0.000 & escalate/fail & 3 \\
-Qwen2.5-0.5B (synthetic) & gradient-ascent & 0.511 & 0.416 & 0.000 & 0.000 & escalate & 3 \\
-Qwen2.5-0.5B (synthetic) & negative SFT & 0.511 & 0.416 & 0.000 & 0.000 & escalate & 3 \\
+SmolLM2-135M & NPO & 0.929 & 0.681 & 0.500 & 0.333 & escalate/fail & 3 \\
+SmolLM2-135M & SimNPO & 0.929 & 0.681 & 0.500 & 0.333 & escalate/fail & 3 \\
+SmolLM2-135M & filtered retraining & 0.929 & 0.929 & 1.000 & 0.333 & fail & 3 \\
+SmolLM2-135M & full SFT & 0.929 & 0.929 & 1.000 & 0.333 & fail & 3 \\
+SmolLM2-135M & gradient-ascent & 0.929 & 0.852 & 0.833 & 0.333 & fail & 3 \\
+SmolLM2-135M & negative SFT & 0.929 & 0.587 & 0.333 & 0.000 & escalate/fail & 3 \\
+Qwen2.5-0.5B & NPO & 0.511 & 0.416 & 0.000 & 0.000 & escalate & 3 \\
+Qwen2.5-0.5B & SimNPO & 0.511 & 0.416 & 0.000 & 0.000 & escalate & 3 \\
+Qwen2.5-0.5B & filtered retraining & 0.511 & 0.416 & 0.000 & 0.000 & escalate & 3 \\
+Qwen2.5-0.5B & full SFT & 0.511 & 0.511 & 0.167 & 0.000 & escalate/fail & 3 \\
+Qwen2.5-0.5B & gradient-ascent & 0.511 & 0.416 & 0.000 & 0.000 & escalate & 3 \\
+Qwen2.5-0.5B & negative SFT & 0.511 & 0.416 & 0.000 & 0.000 & escalate & 3 \\
 Qwen2.5-0.5B (TOFU) & TOFU NPO & 0.643 & 0.643 & 0.500 & 1.000 & fail & 1 \\
 Qwen2.5-0.5B (TOFU) & TOFU full SFT & 0.643 & 0.643 & 0.500 & 1.000 & fail & 1 \\
 \bottomrule
@@ -1755,7 +1765,7 @@ audit\_method & influence-style & DenseRAG/PEFT-LoRA/Pretrained-LoRA/Qwen-TOFU-L
 
 \subsection{Case-Study Redaction}
 
-Case studies are redacted before entering manuscript tables. The artifact stores risk components and interpretations but replaces synthetic user identifiers and secret values with placeholders. This mirrors how a real deletion-audit report should be prepared: auditors need enough evidence to diagnose residual dependence, but articles and public artifacts should not normalize printing sensitive strings.
+Case studies are redacted before entering manuscript tables. The artifact stores risk components and interpretations but replaces user identifiers and secret values with placeholders. This mirrors how a real deletion-audit report should be prepared: auditors need enough evidence to diagnose residual dependence, but articles and public artifacts should not normalize printing sensitive strings.
 
 \subsection{Recommended Extensions}
 

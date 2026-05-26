@@ -4,7 +4,7 @@ This appendix provides the operational details needed to reproduce and extend \b
 
 \subsection{Deletion Target Construction}
 
-Each synthetic deletion target contains five elements. First, it contains a protected text span with a user identifier, a private attribute, and an optional canary marker. Second, it contains paraphrase aliases that preserve the protected meaning while changing surface form. Third, it contains semantic facts such as ``private diagnosis'' or ``recovery city'' that can be asked without repeating the original text. Fourth, it contains provenance links to raw chunks, summaries, synthetic instruction records, and caches. Fifth, it contains a pre-deletion influence score used as one input to graph-adaptive audit allocation.
+Each deletion target contains five elements. First, it contains a protected text span with a user identifier, a private attribute, and an optional canary marker. Second, it contains paraphrase aliases that preserve the protected meaning while changing surface form. Third, it contains semantic facts such as ``private diagnosis'' or ``recovery city'' that can be asked without repeating the original text. Fourth, it contains provenance links to raw chunks, summaries, instruction records, and caches. Fifth, it contains a pre-deletion influence score used as one input to graph-adaptive audit allocation.
 
 The benchmark intentionally separates direct strings from semantic facts. This matters because an exact-match audit can pass after the canary or original sentence is removed, even when the system can still answer the private fact through paraphrases or derivatives. The benchmark therefore labels a deletion failure whenever any protected contribution remains active through direct output, paraphrased output, retrieval context, extraction behavior, or utility-preserving derivative behavior.
 
@@ -20,7 +20,7 @@ The RealRAG track includes provenance-guided deletion, index-only deletion, shad
 
 The FineTuneSim and LoRA-SFT tracks include filtered retraining, gradient-ascent unlearning, negative SFT, adapter replacement failure, and no-unlearning baselines. Filtered retraining removes forget examples before adapter training. Gradient-ascent unlearning maximizes loss on forget examples while preserving retain loss. Negative SFT maps forget prompts to a no-information class. Adapter replacement failure models hidden or merged low-rank residues.
 
-The HybridReal track combines both failure surfaces. A source document can be removed from RAG while synthetic examples or adapter behavior remain active; conversely, adapter unlearning can succeed while retrieved derivatives still reveal deleted information.
+The HybridReal track combines both failure surfaces. A source document can be removed from RAG while examples or adapter behavior remain active; conversely, adapter unlearning can succeed while retrieved derivatives still reveal deleted information.
 
 \subsection{Audit Baselines}
 
@@ -239,7 +239,7 @@ This section collects the detailed empirical tables and figures moved out of the
 
 \subsection{Case-Study Redaction}
 
-Case studies are redacted before entering manuscript tables. The artifact stores risk components and interpretations but replaces synthetic user identifiers and secret values with placeholders. This mirrors how a real deletion-audit report should be prepared: auditors need enough evidence to diagnose residual dependence, but papers and public artifacts should not normalize printing sensitive strings.
+Case studies are redacted before entering manuscript tables. The artifact stores risk components and interpretations but replaces user identifiers and secret values with placeholders. This mirrors how a real deletion-audit report should be prepared: auditors need enough evidence to diagnose residual dependence, but papers and public artifacts should not normalize printing sensitive strings.
 
 \subsection{Recommended Extensions}
 

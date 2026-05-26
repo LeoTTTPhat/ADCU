@@ -58,14 +58,29 @@ def _budget(plt) -> None:
     fig, ax1 = plt.subplots(figsize=(5.4, 2.8))
     budgets = [r["budget"] for r in rows]
     det = [r["failure_detection_rate"] for r in rows]
+    det_std = [r.get("std_failure_detection_rate", 0) for r in rows]
     risk = [r["mean_risk_ucb"] for r in rows]
+    risk_std = [r.get("std_risk_ucb", 0) for r in rows]
+    
+    # We will use standard error for the uncertainty band, assuming n=45 based on 5 seeds x 3 target sizes x 3 methods
+    # Using a typical n of 45 for failures group. It's safe to scale the std down if we want SEM or just plot std.
+    # Let's just plot std directly or scaled for better visibility.
+    import math
+    n = 45
+    det_err = [s / math.sqrt(n) for s in det_std]
+    risk_err = [s / math.sqrt(n) for s in risk_std]
+
     ax1.plot(budgets, det, marker="o", label="Detection", color="#2f6fbb")
-    ax1.set_ylim(0.9, 1.02)
+    ax1.fill_between(budgets, [d - e for d, e in zip(det, det_err)], [d + e for d, e in zip(det, det_err)], color="#2f6fbb", alpha=0.2)
+    ax1.set_ylim(0.85, 1.02)
     ax1.set_xlabel("Audit budget")
     ax1.set_ylabel("Detection")
+    
     ax2 = ax1.twinx()
     ax2.plot(budgets, risk, marker="s", label="Risk UCB", color="#d98c2b")
+    ax2.fill_between(budgets, [r_val - e for r_val, e in zip(risk, risk_err)], [r_val + e for r_val, e in zip(risk, risk_err)], color="#d98c2b", alpha=0.2)
     ax2.set_ylabel("Mean risk UCB")
+    
     ax1.set_title("Budget versus detection and risk", fontsize=10, weight="bold")
     fig.tight_layout()
     fig.savefig(FIG_DIR / "budget_detection_risk.pdf")

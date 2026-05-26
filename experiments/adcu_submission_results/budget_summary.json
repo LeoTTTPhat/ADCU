@@ -4,20 +4,26 @@
     "failure_detection_rate": 0.9111,
     "mean_risk_ucb": 0.8036,
     "mean_floor_normalized_risk": 0.3953,
-    "mean_calls": 12.0
+    "mean_calls": 12.0,
+    "std_failure_detection_rate": 0.2852,
+    "std_risk_ucb": 0.1286
   },
   {
     "budget": 24,
     "failure_detection_rate": 0.9333,
     "mean_risk_ucb": 0.6945,
     "mean_floor_normalized_risk": 0.3806,
-    "mean_calls": 24.0
+    "mean_calls": 24.0,
+    "std_failure_detection_rate": 0.25,
+    "std_risk_ucb": 0.1728
   },
   {
     "budget": 48,
     "failure_detection_rate": 0.9333,
     "mean_risk_ucb": 0.6177,
     "mean_floor_normalized_risk": 0.3806,
-    "mean_calls": 40.28
+    "mean_calls": 40.28,
+    "std_failure_detection_rate": 0.25,
+    "std_risk_ucb": 0.2009
   }
 ]
