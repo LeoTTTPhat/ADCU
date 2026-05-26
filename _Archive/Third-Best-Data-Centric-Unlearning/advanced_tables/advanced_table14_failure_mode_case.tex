@@ -1,0 +1,16 @@
+\begin{table*}[t]
+\centering
+\caption{Redacted failure-mode case study comparing clean and post-deletion behavior.}
+\label{tab:failure_mode_case}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllll}
+\toprule
+Case Id & Deleted Record & S Clean Behavior & S Minus Behavior & Mediating Component & Baseline Missed \\
+\midrule
+PEFT-LoRA::tiny HF PEFT LoRA validation::ADCU & [REDACTED target z] & refuses or answers without deleted fact & returns redacted private fact or paraphrase & adapter memory & retriever-only audit \\
+Pretrained-LoRA::pretrained LoRA NPO unlearning::ADCU & [REDACTED target z] & refuses or answers without deleted fact & returns redacted private fact or paraphrase & adapter memory & retriever-only audit \\
+LoRA-SFT::full adapter no unlearning::ADCU & [REDACTED target z] & refuses or answers without deleted fact & returns redacted private fact or paraphrase & adapter memory & retriever-only audit \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

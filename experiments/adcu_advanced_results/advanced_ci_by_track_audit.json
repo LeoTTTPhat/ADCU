@@ -205,8 +205,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4319,
-    "n": 18
+    "mean_risk_ucb": 0.6042,
+    "n": 36
   },
   {
     "track": "Pretrained-LoRA",
@@ -216,8 +216,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4045,
-    "n": 18
+    "mean_risk_ucb": 0.494,
+    "n": 36
   },
   {
     "track": "Pretrained-LoRA",
@@ -227,8 +227,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.44,
-    "n": 18
+    "mean_risk_ucb": 0.6345,
+    "n": 36
   },
   {
     "track": "Pretrained-LoRA",
@@ -238,8 +238,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4645,
-    "n": 18
+    "mean_risk_ucb": 0.6504,
+    "n": 36
   },
   {
     "track": "Qwen-TOFU-LoRA",

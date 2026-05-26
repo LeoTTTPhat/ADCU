@@ -1,0 +1,41 @@
+track,deletion_method,audit_method,decision,ground_truth_failure,detected_failure,aggregate_risk_ucb,empirical_risk,confidence_floor,floor_normalized_risk,delta,operating_tolerance,direct_leakage,paraphrase_leakage,retrieval_dependence,counterfactual_dependence,extraction_risk,watermark_hit,retain_utility,audit_calls,detection_per_1000_calls,seed,target_size,budget,retain_corpus_n,scaling_regime
+RealRAG,provenance-guided deletion,ExactMatch,pass,False,False,0.4327,0.0,0.4327,0.0,0.05,0.65,0.0,0.0,0.0,0.0,0.0,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,provenance-guided deletion,CanaryOnly,pass,False,False,0.4327,0.0,0.4327,0.0,0.05,0.65,0.0,0.0,0.0,0.0,0.0,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,provenance-guided deletion,RetrieverHit,pass,False,False,0.4327,0.0,0.4327,0.0,0.05,0.65,0.0,0.0,0.0,0.0,0.0,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,provenance-guided deletion,UniformProbes,pass,False,False,0.4327,0.0,0.4327,0.0,0.05,0.05,0.0,0.0,0.0,0.0,0.0,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,provenance-guided deletion,ADCU-NoValuation,pass,False,False,0.4327,0.0,0.4327,0.0,0.05,0.05,0.0,0.0,0.0,0.0,0.0,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,provenance-guided deletion,ADCU-BlackBox,pass,False,False,0.4327,0.0,0.4327,0.0,0.05,0.05,0.0,0.0,0.0,0.0,0.0,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,provenance-guided deletion,ADCU-RetrievalOffCF,pass,False,False,0.4327,0.0,0.4327,0.0,0.05,0.05,0.0,0.0,0.0,0.0,0.0,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,provenance-guided deletion,ADCU,pass,False,False,0.4327,0.0,0.4327,0.0,0.05,0.05,0.0,0.0,0.0,0.0,0.0,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,index-only deletion,ExactMatch,fail,True,False,0.5942,0.2847,0.4327,0.2847,0.05,0.65,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,index-only deletion,CanaryOnly,fail,True,False,0.5942,0.2847,0.4327,0.2847,0.05,0.65,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,index-only deletion,RetrieverHit,fail,True,False,0.5942,0.2847,0.4327,0.2847,0.05,0.65,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,index-only deletion,UniformProbes,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,index-only deletion,ADCU-NoValuation,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,index-only deletion,ADCU-BlackBox,fail,True,True,0.5942,0.268,0.4327,0.2847,0.05,0.05,0.1667,0.125,0.0,0.1569,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,index-only deletion,ADCU-RetrievalOffCF,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.0,0.0278,0.0,0.1667,0.0,0.0,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,index-only deletion,ADCU,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,shadow-copy deletion,ExactMatch,fail,True,False,0.5585,0.2217,0.4327,0.2217,0.05,0.65,0.1667,0.1296,0.1667,0.1667,0.0139,0.1667,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,shadow-copy deletion,CanaryOnly,fail,True,False,0.5585,0.2217,0.4327,0.2217,0.05,0.65,0.1667,0.1296,0.1667,0.1667,0.0139,0.1667,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,shadow-copy deletion,RetrieverHit,fail,True,False,0.5585,0.2217,0.4327,0.2217,0.05,0.65,0.1667,0.1296,0.1667,0.1667,0.0139,0.1667,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,shadow-copy deletion,UniformProbes,fail,True,True,0.5585,0.2217,0.4327,0.2217,0.05,0.05,0.1667,0.1296,0.1667,0.1667,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,shadow-copy deletion,ADCU-NoValuation,fail,True,True,0.5585,0.2217,0.4327,0.2217,0.05,0.05,0.1667,0.1296,0.1667,0.1667,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,shadow-copy deletion,ADCU-BlackBox,fail,True,True,0.5585,0.2094,0.4327,0.2217,0.05,0.05,0.1667,0.1296,0.0,0.1574,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,shadow-copy deletion,ADCU-RetrievalOffCF,fail,True,True,0.5585,0.2217,0.4327,0.2217,0.05,0.05,0.0,0.0238,0.0,0.1667,0.0,0.0,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,shadow-copy deletion,ADCU,fail,True,True,0.5585,0.2217,0.4327,0.2217,0.05,0.05,0.1667,0.1296,0.1667,0.1667,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,cache-not-purged deletion,ExactMatch,fail,True,False,0.5942,0.2847,0.4327,0.2847,0.05,0.65,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,cache-not-purged deletion,CanaryOnly,fail,True,False,0.5942,0.2847,0.4327,0.2847,0.05,0.65,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,cache-not-purged deletion,RetrieverHit,fail,True,False,0.5942,0.2847,0.4327,0.2847,0.05,0.65,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,cache-not-purged deletion,UniformProbes,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,cache-not-purged deletion,ADCU-NoValuation,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,cache-not-purged deletion,ADCU-BlackBox,fail,True,True,0.5942,0.268,0.4327,0.2847,0.05,0.05,0.1667,0.125,0.0,0.1569,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,cache-not-purged deletion,ADCU-RetrievalOffCF,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.0,0.0278,0.0,0.1667,0.0,0.0,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,cache-not-purged deletion,ADCU,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.1667,0.125,0.1667,0.1667,0.0139,0.1667,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,backdoor-triggered RAG leakage,ExactMatch,pass,True,False,0.5276,0.0949,0.4327,0.1673,0.05,0.65,0.0556,0.1667,0.0,0.1667,0.0139,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,backdoor-triggered RAG leakage,CanaryOnly,pass,True,False,0.4327,0.0,0.4327,0.0,0.05,0.65,0.0556,0.1667,0.0,0.1667,0.0139,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,backdoor-triggered RAG leakage,RetrieverHit,pass,True,False,0.4327,0.0,0.4327,0.0,0.05,0.65,0.0556,0.1667,0.0,0.1667,0.0139,0.0,0.98,48,0.0,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,backdoor-triggered RAG leakage,UniformProbes,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.0556,0.1667,0.0,0.1667,0.0139,0.0,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,backdoor-triggered RAG leakage,ADCU-NoValuation,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.0556,0.1667,0.0,0.1667,0.0139,0.0,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,backdoor-triggered RAG leakage,ADCU-BlackBox,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.0556,0.1667,0.0,0.1667,0.0139,0.0,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,backdoor-triggered RAG leakage,ADCU-RetrievalOffCF,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.0556,0.1667,0.0,0.1667,0.0139,0.0,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus
+RealRAG,backdoor-triggered RAG leakage,ADCU,fail,True,True,0.5942,0.2847,0.4327,0.2847,0.05,0.05,0.0556,0.1667,0.0,0.1667,0.0139,0.0,0.98,48,20.83,17,6,48,5000,mid-size RealRAG retain corpus

@@ -17,10 +17,10 @@ ExtractionAudit,0.0,0.0,0.0,0.0,0.0,0.5464,1,PEFT-LoRA
 InfluenceProxy,1.0,1.0,1.0,1.0,1.0,0.8482,1,PEFT-LoRA
 MembershipInference,1.0,1.0,1.0,1.0,1.0,0.9195,1,PEFT-LoRA
 RetrieverHit,0.0,0.0,0.0,0.0,0.0,0.3736,1,PEFT-LoRA
-ADCU,1.0,1.0,1.0,1.0,1.0,0.4319,18,Pretrained-LoRA
-ExtractionAudit,1.0,1.0,1.0,1.0,1.0,0.4045,18,Pretrained-LoRA
-InfluenceProxy,1.0,1.0,1.0,1.0,1.0,0.44,18,Pretrained-LoRA
-MembershipInference,1.0,1.0,1.0,1.0,1.0,0.4645,18,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,1.0,0.6042,36,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,1.0,0.494,36,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,1.0,0.6345,36,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,1.0,0.6504,36,Pretrained-LoRA
 ADCU,1.0,1.0,1.0,1.0,1.0,0.6434,2,Qwen-TOFU-LoRA
 ExtractionAudit,0.0,0.0,0.0,0.0,0.0,0.5249,2,Qwen-TOFU-LoRA
 InfluenceProxy,1.0,1.0,1.0,1.0,1.0,0.6845,2,Qwen-TOFU-LoRA

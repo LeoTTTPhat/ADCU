@@ -6,7 +6,7 @@ failure_detection_rate,mean_adcu_risk_ucb,n,seed,track
 0.8333,0.7446,24,12,LoRA-SFT
 0.8333,0.7493,24,13,LoRA-SFT
 0.7143,0.7661,7,31,PEFT-LoRA
-1.0,0.4161,24,41,Pretrained-LoRA
-1.0,0.4161,24,42,Pretrained-LoRA
-1.0,0.4634,24,43,Pretrained-LoRA
+1.0,0.5251,48,41,Pretrained-LoRA
+1.0,0.6487,48,42,Pretrained-LoRA
+1.0,0.6387,48,43,Pretrained-LoRA
 0.75,0.6434,8,51,Qwen-TOFU-LoRA

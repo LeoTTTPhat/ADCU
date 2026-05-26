@@ -1,0 +1,280 @@
+\section{Benchmark Protocol Details}
+
+This appendix provides the operational details needed to reproduce and extend \bench{}. It is included in the draft because deletion-audit papers are easy to underspecify: small differences in deletion target construction, probe generation, cache handling, or retain-utility reporting can change the interpretation of results.
+
+\subsection{Deletion Target Construction}
+
+Each synthetic deletion target contains five elements. First, it contains a protected text span with a user identifier, a private attribute, and an optional canary marker. Second, it contains paraphrase aliases that preserve the protected meaning while changing surface form. Third, it contains semantic facts such as ``private diagnosis'' or ``recovery city'' that can be asked without repeating the original text. Fourth, it contains provenance links to raw chunks, summaries, synthetic instruction records, and caches. Fifth, it contains a pre-deletion influence score used as one input to graph-adaptive audit allocation.
+
+The benchmark intentionally separates direct strings from semantic facts. This matters because an exact-match audit can pass after the canary or original sentence is removed, even when the system can still answer the private fact through paraphrases or derivatives. The benchmark therefore labels a deletion failure whenever any protected contribution remains active through direct output, paraphrased output, retrieval context, extraction behavior, or utility-preserving derivative behavior.
+
+\subsection{Probe Families}
+
+\bench{} uses six probe families. Direct probes ask for the protected fact in a straightforward way. Paraphrase probes use aliases or alternate wordings. Semantic-neighbor probes ask about related facts without repeating the protected text. Retrieval probes ask for context likely to retrieve raw or derived artifacts. Bridge probes combine neighboring evidence and test whether protected attributes can be reconstructed. Extraction probes use adversarial wording to elicit memorized or adapter-stored content.
+
+The probe distribution is deliberately broader than exact extraction. Deployed systems often leak by answering ordinary user questions rather than by dumping training records. A robust deletion audit should therefore include ordinary question answering, retrieval inspection, and adversarial extraction.
+
+\subsection{Deletion Methods}
+
+The RealRAG track includes provenance-guided deletion, index-only deletion, shadow-copy deletion, and cache-not-purged deletion. Provenance-guided deletion removes all artifacts linked to the target. Index-only deletion leaves summaries and caches active. Shadow-copy deletion leaves near-duplicates under different artifact identifiers. Cache-not-purged deletion leaves previous generated responses or retrieved contexts available.
+
+The FineTuneSim and LoRA-SFT tracks include filtered retraining, gradient-ascent unlearning, negative SFT, adapter replacement failure, and no-unlearning baselines. Filtered retraining removes forget examples before adapter training. Gradient-ascent unlearning maximizes loss on forget examples while preserving retain loss. Negative SFT maps forget prompts to a no-information class. Adapter replacement failure models hidden or merged low-rank residues.
+
+The HybridReal track combines both failure surfaces. A source document can be removed from RAG while synthetic examples or adapter behavior remain active; conversely, adapter unlearning can succeed while retrieved derivatives still reveal deleted information.
+
+\subsection{Audit Baselines}
+
+ExactMatch scores overlap with protected strings. CanaryOnly checks whether explicit canary tokens remain. RetrieverHit checks whether deleted or derived artifact identifiers appear in retrieved contexts. MembershipInference scores direct and paraphrased behavioral dependence. ExtractionAudit emphasizes extraction probes. InfluenceProxy aggregates direct, paraphrase, and retrieval components as a low-cost influence-style approximation. UniformProbes uses the same clean-counterfactual risk statistic as \method{} but allocates budget evenly. ADCU-NoValuation is retained as a legacy ablation that removes the influence/provenance priority signal while keeping the rest of the audit.
+
+These baselines are not straw men. They correspond to practical audit shortcuts: checking that vector IDs are gone, checking that canaries do not appear, checking exact text reproduction, or probing a fixed set of known prompts. The attack suite demonstrates why each shortcut can be insufficient.
+
+\subsection{Confidence Intervals}
+
+For row-level risk, \method{} uses a Hoeffding upper confidence bound because evidence scores are bounded in $[0,1]$. For repeated detection rates, the artifact reports bootstrap 95\% confidence intervals over binary failure-detection outcomes. It also exports per-seed variance tables so reviewers can separate average performance from seed-level instability.
+
+\subsection{Proofs for Risk Bounds}
+
+This appendix gives the complete proof for the confidence claims used in Section~4. The revised main text defines the primary audit target as counterfactual behavioral distance from $S_{\mathrm{clean}}$ and treats the six evidence channels as diagnostics. We first prove the counterfactual version, then show that the older channel-weighted bound is a special case where the bounded discrepancy is $w^\top e(S_-,q,z)$.
+
+\textbf{Counterfactual behavioral deletion.}
+Fix a post-deletion system $S_-$, clean reference $S_{\mathrm{clean}}$, deletion target $z$, and declared audit-probe distribution $A(z,G)$. For probe $q_i\sim A(z,G)$, define
+\[
+Z_i(z)=d(O_{S_-}(q_i),O_{S_{\mathrm{clean}}}(q_i)).
+\]
+By construction $Z_i(z)\in[0,1]$. The true behavioral-deletion risk is
+\[
+\mu^{\mathrm{cf}}_z=\mathbb{E}[Z_i(z)]
+\]
+and the empirical clean-counterfactual distance over $n_z$ probes is
+\[
+\hat\mu^{\mathrm{cf}}_z=\frac{1}{n_z}\sum_{i=1}^{n_z}Z_i(z).
+\]
+Hoeffding's inequality gives
+\[
+\Pr[\mu^{\mathrm{cf}}_z-\hat\mu^{\mathrm{cf}}_z\geq \epsilon]
+\leq \exp(-2n_z\epsilon^2).
+\]
+Set $\epsilon_z(\delta)=\sqrt{\log(1/\delta)/(2n_z)}$. Then
+\[
+\Pr[\mu^{\mathrm{cf}}_z>
+\hat\mu^{\mathrm{cf}}_z+\epsilon_z(\delta)]
+\leq \delta.
+\]
+If the audit passes only when $\hat\mu^{\mathrm{cf}}_z+\epsilon_z(\delta)\leq\varepsilon$, then passing while $\mu^{\mathrm{cf}}_z>\varepsilon$ implies the Hoeffding failure event. Therefore
+\[
+\Pr[\mathrm{pass}(z)\wedge \mu^{\mathrm{cf}}_z>\varepsilon]\leq \delta.
+\]
+For multiple deletion targets, choose $\delta_z$ with $\sum_z\delta_z\leq\delta_{\mathrm{req}}$ and apply a union bound. On the simultaneous-good event, the request-level risk $\sum_z\pi(z)\mu^{\mathrm{cf}}_z$ is bounded by $\sum_z\pi(z)\mathrm{UCB}_{\mathrm{cf}}(z)$.
+
+\textbf{Graph-adaptive arm sharing.}
+Let arms be $a=(z,c)$ and let each arm have bounded risk variable $Z_i(a)\in[0,1]$. The certified version of graph sharing requires more than correlation. For each neighbor edge $b\to a$, assume the scorer can construct a bounded pseudo-observation $Y_i^{a\leftarrow b}\in[0,1]$ whose conditional expectation is the arm-$a$ mean, $\mathbb{E}[Y_i^{a\leftarrow b}\mid b\ \mathrm{sampled}]=r(a)$. This condition is satisfied only when the provenance edge and scoring rule make the neighbor observation an estimator of the same event, such as a deleted derivative that simultaneously certifies retrieval and cache survival. Assign pseudo-observations weight $\rho_{ab}\in[0,1]$ and define $n_t^{\mathrm{eff}}(a)=n_t(a)+\sum_{b\in N(a)}\rho_{ab}n_t(b)$. A weighted Hoeffding bound for bounded observations, followed by a union bound over all $a,t$ with failure probability $\delta/(|\mathcal{A}|t^2)$, gives a simultaneous confidence interval with conservative radius
+\[
+\sqrt{\frac{\log(2|\mathcal{A}|t^2/\delta)}{2n_t^{\mathrm{eff}}(a)}}.
+\]
+Since $n_t^{\mathrm{eff}}(a)\geq n_t(a)$ and is strictly larger when certified neighbors have positive $\rho_{ab}$, graph sharing improves the radius only under this explicit pseudo-observation condition. When the condition is not justified, the implementation uses provenance only to prioritize the next arm and computes the formal pass/fail UCB from direct clean-counterfactual observations.
+
+\textbf{Adversary-class coverage.}
+For adversary class $\mathcal{H}_{k,\eta}$, assume each active leakage mode is hit by a sampled paraphrase-neighborhood or graph-pivot probe with probability at least $p_{\min}$. The probability of missing that mode after $m$ independent probes is at most $(1-p_{\min})^m$. This also gives a matching lower bound for any black-box audit whose probe distribution has hit probability no more than $p_{\min}$ on that hidden mode: the mode remains unseen with probability at least $(1-p_{\min})^m$. The guarantee is therefore minimax for the declared hit-probability model and makes coverage an explicit experimental quantity rather than an implicit assumption.
+
+\textbf{Channel-weighted special case.}
+Fix a post-deletion system $S_-$, a deletion target $z$, a declared audit-probe distribution $A(z)$, and a nonnegative weight vector $w$ normalized so that $\|w\|_1\leq 1$. For probe $q_i\sim A(z)$, define the scalar audit evidence
+\[
+X_i(z)=w^\top e(S_-,q_i,z).
+\]
+Because each evidence channel is in $[0,1]$ and $w$ is nonnegative with $\|w\|_1\leq 1$, $X_i(z)\in[0,1]$. The true target risk is
+\[
+\mu_z=R_{\mathrm{del}}(z;S_-)=\mathbb{E}[X_i(z)],
+\]
+and the empirical risk over $n_z$ probes is
+\[
+\hat\mu_z=\frac{1}{n_z}\sum_{i=1}^{n_z} X_i(z).
+\]
+
+\textbf{Target-level false-pass control.}
+Assume $X_1(z),\ldots,X_{n_z}(z)$ are independent draws from the declared probe distribution. Hoeffding's inequality for bounded variables gives, for any $\epsilon>0$,
+\[
+\Pr[\mu_z-\hat\mu_z\geq \epsilon]\leq \exp(-2n_z\epsilon^2).
+\]
+Set
+\[
+\epsilon_z(\delta)=\sqrt{\frac{\log(1/\delta)}{2n_z}}.
+\]
+Then $\exp(-2n_z\epsilon_z(\delta)^2)=\delta$, so
+\[
+\Pr[\mu_z>\hat\mu_z+\epsilon_z(\delta)]\leq\delta.
+\]
+Define $\mathrm{UCB}(z)=\hat\mu_z+\epsilon_z(\delta)$. If the audit passes target $z$ only when $\mathrm{UCB}(z)\leq\tau$, then the false-pass event
+\[
+\{\mathrm{pass}(z)\ \wedge\ \mu_z>\tau\}
+\]
+implies $\mu_z>\mathrm{UCB}(z)$, because pass gives $\mathrm{UCB}(z)\leq\tau$. Therefore
+\[
+\Pr[\mathrm{pass}(z)\ \wedge\ \mu_z>\tau]
+\leq
+\Pr[\mu_z>\mathrm{UCB}(z)]
+\leq \delta.
+\]
+This proves the target-level false-pass statement.
+
+\textbf{Multiple targets.}
+For a deletion request $D_{\mathrm{del}}$ with targets $z\in D_{\mathrm{del}}$, choose per-target confidence levels $\delta_z$ such that $\sum_z\delta_z\leq\delta_{\mathrm{req}}$. Applying the target-level bound to each $z$ and using the union bound gives
+\[
+\Pr[\exists z:\mu_z>\mathrm{UCB}(z)]\leq \sum_z\delta_z\leq\delta_{\mathrm{req}}.
+\]
+Thus, with probability at least $1-\delta_{\mathrm{req}}$, every target risk is upper-bounded by its reported UCB simultaneously.
+
+\textbf{Aggregate request-level risk.}
+Let $\pi(z)\geq0$ and $\sum_z\pi(z)=1$. The true aggregate risk is
+\[
+R_{\method}(D_{\mathrm{del}};S_-)=\sum_z \pi(z)\mu_z.
+\]
+On the simultaneous-good event above, $\mu_z\leq \mathrm{UCB}(z)$ for all targets, so
+\[
+R_{\method}(D_{\mathrm{del}};S_-)
+=\sum_z\pi(z)\mu_z
+\leq
+\sum_z\pi(z)\mathrm{UCB}(z).
+\]
+Therefore, if the request-level audit passes only when
+\[
+\sum_z\pi(z)\mathrm{UCB}(z)\leq\tau_{\mathrm{req}},
+\]
+then
+\[
+\Pr[\mathrm{pass}(D_{\mathrm{del}})\ \wedge\ R_{\method}(D_{\mathrm{del}};S_-)>\tau_{\mathrm{req}}]
+\leq \delta_{\mathrm{req}},
+\]
+again under the declared probe distributions and independence assumptions.
+
+\textbf{Sample complexity for detection above tolerance.}
+Suppose a target has true risk $\mu_z\geq\tau+\gamma$ for $\gamma>0$. To make the confidence radius at most $\gamma/2$, it suffices that
+\[
+n_z\geq \frac{2\log(1/\delta)}{\gamma^2},
+\]
+because then $\epsilon_z(\delta)\leq \gamma/2$. Hoeffding also gives
+\[
+\Pr[\hat\mu_z \leq \mu_z-\gamma/2]\leq \exp(-n_z\gamma^2/2)\leq\delta.
+\]
+On the complementary event, $\hat\mu_z\geq \mu_z-\gamma/2\geq\tau+\gamma/2$, so the empirical risk itself exceeds $\tau$. This shows that $O(\log(1/\delta)/\gamma^2)$ probes are sufficient to detect a target whose risk is separated from the tolerance by margin $\gamma$, up to constants depending on whether one requires the empirical mean or the UCB radius to cross the operational fail threshold. The shorter bound in Section~4 corresponds to the condition that the UCB radius is at most $\gamma$; the stronger display here gives a direct high-probability empirical separation statement.
+
+\textbf{Role of retain utility.}
+The proof above controls deletion-risk false passes only. The actual audit also requires retain utility to exceed a threshold. This additional condition can only make passing harder. It therefore cannot increase the probability of passing while deletion risk exceeds tolerance, although it can convert otherwise passing runs into \emph{escalate} decisions when unlearning damages retained behavior.
+
+\textbf{Assumptions and limits.}
+The guarantee is conditional on the declared probe distribution, bounded evidence scores, stable post-deletion system behavior during the audit, and independence or martingale-style concentration for the sampled probes. It is not a universal proof that no prompt can ever elicit deleted information. If probes are adaptively selected, the same proof can be recovered by replacing the i.i.d. Hoeffding step with an appropriate bounded martingale concentration bound, provided each next probe is chosen using only previous audit observations and the scoring variables remain bounded.
+
+\subsection{DenseRAG Configuration}
+
+DenseRAG uses TF-IDF features followed by truncated SVD as a local dense retriever. It also includes cache-gated neural retrieval with MiniLM sentence-transformer embeddings, E5-base-v2 retrieval, and BGE-small retrieval over all advanced seeds. E5 queries are prefixed with \texttt{query:} and documents with \texttt{passage:}; BGE queries use the standard retrieval instruction prefix. The cross-encoder-style reranker trains a logistic model over sparse similarity, dense similarity, and token-overlap features. Neural retrieval is limited to a small retain set in the artifact so reviewers can reproduce the run on CPU.
+
+\subsection{LoRA-SFT Configuration}
+
+The LoRA-SFT experiment uses a frozen base linear map and trainable low-rank matrices. Inputs are hashed token and character-ngram features. The model is trained with cross-entropy on retain examples and target-specific private examples. The Pretrained-LoRA experiment additionally loads a cached SmolLM2-135M safetensors checkpoint, wraps it with PEFT LoRA modules on attention projections, fine-tunes private completions, and compares filtered retraining, gradient ascent, negative SFT, NPO with a frozen reference adapter, and SimNPO without the reference correction. The Qwen-TOFU-LoRA experiment loads a cached Qwen2.5-0.5B checkpoint, uses TOFU \texttt{forget01} examples as public forget targets and TOFU \texttt{retain99} examples as retain examples, and compares full SFT with NPO on a compact CPU-reproducible slice. The full TOFU evaluator records all official TOFU split sizes, evaluates the full \texttt{forget01} split, and uses deterministic bounded subsets for the larger retain, holdout, real-author, world-fact, and perturbed splits in the default artifact run. Setting \texttt{ADCU\_TOFU\_EVAL\_LIMIT=full} removes this cap and scores every example in every official split with the same Qwen likelihood metric. The audit converts protected-versus-refusal likelihood margins into an active-memory map before running the same black-box probe interface used by all other tracks. The artifact also reports retain perplexity and retain completion accuracy.
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table5_utility_risk}
+
+Table~\ref{tab:utility_risk} reports the utility--risk view used in the reviewer-response revision. Retain utility is measured as FEVER evidence retrieval accuracy in RAG tracks, configured retain completion or accuracy in adapter tracks, or a deliberately low utility score for over-unlearning. Mean audit calls are reported as the black-box latency proxy; hardware-specific model latency is reported in the artifact manifest rather than folded into deletion risk.
+
+\section{Supplementary Empirical Tables}
+
+This section collects the detailed empirical tables and figures moved out of the main manuscript to reduce density. They support the summarized claims in Section~7 of the main paper while keeping the primary narrative focused on the counterfactual deletion definition, audit algorithm, calibration figures, and headline detection result. In particular, Fig.~\ref{fig:hybrid_detection} gives per-method HybridReal detection and Fig.~\ref{fig:budget} the audit-budget--detection tradeoff referenced in Section~7; Table~\ref{tab:adcu_residual} reports the per-deletion-method residual-dependence channels, and Table~\ref{tab:per_seed} the per-seed detection and risk used to separate average performance from seed-level instability.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/adcu_pdf/hybrid_real_detection.pdf}
+\caption{HybridReal failure detection by audit method. Narrow audits miss residual-dependence channels that combine model-side and retrieval-side artifacts.}
+\label{fig:hybrid_detection}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/adcu_pdf/budget_detection_risk.pdf}
+\caption{Audit budget tradeoff with 95\% uncertainty bands. Larger budgets improve detection and reduce the average risk confidence bound.}
+\label{fig:budget}
+\end{figure}
+
+\input{../Third-Best-Data-Centric-Unlearning/tables/table2_residual_channels}
+
+\input{../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table6_per_seed}
+
+\input{../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table16_reproducibility}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table1b_counterfactual_graph_summary}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table2_method_summary}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table3_budget_summary}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table6_scorer_validation}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table12_floor_roc}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table13_independent_labels}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table4_weight_sensitivity}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table7_blackbox}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table8_counterfactual_ablation}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table9_robustness}
+
+\input{../Third-Best-Data-Centric-Unlearning/submission_tables/submission_table10_natural_fever_case}
+
+\input{../Third-Best-Data-Centric-Unlearning/tables/table3_attack_suite}
+
+\input{../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table1_ci_by_track}
+
+\input{../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table10_larger_model_validation}
+
+\input{../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table11_tofu_complete}
+
+\input{../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table12_retriever_comparison}
+
+\input{../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table13_probe_family_complete}
+
+\input{../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table14_failure_mode_case}
+
+\input{../Third-Best-Data-Centric-Unlearning/advanced_tables/advanced_table15_named_baselines}
+
+\subsection{Case-Study Redaction}
+
+Case studies are redacted before entering manuscript tables. The artifact stores risk components and interpretations but replaces synthetic user identifiers and secret values with placeholders. This mirrors how a real deletion-audit report should be prepared: auditors need enough evidence to diagnose residual dependence, but papers and public artifacts should not normalize printing sensitive strings.
+
+\subsection{Recommended Extensions}
+
+The next version of \bench{} should run unbounded Qwen likelihood evaluation on every retain and perturbed TOFU row, and add additional larger open checkpoints. It should also include separate gray-box and black-box settings: gray-box audits may inspect retrieved artifact identifiers, while black-box audits only observe the final answer. Reporting both settings will make the benchmark more useful to application teams with different levels of system access.
+
+\section{Artifact Checklist}
+
+\textbf{Environment.}
+The artifact is tested with Python 3.11, PyTorch, scikit-learn, pandas, pyarrow, transformers, PEFT, and sentence-transformers. PEFT and sentence-transformers are optional at runtime. If a HuggingFace model or sentence-transformer checkpoint is not locally cached, the artifact records a fallback row rather than silently downloading a model. This behavior is deliberate: repeatable audit artifacts should not depend on unlogged network state.
+
+\textbf{One-command reproduction.}
+A complete reproduction run executes the submission experiments, attack suite, advanced experiments, table generation, figure generation, tests, and manuscript build. The expected outputs are JSON/CSV result files, Markdown/LaTeX tables, PDF figures, and the final IEEE-style PDF. The result files are row-level rather than only aggregate-level so that reviewers can recompute summaries.
+
+\textbf{Data release.}
+The public retain data comes from local FEVER evidence files. The private deletion targets are generated synthetically from seeds. The benchmark should release the generation code and seeds rather than a fixed private-data dump. This makes it possible to regenerate targets, vary target counts, and avoid accidental normalization of sensitive-looking strings in public artifacts.
+
+\textbf{Audit reports.}
+Each audit report includes the decision, aggregate risk UCB, per-target UCBs, empirical risk, priorities, number of probes, violating probe identifiers, retain utility, and notes. For paper tables, protected content is summarized through channel scores and redacted case-study rows.
+
+\textbf{Expected reviewer checks.}
+Reviewers should be able to verify that exact-match, canary-only, retriever-hit, membership-inference, extraction, influence-proxy, uniform-probe, no-valuation, and full \method{} methods are all run through the same audit interface. They should also be able to verify that false alarms are computed on clean provenance-guided deletion cases and that retain utility is reported beside deletion risk.
+
+\section{Limitations and Failure Cases}
+
+\textbf{Probe incompleteness.}
+No finite probe suite can cover all possible prompts. \method{} reduces this risk by using multiple probe families, but its certificate is conditional on the declared probe distribution. If a future adversary uses an unseen language, modality, prompt style, or multi-turn strategy, additional probes may be needed.
+
+\textbf{Semantic scoring limits.}
+The current evidence scorers combine lexical, semantic-token, retrieval, extraction, and watermark signals. This is intentionally lightweight and reproducible, but it can miss subtle paraphrases. A stronger submission version should add NLI or embedding-based semantic equivalence scoring with frozen, versioned judge models.
+
+\textbf{RAG metadata access.}
+Some deployments expose retrieved context identifiers and citations; others expose only final answers. \method{} supports both settings, but retrieval-dependence evidence is stronger in gray-box RAG settings. A purely black-box deployment should report wider uncertainty or rely more heavily on semantic and extraction probes.
+
+\textbf{Adapter opacity.}
+Merged or quantized adapters can obscure provenance. The LoRA-SFT and PEFT paths test low-rank adaptation behavior, but they do not solve the general problem of auditing hidden downstream model merges. In such settings, the audit should treat the model as black-box and increase extraction, paraphrase, and counterfactual probe budgets.
+
+\textbf{Legal interpretation.}
+\method{} is a technical audit framework. It can support deletion governance by producing repeatable evidence, but it does not determine whether a system satisfies GDPR, CCPA, contractual deletion requirements, or sector-specific privacy law. Legal compliance requires organizational context, policy interpretation, and human review.

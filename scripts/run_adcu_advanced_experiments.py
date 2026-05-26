@@ -108,6 +108,8 @@ def probe_family_ablation(rows: list[dict[str, object]]) -> list[dict[str, objec
         for family, detector in families.items():
             vals = [1.0 if detector(row) else 0.0 for row in group]
             low, high = bootstrap_ci(vals)
+            if len(vals) < 3:
+                low, high = "--", "--"
             out.append(
                 {
                     "track": track,

@@ -1,0 +1,58 @@
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsthm}
+
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\method}{ADCU}
+\newcommand{\bench}{ADCU-Bench}
+
+\begin{document}
+
+\title{Auditable Unlearning for Retrieval-Augmented and Fine-Tuned Foundation Models}
+
+\author{Author~Names~Omitted~for~Review}
+
+\markboth{ADCU Unlearning Audit}{}
+
+\maketitle
+
+\begin{abstract}
+Deletion requests in foundation-model applications are difficult to audit because user data can survive through retrievers, vector indexes, synthetic summaries, adapters, caches, and generated traces. This paper proposes \method{}, an auditable unlearning framework grounded in counterfactual behavioral indistinguishability: a post-deletion system should behave like a clean reference system rebuilt as if the deleted record had never entered the pipeline. \method{} lifts $(\varepsilon,\delta)$ deletion from model-centric removal to compositional RAG and fine-tuned AI systems, implements a graph-adaptive black-box test over provenance-linked target--channel arms, and uses diagnostic channels to localize residual risk under declared probe-coverage assumptions. \bench{} evaluates RAG deletion, fine-tuning record unlearning, hybrid RAG-to-fine-tuning retention, clean-counterfactual testing, and component interventions. Across 6,840 repeated audit rows, \method{} detects all configured RealRAG, NaturalFEVER, and HybridReal failures with zero configured false alarms; a 5,000-record RealRAG scaling check shows the behavior is not limited to tiny retain corpora. LoRA, dense-retrieval, TOFU-style, natural-data, and attack-suite experiments further show that narrow exact-match, canary-only, retriever-only, membership-style, and extraction-only audits miss important residual-dependence channels.
+\end{abstract}
+
+\noindent\textbf{Impact Statement---}
+Foundation-model systems are increasingly used in settings where users, organizations, and regulators may require deletion of contributed data. Yet deletion claims are hard to trust when a record can survive through retrieval indexes, summaries, caches, adapters, or synthetic derivatives. This work advances trustworthy AI by turning deletion verification into a measurable behavioral audit for RAG and fine-tuned foundation models. The proposed metric, algorithm, benchmark, and attack suite help practitioners identify residual dependence, compare unlearning procedures, preserve retain utility, and document uncertainty through confidence-bounded decisions. The broader impact is a practical assurance layer for AI governance: rather than relying on informal claims that a model or pipeline has forgotten, operators can produce repeatable, redacted, and technically interpretable evidence about what was tested and where residual deletion risk remains.
+
+\begin{IEEEkeywords}
+Trustworthy artificial intelligence, machine unlearning, retrieval-augmented generation, foundation models, data provenance, behavioral auditing.
+\end{IEEEkeywords}
+
+\input{sections/01_introduction}
+\input{sections/02_related_work}
+\input{sections/03_problem}
+\input{sections/04_metric}
+\input{sections/05_algorithm}
+\input{sections/06_benchmark}
+\input{sections/07_experiments}
+\input{sections/08_discussion}
+\input{sections/09_artifact}
+\input{sections/10_conclusion}
+
+\section*{Supplementary Material}
+The pipeline-deletion composition theorem, full proofs, benchmark protocol details, artifact checklist, and extended limitations are provided as supplementary material to preserve the IEEE TAI regular-paper page limit.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

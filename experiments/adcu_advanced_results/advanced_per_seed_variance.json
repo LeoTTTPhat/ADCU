@@ -52,22 +52,22 @@
     "track": "Pretrained-LoRA",
     "seed": 41,
     "failure_detection_rate": 1.0,
-    "mean_adcu_risk_ucb": 0.4161,
-    "n": 24
+    "mean_adcu_risk_ucb": 0.5251,
+    "n": 48
   },
   {
     "track": "Pretrained-LoRA",
     "seed": 42,
     "failure_detection_rate": 1.0,
-    "mean_adcu_risk_ucb": 0.4161,
-    "n": 24
+    "mean_adcu_risk_ucb": 0.6487,
+    "n": 48
   },
   {
     "track": "Pretrained-LoRA",
     "seed": 43,
     "failure_detection_rate": 1.0,
-    "mean_adcu_risk_ucb": 0.4634,
-    "n": 24
+    "mean_adcu_risk_ucb": 0.6387,
+    "n": 48
   },
   {
     "track": "Qwen-TOFU-LoRA",

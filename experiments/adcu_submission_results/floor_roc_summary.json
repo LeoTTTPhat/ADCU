@@ -1,0 +1,66 @@
+[
+  {
+    "score": "floor_normalized_Rhat_cf",
+    "tolerance": 0.0,
+    "detection_rate": 1.0,
+    "false_alarm_rate": 1.0,
+    "delta": 0.05,
+    "n": 855
+  },
+  {
+    "score": "floor_normalized_Rhat_cf",
+    "tolerance": 0.05,
+    "detection_rate": 0.9259,
+    "false_alarm_rate": 0.0,
+    "delta": 0.05,
+    "n": 855
+  },
+  {
+    "score": "floor_normalized_Rhat_cf",
+    "tolerance": 0.1,
+    "detection_rate": 0.9111,
+    "false_alarm_rate": 0.0,
+    "delta": 0.05,
+    "n": 855
+  },
+  {
+    "score": "floor_normalized_Rhat_cf",
+    "tolerance": 0.2,
+    "detection_rate": 0.8889,
+    "false_alarm_rate": 0.0,
+    "delta": 0.05,
+    "n": 855
+  },
+  {
+    "score": "floor_normalized_Rhat_cf",
+    "tolerance": 0.3,
+    "detection_rate": 0.7259,
+    "false_alarm_rate": 0.0,
+    "delta": 0.05,
+    "n": 855
+  },
+  {
+    "score": "floor_normalized_Rhat_cf",
+    "tolerance": 0.45,
+    "detection_rate": 0.4963,
+    "false_alarm_rate": 0.0,
+    "delta": 0.05,
+    "n": 855
+  },
+  {
+    "score": "floor_normalized_Rhat_cf",
+    "tolerance": 0.6,
+    "detection_rate": 0.2667,
+    "false_alarm_rate": 0.0,
+    "delta": 0.05,
+    "n": 855
+  },
+  {
+    "score": "floor_normalized_Rhat_cf",
+    "tolerance": 0.8,
+    "detection_rate": 0.1778,
+    "false_alarm_rate": 0.0,
+    "delta": 0.05,
+    "n": 855
+  }
+]

@@ -34,7 +34,7 @@
     "deletion_method": "answer-only paraphrase leak",
     "ground_truth": "failure",
     "decision": "fail",
-    "risk_ucb": 0.5934,
+    "risk_ucb": 0.5942,
     "retrieval_dependence": 0.0,
     "redacted_claim": "[X] [X] received [X] for three [X] [X] [X]",
     "redacted_answer": "[X] [X] received [X] for three [X] [X] [X] [X] [X] has been nominated for a number of awards , including an [X] [X] ..."

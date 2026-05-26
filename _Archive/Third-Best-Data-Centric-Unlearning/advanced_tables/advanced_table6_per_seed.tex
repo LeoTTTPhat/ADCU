@@ -1,0 +1,24 @@
+\begin{table*}[t]
+\centering
+\caption{Per-seed failure detection and mean \method{} risk UCB for the advanced tracks. Tiny-$N$ seeds (PEFT-LoRA, Qwen-TOFU-LoRA) are reported as descriptive single-seed observations rather than as confidence intervals.}
+\label{tab:per_seed}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllll}
+\toprule
+Track & Seed & Failure Detection Rate & Mean ADCU Risk Ucb & N \\
+\midrule
+DenseRAG & 21 & 0.8 & 0.7857 & 30 \\
+DenseRAG & 22 & 0.8 & 0.7857 & 30 \\
+DenseRAG & 23 & 0.8 & 0.7857 & 30 \\
+LoRA-SFT & 11 & 0.8333 & 0.7732 & 24 \\
+LoRA-SFT & 12 & 0.8333 & 0.7446 & 24 \\
+LoRA-SFT & 13 & 0.8333 & 0.7493 & 24 \\
+PEFT-LoRA & 31 & 0.7143 & 0.7661 & 7 \\
+Pretrained-LoRA & 41 & 1.0 & 0.5251 & 48 \\
+Pretrained-LoRA & 42 & 1.0 & 0.6487 & 48 \\
+Pretrained-LoRA & 43 & 1.0 & 0.6387 & 48 \\
+Qwen-TOFU-LoRA & 51 & 0.75 & 0.6434 & 8 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

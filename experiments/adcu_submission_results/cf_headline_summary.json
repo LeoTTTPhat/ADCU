@@ -1,0 +1,50 @@
+[
+  {
+    "track": "FineTuneSim",
+    "mean_rhat_cf": 0.2444,
+    "mean_ucb_cf": 0.6399,
+    "mean_floor": 0.508,
+    "floor_normalized_risk": 0.2501,
+    "delta": 0.05,
+    "tolerance": 0.05,
+    "failure_detection_rate": 0.7222,
+    "false_alarm_rate": 0.0,
+    "n": 225
+  },
+  {
+    "track": "HybridReal",
+    "mean_rhat_cf": 0.5667,
+    "mean_ucb_cf": 0.8279,
+    "mean_floor": 0.508,
+    "floor_normalized_risk": 0.6335,
+    "delta": 0.05,
+    "tolerance": 0.05,
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "n": 225
+  },
+  {
+    "track": "NaturalFEVER",
+    "mean_rhat_cf": 0.3056,
+    "mean_ucb_cf": 0.6842,
+    "mean_floor": 0.5068,
+    "floor_normalized_risk": 0.3428,
+    "delta": 0.05,
+    "tolerance": 0.05,
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "n": 180
+  },
+  {
+    "track": "RealRAG",
+    "mean_rhat_cf": 0.2445,
+    "mean_ucb_cf": 0.6648,
+    "mean_floor": 0.508,
+    "floor_normalized_risk": 0.307,
+    "delta": 0.05,
+    "tolerance": 0.05,
+    "failure_detection_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "n": 225
+  }
+]

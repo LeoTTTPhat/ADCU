@@ -11,7 +11,9 @@ sys.path.insert(0, str(ROOT / "src"))
 from adcu.submission_experiments import (
     aggregate_submission_rows,
     run_natural_fever_case_study,
+    run_mid_size_scaling_experiment,
     run_submission_experiments,
+    summarize_mid_size_scaling,
 )
 
 
@@ -35,6 +37,9 @@ def main() -> None:
     for name, summary_rows in summaries.items():
         write_rows(name, summary_rows)
     write_rows("natural_fever_case_study", run_natural_fever_case_study(ROOT / "data"))
+    mid_size_rows = run_mid_size_scaling_experiment(ROOT / "data")
+    write_rows("mid_size_scaling_results", mid_size_rows)
+    write_rows("mid_size_scaling_summary", summarize_mid_size_scaling(mid_size_rows))
 
     print(f"Wrote {len(rows)} repeated submission experiment rows to {OUT_DIR}")
     print("ADCU summary by track:")

@@ -1,0 +1,63 @@
+\section{\method{} Audit Algorithm}
+
+\begin{algorithm}[t]
+\caption{\method{} graph-adaptive counterfactual audit}
+\begin{algorithmic}[1]
+\STATE Build provenance graph $G$ and deletion target set $D_{\mathrm{del}}$
+\STATE Build or approximate clean counterfactual $S_{\mathrm{clean}}$
+\STATE Form target--channel arms $\mathcal{A}=\{(z,c)\}$ from $G$
+\STATE Generate direct, paraphrase, retrieval, extraction, trigger, and graph-pivot probes
+\STATE Initialize each target with a minimum clean-vs-post-deletion probe budget
+\WHILE{audit budget remains and some arm has UCB above tolerance}
+  \STATE Select arm $a_t$ with largest graph-adjusted upper-confidence score
+  \STATE Query $S_-$ and $S_{\mathrm{clean}}$ on the selected probe
+  \STATE Update counterfactual distance and diagnostic evidence channels
+  \STATE Propagate conservative effective samples to provenance-neighbor arms
+\ENDWHILE
+\STATE Estimate retain utility on $Q_{\mathrm{ret}}$
+\STATE Run component interventions: retrieval off, cache purged, adapter swapped, derivative store purged
+\IF{counterfactual UCB $>\varepsilon$ or a localized violation is observed}
+  \STATE \textbf{return} fail with causal component attribution
+\ELSIF{counterfactual UCB $\leq\varepsilon$ and retain utility is acceptable}
+  \STATE \textbf{return} pass
+\ELSE
+  \STATE \textbf{return} escalate
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+The audit is intentionally black-box or gray-box: it can be applied when the operator has access to system responses and retrieval metadata but not necessarily to training gradients or model weights. The key distinction from the earlier channel-only view is that \method{} compares $S_-$ against $S_{\mathrm{clean}}$. Channel scores explain \emph{why} the systems differ; counterfactual distance defines \emph{whether} deletion succeeds.
+
+\textbf{Graph-structured pure exploration.}
+Each audit arm is a target--channel pair, such as $(z,\mathrm{retrieval})$, $(z,\mathrm{paraphrase})$, or $(z,\mathrm{adapter})$. The provenance graph induces correlations among arms: a probe that retrieves a deleted summary may inform cache, synthetic-QA, and adapter arms derived from that summary. \method{} uses this graph in two modes. In the certified mode of Proposition~2, neighbor observations are shared only when the scorer contract supplies bounded pseudo-observations for the same arm mean. Otherwise, the graph is an allocation heuristic: arms with many high-risk derivatives receive more probes, but the formal pass certificate is computed from direct clean-counterfactual samples. This reframes valuation-guided auditing as graph-structured sequential testing rather than a softmax heuristic while avoiding an unjustified UCB claim.
+
+\textbf{Informal composition theorem.}
+Let $S^-$ be the post-deletion pipeline, $S_{\mathrm{clean}}$ the clean reference, and $S^\diamond$ the provenance-closed version of $S^-$ obtained by additionally removing every derivative of the deleted record. If the parametric component is within $\varepsilon_\theta$ of its clean counterfactual, the retrieval/knowledge component is within $\varepsilon_K$, and generation is $L$-Lipschitz with respect to retrieval discrepancy, then the behavioral residual influence over probe class $\mathcal{B}$ obeys
+\[
+\rho_{\mathcal{B}}(S^-)
+\le
+\varepsilon_\theta + L\varepsilon_K + \gamma_z,
+\quad
+\gamma_z=\sup_{q\in\mathcal{B}}\mathrm{TV}(P_{S^-},P_{S^\diamond}).
+\]
+The derivative-coupling term $\gamma_z$ is zero exactly when deletion is provenance-closed: every chunk, embedding, summary, cache entry, synthetic example, and adapter-training derivative of the record has been removed or rendered behaviorally inert. Thus component-level unlearning guarantees compose only after lineage closure; otherwise orphan derivatives can dominate residual behavior. The supplement gives the full theorem, multi-stage extension, and necessity proof.
+
+\textbf{Causal mediation of residual risk.}
+After the distinguishability test finds residual risk, \method{} performs interventions on pipeline components. Let $S^{\mathrm{do}(R=0)}$ disable retrieval, $S^{\mathrm{do}(C=0)}$ purge caches, $S^{\mathrm{do}(A=0)}$ swap or remove adapters, and $S^{\mathrm{do}(D=0)}$ purge derivative stores. For component $M$, define the mediated residual contribution
+\[
+\mathrm{Med}(M)=
+R_{\mathrm{cf}}(S_-,S_{\mathrm{clean}})
+-
+R_{\mathrm{cf}}(S^{\mathrm{do}(M=0)},S_{\mathrm{clean}}).
+\]
+Under standard intervention assumptions--component toggles do not introduce new leakage, retain behavior outside the intervened path is stable, and probes are held fixed--$\mathrm{Med}(M)$ identifies how much distinguishability is mediated by that component. This turns retrieval-off ablations into a causal diagnostic: the audit can say whether deleted information survives primarily through retrieval artifacts, parametric adapter memory, caches, or synthetic derivatives.
+
+\textbf{Adaptive adversarial probes.}
+Templated probes are reproducible but incomplete. \method{} therefore treats learned red-team probes as an optional budgeted arm: a generator proposes paraphrases within a declared semantic radius or $k$-hop graph pivots that maximize current evidence. The audit records whether learned probes discover violations missed by direct, paraphrase, retrieval, and extraction templates. This makes probe coverage an empirical object tied to the adversary class in Proposition~3 rather than an informal assumption.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/adcu_pdf/adcu_pipeline.pdf}
+\caption{\method{} audit pipeline: a deletion request is expanded through the provenance graph into value-guided probes, whose black-box responses against $S_-$ and $S_{\mathrm{clean}}$ yield a confidence-bounded risk UCB together with a retain-utility check.}
+\label{fig:adcu_pipeline}
+\end{figure}

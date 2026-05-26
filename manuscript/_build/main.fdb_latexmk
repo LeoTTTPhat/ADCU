@@ -1,0 +1,12 @@
+# Fdb version 3
+["pdflatex"] 1779709347 "main.tex" "main.pdf" "main" 1779709347
+  "/etc/texmf/web2c/texmf.cnf" 1774892393 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1774892399 1405645 9561d0048b00439ca06376833dfb6690 ""
+  "IEEEtran.cls" 0 -1 0 ""
+  "main.aux" 1779638813 10156 f24a22237dc90b0d97ee9f6d9fa2dcbf "pdflatex"
+  "main.tex" 1779638808 3848 1466197f80bd2b4042f73ceb55bd893b ""
+  (generated)
+  "main.log"
+  "main.pdf"

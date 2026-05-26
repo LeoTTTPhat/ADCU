@@ -1,0 +1,82 @@
+\section{Behavioral Deletion Risk}
+
+\method{} defines deletion risk as distance from the clean counterfactual, not as the mere presence of a hand-written leakage pattern. For a target $z$, let $A(z,G)$ be a target- and graph-conditioned audit distribution over probes in $\mathcal{Q}$. Let $Y_-(q)=O_{S_-}(q)$ and $Y_c(q)=O_{S_{\mathrm{clean}}}(q)$. Given a bounded behavioral discrepancy $d(Y_-,Y_c)\in[0,1]$, the target-level risk is
+\[
+R_{\mathrm{cf}}(z;S_-,S_{\mathrm{clean}})
+=
+\mathbb{E}_{q\sim A(z,G)}
+\left[d(Y_-(q),Y_c(q))\right].
+\]
+The request-level risk is
+\[
+R_{\method}(D_{\mathrm{del}})=
+\sum_{z\in D_{\mathrm{del}}}\pi(z)R_{\mathrm{cf}}(z;S_-,S_{\mathrm{clean}}),
+\]
+where $\pi(z)$ is an audit prior induced by target influence and provenance degree. In deterministic deployments, $d$ can be a normalized answer-and-retrieval distance. In stochastic deployments, $d$ can be a two-sample distance between output distributions, such as total variation over discretized answer features, maximum mean discrepancy over embeddings, or a calibrated classifier's distinguishability advantage. The audit reports the raw UCB and applies the floor-normalized operating rule below so finite-budget clean systems are not rejected solely by the confidence floor; retain utility must also remain above threshold.
+
+\textbf{Diagnostic evidence channels.}
+The released benchmark also computes an evidence vector
+\[
+e(S_-,q,z) = [e_d,e_p,e_r,e_c,e_x,e_w],
+\]
+where $e_d$ measures direct leakage, $e_p$ paraphrased leakage, $e_r$ retrieval dependence, $e_c$ clean-counterfactual answer dependence, $e_x$ extraction risk, and $e_w$ watermark or provenance-token hits. These channels are not the ground-truth definition of deletion failure. They are transparent estimators and localizers for the counterfactual distance: when $S_-$ differs from $S_{\mathrm{clean}}$, the channel vector indicates whether the difference is direct, semantic, retrieval-mediated, extraction-mediated, or provenance-token-mediated.
+
+\textbf{Operational scorers.}
+The artifact uses deterministic, versioned scorers so audit rows are reproducible. Direct leakage is normalized token overlap with protected text. Paraphrase leakage is maximum overlap with aliases, protected facts, and probe-specific expected terms. Retrieval dependence is one when the response cites or retrieves an artifact reachable from the deleted target in $G$ and the clean reference does not. Counterfactual answer dependence compares the answer under $S_-$ with the clean response and fires when the deleted target changes the answer semantics or retrieval evidence. Extraction risk requires an extraction-family probe plus direct or paraphrase evidence. Watermark evidence is an exact canary or provenance-token hit. Deployments can replace these scorers with frozen embedding, NLI, or judge models, but must report judge versions, thresholds, and calibration data.
+
+\textbf{Two-sample audit statistic.}
+For the minimal black-box instantiation, sample $n_z$ probes $q_i\sim A(z,G)$, query both $S_-$ and $S_{\mathrm{clean}}$, and compute
+\[
+\hat R_{\mathrm{cf}}(z)=\frac{1}{n_z}\sum_{i=1}^{n_z}
+d(O_{S_-}(q_i),O_{S_{\mathrm{clean}}}(q_i)).
+\]
+Because $d\in[0,1]$, \method{} reports
+\[
+\mathrm{UCB}_{\mathrm{cf}}(z)=\hat R_{\mathrm{cf}}(z)+
+\sqrt{\frac{\log(1/\delta_z)}{2n_z}}.
+\]
+The square-root term creates an irreducible confidence floor even when the empirical clean-counterfactual distance is zero. We therefore report the raw UCB and use a floor-corrected excess risk for finite-budget operating decisions:
+\begin{align}
+\widetilde R_{\mathrm{cf}}(z)&=
+\frac{\max\{0,\mathrm{UCB}_{\mathrm{cf}}(z)-r_0(n_z,\delta_z)\}}
+{1-r_0(n_z,\delta_z)}, \nonumber\\
+r_0(n_z,\delta_z)&=\sqrt{\frac{\log(1/\delta_z)}{2n_z}}. \nonumber
+\end{align}
+The excess score is not a new guarantee; it is a calibrated way to state how far the observed risk rises above the clean-UCB floor. A floor-normalized operating tolerance $\tau_{\mathrm{ex}}$ corresponds to the raw-UCB condition $\mathrm{UCB}_{\mathrm{cf}}(z)\leq r_0+(1-r_0)\tau_{\mathrm{ex}}$. The experiments report both raw $\mathrm{UCB}_{\mathrm{cf}}$ and $\widetilde R_{\mathrm{cf}}$, and the headline pass/fail rule uses the declared excess-risk tolerance so clean systems with zero empirical counterfactual distance are not rejected only because the audit budget is finite. If $S_{\mathrm{clean}}$ is expensive, the audit can use an archived clean index, filtered retraining on a small slice, or a clean simulator for benchmark evaluation. The paper reports both the counterfactual statistic when the clean reference is available and the channel scores used to diagnose why a system is distinguishable.
+
+\begin{proposition}[Counterfactual false-pass control]
+Assume $d(O_{S_-}(q),O_{S_{\mathrm{clean}}}(q))\in[0,1]$ and probes are sampled independently from $A(z,G)$. If the audit passes target $z$ only when $\mathrm{UCB}_{\mathrm{cf}}(z)\leq\varepsilon$, then
+\[
+\Pr[\mathrm{pass}(z)\wedge R_{\mathrm{cf}}(z)>\varepsilon]\leq \delta_z .
+\]
+\end{proposition}
+
+\textit{Proof sketch.}
+Hoeffding's inequality bounds the probability that the true mean counterfactual distance exceeds $\hat R_{\mathrm{cf}}(z)+\sqrt{\log(1/\delta_z)/(2n_z)}$ by $\delta_z$. The pass event requires this upper bound to be no larger than $\varepsilon$, so passing while the true risk exceeds $\varepsilon$ is contained in the Hoeffding failure event.
+
+\begin{proposition}[Certified graph-structured adaptive audit]
+Let each arm be a target--channel pair $a=(z,c)$ and let $N(a)$ be the set of provenance-neighbor arms sharing a downstream artifact, cache, adapter, or derivative family. For every neighbor edge $b\to a$, assume a scorer contract provides a bounded pseudo-observation $Y_i^{a\leftarrow b}\in[0,1]$ with $\mathbb{E}[Y_i^{a\leftarrow b}\mid b\ \mathrm{sampled}]=r(a)$, and assign it weight $\rho_{ab}\in[0,1]$. Let $\hat r_t(a)$ be the weighted mean of direct observations from $a$ and certified pseudo-observations from neighbors, with effective sample size
+\begin{align}
+n_t^{\mathrm{eff}}(a)&=n_t(a)+
+\sum_{b\in N(a)}\rho_{ab}n_t(b). \nonumber
+\end{align}
+If the audit ranks arms by
+\[
+B_t(a)=\hat r_t(a)+
+\sqrt{\frac{\log(2|\mathcal{A}|t^2/\delta)}
+{2 n_t^{\mathrm{eff}}(a)}} ,
+\]
+then, with probability at least $1-\delta$, all certified arm risks are simultaneously upper-bounded by $B_t(a)$ for all audit times $t$.
+\end{proposition}
+
+\textit{Proof sketch.}
+Under the scorer contract, direct observations and certified neighbor pseudo-observations are bounded estimates of the same arm mean $r(a)$; the weights define a standard weighted bounded-mean estimator. Weighted Hoeffding gives the displayed radius up to the conservative effective sample count above. Applying the bound to every arm and time with failure probability $\delta/(|\mathcal{A}|t^2)$ and union-bounding over arms and audit times gives simultaneous coverage. If this contract is unavailable, \method{} uses graph scores only to prioritize which arm to sample next; the formal false-pass certificate then falls back to direct clean-counterfactual samples and Proposition~1.
+
+\begin{proposition}[Probe coverage against bounded adversaries]
+Let $\mathcal{H}_{k,\eta}$ be an adversary class whose leakage can be elicited by either a direct/paraphrase probe within semantic radius $\eta$ of a protected fact or by a $k$-hop provenance pivot from a deleted artifact. If the probe generator samples $m$ independent paraphrase neighborhoods and graph pivots such that each adversarial leakage mode is hit with probability at least $p_{\min}$, then the probability that an active leakage mode in $\mathcal{H}_{k,\eta}$ is missed is at most $(1-p_{\min})^m$. Conversely, any black-box audit with budget $m$ and hit probability at most $p_{\min}$ for a hidden mode has miss probability at least $(1-p_{\min})^m$ for that mode.
+\end{proposition}
+
+This coverage statement is deliberately conditional on an explicit adversary class. It replaces the vague claim that probes are representative with a testable requirement: report the semantic neighborhood, graph-hop radius, hit probability estimate, and budget. Learned red-team probes can then be evaluated by whether they increase $p_{\min}$ or discover additional modes outside $\mathcal{H}_{k,\eta}$.
+
+\textbf{Violation rule versus UCB rule.}
+The implementation records any high-scoring diagnostic probe as a localized violation so operators can immediately inspect the responsible artifact or component. The formal false-pass guarantee, however, is attached only to the UCB rule above. A single-probe fail is therefore a conservative escalation/fail heuristic for triage, not a separate statistical certificate. When the two disagree, \method{} reports the disagreement and treats the decision as fail or escalate rather than pass.

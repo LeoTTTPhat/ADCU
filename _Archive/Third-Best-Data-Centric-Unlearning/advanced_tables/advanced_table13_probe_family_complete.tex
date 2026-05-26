@@ -1,0 +1,43 @@
+\begin{table*}[t]
+\centering
+\caption{Probe-family ablation with detection, false alarms, marginal gain, missed failures, and bootstrap intervals.}
+\label{tab:probe_family_complete}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllllll}
+\toprule
+Track & Probe Family & Detection & False Alarm & Marginal Gain & Missed Failures & Ci95 & N \\
+\midrule
+DenseRAG & direct\_only & 0.333 & -- & 0.667 & 12 & [0.1111,0.5556] & 18 \\
+DenseRAG & paraphrase\_only & 0.667 & -- & 0.333 & 6 & [0.4444,0.8889] & 18 \\
+DenseRAG & retrieval\_only & 1.000 & -- & 0.000 & 0 & [1.0,1.0] & 18 \\
+DenseRAG & counterfactual\_only & 1.000 & -- & 0.000 & 0 & [1.0,1.0] & 18 \\
+DenseRAG & extraction\_only & 0.000 & -- & 1.000 & 18 & [0.0,0.0] & 18 \\
+DenseRAG & full\_adcu & 1.000 & -- & 0.000 & 0 & [1.0,1.0] & 18 \\
+LoRA-SFT & direct\_only & 1.000 & 0.000 & 0.000 & 0 & [1.0,1.0] & 12 \\
+LoRA-SFT & paraphrase\_only & 1.000 & 1.000 & 0.000 & 0 & [1.0,1.0] & 12 \\
+LoRA-SFT & retrieval\_only & 0.000 & 0.000 & 1.000 & 6 & [0.0,0.0] & 12 \\
+LoRA-SFT & counterfactual\_only & 1.000 & 1.000 & 0.000 & 0 & [1.0,1.0] & 12 \\
+LoRA-SFT & extraction\_only & 0.000 & 0.000 & 1.000 & 6 & [0.0,0.0] & 12 \\
+LoRA-SFT & full\_adcu & 1.000 & 1.000 & 0.000 & 0 & [1.0,1.0] & 12 \\
+PEFT-LoRA & direct\_only & 1.000 & -- & 0.000 & 0 & -- & 1 \\
+PEFT-LoRA & paraphrase\_only & 1.000 & -- & 0.000 & 0 & -- & 1 \\
+PEFT-LoRA & retrieval\_only & 0.000 & -- & 1.000 & 1 & -- & 1 \\
+PEFT-LoRA & counterfactual\_only & 1.000 & -- & 0.000 & 0 & -- & 1 \\
+PEFT-LoRA & extraction\_only & 0.000 & -- & 1.000 & 1 & -- & 1 \\
+PEFT-LoRA & full\_adcu & 1.000 & -- & 0.000 & 0 & -- & 1 \\
+Pretrained-LoRA & direct\_only & 0.444 & -- & 0.556 & 20 & [0.2778,0.6111] & 36 \\
+Pretrained-LoRA & paraphrase\_only & 0.444 & -- & 0.556 & 20 & [0.2778,0.6111] & 36 \\
+Pretrained-LoRA & retrieval\_only & 0.000 & -- & 1.000 & 36 & [0.0,0.0] & 36 \\
+Pretrained-LoRA & counterfactual\_only & 0.444 & -- & 0.556 & 20 & [0.2778,0.6111] & 36 \\
+Pretrained-LoRA & extraction\_only & 0.278 & -- & 0.722 & 26 & [0.1389,0.4444] & 36 \\
+Pretrained-LoRA & full\_adcu & 1.000 & -- & 0.000 & 0 & [1.0,1.0] & 36 \\
+Qwen-TOFU-LoRA & direct\_only & 0.000 & -- & 1.000 & 2 & -- & 2 \\
+Qwen-TOFU-LoRA & paraphrase\_only & 1.000 & -- & 0.000 & 0 & -- & 2 \\
+Qwen-TOFU-LoRA & retrieval\_only & 0.000 & -- & 1.000 & 2 & -- & 2 \\
+Qwen-TOFU-LoRA & counterfactual\_only & 1.000 & -- & 0.000 & 0 & -- & 2 \\
+Qwen-TOFU-LoRA & extraction\_only & 0.000 & -- & 1.000 & 2 & -- & 2 \\
+Qwen-TOFU-LoRA & full\_adcu & 1.000 & -- & 0.000 & 0 & -- & 2 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

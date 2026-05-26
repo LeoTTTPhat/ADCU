@@ -2,7 +2,8 @@
   {
     "track": "FineTuneSim",
     "deletion_method": "adapter replacement failure",
-    "mean_risk_ucb": 0.829,
+    "mean_risk_ucb": 0.8379,
+    "mean_floor_normalized_risk": 0.6253,
     "mean_retain_utility": 0.965,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 1.0
@@ -11,6 +12,7 @@
     "track": "FineTuneSim",
     "deletion_method": "filtered retraining",
     "mean_risk_ucb": 0.508,
+    "mean_floor_normalized_risk": 0.0,
     "mean_retain_utility": 0.985,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 0.0
@@ -18,7 +20,8 @@
   {
     "track": "FineTuneSim",
     "deletion_method": "gradient-ascent unlearning",
-    "mean_risk_ucb": 0.6716,
+    "mean_risk_ucb": 0.7155,
+    "mean_floor_normalized_risk": 0.4062,
     "mean_retain_utility": 0.965,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 1.0
@@ -26,7 +29,8 @@
   {
     "track": "FineTuneSim",
     "deletion_method": "negative fine-tuning",
-    "mean_risk_ucb": 0.606,
+    "mean_risk_ucb": 0.6303,
+    "mean_floor_normalized_risk": 0.2192,
     "mean_retain_utility": 0.955,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 0.8889
@@ -35,14 +39,16 @@
     "track": "FineTuneSim",
     "deletion_method": "over-unlearned adapter",
     "mean_risk_ucb": 0.508,
+    "mean_floor_normalized_risk": 0.0,
     "mean_retain_utility": 0.42,
     "mean_audit_calls": 25.33,
-    "failure_detection_rate": 1.0
+    "failure_detection_rate": 0.0
   },
   {
     "track": "HybridReal",
     "deletion_method": "RAG-only deletion",
-    "mean_risk_ucb": 0.8045,
+    "mean_risk_ucb": 0.8772,
+    "mean_floor_normalized_risk": 0.7226,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 1.0
@@ -51,6 +57,7 @@
     "track": "HybridReal",
     "deletion_method": "adapter-only unlearning",
     "mean_risk_ucb": 0.8772,
+    "mean_floor_normalized_risk": 0.7226,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 1.0
@@ -59,6 +66,7 @@
     "track": "HybridReal",
     "deletion_method": "full provenance purge",
     "mean_risk_ucb": 0.508,
+    "mean_floor_normalized_risk": 0.0,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 0.0
@@ -66,7 +74,8 @@
   {
     "track": "HybridReal",
     "deletion_method": "graph-pivot expansion retained",
-    "mean_risk_ucb": 0.877,
+    "mean_risk_ucb": 0.8772,
+    "mean_floor_normalized_risk": 0.7226,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 1.0
@@ -74,7 +83,8 @@
   {
     "track": "HybridReal",
     "deletion_method": "synthetic derivative retained",
-    "mean_risk_ucb": 0.9846,
+    "mean_risk_ucb": 1.0,
+    "mean_floor_normalized_risk": 1.0,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 1.0
@@ -82,7 +92,8 @@
   {
     "track": "NaturalFEVER",
     "deletion_method": "answer-only paraphrase leak",
-    "mean_risk_ucb": 0.8427,
+    "mean_risk_ucb": 0.8616,
+    "mean_floor_normalized_risk": 0.6857,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.78,
     "failure_detection_rate": 1.0
@@ -90,7 +101,8 @@
   {
     "track": "NaturalFEVER",
     "deletion_method": "citation cache retained",
-    "mean_risk_ucb": 0.6985,
+    "mean_risk_ucb": 0.6975,
+    "mean_floor_normalized_risk": 0.3685,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.78,
     "failure_detection_rate": 1.0
@@ -98,7 +110,8 @@
   {
     "track": "NaturalFEVER",
     "deletion_method": "full provenance purge",
-    "mean_risk_ucb": 0.5078,
+    "mean_risk_ucb": 0.5068,
+    "mean_floor_normalized_risk": 0.0,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.78,
     "failure_detection_rate": 0.0
@@ -106,7 +119,8 @@
   {
     "track": "NaturalFEVER",
     "deletion_method": "natural summary retained",
-    "mean_risk_ucb": 0.6632,
+    "mean_risk_ucb": 0.6709,
+    "mean_floor_normalized_risk": 0.3172,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.78,
     "failure_detection_rate": 1.0
@@ -114,7 +128,8 @@
   {
     "track": "RealRAG",
     "deletion_method": "backdoor-triggered RAG leakage",
-    "mean_risk_ucb": 0.6716,
+    "mean_risk_ucb": 0.7155,
+    "mean_floor_normalized_risk": 0.4062,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 1.0
@@ -123,6 +138,7 @@
     "track": "RealRAG",
     "deletion_method": "cache-not-purged deletion",
     "mean_risk_ucb": 0.7155,
+    "mean_floor_normalized_risk": 0.4062,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 1.0
@@ -131,6 +147,7 @@
     "track": "RealRAG",
     "deletion_method": "index-only deletion",
     "mean_risk_ucb": 0.7155,
+    "mean_floor_normalized_risk": 0.4062,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 1.0
@@ -139,6 +156,7 @@
     "track": "RealRAG",
     "deletion_method": "provenance-guided deletion",
     "mean_risk_ucb": 0.508,
+    "mean_floor_normalized_risk": 0.0,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 0.0
@@ -147,6 +165,7 @@
     "track": "RealRAG",
     "deletion_method": "shadow-copy deletion",
     "mean_risk_ucb": 0.6696,
+    "mean_floor_normalized_risk": 0.3163,
     "mean_retain_utility": 0.98,
     "mean_audit_calls": 25.33,
     "failure_detection_rate": 1.0

@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\caption{Natural-data FEVER deletion audit case study with redacted observed outputs.}
+\label{tab:natural_fever_case}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllllll}
+\toprule
+Case Id & Deletion Method & Ground Truth & Decision & Risk Ucb & Retrieval Dependence & Redacted Claim & Redacted Answer \\
+\midrule
+NF-1 & full provenance purge & clean & pass & 0.4327 & 0.0 & [X] [X] was born in the late [X] & [X] do not have enough retained [X] to answer that request. \\
+NF-2 & citation cache retained & failure & fail & 0.6508 & 0.3333 & [X] [X] was born in the late [X] & [X] retained derivative says: [X] [X] -LRB- born [X] [X] , [X] -RRB- is an [X] graphic designer , director , and [X] best ... \\
+NF-3 & natural summary retained & failure & fail & 0.6204 & 0.0 & [X] [X] spent her whole life single. & [X] [X] spent her whole life single. [X] [X] [X] , [X] married [X] tennis player [X] [X] , with whom she had three ... \\
+NF-4 & answer-only paraphrase leak & failure & fail & 0.5942 & 0.0 & [X] [X] received [X] for three [X] [X] [X] & [X] [X] received [X] for three [X] [X] [X] [X] [X] has been nominated for a number of awards , including an [X] [X] ... \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

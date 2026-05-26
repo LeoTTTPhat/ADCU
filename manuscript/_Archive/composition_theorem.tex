@@ -1,0 +1,386 @@
+% =====================================================================
+%  Drop-in section: A Composition Theorem for Pipeline Deletion
+%  ---------------------------------------------------------------------
+%  INTEGRATION NOTES
+%  1. Add these declarations to the PREAMBLE of main.tex (you already
+%     have \newtheorem{proposition}{Proposition}; do NOT redeclare it):
+%
+%        \newtheorem{theorem}{Theorem}
+%        \newtheorem{lemma}{Lemma}
+%        \newtheorem{corollary}{Corollary}
+%        \theoremstyle{definition}
+%        \newtheorem{definition}{Definition}
+%        \newtheorem{assumption}{Assumption}
+%
+%  2. \input this file where the formal contribution should appear,
+%     e.g. just after Section 4 (Deletion-Risk Metric) or in the
+%     supplement. It uses your \method{} and \bench{} macros.
+%  3. Requires amsmath, amssymb/amsfonts, amsthm (already loaded).
+% =====================================================================
+
+\section{A Composition Theorem for Pipeline Deletion}
+\label{sec:composition}
+
+The experiments show repeatedly that deleting a record from each
+component in isolation does not delete it from the deployed system: an
+index can be purged while a summary survives, or an adapter can be
+unlearned while a synthetic derivative is still retrieved. This section
+makes that observation precise. We define behavioral deletion against a
+counterfactual reference system, prove that per-component deletion
+guarantees \emph{compose} up to an explicit derivative-coupling term,
+and prove that this coupling term is \emph{necessary}: even perfect,
+independently certified component-level deletion does not imply
+pipeline-level deletion. The theorem provides the formal justification
+for treating deletion verification as a provenance-closed, multi-channel
+behavioral audit, which is exactly what \method{} operationalizes.
+
+\subsection{Setup and Counterfactual Reference}
+
+Fix a deletion target $z$. A foundation-model pipeline produces, for a
+query $q$, a distribution over answers. We write the pipeline's answer
+law as $P_{S}(\cdot\mid q)$ for a system $S$. A system is characterized
+by a parameter state $\theta$ (base weights and adapters) and an
+external knowledge state $K$ (vector index, lexical index, reranker
+state, caches, summaries, and any synthetic-derivative store). We
+consider queries drawn from a declared probe class $\mathcal{B}$ and
+measure deviation between answer laws by total variation,
+$\mathrm{TV}(\mu,\nu)=\sup_{A}\lvert\mu(A)-\nu(A)\rvert$.
+
+We compare three systems built from the same architecture:
+\begin{itemize}
+\item $S_0$, the pre-deletion system $(\theta_0,K_0)$;
+\item $S^{-}$, the deployed post-deletion system $(\theta^{-},K^{-})$
+obtained by applying a deletion operation to $S_0$;
+\item $S^{\star}$, the \emph{counterfactual reference} $(\theta^{\star},
+K^{\star})$, i.e.\ the pipeline that would have been built had $z$
+\emph{never been ingested}. $S^{\star}$ is the gold standard inherited
+from exact retraining and certified removal, lifted here from a single
+model to the whole pipeline.
+\end{itemize}
+
+\begin{definition}[Behavioral residual influence]
+\label{def:residual}
+The behavioral residual influence of $z$ in the post-deletion system,
+relative to the probe class $\mathcal{B}$, is
+\[
+  \rho_{\mathcal{B}}(S^{-})
+  \;=\;
+  \sup_{q\in\mathcal{B}}
+  \mathrm{TV}\!\big(P_{S^{-}}(\cdot\mid q),\,P_{S^{\star}}(\cdot\mid q)\big).
+\]
+We say $S^{-}$ achieves \emph{$\varepsilon$-behavioral deletion} on
+$\mathcal{B}$ if $\rho_{\mathcal{B}}(S^{-})\le\varepsilon$.
+\end{definition}
+
+Definition~\ref{def:residual} is the property an auditor actually cares
+about: it asks whether the deployed system is behaviorally
+indistinguishable, over the probe class, from a system that never saw
+$z$. It is strictly stronger than checking that artifacts labeled with
+$z$ are gone, a distinction we now name.
+
+\begin{definition}[Syntactic vs.\ behavioral deletion]
+\label{def:syntactic}
+A deletion operation is \emph{syntactic} if it removes exactly the
+artifacts explicitly tagged with the provenance identifier of $z$. It is
+\emph{behavioral} if the resulting system attains
+$\varepsilon$-behavioral deletion for small $\varepsilon$. Syntactic
+deletion is observable from metadata; behavioral deletion is a property
+of the answer law and is what Definition~\ref{def:residual} measures.
+\end{definition}
+
+\subsection{Pipeline Decomposition}
+
+We model the canonical retrieval-plus-generation pipeline as two stages
+with the parameter state entering generation as a side input. Given $q$
+and knowledge state $K$, a retrieval stage produces a (random) context
+$X$ with law $\mathcal{R}(\cdot\mid q,K)$. A generation stage produces
+the answer with law $\mathcal{G}(\cdot\mid q,X,\theta)$. The pipeline
+answer law is the mixture
+\begin{equation}
+\label{eq:pipeline}
+  P_{S}(\cdot\mid q)
+  \;=\;
+  \mathbb{E}_{X\sim\mathcal{R}(\cdot\mid q,K)}
+  \big[\,\mathcal{G}(\cdot\mid q,X,\theta)\,\big].
+\end{equation}
+Deeper pipelines (reranking, caching, summarization) are obtained by
+further composing stages; the serial generalization is
+Theorem~\ref{thm:general}.
+
+We assume the deletion operation is, or can be analyzed relative to, a
+\emph{provenance-closed} idealization. Let $\mathcal{D}(z)$ denote the
+transitive closure of $z$ in the provenance graph: every chunk,
+embedding, summary, cache entry, synthetic instruction/QA example, and
+fine-tuning record causally derived from $z$ or from a member of
+$\mathcal{D}(z)$. Let $S^{\diamond}=(\theta^{\diamond},K^{\diamond})$ be
+the system obtained from $S^{-}$ by \emph{additionally} removing all of
+$\mathcal{D}(z)$ from the knowledge state and excluding it from the data
+that produced the parameters. $S^{\diamond}$ is the system $S^{-}$
+``should have been'' had deletion followed lineage rather than labels.
+
+\subsection{Assumptions}
+
+\begin{assumption}[Parametric behavioral deletion]
+\label{a:theta}
+Uniformly over the probe class and over contexts,
+\[
+  \sup_{q\in\mathcal{B},\,x}
+  \mathrm{TV}\!\big(\mathcal{G}(\cdot\mid q,x,\theta^{\diamond}),\,
+  \mathcal{G}(\cdot\mid q,x,\theta^{\star})\big)\le\varepsilon_{\theta}.
+\]
+\end{assumption}
+
+\begin{assumption}[Knowledge-state deletion]
+\label{a:k}
+For a retrieval discrepancy $d_{\mathcal{R}}$,
+\[
+  \sup_{q\in\mathcal{B}}
+  d_{\mathcal{R}}\!\big(\mathcal{R}(\cdot\mid q,K^{\diamond}),\,
+  \mathcal{R}(\cdot\mid q,K^{\star})\big)\le\varepsilon_{K}.
+\]
+\end{assumption}
+
+\begin{assumption}[Bounded context sensitivity]
+\label{a:lip}
+The generation stage is $L$-Lipschitz from the retrieval discrepancy to
+answer total variation: for any context laws $\alpha,\beta$ and any
+fixed $(q,\theta)$,
+\[
+  \mathrm{TV}\!\Big(\mathbb{E}_{X\sim\alpha}\mathcal{G}(\cdot\mid q,X,\theta),\,
+  \mathbb{E}_{X\sim\beta}\mathcal{G}(\cdot\mid q,X,\theta)\Big)
+  \le L\, d_{\mathcal{R}}(\alpha,\beta).
+\]
+\end{assumption}
+
+Assumptions~\ref{a:theta}--\ref{a:k} say the parametric and knowledge
+components are individually deletion-certified \emph{against the
+counterfactual references on the provenance-closed problem}.
+Assumption~\ref{a:lip} bounds how strongly a change in what is retrieved
+can change what is answered. When $d_{\mathcal{R}}$ is itself total
+variation over context laws, $L\le 1$ by the data-processing inequality
+(mixing is a channel), and \eqref{eq:pipeline} gives no amplification;
+$L>1$ captures the practical case where $\varepsilon_{K}$ is reported in
+a weaker retrieval metric (e.g.\ retrieved-identifier overlap) than the
+answer divergence it induces.
+
+\subsection{Composition}
+
+\begin{lemma}[Hybrid bound]
+\label{lem:hybrid}
+For any $q$,
+\[
+  \mathrm{TV}\!\big(P_{S^{\diamond}}(\cdot\mid q),P_{S^{\star}}(\cdot\mid q)\big)
+  \le \varepsilon_{\theta} + L\,\varepsilon_{K}.
+\]
+\end{lemma}
+
+\begin{proof}
+Insert the hybrid system $(\theta^{\star},K^{\diamond})$ and apply the
+triangle inequality:
+\[
+\begin{aligned}
+\mathrm{TV}\!\big(P_{(\theta^{\diamond},K^{\diamond})},P_{(\theta^{\star},K^{\star})}\big)
+&\le
+\mathrm{TV}\!\big(P_{(\theta^{\diamond},K^{\diamond})},P_{(\theta^{\star},K^{\diamond})}\big)\\
+&\quad+
+\mathrm{TV}\!\big(P_{(\theta^{\star},K^{\diamond})},P_{(\theta^{\star},K^{\star})}\big).
+\end{aligned}
+\]
+For the first term the knowledge state is fixed at $K^{\diamond}$, so by
+\eqref{eq:pipeline} and convexity of total variation under mixtures,
+\[
+\begin{aligned}
+&\mathrm{TV}\!\big(P_{(\theta^{\diamond},K^{\diamond})},
+P_{(\theta^{\star},K^{\diamond})}\big)\\
+&\quad\le
+\mathbb{E}_{X}\,
+\mathrm{TV}\!\big(\mathcal{G}(\cdot\mid q,X,\theta^{\diamond}),
+\mathcal{G}(\cdot\mid q,X,\theta^{\star})\big)
+\le \varepsilon_{\theta},
+\end{aligned}
+\]
+using Assumption~\ref{a:theta}. For the second term the parameters are
+fixed at $\theta^{\star}$ and only the retrieval law differs, so by
+Assumption~\ref{a:lip} and then Assumption~\ref{a:k},
+\[
+\begin{aligned}
+&\mathrm{TV}\!\big(P_{(\theta^{\star},K^{\diamond})},
+P_{(\theta^{\star},K^{\star})}\big)\\
+&\quad\le L\,d_{\mathcal{R}}\!\big(
+\mathcal{R}(\cdot\mid q,K^{\diamond}),
+\mathcal{R}(\cdot\mid q,K^{\star})\big)
+\le L\,\varepsilon_{K}.
+\end{aligned}
+\]
+Summing gives the claim.
+\end{proof}
+
+We now isolate the part of the deviation that per-component guarantees
+\emph{cannot} reach: the orphan derivatives present in $S^{-}$ but absent
+from the provenance-closed $S^{\diamond}$.
+
+\begin{definition}[Derivative-coupling term]
+\label{def:gamma}
+\[
+  \gamma_{z}
+  \;=\;
+  \sup_{q\in\mathcal{B}}
+  \mathrm{TV}\!\big(P_{S^{-}}(\cdot\mid q),\,P_{S^{\diamond}}(\cdot\mid q)\big).
+\]
+We say the deletion operation achieves \emph{provenance closure} if
+$S^{-}=S^{\diamond}$, equivalently if every artifact in
+$\mathcal{D}(z)$ was removed.
+\end{definition}
+
+\begin{theorem}[Pipeline deletion composition]
+\label{thm:main}
+Under Assumptions~\ref{a:theta}--\ref{a:lip},
+\[
+  \boxed{\;\rho_{\mathcal{B}}(S^{-})
+  \;\le\;
+  \varepsilon_{\theta}\;+\;L\,\varepsilon_{K}\;+\;\gamma_{z}.\;}
+\]
+Moreover $\gamma_{z}=0$ if and only if the deletion operation achieves
+provenance closure, in which case
+$\rho_{\mathcal{B}}(S^{-})\le\varepsilon_{\theta}+L\,\varepsilon_{K}$.
+\end{theorem}
+
+\begin{proof}
+By the triangle inequality, for each $q$,
+\[
+\mathrm{TV}\!\big(P_{S^{-}},P_{S^{\star}}\big)
+\le
+\mathrm{TV}\!\big(P_{S^{-}},P_{S^{\diamond}}\big)
++\mathrm{TV}\!\big(P_{S^{\diamond}},P_{S^{\star}}\big).
+\]
+Taking $\sup_{q\in\mathcal{B}}$, the first supremum is $\gamma_{z}$ by
+Definition~\ref{def:gamma} and the second is bounded by
+$\varepsilon_{\theta}+L\,\varepsilon_{K}$ by Lemma~\ref{lem:hybrid}.
+If provenance closure holds then $S^{-}=S^{\diamond}$, so
+$\gamma_{z}=0$; conversely $\gamma_{z}=0$ forces
+$P_{S^{-}}=P_{S^{\diamond}}$ on $\mathcal{B}$, i.e.\ the retained
+derivatives exert no behavioral influence over the probe class, which is
+provenance closure in behavioral form.
+\end{proof}
+
+The next result shows the coupling term is not an artifact of loose
+analysis: component-wise deletion, \emph{even when perfect}, is
+insufficient.
+
+\begin{proposition}[Necessity of provenance closure]
+\label{prop:necessity}
+For every $\delta\in(0,1)$ there is a pipeline and a deletion operation
+with $\varepsilon_{\theta}=\varepsilon_{K}=0$---each component
+individually certified against its counterfactual reference and free of
+any artifact \emph{labeled} $z$---yet
+$\rho_{\mathcal{B}}(S^{-})\ge 1-\delta$. Hence no bound of the form
+$\rho_{\mathcal{B}}(S^{-})\le f(\varepsilon_{\theta},\varepsilon_{K})$
+can hold without the coupling term $\gamma_{z}$.
+\end{proposition}
+
+\begin{proof}
+Let the base model never be trained on $z$, so
+$\theta^{-}=\theta^{\diamond}=\theta^{\star}$ and
+$\varepsilon_{\theta}=0$. During ingestion a summarization component
+writes a derivative $s(z)\in\mathcal{D}(z)$---a paraphrased summary of
+$z$'s protected fact---into the index under a \emph{fresh} artifact
+identifier that is not tagged with $z$. Syntactic deletion removes the
+raw chunk of $z$ but, having no label linking $s(z)$ to $z$, leaves
+$s(z)$ in $K^{-}$. Restrict the comparison to direct artifacts of $z$:
+relative to those, the retrieval laws of $K^{-}$ and $K^{\star}$
+coincide, so a label-based audit reports $\varepsilon_{K}=0$.
+
+Now take a probe $q\in\mathcal{B}$ asking for the protected fact. Under
+$S^{-}$ the retriever returns $s(z)$ with probability one and the
+generator answers the fact; under $S^{\star}$ neither $z$ nor $s(z)$ was
+ever ingested, so the system returns ``insufficient information.'' These
+answer laws are almost disjoint, giving
+$\mathrm{TV}(P_{S^{-}}(\cdot\mid q),P_{S^{\star}}(\cdot\mid q))\ge1-\delta$
+for any target $\delta$ by making the two responses distinguishable with
+probability $\ge1-\delta$. Therefore $\rho_{\mathcal{B}}(S^{-})\ge1-\delta$
+while $\varepsilon_{\theta}=\varepsilon_{K}=0$; the entire deviation is
+carried by $\gamma_{z}$, the orphan derivative $s(z)$.
+\end{proof}
+
+Proposition~\ref{prop:necessity} is the formal counterpart of the
+\emph{synthetic derivative retained} and \emph{shadow-copy} failures in
+our experiments, where each component looks clean by its own check yet
+the pipeline still answers the deleted fact. It explains why those rows
+carry near-maximal risk even though no artifact labeled with the target
+remains.
+
+\subsection{Serial Pipelines}
+
+\begin{theorem}[Multi-stage composition]
+\label{thm:general}
+Consider a serial pipeline $C_{m}\circ\cdots\circ C_{1}$ in which stage
+$C_{i}$ has deletion error $\varepsilon_{i}$ against its counterfactual
+reference (on the provenance-closed problem) and every downstream stage
+$C_{k}$, $k>i$, is $L_{k}$-Lipschitz in the sense of
+Assumption~\ref{a:lip}. Then
+\[
+  \rho_{\mathcal{B}}(S^{-})
+  \;\le\;
+  \sum_{i=1}^{m}\Big(\textstyle\prod_{k=i+1}^{m}L_{k}\Big)\varepsilon_{i}
+  \;+\;\gamma_{z}.
+\]
+\end{theorem}
+
+\begin{proof}
+Form the $m$ hybrids that switch stages from the reference to the
+deployed version one at a time, holding all others fixed. Telescoping
+the triangle inequality, the deviation introduced when stage $C_{i}$ is
+switched is at most $\varepsilon_{i}$, and it is transported to the
+output through the downstream stages, each contracting (or amplifying)
+it by its Lipschitz factor, contributing
+$(\prod_{k>i}L_{k})\varepsilon_{i}$. Summation over $i$ bounds the
+provenance-closed deviation $\mathrm{TV}(P_{S^{\diamond}},P_{S^{\star}})$;
+adding $\gamma_{z}$ as in Theorem~\ref{thm:main} gives the result.
+\end{proof}
+
+\subsection{Consequences for Auditing}
+
+\begin{corollary}[Audit sufficiency]
+\label{cor:audit}
+To certify $\varepsilon$-behavioral deletion it suffices to (i) establish
+provenance closure, driving $\gamma_{z}\to 0$, and (ii) bound each
+component error so that the propagated sum in
+Theorem~\ref{thm:general} is at most $\varepsilon$. Conversely, by
+Proposition~\ref{prop:necessity}, an audit that omits either ingredient
+cannot certify deletion.
+\end{corollary}
+
+Corollary~\ref{cor:audit} maps onto \method{} term by term. Building the
+provenance graph and expanding deletion targets to $\mathcal{D}(z)$ is
+the operational route to $\gamma_{z}\to 0$; the residual-dependence
+channels estimate the component and behavioral errors that survive
+closure (direct, paraphrase, and extraction probes estimate the
+answer-side parametric and derivative error; retrieval-dependence probes
+estimate the retrieval-mediated term $L\varepsilon_{K}$; watermark
+probes detect labeled-artifact survival; the retrieval-off counterfactual
+isolates which path dominates). The Hoeffding upper confidence bound of
+Section~4 is then the finite-sample, high-probability estimate of
+$\rho_{\mathcal{B}}(S^{-})$ that Theorem~\ref{thm:main} bounds in
+expectation: a pass certifies that the estimated propagated error plus
+coupling term lies below tolerance, under the declared probe class.
+
+\paragraph{Relation to differential-privacy composition.}
+Theorem~\ref{thm:general} is structurally a composition-across-data-flow
+result---deletion budgets add (sensitivity-weighted) along the
+pipeline---but it differs from differential-privacy composition in an
+essential way: it carries the non-additive term $\gamma_{z}$. Standard
+privacy composition has no analogue of $\gamma_{z}$ because it does not
+model derived artifacts that re-enter the pipeline. The coupling term is
+precisely the contribution of derivative re-ingestion, and it is why
+deletion in compositional foundation-model systems requires lineage
+tracking rather than per-component accounting alone.
+
+\paragraph{Assumptions and scope.}
+The guarantee is conditional on the declared probe class $\mathcal{B}$
+(it bounds residual influence over $\mathcal{B}$, not over all
+conceivable prompts), on access to the counterfactual references for
+defining $\varepsilon_{\theta},\varepsilon_{K}$ (in practice estimated,
+e.g.\ via a retrain-without-record reference on a sampled slice), and on
+stable system behavior during the audit. These are the same operating
+assumptions used by the empirical metric, now made explicit at the level
+of the composition they justify.

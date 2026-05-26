@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\caption{Evaluation against deletion-operation labels independent of ADCU channel scores.}
+\label{tab:independent_labels}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllll}
+\toprule
+Track & Label Source & Labeled Failures & Labeled Clean & Detection Rate & False Alarm Rate \\
+\midrule
+FineTuneSim & deletion-operation manifest, not ADCU channel scores & 180 & 45 & 0.7222 & 0.0 \\
+HybridReal & deletion-operation manifest, not ADCU channel scores & 180 & 45 & 1.0 & 0.0 \\
+NaturalFEVER & deletion-operation manifest, not ADCU channel scores & 135 & 45 & 1.0 & 0.0 \\
+RealRAG & deletion-operation manifest, not ADCU channel scores & 180 & 45 & 1.0 & 0.0 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

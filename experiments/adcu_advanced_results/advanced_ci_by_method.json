@@ -740,8 +740,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4161,
-    "n": 3
+    "mean_risk_ucb": 0.5488,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -752,8 +752,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.3964,
-    "n": 3
+    "mean_risk_ucb": 0.4651,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -764,8 +764,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4221,
-    "n": 3
+    "mean_risk_ucb": 0.5722,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -776,8 +776,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4474,
-    "n": 3
+    "mean_risk_ucb": 0.5907,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -788,8 +788,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4161,
-    "n": 3
+    "mean_risk_ucb": 0.5488,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -800,8 +800,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.3964,
-    "n": 3
+    "mean_risk_ucb": 0.4651,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -812,8 +812,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4221,
-    "n": 3
+    "mean_risk_ucb": 0.5722,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -824,8 +824,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4474,
-    "n": 3
+    "mean_risk_ucb": 0.5907,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -836,8 +836,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4161,
-    "n": 3
+    "mean_risk_ucb": 0.6723,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -848,8 +848,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.3964,
-    "n": 3
+    "mean_risk_ucb": 0.5295,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -860,8 +860,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4221,
-    "n": 3
+    "mean_risk_ucb": 0.7111,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -872,8 +872,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4474,
-    "n": 3
+    "mean_risk_ucb": 0.7237,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -884,8 +884,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.5106,
-    "n": 3
+    "mean_risk_ucb": 0.7196,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -896,8 +896,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4452,
-    "n": 3
+    "mean_risk_ucb": 0.5539,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -908,8 +908,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.5296,
-    "n": 3
+    "mean_risk_ucb": 0.7648,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -920,8 +920,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.5498,
-    "n": 3
+    "mean_risk_ucb": 0.7749,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -932,8 +932,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4161,
-    "n": 3
+    "mean_risk_ucb": 0.6342,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -944,8 +944,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.3964,
-    "n": 3
+    "mean_risk_ucb": 0.5095,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -956,8 +956,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4221,
-    "n": 3
+    "mean_risk_ucb": 0.6685,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -968,8 +968,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4474,
-    "n": 3
+    "mean_risk_ucb": 0.6828,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -980,8 +980,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4161,
-    "n": 3
+    "mean_risk_ucb": 0.5015,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -992,8 +992,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.3964,
-    "n": 3
+    "mean_risk_ucb": 0.4407,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -1004,8 +1004,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4221,
-    "n": 3
+    "mean_risk_ucb": 0.5184,
+    "n": 6
   },
   {
     "track": "Pretrained-LoRA",
@@ -1016,8 +1016,8 @@
     "ci95_high": 1.0,
     "bootstrap_ci95_low": 1.0,
     "bootstrap_ci95_high": 1.0,
-    "mean_risk_ucb": 0.4474,
-    "n": 3
+    "mean_risk_ucb": 0.5395,
+    "n": 6
   },
   {
     "track": "Qwen-TOFU-LoRA",

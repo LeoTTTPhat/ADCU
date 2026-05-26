@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\caption{Headline counterfactual deletion results using the two-sample $\hat R_{\mathrm{cf}}$ statistic.}
+\label{tab:cf_headline}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllllllll}
+\toprule
+Track & Mean Rhat Cf & Mean Ucb Cf & Mean Floor & Floor Normalized Risk & Delta & Tolerance & Failure Detection Rate & False Alarm Rate & N \\
+\midrule
+FineTuneSim & 0.2444 & 0.6399 & 0.508 & 0.2501 & 0.05 & 0.05 & 0.7222 & 0.0 & 225 \\
+HybridReal & 0.5667 & 0.8279 & 0.508 & 0.6335 & 0.05 & 0.05 & 1.0 & 0.0 & 225 \\
+NaturalFEVER & 0.3056 & 0.6842 & 0.5068 & 0.3428 & 0.05 & 0.05 & 1.0 & 0.0 & 180 \\
+RealRAG & 0.2445 & 0.6648 & 0.508 & 0.307 & 0.05 & 0.05 & 1.0 & 0.0 & 225 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

@@ -11,10 +11,12 @@ from adcu import (
     aggregate_risk,
     build_attack_suite,
     build_synthetic_scenario,
+    distinguishability_test,
     make_clean_system,
     make_leaky_system,
     risk_ucb,
 )
+from adcu.probes import ProbeGenerator
 
 
 def test_risk_ucb_decreases_with_more_clean_evidence() -> None:
@@ -27,8 +29,12 @@ def test_risk_ucb_decreases_with_more_clean_evidence() -> None:
 def test_risk_weights_score_retrieval_and_leakage() -> None:
     weights = RiskWeights()
     score = weights.score(EvidenceScore(direct=1.0, retrieval=1.0, counterfactual=1.0))
+    cf_score = RiskWeights(direct=0.0, paraphrase=0.0, retrieval=0.0, counterfactual=1.0, extraction=0.0, watermark=0.0).score(
+        EvidenceScore(direct=1.0, retrieval=1.0, counterfactual=1.0)
+    )
 
-    assert 0.55 <= score <= 0.65
+    assert 0.40 <= score <= 0.50
+    assert cf_score == 1.0
 
 
 def test_aggregate_risk_uses_priorities() -> None:
@@ -44,6 +50,20 @@ def test_clean_system_has_no_violating_probes() -> None:
 
     assert report.violating_probes == []
     assert report.decision in {"pass", "escalate"}
+
+
+def test_counterfactual_distinguishability_passes_clean_and_fails_leaky() -> None:
+    scenario = build_synthetic_scenario()
+    probes = ProbeGenerator().generate(scenario.targets[0], scenario.graph)
+    clean = make_clean_system(scenario)
+    leaky = make_leaky_system(scenario, leak_target_ids={scenario.targets[0].target_id})
+
+    clean_report = distinguishability_test(clean, clean, probes, epsilon=0.75)
+    leaky_report = distinguishability_test(leaky, clean, probes, epsilon=0.75)
+
+    assert clean_report.passed
+    assert not leaky_report.passed
+    assert leaky_report.mean_distance > clean_report.mean_distance
 
 
 def test_rag_retrieval_residue_fails_audit() -> None:

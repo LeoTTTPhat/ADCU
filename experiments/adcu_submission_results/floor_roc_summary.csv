@@ -1,0 +1,9 @@
+score,tolerance,detection_rate,false_alarm_rate,delta,n
+floor_normalized_Rhat_cf,0.0,1.0,1.0,0.05,855
+floor_normalized_Rhat_cf,0.05,0.9259,0.0,0.05,855
+floor_normalized_Rhat_cf,0.1,0.9111,0.0,0.05,855
+floor_normalized_Rhat_cf,0.2,0.8889,0.0,0.05,855
+floor_normalized_Rhat_cf,0.3,0.7259,0.0,0.05,855
+floor_normalized_Rhat_cf,0.45,0.4963,0.0,0.05,855
+floor_normalized_Rhat_cf,0.6,0.2667,0.0,0.05,855
+floor_normalized_Rhat_cf,0.8,0.1778,0.0,0.05,855

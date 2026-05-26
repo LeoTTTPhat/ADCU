@@ -1,0 +1,32 @@
+\begin{table*}[t]
+\centering
+\caption{Repeated residual-dependence summary for ADCU.}
+\label{tab:submission_methods}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllllllll}
+\toprule
+Track & Deletion Method & Direct Leakage & Paraphrase Leakage & Retrieval Dependence & Extraction Risk & Retain Utility & Risk Ucb & Cf Distance & Floor Normalized Risk \\
+\midrule
+FineTuneSim & adapter replacement failure & 0.6111 & 0.4668 & 0.0 & 0.0509 & 0.965 & 0.8379 & 0.6111 & 0.6253 \\
+FineTuneSim & filtered retraining & 0.0 & 0.0 & 0.0 & 0.0 & 0.985 & 0.508 & 0.0 & 0.0 \\
+FineTuneSim & gradient-ascent unlearning & 0.1019 & 0.3056 & 0.0 & 0.0255 & 0.965 & 0.7155 & 0.3056 & 0.4062 \\
+FineTuneSim & negative fine-tuning & 0.1309 & 0.3056 & 0.0 & 0.0255 & 0.955 & 0.6303 & 0.3056 & 0.2192 \\
+FineTuneSim & over-unlearned adapter & 0.0 & 0.0 & 0.0 & 0.0 & 0.42 & 0.508 & 0.0 & 0.0 \\
+HybridReal & RAG-only deletion & 0.2328 & 0.6111 & 0.0 & 0.0509 & 0.98 & 0.8772 & 0.6111 & 0.7226 \\
+HybridReal & adapter-only unlearning & 0.6111 & 0.4668 & 0.6111 & 0.0509 & 0.98 & 0.8772 & 0.6111 & 0.7226 \\
+HybridReal & full provenance purge & 0.0 & 0.0 & 0.0 & 0.0 & 0.98 & 0.508 & 0.0 & 0.0 \\
+HybridReal & graph-pivot expansion retained & 0.2328 & 0.6111 & 0.6111 & 0.0509 & 0.98 & 0.8772 & 0.6111 & 0.7226 \\
+HybridReal & synthetic derivative retained & 0.3995 & 1.0 & 0.6111 & 0.0833 & 0.98 & 1.0 & 1.0 & 1.0 \\
+NaturalFEVER & answer-only paraphrase leak & 0.574 & 0.616 & 0.0 & 0.0436 & 0.98 & 0.8616 & 0.6111 & 0.6857 \\
+NaturalFEVER & citation cache retained & 0.3068 & 0.3011 & 0.3056 & 0.0218 & 0.98 & 0.6975 & 0.3056 & 0.3685 \\
+NaturalFEVER & full provenance purge & 0.0012 & 0.0049 & 0.0 & 0.0 & 0.98 & 0.5068 & 0.0 & 0.0 \\
+NaturalFEVER & natural summary retained & 0.2915 & 0.3105 & 0.0 & 0.0218 & 0.98 & 0.6709 & 0.3056 & 0.3172 \\
+RealRAG & backdoor-triggered RAG leakage & 0.1019 & 0.3056 & 0.0 & 0.0255 & 0.98 & 0.7155 & 0.3056 & 0.4062 \\
+RealRAG & cache-not-purged deletion & 0.3056 & 0.2292 & 0.3056 & 0.0255 & 0.98 & 0.7155 & 0.3056 & 0.4062 \\
+RealRAG & index-only deletion & 0.3056 & 0.2292 & 0.3056 & 0.0255 & 0.98 & 0.7155 & 0.3056 & 0.4062 \\
+RealRAG & provenance-guided deletion & 0.0 & 0.0 & 0.0 & 0.0 & 0.98 & 0.508 & 0.0 & 0.0 \\
+RealRAG & shadow-copy deletion & 0.3056 & 0.2376 & 0.3056 & 0.0255 & 0.98 & 0.6696 & 0.3056 & 0.3163 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

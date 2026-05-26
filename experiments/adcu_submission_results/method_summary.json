@@ -7,7 +7,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0509,
     "retain_utility": 0.965,
-    "risk_ucb": 0.829
+    "risk_ucb": 0.8379,
+    "cf_distance": 0.6111,
+    "floor_normalized_risk": 0.6253
   },
   {
     "track": "FineTuneSim",
@@ -17,7 +19,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0,
     "retain_utility": 0.985,
-    "risk_ucb": 0.508
+    "risk_ucb": 0.508,
+    "cf_distance": 0.0,
+    "floor_normalized_risk": 0.0
   },
   {
     "track": "FineTuneSim",
@@ -27,7 +31,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0255,
     "retain_utility": 0.965,
-    "risk_ucb": 0.6716
+    "risk_ucb": 0.7155,
+    "cf_distance": 0.3056,
+    "floor_normalized_risk": 0.4062
   },
   {
     "track": "FineTuneSim",
@@ -37,7 +43,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0255,
     "retain_utility": 0.955,
-    "risk_ucb": 0.606
+    "risk_ucb": 0.6303,
+    "cf_distance": 0.3056,
+    "floor_normalized_risk": 0.2192
   },
   {
     "track": "FineTuneSim",
@@ -47,7 +55,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0,
     "retain_utility": 0.42,
-    "risk_ucb": 0.508
+    "risk_ucb": 0.508,
+    "cf_distance": 0.0,
+    "floor_normalized_risk": 0.0
   },
   {
     "track": "HybridReal",
@@ -57,7 +67,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0509,
     "retain_utility": 0.98,
-    "risk_ucb": 0.8045
+    "risk_ucb": 0.8772,
+    "cf_distance": 0.6111,
+    "floor_normalized_risk": 0.7226
   },
   {
     "track": "HybridReal",
@@ -67,7 +79,9 @@
     "retrieval_dependence": 0.6111,
     "extraction_risk": 0.0509,
     "retain_utility": 0.98,
-    "risk_ucb": 0.8772
+    "risk_ucb": 0.8772,
+    "cf_distance": 0.6111,
+    "floor_normalized_risk": 0.7226
   },
   {
     "track": "HybridReal",
@@ -77,7 +91,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0,
     "retain_utility": 0.98,
-    "risk_ucb": 0.508
+    "risk_ucb": 0.508,
+    "cf_distance": 0.0,
+    "floor_normalized_risk": 0.0
   },
   {
     "track": "HybridReal",
@@ -87,7 +103,9 @@
     "retrieval_dependence": 0.6111,
     "extraction_risk": 0.0509,
     "retain_utility": 0.98,
-    "risk_ucb": 0.877
+    "risk_ucb": 0.8772,
+    "cf_distance": 0.6111,
+    "floor_normalized_risk": 0.7226
   },
   {
     "track": "HybridReal",
@@ -97,7 +115,9 @@
     "retrieval_dependence": 0.6111,
     "extraction_risk": 0.0833,
     "retain_utility": 0.98,
-    "risk_ucb": 0.9846
+    "risk_ucb": 1.0,
+    "cf_distance": 1.0,
+    "floor_normalized_risk": 1.0
   },
   {
     "track": "NaturalFEVER",
@@ -107,7 +127,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0436,
     "retain_utility": 0.98,
-    "risk_ucb": 0.8427
+    "risk_ucb": 0.8616,
+    "cf_distance": 0.6111,
+    "floor_normalized_risk": 0.6857
   },
   {
     "track": "NaturalFEVER",
@@ -117,7 +139,9 @@
     "retrieval_dependence": 0.3056,
     "extraction_risk": 0.0218,
     "retain_utility": 0.98,
-    "risk_ucb": 0.6985
+    "risk_ucb": 0.6975,
+    "cf_distance": 0.3056,
+    "floor_normalized_risk": 0.3685
   },
   {
     "track": "NaturalFEVER",
@@ -127,7 +151,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0,
     "retain_utility": 0.98,
-    "risk_ucb": 0.5078
+    "risk_ucb": 0.5068,
+    "cf_distance": 0.0,
+    "floor_normalized_risk": 0.0
   },
   {
     "track": "NaturalFEVER",
@@ -137,7 +163,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0218,
     "retain_utility": 0.98,
-    "risk_ucb": 0.6632
+    "risk_ucb": 0.6709,
+    "cf_distance": 0.3056,
+    "floor_normalized_risk": 0.3172
   },
   {
     "track": "RealRAG",
@@ -147,7 +175,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0255,
     "retain_utility": 0.98,
-    "risk_ucb": 0.6716
+    "risk_ucb": 0.7155,
+    "cf_distance": 0.3056,
+    "floor_normalized_risk": 0.4062
   },
   {
     "track": "RealRAG",
@@ -157,7 +187,9 @@
     "retrieval_dependence": 0.3056,
     "extraction_risk": 0.0255,
     "retain_utility": 0.98,
-    "risk_ucb": 0.7155
+    "risk_ucb": 0.7155,
+    "cf_distance": 0.3056,
+    "floor_normalized_risk": 0.4062
   },
   {
     "track": "RealRAG",
@@ -167,7 +199,9 @@
     "retrieval_dependence": 0.3056,
     "extraction_risk": 0.0255,
     "retain_utility": 0.98,
-    "risk_ucb": 0.7155
+    "risk_ucb": 0.7155,
+    "cf_distance": 0.3056,
+    "floor_normalized_risk": 0.4062
   },
   {
     "track": "RealRAG",
@@ -177,7 +211,9 @@
     "retrieval_dependence": 0.0,
     "extraction_risk": 0.0,
     "retain_utility": 0.98,
-    "risk_ucb": 0.508
+    "risk_ucb": 0.508,
+    "cf_distance": 0.0,
+    "floor_normalized_risk": 0.0
   },
   {
     "track": "RealRAG",
@@ -187,6 +223,8 @@
     "retrieval_dependence": 0.3056,
     "extraction_risk": 0.0255,
     "retain_utility": 0.98,
-    "risk_ucb": 0.6696
+    "risk_ucb": 0.6696,
+    "cf_distance": 0.3056,
+    "floor_normalized_risk": 0.3163
   }
 ]

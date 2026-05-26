@@ -1,0 +1,10 @@
+| track | audit_method | failure_detection_rate | mean_direct | mean_paraphrase | mean_retrieval | mean_risk_ucb | n |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| FineTuneSim | ADCU | 0.7222 | 0.1688 | 0.2156 | 0.0 | 0.6399 | 225 |
+| FineTuneSim | ADCU-BlackBox | 0.9722 | 0.1688 | 0.2156 | 0.0 | 0.6399 | 225 |
+| HybridReal | ADCU | 1.0 | 0.2953 | 0.5378 | 0.3667 | 0.8279 | 225 |
+| HybridReal | ADCU-BlackBox | 1.0 | 0.2953 | 0.5378 | 0.0 | 0.8279 | 225 |
+| NaturalFEVER | ADCU | 1.0 | 0.2934 | 0.3081 | 0.0764 | 0.6842 | 180 |
+| NaturalFEVER | ADCU-BlackBox | 1.0 | 0.2934 | 0.3081 | 0.0 | 0.6842 | 180 |
+| RealRAG | ADCU | 1.0 | 0.2037 | 0.2003 | 0.1833 | 0.6648 | 225 |
+| RealRAG | ADCU-BlackBox | 1.0 | 0.2037 | 0.2003 | 0.0 | 0.6648 | 225 |

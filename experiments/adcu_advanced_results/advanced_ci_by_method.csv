@@ -60,30 +60,30 @@ ExtractionAudit,0.0,0.0,0.0,0.0,tiny HF PEFT LoRA validation,0.0,0.5464,1,PEFT-L
 InfluenceProxy,1.0,1.0,1.0,1.0,tiny HF PEFT LoRA validation,1.0,0.8482,1,PEFT-LoRA
 MembershipInference,1.0,1.0,1.0,1.0,tiny HF PEFT LoRA validation,1.0,0.9195,1,PEFT-LoRA
 RetrieverHit,0.0,0.0,0.0,0.0,tiny HF PEFT LoRA validation,0.0,0.3736,1,PEFT-LoRA
-ADCU,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.4161,3,Pretrained-LoRA
-ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.3964,3,Pretrained-LoRA
-InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.4221,3,Pretrained-LoRA
-MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.4474,3,Pretrained-LoRA
-ADCU,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.4161,3,Pretrained-LoRA
-ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.3964,3,Pretrained-LoRA
-InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.4221,3,Pretrained-LoRA
-MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.4474,3,Pretrained-LoRA
-ADCU,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.4161,3,Pretrained-LoRA
-ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.3964,3,Pretrained-LoRA
-InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.4221,3,Pretrained-LoRA
-MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.4474,3,Pretrained-LoRA
-ADCU,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.5106,3,Pretrained-LoRA
-ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.4452,3,Pretrained-LoRA
-InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.5296,3,Pretrained-LoRA
-MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.5498,3,Pretrained-LoRA
-ADCU,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.4161,3,Pretrained-LoRA
-ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.3964,3,Pretrained-LoRA
-InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.4221,3,Pretrained-LoRA
-MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.4474,3,Pretrained-LoRA
-ADCU,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.4161,3,Pretrained-LoRA
-ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.3964,3,Pretrained-LoRA
-InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.4221,3,Pretrained-LoRA
-MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.4474,3,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.5488,6,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.4651,6,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.5722,6,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA NPO unlearning,1.0,0.5907,6,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.5488,6,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.4651,6,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.5722,6,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA SimNPO unlearning,1.0,0.5907,6,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.6723,6,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.5295,6,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.7111,6,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA filtered retraining,1.0,0.7237,6,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.7196,6,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.5539,6,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.7648,6,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA full SFT,1.0,0.7749,6,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.6342,6,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.5095,6,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.6685,6,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA gradient-ascent unlearning,1.0,0.6828,6,Pretrained-LoRA
+ADCU,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.5015,6,Pretrained-LoRA
+ExtractionAudit,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.4407,6,Pretrained-LoRA
+InfluenceProxy,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.5184,6,Pretrained-LoRA
+MembershipInference,1.0,1.0,1.0,1.0,pretrained LoRA negative SFT unlearning,1.0,0.5395,6,Pretrained-LoRA
 ADCU,1.0,1.0,1.0,1.0,Qwen2.5-0.5B TOFU-like NPO unlearning,1.0,0.6434,1,Qwen-TOFU-LoRA
 ExtractionAudit,0.0,0.0,0.0,0.0,Qwen2.5-0.5B TOFU-like NPO unlearning,0.0,0.5249,1,Qwen-TOFU-LoRA
 InfluenceProxy,1.0,1.0,1.0,1.0,Qwen2.5-0.5B TOFU-like NPO unlearning,1.0,0.6845,1,Qwen-TOFU-LoRA

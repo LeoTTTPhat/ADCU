@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Counterfactual and graph-allocation evidence in the repeated harness. $\hat R_{\mathrm{cf}}$ is the empirical clean-vs-post behavioral distance; clean rows have zero empirical distance before the UCB floor.}
+\label{tab:cf_graph_summary}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Track & Clean $\hat R_{\mathrm{cf}}$ & Failure $\hat R_{\mathrm{cf}}$ & ADCU Det. & Uniform Det. & Gain \\
+\midrule
+RealRAG & 0.000 & 0.306 & 1.000 & 1.000 & 0.000 \\
+NaturalFEVER & 0.000 & 0.407 & 1.000 & 1.000 & 0.000 \\
+FineTuneSim & 0.000 & 0.306 & 0.972 & 0.917 & 0.056 \\
+HybridReal & 0.000 & 0.708 & 1.000 & 1.000 & 0.000 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}

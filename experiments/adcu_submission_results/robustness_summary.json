@@ -1,9 +1,9 @@
 [
   {
     "track": "FineTuneSim",
-    "block_bootstrap_low": 0.9722,
-    "block_bootstrap_high": 0.9722,
-    "score_jitter_stability": 0.9722,
+    "block_bootstrap_low": 0.7222,
+    "block_bootstrap_high": 0.7222,
+    "score_jitter_stability": 0.7222,
     "mean_effective_probe_families": 2.6,
     "n": 225
   },

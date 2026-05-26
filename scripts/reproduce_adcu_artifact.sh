@@ -14,4 +14,5 @@ python3.11 scripts/make_adcu_advanced_tables.py
 python3.11 scripts/make_adcu_submission_figures.py
 python3.11 scripts/make_adcu_pdf_figures.py
 python3.11 -m pytest -q
-(cd manuscript_adcu && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex)
+(cd manuscript && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex)
+(cd manuscript && latexmk -pdf -interaction=nonstopmode -halt-on-error supplement.tex)
