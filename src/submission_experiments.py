@@ -614,6 +614,8 @@ def _budget_summary(rows: list[dict[str, object]]) -> list[dict[str, object]]:
                 "mean_risk_ucb": round(_mean(float(row["aggregate_risk_ucb"]) for row in group), 4),
                 "mean_floor_normalized_risk": round(_mean(float(row["floor_normalized_risk"]) for row in group), 4),
                 "mean_calls": round(_mean(float(row["audit_calls"]) for row in group), 2),
+                "std_failure_detection_rate": round(_std((float(row["detected_failure"]) for row in failures), detected / len(failures) if failures else 0.0), 4),
+                "std_risk_ucb": round(_std((float(row["aggregate_risk_ucb"]) for row in group), _mean(float(row["aggregate_risk_ucb"]) for row in group)), 4),
             }
         )
     return out
@@ -996,6 +998,14 @@ def _group(rows: list[dict[str, object]], keys: list[str]) -> dict[tuple[object,
 def _mean(values: Iterable[float]) -> float:
     values = list(values)
     return sum(values) / len(values) if values else 0.0
+
+
+def _std(values: Iterable[float], mean_val: float) -> float:
+    values = list(values)
+    if len(values) < 2: return 0.0
+    import math
+    variance = sum((x - mean_val) ** 2 for x in values) / (len(values) - 1)
+    return math.sqrt(variance)
 
 
 def _tokens(text: str) -> set[str]:

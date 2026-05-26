@@ -48,7 +48,7 @@
 
 \title{Auditable Unlearning for Retrieval-Augmented and Fine-Tuned Foundation Models}
 
-\author{Author~Names~Omitted~for~Review}
+\author{Anonymous authors}
 
 \markboth{ADCU Unlearning Audit}{}
 
@@ -76,11 +76,11 @@ Privacy and governance regimes motivate data erasure and deletion accountability
 
 We argue that deletion verification should be treated as \emph{counterfactual behavioral indistinguishability}. The relevant question is not whether a chosen leakage string appears, but whether the post-deletion system behaves like a clean reference system $S_{\mathrm{clean}}$ rebuilt as if the deleted record had never entered any retriever, cache, synthetic-data generator, adapter, or evaluation trace. This avoids circularity: diagnostic channels can localize failures, but the gold standard is statistical distance from the clean counterfactual. A practical audit then needs three ingredients: provenance (which artifacts are downstream of the target), efficient adaptive testing over high-risk target--channel arms, and behavioral tests that compare $S_-$ with $S_{\mathrm{clean}}$ and explain whether the residual distance is retrieval-, parametric-, cache-, or derivative-mediated.
 
-This paper proposes \method{} (\emph{Auditable Data-Centric Unlearning}), a framework for deletion-risk auditing in RAG and fine-tuned foundation-model systems. \method{} represents deletion targets and their downstream artifacts in a provenance graph; defines an $(\varepsilon,\delta)$ behavioral-deletion guarantee as bounded distance between $S_-$ and $S_{\mathrm{clean}}$ over an adversary-aware probe class; allocates probes through a graph-structured sequential test; and uses direct, paraphrase, retrieval, counterfactual, extraction, trigger, and graph-pivot probes as diagnostic localizers rather than as the failure definition. Instead of a binary claim of perfect forgetting, it returns a confidence-bounded pass, fail, or escalate decision under an operator-chosen tolerance. The goal is not to replace unlearning algorithms, certified removal, differential privacy, or legal review~\cite{dwork2006dp,guo2020certified,kirchenbauer2023watermark}, but to provide measurable technical evidence about residual behavioral dependence in the pipeline surrounding those mechanisms.
+This article proposes \method{} (\emph{Auditable Data-Centric Unlearning}), a framework for deletion-risk auditing in RAG and fine-tuned foundation-model systems. \method{} represents deletion targets and their downstream artifacts in a provenance graph; defines an $(\varepsilon,\delta)$ behavioral-deletion guarantee as bounded distance between $S_-$ and $S_{\mathrm{clean}}$ over an adversary-aware probe class; allocates probes through a graph-structured sequential test; and uses direct, paraphrase, retrieval, counterfactual, extraction, trigger, and graph-pivot probes as diagnostic localizers rather than as the failure definition. Instead of a binary claim of perfect forgetting, it returns a confidence-bounded pass, fail, or escalate decision under an operator-chosen tolerance. The goal is not to replace unlearning algorithms, certified removal, differential privacy, or legal review~\cite{dwork2006dp,guo2020certified,kirchenbauer2023watermark}, but to provide measurable technical evidence about residual behavioral dependence in the pipeline surrounding those mechanisms.
 
 We instantiate the framework in \bench{}, spanning four settings: \emph{RealRAG} (public FEVER retain corpus with injected synthetic private targets), \emph{NaturalFEVER} (public FEVER passages as deletion units with redacted outputs), \emph{FineTuneSim} (a controlled adapter-memory simulator), and \emph{HybridReal} (RAG records plus derivatives that survive through summaries, caches, synthetic examples, or model-side behavior). We further add LoRA-SFT and cached PEFT/LoRA validations, pretrained LoRA margin analysis, TOFU-style forget/retain evaluation, neural dense retrieval (MiniLM/E5/BGE), clean-counterfactual two-sample tests, and component interventions for causal mediation. Across the repeated harness, \method{} detects configured deletion failures in RealRAG, NaturalFEVER, and HybridReal with zero configured false alarms; in FineTuneSim it detects 72.2\% of all configured failures, or 96.3\% of residual adapter-memory failures once utility-only over-unlearning cases are separated as escalations. The results do not prove legal compliance or absolute absence of influence; they show that deletion audits become substantially more informative when they are clean-counterfactual, provenance-aware, graph-adaptive, and multi-channel.
 
-This paper makes the following contributions:
+This article makes the following contributions:
 \begin{itemize}
 \item We formulate deletion verification for RAG and fine-tuned foundation-model systems as $(\varepsilon,\delta)$ counterfactual behavioral indistinguishability from a clean reference pipeline.
 \item We define deletion risk as clean-counterfactual behavioral distance and use direct, paraphrase, retrieval, extraction, and watermark evidence as diagnostic localizers rather than circular ground truth.
@@ -166,7 +166,24 @@ The released benchmark also computes an evidence vector
 \[
 e(S_-,q,z) = [e_d,e_p,e_r,e_c,e_x,e_w],
 \]
-where $e_d$ measures direct leakage, $e_p$ paraphrased leakage, $e_r$ retrieval dependence, $e_c$ clean-counterfactual answer dependence, $e_x$ extraction risk, and $e_w$ watermark or provenance-token hits. These channels are not the ground-truth definition of deletion failure. They are transparent estimators and localizers for the counterfactual distance: when $S_-$ differs from $S_{\mathrm{clean}}$, the channel vector indicates whether the difference is direct, semantic, retrieval-mediated, extraction-mediated, or provenance-token-mediated.
+where $e_d$ measures direct leakage, $e_p$ paraphrased leakage, $e_r$ retrieval dependence, $e_c$ clean-counterfactual answer dependence, $e_x$ extraction risk, and $e_w$ watermark or provenance-token hits. These channels are not the ground-truth definition of deletion failure. They are transparent estimators and localizers for the counterfactual distance: when $S_-$ differs from $S_{\mathrm{clean}}$, the channel vector (Fig.~\ref{fig:channels}) indicates whether the difference is direct, semantic, retrieval-mediated, extraction-mediated, or provenance-token-mediated.
+
+\begin{figure}[t]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}[node distance=2mm and 3mm, every node/.style={font=\scriptsize, align=center}]
+  \node[adcunode, fill=adcuRed!18, draw=adcuRed]                       (d) {$e_d$\\direct};
+  \node[adcunode, fill=adcuRed!12, draw=adcuRed, right=of d]           (p) {$e_p$\\paraphrase};
+  \node[adcunode, fill=adcuOrange!18, draw=adcuOrange, right=of p]     (r) {$e_r$\\retrieval};
+  \node[adcunode, fill=adcuPurple!12, draw=adcuPurple, right=of r]     (c) {$e_c$\\counter-\\factual};
+  \node[adcunode, fill=adcuBlue!12, draw=adcuBlue, right=of c]         (x) {$e_x$\\extraction};
+  \node[adcunode, fill=adcuGray!18, draw=adcuGray, right=of x]         (w) {$e_w$\\watermark};
+  \node[adcuclean, below=5mm of c.south, text width=48mm]              (risk) {evidence vector $e(S_-,q,z) \to$ channel score $\hat R$ (localizers; the failure definition is the $S_-$-vs-$S_{\mathrm{clean}}$ distance)};
+  \foreach \n in {d,p,r,c,x,w} \draw[adcuflow, line width=0.4pt] (\n)--(risk);
+\end{tikzpicture}}
+\caption{The six diagnostic evidence channels. Each fires under a different failure mode---direct/paraphrase under model-side leakage, retrieval under stale or shadow-copy artifacts, counterfactual under any $S_-$-vs-$S_{\mathrm{clean}}$ divergence, extraction under adversarial probes, watermark under canary or provenance-token hits---and together they localize residual dependence without themselves defining deletion failure.}
+\label{fig:channels}
+\end{figure}
 
 \textbf{Operational scorers.}
 The artifact uses deterministic, versioned scorers so audit rows are reproducible. Direct leakage is normalized token overlap with protected text. Paraphrase leakage is maximum overlap with aliases, protected facts, and probe-specific expected terms. Retrieval dependence is one when the response cites or retrieves an artifact reachable from the deleted target in $G$ and the clean reference does not. Counterfactual answer dependence compares the answer under $S_-$ with the clean response and fires when the deleted target changes the answer semantics or retrieval evidence. Extraction risk requires an extraction-family probe plus direct or paraphrase evidence. Watermark evidence is an exact canary or provenance-token hit. Deployments can replace these scorers with frozen embedding, NLI, or judge models, but must report judge versions, thresholds, and calibration data.
@@ -189,7 +206,7 @@ The square-root term creates an irreducible confidence floor even when the empir
 {1-r_0(n_z,\delta_z)}, \nonumber\\
 r_0(n_z,\delta_z)&=\sqrt{\frac{\log(1/\delta_z)}{2n_z}}. \nonumber
 \end{align}
-The excess score is not a new guarantee; it is a calibrated way to state how far the observed risk rises above the clean-UCB floor. A floor-normalized operating tolerance $\tau_{\mathrm{ex}}$ corresponds to the raw-UCB condition $\mathrm{UCB}_{\mathrm{cf}}(z)\leq r_0+(1-r_0)\tau_{\mathrm{ex}}$. The experiments report both raw $\mathrm{UCB}_{\mathrm{cf}}$ and $\widetilde R_{\mathrm{cf}}$, and the headline pass/fail rule uses the declared excess-risk tolerance so clean systems with zero empirical counterfactual distance are not rejected only because the audit budget is finite. If $S_{\mathrm{clean}}$ is expensive, the audit can use an archived clean index, filtered retraining on a small slice, or a clean simulator for benchmark evaluation. The paper reports both the counterfactual statistic when the clean reference is available and the channel scores used to diagnose why a system is distinguishable.
+The excess score is not a new guarantee; it is a calibrated way to state how far the observed risk rises above the clean-UCB floor. A floor-normalized operating tolerance $\tau_{\mathrm{ex}}$ corresponds to the raw-UCB condition $\mathrm{UCB}_{\mathrm{cf}}(z)\leq r_0+(1-r_0)\tau_{\mathrm{ex}}$. The experiments report both raw $\mathrm{UCB}_{\mathrm{cf}}$ and $\widetilde R_{\mathrm{cf}}$, and the headline pass/fail rule uses the declared excess-risk tolerance so clean systems with zero empirical counterfactual distance are not rejected only because the audit budget is finite. If $S_{\mathrm{clean}}$ is expensive, the audit can use an archived clean index, filtered retraining on a small slice, or a clean simulator for benchmark evaluation. The article reports both the counterfactual statistic when the clean reference is available and the channel scores used to diagnose why a system is distinguishable.
 
 \begin{proposition}[Counterfactual false-pass control]
 Assume $d(O_{S_-}(q),O_{S_{\mathrm{clean}}}(q))\in[0,1]$ and probes are sampled independently from $A(z,G)$. If the audit passes target $z$ only when $\mathrm{UCB}_{\mathrm{cf}}(z)\leq\varepsilon$, then
@@ -272,7 +289,27 @@ Let $S^-$ be the post-deletion pipeline, $S_{\mathrm{clean}}$ the clean referenc
 \quad
 \gamma_z=\sup_{q\in\mathcal{B}}\mathrm{TV}(P_{S^-},P_{S^\diamond}).
 \]
-The derivative-coupling term $\gamma_z$ is zero exactly when deletion is provenance-closed: every chunk, embedding, summary, cache entry, synthetic example, and adapter-training derivative of the record has been removed or rendered behaviorally inert. Thus component-level unlearning guarantees compose only after lineage closure; otherwise orphan derivatives can dominate residual behavior. The supplement gives the full theorem, multi-stage extension, and necessity proof.
+The derivative-coupling term $\gamma_z$ (Fig.~\ref{fig:composition}) is zero exactly when deletion is provenance-closed: every chunk, embedding, summary, cache entry, synthetic example, and adapter-training derivative of the record has been removed or rendered behaviorally inert. Thus component-level unlearning guarantees compose only after lineage closure; otherwise orphan derivatives can dominate residual behavior. Appendix~A gives the full theorem, multi-stage extension, and necessity proof.
+
+\begin{figure}[t]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}[node distance=4mm and 6mm, every node/.style={font=\scriptsize, align=center}]
+  \node[adcunode, fill=adcuBlue!10, draw=adcuBlue, text width=20mm]                              (theta) {Parametric\\error $\varepsilon_\theta$};
+  \node[adcunode, fill=adcuGreen!10, draw=adcuGreen, text width=20mm, right=of theta]            (K)     {Knowledge\\error $\varepsilon_K$};
+  \node[adcunode, fill=adcuOrange!12, draw=adcuOrange, text width=20mm, right=of K]              (gen)   {Generation\\Lipschitz $L$};
+  \node[adcudec, below=5mm of K, text width=58mm]                                                (bound) {Composed bound:\\ $\rho_{\mathcal{B}}(S^-) \le \varepsilon_\theta + L\,\varepsilon_K + \gamma_z$};
+  \node[adcunode, fill=adcuRed!15, draw=adcuRed, text width=22mm, right=7mm of bound]            (gz)    {derivative coupling $\gamma_z$\\(orphan derivatives, non-additive)};
+  \draw[adcuflow] (theta)--(K);
+  \draw[adcuflow] (K)--(gen);
+  \draw[adcuflow] (theta) to[bend right=12] (bound);
+  \draw[adcuflow] (K) to[bend right=6] (bound);
+  \draw[adcuflow] (gen) to[bend left=12] (bound);
+  \draw[adcuflow, dashed] (gz) -- (bound);
+\end{tikzpicture}}
+\caption{Pipeline-deletion composition (Appendix~A). Per-component deletion errors compose additively---$\varepsilon_\theta$ on parameters, $\varepsilon_K$ on knowledge amplified by the generation Lipschitz factor $L$---plus a non-additive derivative-coupling term $\gamma_z$ that is zero \emph{iff} every derivative of the deleted record has also been removed; otherwise orphan derivatives dominate.}
+\label{fig:composition}
+\end{figure}
 
 \textbf{Causal mediation of residual risk.}
 After the distinguishability test finds residual risk, \method{} performs interventions on pipeline components. Let $S^{\mathrm{do}(R=0)}$ disable retrieval, $S^{\mathrm{do}(C=0)}$ purge caches, $S^{\mathrm{do}(A=0)}$ swap or remove adapters, and $S^{\mathrm{do}(D=0)}$ purge derivative stores. For component $M$, define the mediated residual contribution
@@ -424,7 +461,7 @@ Table~\ref{tab:mid_size_scaling} adds one mid-size data point: a RealRAG audit o
 
 These labels should be read carefully. The synthetic private tracks are stress tests with configured failure modes, not independent proof that the same rate holds for arbitrary private deployments. To avoid circularity, the diagnostic channels are not the formal failure definition: when a clean reference is available, we also run the two-sample distinguishability test between $S_-$ and $S_{\mathrm{clean}}$, and the channel scores are used to localize why the systems differ. NaturalFEVER and the redacted human-adjudicated cases reduce but do not eliminate the benchmark-design gap.
 
-The full residual-channel, budget, scorer-validation, black-box, intervention, robustness, attack-suite, LoRA, DenseRAG, TOFU, probe-ablation, and per-seed uncertainty tables are in the supplement, keeping the main paper focused on the audit definition, algorithm, and headline evidence. The tolerance sweep (Fig.~\ref{fig:tolerance_roc}) also explains the apparent discrepancy between zero false alarms at the configured operating point and larger false-alarm rates in aggressive settings: the raw UCB contains the Section~4 confidence floor, so a tolerance set near or below that floor can reject clean systems with zero empirical leakage. The main decision rows therefore use the floor-normalized excess-risk tolerance, and the sweep is reported as an ROC-style calibration view separate from formal pass/fail.
+The full residual-channel, budget, scorer-validation, black-box, intervention, robustness, attack-suite, LoRA, DenseRAG, TOFU, probe-ablation, and per-seed uncertainty tables are in the supplement, keeping the main article focused on the audit definition, algorithm, and headline evidence. The tolerance sweep (Fig.~\ref{fig:tolerance_roc}) also explains the apparent discrepancy between zero false alarms at the configured operating point and larger false-alarm rates in aggressive settings: the raw UCB contains the Section~4 confidence floor, so a tolerance set near or below that floor can reject clean systems with zero empirical leakage. The main decision rows therefore use the floor-normalized excess-risk tolerance, and the sweep is reported as an ROC-style calibration view separate from formal pass/fail.
 
 \begin{figure}[t]
 \centering
@@ -448,7 +485,7 @@ The full residual-channel, budget, scorer-validation, black-box, intervention, r
 \label{fig:tolerance_roc}
 \end{figure}
 
-The natural-data audit uses public FEVER evidence passages as requested deletion units and records whether risk is mediated by citation caches, summary derivatives, or answer-only paraphrases. Redacted human adjudication bridges synthetic private traces and public RAG evidence without printing sensitive-looking strings in the paper body. We still treat realistic private-text deletion as an empirical limitation rather than a solved claim: the current manuscript demonstrates public natural evidence plus redacted adjudication, while a larger externally labeled private-text audit remains the next acceptance-critical experiment. Per-method HybridReal detection and the audit-budget--detection tradeoff are reported in the supplement.
+The natural-data audit uses public FEVER evidence passages as requested deletion units and records whether risk is mediated by citation caches, summary derivatives, or answer-only paraphrases. Redacted human adjudication bridges synthetic private traces and public RAG evidence without printing sensitive-looking strings in the article body. We still treat realistic private-text deletion as an empirical limitation rather than a solved claim: the current manuscript demonstrates public natural evidence plus redacted adjudication, while a larger externally labeled private-text audit remains the next acceptance-critical experiment. Per-method HybridReal detection and the audit-budget--detection tradeoff are reported in the supplement.
 
 The attack suite is designed to make weak audits pass while residual dependence remains through paraphrases, chunk boundaries, shadow copies, synthetic derivatives, adapter residues, evaluation evasion, retriever-reranker disagreement, retain-neighbor over-unlearning, multi-hop reconstruction, triggered RAG leakage, graph-pivot reconstruction, and watermark suppression. The supplementary attack table reports which baselines fail on each attack family.
 
@@ -525,7 +562,7 @@ When retrieval metadata is unavailable, \method{} still audits answer-side disti
 
 \section{Conclusion}
 
-Deletion in a foundation-model pipeline is not a storage operation but a behavioral property, and this paper makes that property measurable. By defining success as counterfactual indistinguishability from a clean reference system and estimating it with a graph-adaptive, confidence-bounded audit, \method{} turns ``did we really forget?'' from an informal assurance into a reproducible test, with causal interventions that say \emph{where} any residual influence still lives. The experiments deliver a consistent message: no single-axis audit suffices, because the channel that leaks depends on the failure mode---exact matching breaks under paraphrase, canaries fall once the marker is stripped, and retriever-only checks are blind to adapter memory---whereas the clean-counterfactual, provenance-aware, multi-channel audit catches the configured failures across RAG, fine-tuning, hybrid, dense-retrieval, and TOFU-style settings. We do not claim legal compliance or absolute forgetting; we claim a practical assurance layer for trustworthy RAG and fine-tuned systems, and a benchmark others can build on. The clearest next step is an externally labeled, realistic private-text audit to close the remaining gap between a well-instrumented benchmark and deployment.
+Deletion in a foundation-model pipeline is not a storage operation but a behavioral property, and this article makes that property measurable. By defining success as counterfactual indistinguishability from a clean reference system and estimating it with a graph-adaptive, confidence-bounded audit, \method{} turns ``did we really forget?'' from an informal assurance into a reproducible test, with causal interventions that say \emph{where} any residual influence still lives. The experiments deliver a consistent message: no single-axis audit suffices, because the channel that leaks depends on the failure mode---exact matching breaks under paraphrase, canaries fall once the marker is stripped, and retriever-only checks are blind to adapter memory---whereas the clean-counterfactual, provenance-aware, multi-channel audit catches the configured failures across RAG, fine-tuning, hybrid, dense-retrieval, and TOFU-style settings. We do not claim legal compliance or absolute forgetting; we claim a practical assurance layer for trustworthy RAG and fine-tuned systems, and a benchmark others can build on. The clearest next step is an externally labeled, realistic private-text audit to close the remaining gap between a well-instrumented benchmark and deployment.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
@@ -902,7 +939,7 @@ of the composition they justify.
 
 \section{Benchmark Protocol Details}
 
-This appendix provides the operational details needed to reproduce and extend \bench{}. It is included in the draft because deletion-audit papers are easy to underspecify: small differences in deletion target construction, probe generation, cache handling, or retain-utility reporting can change the interpretation of results.
+This appendix provides the operational details needed to reproduce and extend \bench{}. It is included in the draft because deletion-audit articles are easy to underspecify: small differences in deletion target construction, probe generation, cache handling, or retain-utility reporting can change the interpretation of results.
 
 \subsection{Deletion Target Construction}
 
@@ -1111,7 +1148,7 @@ Table~\ref{tab:utility_risk} reports the utility--risk view used in the reviewer
 
 \section{Supplementary Empirical Tables}
 
-This section collects the detailed empirical tables and figures moved out of the main manuscript to reduce density. They support the summarized claims in Section~7 of the main paper while keeping the primary narrative focused on the counterfactual deletion definition, audit algorithm, calibration figures, and headline detection result. In particular, Fig.~\ref{fig:hybrid_detection} gives per-method HybridReal detection and Fig.~\ref{fig:budget} the audit-budget--detection tradeoff referenced in Section~7; Table~\ref{tab:adcu_residual} reports the per-deletion-method residual-dependence channels, and Table~\ref{tab:per_seed} the per-seed detection and risk used to separate average performance from seed-level instability.
+This section collects the detailed empirical tables and figures moved out of the main manuscript to reduce density. They support the summarized claims in Section~7 of the main article while keeping the primary narrative focused on the counterfactual deletion definition, audit algorithm, calibration figures, and headline detection result. In particular, Fig.~\ref{fig:hybrid_detection} gives per-method HybridReal detection and Fig.~\ref{fig:budget} the audit-budget--detection tradeoff referenced in Section~7; Table~\ref{tab:adcu_residual} reports the per-deletion-method residual-dependence channels, and Table~\ref{tab:per_seed} the per-seed detection and risk used to separate average performance from seed-level instability.
 
 \begin{figure}[t]
 \centering
@@ -1718,7 +1755,7 @@ audit\_method & influence-style & DenseRAG/PEFT-LoRA/Pretrained-LoRA/Qwen-TOFU-L
 
 \subsection{Case-Study Redaction}
 
-Case studies are redacted before entering manuscript tables. The artifact stores risk components and interpretations but replaces synthetic user identifiers and secret values with placeholders. This mirrors how a real deletion-audit report should be prepared: auditors need enough evidence to diagnose residual dependence, but papers and public artifacts should not normalize printing sensitive strings.
+Case studies are redacted before entering manuscript tables. The artifact stores risk components and interpretations but replaces synthetic user identifiers and secret values with placeholders. This mirrors how a real deletion-audit report should be prepared: auditors need enough evidence to diagnose residual dependence, but articles and public artifacts should not normalize printing sensitive strings.
 
 \subsection{Recommended Extensions}
 
@@ -1736,7 +1773,7 @@ A complete reproduction run executes the submission experiments, attack suite, a
 The public retain data comes from local FEVER evidence files. The private deletion targets are generated synthetically from seeds. The benchmark should release the generation code and seeds rather than a fixed private-data dump. This makes it possible to regenerate targets, vary target counts, and avoid accidental normalization of sensitive-looking strings in public artifacts.
 
 \textbf{Audit reports.}
-Each audit report includes the decision, aggregate risk UCB, per-target UCBs, empirical risk, priorities, number of probes, violating probe identifiers, retain utility, and notes. For paper tables, protected content is summarized through channel scores and redacted case-study rows.
+Each audit report includes the decision, aggregate risk UCB, per-target UCBs, empirical risk, priorities, number of probes, violating probe identifiers, retain utility, and notes. For article tables, protected content is summarized through channel scores and redacted case-study rows.
 
 \textbf{Expected reviewer checks.}
 Reviewers should be able to verify that exact-match, canary-only, retriever-hit, membership-inference, extraction, influence-proxy, uniform-probe, no-valuation, and full \method{} methods are all run through the same audit interface. They should also be able to verify that false alarms are computed on clean provenance-guided deletion cases and that retain utility is reported beside deletion risk.
