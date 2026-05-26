@@ -37,20 +37,10 @@ G.~Izacard and E.~Grave, ``Leveraging passage retrieval with generative models
   for open domain question answering,'' in \emph{European Chapter of the
   Association for Computational Linguistics}, 2021.
 
-\bibitem{gao2024ragsurvey}
-Y.~Gao, Y.~Xiong, X.~Gao, K.~Jia, J.~Pan, Y.~Bi, Y.~Dai, J.~Sun, M.~Wang, and
-  H.~Wang, ``Retrieval-augmented generation for large language models: A
-  survey,'' \emph{arXiv preprint arXiv:2312.10997}, 2024.
-
 \bibitem{voigt2017gdpr}
 P.~Voigt and A.~von~dem Bussche, \emph{The EU General Data Protection
   Regulation (GDPR): A Practical Guide}.\hskip 1em plus 0.5em minus 0.4em\relax
   Springer, 2017.
-
-\bibitem{cohen2022deletioncontrol}
-A.~Cohen, A.~Smith, M.~Swanberg, and P.~N. Vasudevan, ``Control,
-  confidentiality, and the right to be forgotten,'' \emph{arXiv preprint
-  arXiv:2210.07876}, 2022.
 
 \bibitem{fan2025fedfmchallenges}
 T.~Fan, H.~Gu, X.~Cao, C.~S. Chan, Q.~Chen, Y.~Chen, Y.~Feng, Y.~Gu, J.~Geng,
@@ -80,22 +70,15 @@ C.~Guo, T.~Goldstein, A.~Hannun, and L.~van~der Maaten, ``Certified data
   removal from machine learning models,'' in \emph{International Conference on
   Machine Learning}, 2020.
 
-\bibitem{maini2024tofu}
-P.~Maini, Z.~Feng, A.~Schwarzschild, Z.~C. Lipton, and J.~Z. Kolter, ``Tofu: A
-  task of fictitious unlearning for llms,'' in \emph{arXiv preprint
-  arXiv:2401.06121}, 2024.
-
 \bibitem{yao2024largeunlearning}
 Y.~Yao, X.~Xu, and Y.~Liu, ``Large language model unlearning,'' in
   \emph{Advances in Neural Information Processing Systems}, 2024.
 
 \bibitem{liu2024rethinking}
-Z.~Liu \emph{et~al.}, ``Rethinking machine unlearning for large language
-  models,'' \emph{arXiv preprint arXiv:2402.08787}, 2024.
-
-\bibitem{wang2024llmunlearning}
-L.~Wang \emph{et~al.}, ``Machine unlearning in large language models,''
-  \emph{arXiv preprint arXiv:2404.16841}, 2024.
+S.~Liu, Y.~Yao, J.~Jia, S.~Casper, N.~Baracaldo, P.~Hase, Y.~Yao, C.~Y. Liu,
+  X.~Xu, H.~Li \emph{et~al.}, ``Rethinking machine unlearning for large
+  language models,'' \emph{Nature Machine Intelligence}, vol.~7, no.~2, pp.
+  181--194, 2025.
 
 \bibitem{jin2024surveyunlearning}
 Z.~Jin \emph{et~al.}, ``Digital forgetting in large language models: A survey
@@ -133,49 +116,49 @@ J.~Mattern, F.~Mireshghallah, Z.~Jin, H.~Schutze, M.~Sachan, and
   via neighbourhood comparison,'' \emph{Findings of the Association for
   Computational Linguistics}, 2023.
 
-\bibitem{gao2023retrievalaugmented}
-Y.~Gao \emph{et~al.}, ``Retrieval-augmented generation for ai-generated
-  content: A survey,'' \emph{arXiv preprint arXiv:2402.19473}, 2024.
-
 \bibitem{asai2024selfrag}
 A.~Asai, Z.~Wu, Y.~Wang, A.~Sil, and H.~Hajishirzi, ``Self-rag: Learning to
   retrieve, generate, and critique through self-reflection,'' in
   \emph{International Conference on Learning Representations}, 2024.
-
-\bibitem{yu2024ragevalsurvey}
-H.~Yu, A.~Gan, K.~Zhang, S.~Tong, Q.~Liu, and Z.~Liu, ``Evaluation of
-  retrieval-augmented generation: A survey,'' \emph{arXiv preprint
-  arXiv:2405.07437}, 2024.
-
-\bibitem{akkiraju2024facts}
-R.~Akkiraju, A.~Xu, D.~Bora, T.~Yu, L.~An \emph{et~al.}, ``Facts about building
-  retrieval augmented generation-based chatbots,'' \emph{arXiv preprint
-  arXiv:2407.07858}, 2024.
 
 \bibitem{dwork2006dp}
 C.~Dwork, F.~McSherry, K.~Nissim, and A.~Smith, ``Calibrating noise to
   sensitivity in private data analysis,'' in \emph{Theory of Cryptography
   Conference}, 2006.
 
-\bibitem{wang2025ikea}
-Y.~Wang, W.~Qu, S.~Zhai, Y.~Jiang, Z.~Liu, Y.~Liu, Y.~Dong, and J.~Zhang,
-  ``Silent leaks: Implicit knowledge extraction attack on rag systems through
-  benign queries,'' \emph{arXiv preprint arXiv:2505.15420}, 2025.
+\bibitem{kirchenbauer2023watermark}
+J.~Kirchenbauer, J.~Geiping, Y.~Wen, J.~Katz, I.~Miers, and T.~Goldstein, ``A
+  watermark for large language models,'' in \emph{International Conference on
+  Machine Learning}, 2023.
 
-\bibitem{xie2026canaryrag}
-Y.~Xie, Y.~Zhang, Y.~Li, S.~Song, X.~Chen, Z.~Liu, L.~Su, and T.~Liu,
-  ``Detecting rag extraction attack via dual-path runtime integrity game,''
-  \emph{arXiv preprint arXiv:2604.10717}, 2026.
+\bibitem{thorne2018fever}
+J.~Thorne, A.~Vlachos, C.~Christodoulopoulos, and A.~Mittal, ``Fever: a
+  large-scale dataset for fact extraction and verification,'' in
+  \emph{Proceedings of the 2018 Conference on Empirical Methods in Natural
+  Language Processing}, 2018, pp. 4029--4038.
 
-\bibitem{song2026grasp}
-M.~Song, J.~Kim, M.~Kang, H.~Kim, S.~Shin, and S.~Son, ``Subgraph
-  reconstruction attacks on graph rag deployments with practical defenses,''
-  \emph{arXiv preprint arXiv:2602.06495}, 2026.
+\bibitem{hu2021lora}
+E.~J. Hu, Y.~Shen, P.~Wallis, Z.~Allen-Zhu, Y.~Li, S.~Wang, L.~Wang, and
+  W.~Chen, ``Lora: Low-rank adaptation of large language models,'' in
+  \emph{International Conference on Learning Representations}, 2021.
 
-\bibitem{thornton2026retrievalpivot}
-S.~Thornton, ``Retrieval pivot attacks in hybrid rag: Measuring and mitigating
-  amplified leakage from vector seeds to graph expansion,'' \emph{arXiv
-  preprint arXiv:2602.08668}, 2026.
+\bibitem{maini2024tofu}
+P.~Maini, Q.~Feng, A.~Schwarzschild, Z.~C. Lipton, and J.~Z. Kolter, ``Tofu: A
+  task of fictitious unlearning for large language models,'' in \emph{The
+  Twelfth International Conference on Learning Representations}, 2024.
+
+\bibitem{shi2024muse}
+W.~Shi \emph{et~al.}, ``Muse: Machine unlearning six-way evaluation for
+  language models,'' \emph{arXiv preprint arXiv:2407.06460}, 2024.
+
+\bibitem{jin2024rwku}
+Z.~Jin \emph{et~al.}, ``Rwku: Benchmarking real-world knowledge unlearning for
+  large language models,'' \emph{arXiv preprint arXiv:2406.10900}, 2024.
+
+\bibitem{li2024wmdp}
+N.~Li \emph{et~al.}, ``The wmdp benchmark: Measuring and reducing malicious use
+  with unlearning,'' in \emph{International Conference on Machine Learning},
+  2024.
 
 \bibitem{ghorbani2019datashapley}
 A.~Ghorbani and J.~Zou, ``Data shapley: Equitable valuation of data for machine
@@ -216,30 +199,9 @@ A.~Ilyas, S.~M. Park, L.~Engstrom, G.~Leclerc, and A.~Madry, ``Datamodels:
   Predicting predictions from training data,'' in \emph{International
   Conference on Machine Learning}, 2022.
 
-\bibitem{kirchenbauer2023watermark}
-J.~Kirchenbauer, J.~Geiping, Y.~Wen, J.~Katz, I.~Miers, and T.~Goldstein, ``A
-  watermark for large language models,'' in \emph{International Conference on
-  Machine Learning}, 2023.
-
-\bibitem{zhao2023watermarksurvey}
-X.~Zhao \emph{et~al.}, ``A survey of text watermarking in the era of large
-  language models,'' \emph{arXiv preprint arXiv:2312.07913}, 2023.
-
 \bibitem{wang2024ragate}
-X.~Wang, P.~Sen, R.~Li, and E.~Yilmaz, ``Adaptive retrieval-augmented
-  generation for conversational systems,'' \emph{arXiv preprint
-  arXiv:2407.21712}, 2024.
-
-\bibitem{pham2026memorai}
-H.~Pham~Van, N.~M. Hieu, K.~P.~T. Tuan, N.~L. Hai, L.~N. Van, N.~T.~N. Diep,
-  and T.~Le, ``Memorai: Memory organization and retrieval via adaptive graph
-  intelligence for llm conversational agents,'' \emph{arXiv preprint
-  arXiv:2605.01386}, 2026.
-
-\bibitem{lee2025finetunerag}
-Z.~P. Lee, A.~Lin, and C.~Tan, ``Finetune-rag: Fine-tuning language models to
-  resist hallucination in retrieval-augmented generation,'' \emph{arXiv
-  preprint arXiv:2505.10792}, 2025.
+Y.~Wang \emph{et~al.}, ``Ragate: Instruction tuned language models are great
+  adaptive retrievers,'' \emph{arXiv preprint arXiv:2405.10530}, 2024.
 
 \bibitem{zhang2024npo}
 R.~Zhang, L.~Lin, Y.~Bai, and S.~Mei, ``Negative preference optimization: From
@@ -247,8 +209,7 @@ R.~Zhang, L.~Lin, Y.~Bai, and S.~Mei, ``Negative preference optimization: From
   Language Modeling}, 2024.
 
 \bibitem{wang2022textembeddings}
-L.~Wang, N.~Yang, X.~Huang, B.~Jiao, L.~Yang, D.~Jiang, R.~Majumder, and
-  F.~Wei, ``Text embeddings by weakly-supervised contrastive pre-training,''
-  \emph{arXiv preprint arXiv:2212.03533}, 2022.
+L.~Wang \emph{et~al.}, ``Text embeddings by weakly-supervised contrastive
+  pre-training,'' \emph{arXiv preprint arXiv:2212.03533}, 2022.
 
 \end{thebibliography}
